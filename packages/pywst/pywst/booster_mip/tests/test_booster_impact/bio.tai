@@ -1,0 +1,29 @@
+ ; THREAT ASSESSMENT INPUT (TAI) FILE
+; USAGE: teva-assess.exe <TAI filename>
+; Data items explained below
+;
+TSONAME      \\fileserver\TEVADatabase\TA_2_RM output.node*.tso      ; name of TSO file
+TAONAME   Unprotected.tao
+;
+DR:A          1         ; dose-response 'a' coefficient
+DR:M          -1        ; dose-response 'm' coefficient
+DR:N          -.9899    ; dose-response 'n' coefficient
+DR:TAU        1.E7      ; dose-response 'tau' coefficient
+BODYMASS      70        ; exposed individual body mass (Kg)
+NORMALIZE     no        ; Response computed using mg/Kg ('yes') or mg ('no')
+DR:BETA         0       ;
+DR:LD50         0       ;
+DR:Type         old     ;
+;
+LATENCYTIME   168       ; time from being exposed to exhibiting definitive symptoms (hours)
+FATALITYTIME  168       ; time from exhibiting symptoms till death or recovery (hours)
+FATALITYRATE  0.30      ; Fraction of exposed population that die
+;
+DOSETYPE      total     ; 'total' for total ingested mass
+INGESTIONTYPE demand    ; 'demand' for ingestion probability proportional to node demand
+INGESTIONRATE 2         ; volumetric ingestion rate (liters/day)
+;
+;POPULATION      demand     0.139    ; per capita usage rate (flow units/person)
+POPULATION      demand     0.1152    ; per capita usage rate (flow units/person)
+;
+DOSE_THRESHOLDS 1.0e-8

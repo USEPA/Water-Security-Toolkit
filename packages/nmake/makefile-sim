@@ -1,0 +1,618 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build epanet codes
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+## To build shared libraries:
+##
+##  nmake /F makefile-sim dlls JDK_ROOT=C:\Java\jdk1.6.0
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+DEBUGGING_SYMBOLS=/Z7
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+
+CFLAGS=$(CFLAGS) /Z7
+   
+ANLDIR=$(PACKAGES)\tevaUtils\anl
+ANLUTILS_DIR=$(ANLDIR)\ANLUtils
+ANLUTILS_DLL=$(ANLDIR)\libs\$(LIBSUBDIR)\ANLUtils.dll
+ANLUTILS_LIB_DIR=$(ANLDIR)\libs\$(LIBSUBDIR)
+ANLUTILS_LIB=$(ANLUTILS_LIB_DIR)\ANLUtils.lib
+ANLUTILS_INCLUDE=/I $(ANLUTILS_DIR)\include /I $(ANLUTILS_DIR)\src /I $(ANLUTILS_DIR)\include
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS -DWINDOWS
+## _USRDLL and LIBEPANET_JNI_EXPORTS are not found in our sources
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530
+CFLAGS = $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+##
+## UTILIB LIBRARY - BUILD IT IF NOT ALREADY CREATED
+##
+##
+UTILIB_DIR=$(TPL)\acro\packages\utilib
+UTILIB_LIB_DIR=$(UTILIB_DIR)\mvs\nmake
+UTILIB_LIB=$(UTILIB_LIB_DIR)\static\libutilib.lib
+UTILIB_INCLUDE= \
+  /I $(UTILIB_LIB_DIR) \
+  /I $(UTILIB_DIR)\src
+
+all: $(UTILIB_LIB) \
+     headers \
+     static\liblzma.lib \
+     static\liberd.lib \
+     static\libtsoutil.lib \
+     static\libepanet.lib  \
+     static\libepanetbtx.lib  \
+     static\libepanetmsx.lib  \
+     static\libmerlion.lib  \
+     static\libmerlionutils.lib \
+     static\libenl.lib \
+     static\epanet.exe \
+     static\epanet_msx.exe \
+     static\tevasim.exe \
+     static\erd2text.exe \
+     static\erddiff.exe \
+     static\erdinfo.exe
+
+dll: dlls
+
+dlls: shared \
+     headers \
+     shared\libtsoutil.dll \
+     shared\libepanet.dll  \
+     shared\libepanetbtx.dll  \
+     shared\libepanetmsx.dll  \
+     shared\libAnalysisModule.dll \
+     shared\libepanet_jni.dll \
+     shared\libepanetmsx_jni.dll \
+     shared\libTSO.dll \
+     shared\libERD_JNI.dll \
+     shared\liberd.dll \
+     shared\liblzma.dll
+
+$(UTILIB_LIB):
+   cd $(UTILIB_LIB_DIR)
+   if not exist static\libutilib.lib $(MAKE) DEBUGFLAG="$(DEBUGFLAG)" static\libutilib.lib
+   cd $(MAKEDIR)
+
+utilib.lib:	$(UTILIB_LIB)
+
+
+##
+## Create a teva_config.h - the configuration file from autotools
+##
+##
+headers:
+    copy teva_config.txt teva_config.h
+
+##
+## Create directories to keep static and shared files separate
+##
+##
+static:
+    @if not exist static mkdir static
+
+shared:
+    @if not exist shared mkdir shared
+
+##
+## LZMA_LIB LIBRARY
+##
+##
+LZMA_LIB_LOC = $(TPL)\lzma\C
+LZMA_LIB_C_SRC = $(LZMA_LIB_LOC)\Alloc.c \
+				 $(LZMA_LIB_LOC)\LzFind.c \
+				 $(LZMA_LIB_LOC)\LzFindMt.c \
+				 $(LZMA_LIB_LOC)\LzmaDec.c \
+				 $(LZMA_LIB_LOC)\LzmaEnc.c \
+				 $(LZMA_LIB_LOC)\LzmaLib.c \
+				 $(LZMA_LIB_LOC)\Threads.c
+
+LZMA_LIB_C_OBJ = $(LZMA_LIB_C_SRC:.c=.obj)
+LZMA_LIB_INCLUDE = /I $(LZMA_LIB_LOC)
+
+$(LZMA_LIB_C_OBJ): $(LZMA_LIB_C_SRC)
+    $(CC) $(CFLAGS) $(LZMA_LIB_FLAGS) $(LZMA_LIB_INCLUDE) /Fo$@ /c $*.c
+
+static\liblzma.lib: static $(LZMA_LIB_C_OBJ)
+    lib /out:static\liblzma.lib $(LZMA_LIB_C_OBJ)
+
+shared\liblzma.dll: shared $(LZMA_LIB_C_OBJ)
+    link $(LINK_FLAGS) /dll /DEF:LzmaLib.def /IMPLIB:shared\liblzma.lib /out:shared\liblzma.dll $(LZMA_LIB_C_OBJ)
+
+##
+## ERD LIBRARY
+##
+##
+ERD_LIB_LOC = $(PACKAGES)\tevaUtils\erd\erd\src
+ERD_LIB_INC = $(PACKAGES)\tevaUtils\erd\erd\include
+ERD_LIB_C_SRC = $(ERD_LIB_LOC)\dpx.c \
+				$(ERD_LIB_LOC)\erd.c \
+				$(ERD_LIB_LOC)\erdinternal.c \
+				$(ERD_LIB_LOC)\lzma_dec.c \
+				$(ERD_LIB_LOC)\lzma_enc.c \
+				$(ERD_LIB_LOC)\rle_dec.c \
+				$(ERD_LIB_LOC)\rle_enc.c \
+				$(ERD_LIB_LOC)\teva.c
+ERD_LIB_C_OBJ = $(ERD_LIB_C_SRC:.c=.obj)
+ERD_LIB_INCLUDE = /I $(ERD_LIB_INC)	/I $(PACKAGES)\tevaUtils\dirent /I $(LZMA_LIB_LOC)
+ERD_LIB_FLAGS = -D_FILE_OFFSET_BITS=64
+ERD_FLAGS = -DDLL
+
+$(ERD_LIB_C_OBJ): $(ERD_LIB_C_SRC)
+    $(CC) $(CFLAGS) $(ERD_LIB_FLAGS) $(ERD_LIB_INCLUDE) /Fo$@ /c $*.c
+
+static\liberd.lib: static $(ERD_LIB_C_OBJ) static\liblzma.lib
+    lib /out:static\liberd.lib $(ERD_LIB_C_OBJ) static\liblzma.lib
+
+shared\liberd.dll: shared shared\liblzma.dll $(ERD_LIB_C_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\liberd.lib /out:shared\liberd.dll shared\liblzma.lib $(ERD_LIB_C_OBJ)
+
+##
+## TSO_UTIL LIBRARY
+##
+##
+TSO_UTIL_LIB_LOC = $(PACKAGES)\tevaUtils\tso\src
+TSO_UTIL_LIB_C_SRC = $(TSO_UTIL_LIB_LOC)\tso.c
+TSO_UTIL_LIB_C_OBJ = $(TSO_UTIL_LIB_C_SRC:.c=.obj)
+TSO_UTIL_LIB_INCLUDE = /I $(TSO_UTIL_LIB_LOC) /I $(ERD_LIB_INC)
+TSO_UTIL_LIB_FLAGS = -D_FILE_OFFSET_BITS=64
+TSO_UTIL_FLAGS = -DDLL
+
+$(TSO_UTIL_LIB_C_OBJ): $(TSO_UTIL_LIB_C_SRC)
+    $(CC) $(CFLAGS) $(TSO_UTIL_LIB_FLAGS) $(TSO_UTIL_LIB_INCLUDE) /Fo$@ /c $*.c
+
+static\libtsoutil.lib: static $(TSO_UTIL_LIB_C_OBJ) static\liberd.lib
+    lib /out:static\libtsoutil.lib $(TSO_UTIL_LIB_C_OBJ) static\liberd.lib
+
+shared\libtsoutil.dll: shared $(TSO_UTIL_LIB_C_OBJ) shared\liberd.dll
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libtsoutil.lib /out:shared\libtsoutil.dll shared\liberd.lib $(TSO_UTIL_LIB_C_OBJ)
+
+##
+## EPANET LIBRARY
+##
+##
+EPANETLIB_LOC = $(TPL)\epanet\EPANET_\src
+EPANETLIB_C_SRC = \
+    $(EPANETLIB_LOC)\epanet.c \
+    $(EPANETLIB_LOC)\hash.c \
+    $(EPANETLIB_LOC)\hydraul.c \
+    $(EPANETLIB_LOC)\inpfile.c \
+    $(EPANETLIB_LOC)\input1.c \
+    $(EPANETLIB_LOC)\input2.c \
+    $(EPANETLIB_LOC)\input3.c \
+    $(EPANETLIB_LOC)\mempool.c \
+    $(EPANETLIB_LOC)\output.c \
+    $(EPANETLIB_LOC)\quality.c \
+    $(EPANETLIB_LOC)\report.c \
+    $(EPANETLIB_LOC)\rules.c \
+    $(EPANETLIB_LOC)\smatrix.c 
+
+EPANETLIB_C_OBJ = $(EPANETLIB_C_SRC:.c=.obj)
+EPANETLIB_INCLUDE = /I . /I $(EPANETLIB_LOC) /I $(EPANETLIB_LOC)/../include
+EPANETLIB_FLAGS =
+
+{$(EPANETLIB_LOC)}.c.{$(EPANETLIB_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANETLIB_FLAGS) $(EPANETLIB_INCLUDE) /Fo$@ /c $*.c
+
+static\libepanet.lib: static $(EPANETLIB_C_OBJ)
+    lib /out:static\libepanet.lib $(EPANETLIB_C_OBJ)
+
+shared\libepanet.dll: shared $(EPANETLIB_C_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libepanet.lib /out:shared\libepanet.dll $(EPANETLIB_C_OBJ)
+
+##
+## EPANETMSX LIBRARY
+##
+##
+EPANETMSXLIB_LOC = $(TPL)\epanet\EPANET_MSX_\src
+EPANETMSXLIB_INC = $(TPL)\epanet\EPANET_MSX_\include
+#not including hash.c because the identical file has already been compiled into libepanet.lib
+EPANETMSXLIB_C_SRC = \
+    $(EPANETMSXLIB_LOC)\mathexpr.c \
+    $(EPANETMSXLIB_LOC)\msxchem.c \
+    $(EPANETMSXLIB_LOC)\msxcompiler.c \
+    $(EPANETMSXLIB_LOC)\msxfile.c \
+    $(EPANETMSXLIB_LOC)\msxfuncs.c \
+    $(EPANETMSXLIB_LOC)\msxinp.c \
+    $(EPANETMSXLIB_LOC)\msxout.c \
+    $(EPANETMSXLIB_LOC)\msxproj.c \
+    $(EPANETMSXLIB_LOC)\msxqual.c \
+    $(EPANETMSXLIB_LOC)\msxrpt.c \
+    $(EPANETMSXLIB_LOC)\msxtank.c \
+    $(EPANETMSXLIB_LOC)\msxtoolkit.c \
+    $(EPANETMSXLIB_LOC)\msxutils.c \
+    $(EPANETMSXLIB_LOC)\newton.c \
+    $(EPANETMSXLIB_LOC)\rk5.c \
+    $(EPANETMSXLIB_LOC)\ros2.c
+
+EPANETMSXDLL_C_SRC=$(EPANETMSXLIB_LOC)\hash.c
+
+EPANETMSXLIB_C_OBJ = $(EPANETMSXLIB_C_SRC:.c=.obj)
+EPANETMSXDLL_C_OBJ = $(EPANETMSXDLL_C_SRC:.c=.obj)
+EPANETMSXLIB_INCLUDE = /I . /I $(EPANETLIB_LOC)  /I $(EPANETLIB_LOC)/../include /I $(EPANETMSXLIB_INC) /I $(EPANETMSXLIB_LOC)
+EPANETMSXLIB_FLAGS =
+
+{$(EPANETMSXLIB_LOC)}.c.{$(EPANETMSXLIB_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANETMSXLIB_FLAGS) $(EPANETMSXLIB_INCLUDE) /Fo$@ /c $*.c
+
+{$(EPANETMSXDLL_LOC)}.c.{$(EPANETMSXDLL_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANETMSXDLL_FLAGS) $(EPANETMSXLIB_INCLUDE) /Fo$@ /c $*.c
+
+static\libepanetmsx.lib: static static\libepanet.lib $(EPANETMSXLIB_C_OBJ)
+    lib /out:static\libepanetmsx.lib $(EPANETMSXLIB_C_OBJ) static\libepanet.lib 
+
+shared\libepanetmsx.dll: shared shared\libepanet.dll $(EPANETMSXLIB_C_OBJ) $(EPANETMSXDLL_C_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libepanetmsx.lib /out:shared\libepanetmsx.dll shared\libepanet.lib $(EPANETMSXLIB_C_OBJ) $(EPANETMSXDLL_C_OBJ)
+
+
+##
+## EPANETBTX LIBRARY
+##
+##
+EPANETBTXLIB_LOC = $(TPL)\epanet\EPANET_BTX_\src
+EPANETBTXLIB_INC = $(TPL)\epanet\EPANET_BTX_\include
+EPANETBTXLIB_C_SRC = \
+  $(EPANETBTXLIB_LOC)\backtrack.c \
+  $(EPANETBTXLIB_LOC)\btxtoolkit.c \
+  $(EPANETBTXLIB_LOC)\btxutil.c
+
+EPANETBTXLIB_C_OBJ = $(EPANETBTXLIB_C_SRC:.c=.obj)
+EPANETBTXLIB_INCLUDE = /I . /I $(EPANETLIB_LOC)  /I $(EPANETLIB_LOC)\..\include /I $(EPANETBTXLIB_INC) /I $(EPANETBTXLIB_LOC)
+EPANETBTXLIB_FLAGS =
+
+{$(EPANETBTXLIB_LOC)}.c.{$(EPANETBTXLIB_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANETBTXLIB_FLAGS) $(EPANETBTXLIB_INCLUDE) /Fo$@ /c $*.c
+
+static\libepanetbtx.lib: static static\libepanet.lib $(EPANETBTXLIB_C_OBJ)
+    lib /out:static\libepanetbtx.lib $(EPANETBTXLIB_C_OBJ) static\libepanet.lib 
+
+shared\libepanetbtx.dll: shared shared\libepanet.dll $(EPANETBTXLIB_C_OBJ) $(EPANETBTXDLL_C_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libepanetbtx.lib /out:shared\libepanetbtx.dll shared\libepanet.lib $(EPANETBTXLIB_C_OBJ) $(EPANETBTXDLL_C_OBJ)
+
+
+##
+## MERLION LIBRARY
+##
+##
+MERLIONLIB_LOC = $(PACKAGES)\sim\merlion\src
+MERLIONLIB_CPP_SRC = \
+    $(MERLIONLIB_LOC)\merlion\TriSolve.cpp \
+    $(MERLIONLIB_LOC)\merlion\BlasWrapper.cpp \
+    $(MERLIONLIB_LOC)\merlion\DirectedGraph.cpp \
+    $(MERLIONLIB_LOC)\merlion\SparseMatrix.cpp \
+    $(MERLIONLIB_LOC)\merlion\Network.cpp \
+    $(MERLIONLIB_LOC)\merlion\WaterQualityModel.cpp \
+    $(MERLIONLIB_LOC)\merlion\Merlion.cpp
+
+MERLIONLIB_CPP_OBJ = $(MERLIONLIB_CPP_SRC:.cpp=.obj)
+MERLIONLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC)
+
+{$(MERLIONLIB_LOC)\merlion}.cpp.{$(MERLIONLIB_LOC)\merlion}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(MERLIONLIB_FLAGS) $(MERLIONLIB_INCLUDE) /Fo$@ /c $*.cpp
+
+static\libmerlion.lib: static $(MERLIONLIB_CPP_OBJ)
+    lib /out:static\libmerlion.lib $(MERLIONLIB_CPP_OBJ)
+
+##
+## MERLION UTILS LIBRARY
+##
+##
+MERLIONUTILSLIB_LOC = $(PACKAGES)\sim\merlion\merlionUtils\src
+MERLIONUTILSLIB_CPP_SRC = \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\EpanetLinker.cpp \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\ModelWriter.cpp \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\TSG_Reader.cpp \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\SimTools.cpp \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\Scenarios.cpp \
+    $(MERLIONUTILSLIB_LOC)\merlionUtils\NetworkSimulator.cpp
+
+MERLIONUTILSLIB_CPP_OBJ = $(MERLIONUTILSLIB_CPP_SRC:.cpp=.obj)
+MERLIONUTILSLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC) /I $(EPANETLIB_LOC)  /I $(EPANETLIB_LOC)\..\include /I $(MERLIONUTILSLIB_LOC) /I $(TPL)\acro\tpl\boost
+MERLIONUTILSLIB_FLAGS = /EHs # required to use boost library
+
+{$(MERLIONUTILSLIB_LOC)\merlionUtils}.cpp.{$(MERLIONUTILSLIB_LOC)\merlionUtils}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(MERLIONUTILSLIB_FLAGS) $(MERLIONUTILSLIB_INCLUDE) /Fo$@ /c $*.cpp
+
+static\libmerlionutils.lib: static static\libmerlion.lib static\libepanet.lib $(MERLIONUTILSLIB_CPP_OBJ)
+    lib /out:static\libmerlionutils.lib $(MERLIONUTILSLIB_CPP_OBJ) static\libmerlion.lib static\libepanet.lib 
+
+##
+## ENL LIBRARY
+##
+##
+ENL_LIB_LOC = $(PACKAGES)\tevaUtils\erd\enl\src
+ENL_LIB_INC = $(PACKAGES)\tevaUtils\erd\enl\include
+ENL_LIB_C_SRC = $(ENL_LIB_LOC)\enl.c
+ENL_LIB_C_OBJ = $(ENL_LIB_C_SRC:.c=.obj)
+
+ENL_LIB_INCLUDE = /I $(ENL_LIB_INC) \
+				  /I $(ERD_LIB_INC) \
+				  /I $(EPANETLIB_LOC) \
+				  /I $(EPANETLIB_LOC)/../include \
+				  /I $(EPANETMSXLIB_INC) \
+				  /I $(EPANETMSXLIB_LOC)
+ENL_LIB_FLAGS = -D_FILE_OFFSET_BITS=64
+
+$(ENL_LIB_C_OBJ): $(ENL_LIB_C_SRC)
+    $(CC) $(CFLAGS) $(ENL_LIB_FLAGS) $(ENL_LIB_INCLUDE) /Fo$@ /c $*.c
+
+static\libenl.lib: static $(ENL_LIB_C_OBJ) static\libepanet.lib
+    lib /out:static\libenl.lib $(ENL_LIB_C_OBJ) static\libepanet.lib
+
+##
+## ANALYSIS MODULE LIBRARY  (SHARED ONLY)
+##
+##
+
+ANALYSIS_LOC = $(ANLDIR)\src
+ANALYSIS_C_SRC = \
+  $(ANALYSIS_LOC)\namedData.c \
+  $(ANALYSIS_LOC)\AggregationServerJNI.c  \
+  $(ANALYSIS_LOC)\IntAnalysisServerJNI.c \
+  $(ANALYSIS_LOC)\AnalysisModuleUtils.c \
+  $(ANALYSIS_LOC)\DiskCachedData.c
+
+ANALYSIS_C_OBJ = $(ANALYSIS_C_SRC:.c=.obj)
+ANALYSIS_INCLUDE =  $(ANLUTILS_INCLUDE) /I $(ANLDIR)\include /I $(ERD_LIB_INC) /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32"
+ANALYSIS_FLAGS = 
+
+{$(ANALYSIS_LOC)}.c.{$(ANALYSIS_LOC)}.obj:
+    $(CC) $(CFLAGS) $(ANALYSIS_FLAGS) $(ANALYSIS_INCLUDE) /Fo$@ /c $*.c
+
+shared\libAnalysisModule.dll: shared $(ANALYSIS_C_OBJ)
+   link $(LINK_FLAGS) /dll /out:shared\libAnalysisModule.dll $(ANALYSIS_C_OBJ) $(ANLUTILS_LIB)
+
+##
+## ERD_JNI MODULE LIBRARY  (SHARED ONLY)
+##
+##
+ERDJNI_LOC = $(PACKAGES)\tevaUtils\erd_jni
+ERDJNI_C_SRC = $(ERDJNI_LOC)\erd_jni.c $(ERDJNI_LOC)\erd_utils.c
+ERDJNI_C_OBJ = $(ERDJNI_C_SRC:.c=.obj)
+ERDJNI_INCLUDE =  /I $(TSO_LOC) /I $(ERD_LIB_INC) /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32" $(ANLUTILS_INCLUDE)
+ERDJNI_FLAGS = 
+
+{$(ERDJNI_LOC)}.c.{$(ERDJNI_LOC)}.obj:
+    $(CC) $(CFLAGS) $(ERDJNI_FLAGS) $(ERDJNI_INCLUDE) /Fo$@ /c $*.c
+
+shared\libERD_JNI.dll: shared $(ERDJNI_C_OBJ)
+    link $(LINK_FLAGS) /dll /out:shared\libERD_JNI.dll $(ERDJNI_C_OBJ) $(ANLUTILS_LIB) shared\liberd.lib shared\liblzma.lib
+
+##
+## TSO MODULE LIBRARY  (SHARED ONLY)
+##
+##
+TSO_LOC = $(PACKAGES)\tevaUtils\tso_jni
+TSO_C_SRC = $(TSO_LOC)\tso_jni.c
+TSO_C_OBJ = $(TSO_C_SRC:.c=.obj)
+TSO_INCLUDE =  /I $(TSO_LOC) /I $(PACKAGES)\tevaUtils\tso  $(TSO_UTIL_LIB_INCLUDE) /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32" $(ANLUTILS_INCLUDE) /I $(ERDJNI_LOC)
+TSO_FLAGS = 
+
+{$(TSO_LOC)}.c.{$(TSO_LOC)}.obj:
+    $(CC) $(CFLAGS) $(TSO_FLAGS) $(TSO_INCLUDE) /Fo$@ /c $*.c
+
+shared\libTSO.dll: shared $(TSO_C_OBJ) shared\libERD_JNI.dll
+    link $(LINK_FLAGS) /dll /out:shared\libTSO.dll $(TSO_C_OBJ) $(ANLUTILS_LIB) shared\libtsoutil.lib shared\libERD_JNI.lib
+
+##
+## EPANET_JNI MODULE LIBRARY  (SHARED ONLY)
+##
+##
+EPANET_JNI_LOC = $(PACKAGES)\sim\TEVAEpanetJNI
+EPANET_JNI_C_SRC = \
+    $(EPANET_JNI_LOC)\EPANETWaterModel.c \
+    $(EPANET_JNI_LOC)\EPANETJava.c
+
+EPANET_JNI_C_OBJ = $(EPANET_JNI_C_SRC:.c=.obj)
+EPANET_JNI_INCLUDE =  /I $(EPANET_JNI_LOC) /I $(TPL)\epanet\EPANET_\src /I $(TPL)\epanet\EPANET_\include /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32" $(ANLUTILS_INCLUDE)
+EPANET_JNI_FLAGS = 
+
+{$(EPANET_JNI_LOC)}.c.{$(EPANET_JNI_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANET_JNI_FLAGS) $(EPANET_JNI_INCLUDE) /Fo$@ /c $*.c
+
+shared\libepanet_jni.dll: shared $(EPANET_JNI_C_OBJ) shared\libepanet.dll
+    link $(LINK_FLAGS) /dll /out:shared\libepanet_jni.dll $(EPANET_JNI_C_OBJ)  /LIBPATH:$(ANLUTILS_LIB_DIR) ANLUtils.lib shared\libepanet.lib
+
+##
+## EPANETMSX_JNI MODULE LIBRARY  (SHARED ONLY)
+##
+EPANETMSX_JNI_LOC = $(PACKAGES)\sim\TEVAEpanetMSXJNI
+EPANETMSX_JNI_C_SRC = \
+    $(EPANETMSX_JNI_LOC)\EPANETMSXJava.c
+
+EPANETMSX_JNI_C_OBJ = $(EPANETMSX_JNI_C_SRC:.c=.obj)
+EPANETMSX_JNI_INCLUDE =  /I $(EPANETMSX_JNI_LOC) /I $(TPL)\epanet\EPANET_\src /I $(TPL)\epanet\EPANET_\include /I $(TPL)\epanet\EPANET_MSX_\src /I $(TPL)\epanet\EPANET_MSX_\include /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32" $(ANLUTILS_INCLUDE)
+EPANETMSX_JNI_FLAGS = 
+
+{$(EPANETMSX_JNI_LOC)}.c.{$(EPANETMSX_JNI_LOC)}.obj:
+    $(CC) $(CFLAGS) $(EPANETMSX_JNI_FLAGS) $(EPANETMSX_JNI_INCLUDE) /Fo$@ /c $*.c
+
+shared\libepanetmsx_jni.dll: shared $(EPANETMSX_JNI_C_OBJ) shared\libepanetmsx.dll
+    link $(LINK_FLAGS) /dll /out:shared\libepanetmsx_jni.dll $(EPANETMSX_JNI_C_OBJ)  /LIBPATH:$(ANLUTILS_LIB_DIR) ANLUtils.lib shared\libepanet.lib shared\libepanetmsx.lib
+
+##
+##
+## EPANET EXECUTABLE
+##
+##
+EPANET_C_SRC = $(EPANETLIB_LOC)\epanet.c
+EPANET_C_OBJ = .\epanet.obj
+EPANET_INCLUDE = /I . /I $(EPANETLIB_INCLUDE)
+EPANET_FLAGS = -DCLE
+
+$(EPANET_C_OBJ): $(EPANET_C_SRC)
+    $(CC) $(CFLAGS) $(EPANET_FLAGS) $(EPANETLIB_INCLUDE) /Fo$@ /c $**
+
+static\epanet.exe:  $(EPANET_C_OBJ) static\libepanet.lib
+     $(CC) $(LINKDBG) /Fe$@ $**
+     del $(EPANET_C_OBJ)
+
+##
+## EPANETMSX EXECUTABLE
+##
+##
+EPANETMSX_C_SRC = $(EPANETMSXLIB_LOC)\msxmain.c
+EPANETMSX_C_OBJ = $(EPANETMSX_C_SRC:.c=.obj)
+EPANETMSX_INCLUDE = /I . /I $(EPANETLIB_INCLUDE)
+EPANETMSX_FLAGS = -DCLE
+
+$(EPANETMSX_C_OBJ): $(EPANETMSX_C_SRC)
+    $(CC) $(CFLAGS) $(EPANETMSX_FLAGS) $(EPANETMSXLIB_INCLUDE) /Fo$@ /c $**
+
+static\epanet_msx.exe:  $(EPANETMSX_C_OBJ) static\libepanetmsx.lib
+     $(CC) $(LINKDBG) /Fe$@ $**
+
+##
+## TEVASIM EXECUTABLE
+##
+##
+TEVASIM_LOC = $(PACKAGES)\sim\tevasim
+TEVASIM_CPP_SRC = $(TEVASIM_LOC)\teva.cpp 
+TEVASIM_CPP_OBJ = $(TEVASIM_CPP_SRC:.cpp=.obj)
+TEVASIM_C_SRC = $(TEVASIM_LOC)\run_teva.c $(TEVASIM_LOC)\mem_mon.c
+TEVASIM_C_OBJ = $(TEVASIM_C_SRC:.c=.obj)
+TEVASIM_OBJ = $(TEVASIM_C_OBJ) $(TEVASIM_CPP_OBJ)
+TEVASIM_INCLUDE = /I . /I $(TEVASIM_LOC) \
+				  /I $(TSO_UTIL_LIB_LOC) \
+				  /I $(EPANETLIB_LOC) \
+				  /I $(EPANETLIB_LOC)/../include \
+				  /I $(EPANETMSXLIB_LOC) \
+				  /I $(EPANETMSXLIB_INC) \
+				  /I $(MERLIONLIB_LOC) \
+				  /I $(ERD_LIB_INC) \
+				  /I $(ENL_LIB_INC) \
+				  $(UTILIB_INCLUDE) \
+				  /I $(PACKAGES)\tevaUtils\dirent \
+				  /I $(MERLIONUTILSLIB_LOC) \
+                                  /I $(TPL)\acro\tpl\boost
+TEVASIM_FLAGS = -DNOMINMAX 
+
+{$(TEVASIM_LOC)}.c.{$(TEVASIM_LOC)}.obj:
+    $(CC) $(CFLAGS) $(TEVASIM_FLAGS) $(TEVASIM_INCLUDE) /Fo$@ /c $*.c
+
+{$(TEVASIM_LOC)}.cpp.{$(TEVASIM_LOC)}.obj:
+    $(CPP) $(CFLAGS) $(TEVASIM_FLAGS) $(TEVASIM_INCLUDE) /Fo$@ /c $*.cpp
+
+static\tevasim.exe:  $(UTILIB_LIB) $(TEVASIM_OBJ) static\liberd.lib static\libenl.lib static\libepanetmsx.lib static\libmerlion.lib static\libmerlionutils.lib
+   $(CC) $(DEBUGGING_SYMBOLS) /L psapi.lib $(LINKDBG) /Fe$@  $**
+
+##
+## ERD2TEXT EXECUTABLE
+##
+##
+ERD2TEXT_LOC = $(TSO_UTIL_LIB_LOC)
+ERD2TEXT_C_SRC = $(ERD2TEXT_LOC)\tso2text.c
+ERD2TEXT_C_OBJ = $(ERD2TEXT_C_SRC:.c=.obj)
+ERD2TEXT_INCLUDE = /I . /I $(ERD2TEXT_LOC) /I $(ERD_LIB_INC)
+ERD2TEXT_FLAGS =
+
+$(ERD2TEXT_C_OBJ): $(ERD2TEXT_C_SRC)
+    $(CC) $(CFLAGS) $(ERD2TEXT_FLAGS) $(ERD2TEXT_INCLUDE) /Fo$@ /c $*.c
+
+static\erd2text.exe:  $(ERD2TEXT_C_OBJ) static\libtsoutil.lib
+   $(CC) $(LINKDBG) /Fe$@ $** 
+
+##
+## ERDDIFF EXECUTABLE
+##
+##
+ERDDIFF_LOC = $(TSO_UTIL_LIB_LOC)
+ERDDIFF_C_SRC = $(ERDDIFF_LOC)\tsodiff.c
+ERDDIFF_C_OBJ = $(ERDDIFF_C_SRC:.c=.obj)
+ERDDIFF_INCLUDE = /I . /I $(ERDDIFF_LOC) /I $(ERD_LIB_INC)
+ERDDIFF_FLAGS =
+
+$(ERDDIFF_C_OBJ): $(ERDDIFF_C_SRC)
+    $(CC) $(CFLAGS) $(ERDDIFF_FLAGS) $(ERDDIFF_INCLUDE) /Fo$@ /c $*.c
+
+static\erddiff.exe:  $(ERDDIFF_C_OBJ) static\libtsoutil.lib
+   $(CC) $(LINKDBG) /Fe$@ $** 
+
+##
+## ERDINFO EXECUTABLE
+##
+##
+ERDINFO_LOC = $(TSO_UTIL_LIB_LOC)
+ERDINFO_C_SRC = $(ERDINFO_LOC)\tso_info.c
+ERDINFO_C_OBJ = $(ERDINFO_C_SRC:.c=.obj)
+ERDINFO_INCLUDE = /I . /I $(ERDINFO_LOC) /I $(ERD_LIB_INC)
+ERDINFO_FLAGS =
+
+$(ERDINFO_C_OBJ): $(ERDINFO_C_SRC)
+    $(CC) $(CFLAGS) $(ERDINFO_FLAGS) $(ERDINFO_INCLUDE) /Fo$@ /c $*.c
+
+static\erdinfo.exe:  $(ERDINFO_C_OBJ) static\libtsoutil.lib
+   $(CC) $(LINKDBG) /Fe$@ $** 
+
+OBJ_FILES = $(LZMA_LIB_C_OBJ) $(ERD_LIB_C_OBJ) $(TSO_UTIL_LIB_C_OBJ) $(EPANETLIB_C_OBJ) $(EPANETMSXLIB_C_OBJ) \
+			$(EPANETMSXDLL_C_OBJ) $(ENL_LIB_C_OBJ) $(ANALYSIS_C_OBJ) $(TSO_C_OBJ) $(EPANET_JNI_C_OBJ) \
+			$(EPANET_C_OBJ) $(EPANETMSX_C_OBJ) $(TEVASIM_C_OBJ) $(TEVASIM_CPP_OBJ) $(ERD2TEXT_C_OBJ) \
+			$(ERDDIFF_C_OBJ) $(ERDINFO_C_OBJ) $(EPANETMSX_JNI_C_OBJ) $(ERDJNI_C_OBJ) $(MERLIONLIB_CPP_OBJ) \
+			$(MERLIONUTILSLIB_CPP_OBJ)
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake dlls " will build the shared versions
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+clean:
+	cd $(UTILIB_LIB_DIR)
+	$(MAKE) clean
+	cd $(MAKEDIR)
+		@-del /Q teva_config.h
+        @-del $(OBJ_FILES)
+        @-del /Q static\liblzma.*
+        @-del /Q static\liberd.*
+        @-del /Q static\libtsoutil.*
+        @-del /Q static\libepanet.*
+        @-del /Q static\libepanetmsx.*
+        @-del /Q static\libenl.*
+        @-del /Q static\libmerlion.*
+        @-del /Q static\libmerlionutils.*
+        @-del /Q static\epanet.*
+        @-del /Q static\epanet_msx.*
+        @-del /Q static\tevasim.*
+        @-del /Q static\erd2text.*
+        @-del /Q static\erddiff.*
+        @-del /Q static\erdinfo.*
+        @-del /Q shared\libtsoutil.*
+        @-del /Q shared\libepanet.*
+        @-del /Q shared\libAnalysisModule.*
+        @-del /Q shared\libepanet_jni.*
+        @-del /Q shared\libepanetmsx_jni.*
+        @-del /Q shared\libTSO.*
+        @-del /Q shared\libERD_JNI.*
+        @-del /Q shared\libepanetmsx.*
+        @-del /Q shared\liblzma.*
+        @-del /Q shared\liberd.*
+        

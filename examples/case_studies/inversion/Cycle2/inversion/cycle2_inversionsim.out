@@ -1,0 +1,23 @@
+***WARNING***: Merlion only supports time controls. Please change level controls to time controls in the input file.
+***Ignoring above Warnings***
+Hydraulic simulation ran for a duration of: 48 hr
+
+	- Ran hydraulic model with Epanet  (time in seconds): 0.26311
+last_ts:   108
+last_ts:   0
+Total other time : 0
+Using Allowed Nodes Cut ...
+Running Inversion:
+
+ Total number of simulations: 603
+
+	 - Ran all possible event simulations  (time in seconds): 0.002866
+
+	 - Total concentration calc time  (time in seconds): 0.001276
+
+ Measurement match time  (time in seconds): 0.000412
+
+ Blas reset time  (time in seconds): 0.000218
+ Total file print time  (time in seconds): 0.000141
+
+DONE

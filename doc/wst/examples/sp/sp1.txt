@@ -1,0 +1,25 @@
+====================
+Optimization Results
+====================
+
+Solutions: [[2, 4, 59, 70, 81]]
+Locations: [['15', '203', '219', '253', '35']]
+------------------------------------------------------------------------------
+Sensor placement id:        14861
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            2 4 59 70 81 
+Sensor junctions:           15 35 203 219 253 
+
+Impact File:                Net3_mc.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                21721.3019
+Lower quartile impact:      289.3540
+Median impact:              1354.0800
+Upper quartile impact:      9115.0900
+Value at Risk (VaR) (  5%): 143999.0000
+TCE                 (  5%): 143999.0000
+Max impact:                 143999.0000
+------------------------------------------------------------------------------
+

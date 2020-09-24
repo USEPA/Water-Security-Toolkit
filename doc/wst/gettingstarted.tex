@@ -1,0 +1,327 @@
+
+This chapter provides information on downloading and
+installing WST. WST is an open source toolkit for
+modeling and analyzing water distribution systems to minimize the
+potential impact of contamination incidents.
+
+\section{Obtaining the Water Security Toolkit}\label{S:getting_wst}
+
+WST is distributed by the EPA in both source and
+pre-built binary forms through the World Wide Web at
+\url{https://github.com/USEPA/Water-Security-Toolkit}. From the main WST web page,
+click the ``Releases'' link. The download page 
+has options to download the WST source code as well as pre-built binary
+packages for 64-bit Microsoft Windows\textsuperscript{\textregistered} operating system. For most users, 
+installing pre-built binary versions of WST is recommended.
+
+Alternatively, the WST source code can be checked out directly from the
+master git version control system through
+\url{https://github.com/USEPA/Water-Security-Toolkit}. In particular, the
+source can be checked out with the git command:
+\begin{unknownListing}
+git clone https://github.com/USEPA/Water-Security-Toolkit
+\end{unknownListing}
+
+\section{Dependencies of the Water Security Toolkit}\label{dependencies}
+
+WST is a collection of Python\texttrademark (Python Software Foundation) and compiled C++ software. It has
+dependencies on several third-party software packages. First and
+foremost, a Python interpreter must be installed. WST is
+currently compatible with Python 2.6 or 2.7. Python 3.x is not 
+supported. Python is available from \url{http://python.org/}.
+
+The WST source code and binary distributions bundle several additional
+Python packages, including:
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em,labelindent=2em,leftmargin=4em]
+\item[Coopr]\hfill\\ A collection of open-source optimization-related
+  Python packages that support a diverse set of optimization
+  capabilities for formulating and analyzing optimization models. Coopr
+  in turn bundles several third-party dependency libraries:
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[argparse]\hfill\\ A Python command line argument parsing utility
+  \item[coverage]\hfill\\ A Python utility for capturing and reporting
+    code coverage
+  \item[distribute]\hfill\\ A Python utility for building and installing
+    Python packages
+  \item[gcovr]\hfill\\ A utility for parsing and reporting GCOV code
+    coverage reports
+  \item[nose]\hfill\\ A Python test-harness driver
+  \item[ordereddict]\hfill\\ A utility that back-ports ordered
+    dictionaries to Python 2.6
+  \item[pip]\hfill\\ A Python utility for installing Python packages
+  \item[ply]\hfill\\ A general parser-lexer
+  \item[pyro]\hfill\\ A utility for managing distributed Python execution
+  \item[runpy2]\hfill\\ A utility that back-ports runpy functionality to Python 2.4
+  \item[setuptools]\hfill\\ A Python utility for building and installing Python packages
+  \item[six]\hfill\\ A utility that provides a portable interface to Python 2.x
+    and 3.x
+  \item[unittest2]\hfill\\ A utility that back-ports unittest functionality from
+    Python 2.7 to 2.3-2.6
+  \item[virtualenv]\hfill\\ A utility for creating virtual Python environments
+  \end{description}
+\item[PyUtilib]\hfill\\ A collection of Python utilities, including the testing
+  harness used in WST
+\item[PyEPANET]\hfill\\ Python wrappers for the EPANET 2.00.12 Programmers Toolkit
+\item[PyYAML]\hfill\\ A YAML parser and emitter for Python
+\end{description}
+
+WST subcommands can leverage numerous third-party programs that
+are not available in the WST zipped file that contains the source code and binary distribution:
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em,labelindent=2em,leftmargin=4em]
+\item[AMPL]\hfill\\ A commercial algebraic modeling environment, available from
+  \url{http://www.ampl.com/}
+\item[CBC]\hfill\\ An open-source mixed-integer linear programming
+  solver, available from \url{https://github.com/coin-or/Cbc}. The
+  COIN Binary Project provides pre-compiled binaries through the
+  CoinAll distribution,
+  available from \url{https://www.coin-or.org/download/binary/CoinAll}.
+\item[CPLEX]\hfill\\ A commercial mixed-integer linear programming solver,
+  available from
+  \url{https://www.ibm.com/products/ilog-cplex-optimization-studio}
+\item[Coliny]\hfill\\ An open-source package that provides algorithms for model
+  transformation and black-box optimization, available as 
+  part of the Dakota project at \url{http://dakota.sandia.gov/}
+\item[Dakota]\hfill\\ An open-source package that provides algorithms for
+  black-box optimization, sensitivity analysis, surrogate modeling and
+  uncertainty quantification, available from
+  \url{http://dakota.sandia.gov/}. For Windows users, the
+  6.8 Windows build is recommended. The information on how to download and install Dakota is 
+  provided in the \ref{sec.WSTinstall} section.
+\item[GLPK]\hfill\\ An open-source mixed-integer linear programming
+  solver, available from \url{http://www.gnu.org/software/glpk/}.
+  Pre-compiled binary distributions are available as part of most
+  UNIX-like operating systems. The GLPK for Windows Project
+  provides pre-compiled Windows binaries, available from
+  \url{http://winglpk.sourceforge.net/}.
+\item[Gurobi]\hfill\\ A commercial mixed-integer linear programming solver,
+  available from
+  \url{http://www.gurobi.com/}.
+%\item[PICO]\hfill\\ An open-source mixed-integer linear programming solver,
+%  available as the Acro-pico project from
+%  \url{https://software.sandia.gov/trac/acro/}.
+\end{description}
+Please refer to the individual projects' documentation for licensing,
+pricing and installation information.
+
+\section{Installing the Water Security Toolkit Binary Distributions}\label{sec.WSTinstall}
+
+This is the last binary build of the WST software, since it is no longer in active development. The source code is available along with the "NMAKE" files in the appropriate package directory. The build is fragile, since it might require older versions of Python and MSVS runtime libraries. Due to these limitations, the best method to compile and build WST is on a Linux machine. Associated projects under active development include the following: Water Network Tool for Resilience (WNTR) available at \url{https://github.com/USEPA/WNTR}, Chama available at \url{https://github.com/sandialabs/chama} and Pecos available at \url{https://github.com/sandialabs/pecos}.
+
+The following instructions are provided for installing WST on Windows machines.
+For the most up-to-date instructions, including updated third-party URLs, please see the Install page on the GitHub site at \url{https://github.com/USEPA/Water-Security-Toolkit}.
+
+\begin{itemize}
+\item Download Anaconda 2.7 from \url{https://www.anaconda.com/distribution/#download-section}. Get the ``Anaconda 2.7'' version, not the Anaconda 3.x.
+
+\item Download Dakota/Coliny from \url{https://dakota.sandia.gov/downloads}. Get the ``Windows'', ``6.8'', ``command line only'', ``unsupported'' version (\texttt{dakota-6.8-release-public-Windows.x86.zip}).
+
+\item Download CBC from \url{https://www.coin-or.org/download/binary/CoinAll}. Get the ``Windows 1.7.4'' version build date ``2013-12-26 18:14'' (\texttt{COIN-OR-1.7.4-win32-msvc11.zip}).
+
+\item Download WST. Get the ``Release 2019'' from the ``Releases'' tab (\texttt{wst-2019.zip}).
+
+\item Perform the following steps:
+\begin{enumerate}
+\item Install Anaconda2 as ``Just Me'' so administrator access is not needed
+\item Unzip the \texttt{wst-2019.zip} file into the desired directory 
+\item Unzip the \texttt{dakota-6.8-release-public-Windows.x86.zip} file (should create a directory called the same thing, without the .zip extension, in the same directory as the zip file)
+\item Copy all the files from the \texttt{dakota-6.8-release-public-Windows.x86/bin} directory into the \texttt{wst-2019/bin} directory
+\item Unzip the \texttt{COIN-OR-1.7.4-win-21-msvc11.zip} file (should create a directory called the same thing, without the .zip extension, in the same directory as the zip file)
+\item Copy all the files from the \texttt{COIN-OR-1.7.4-win-21-msvc11/win32-msvc11/bin} directory into the \texttt{wst-2019/bin} directory
+\item Open an Anaconda Prompt from the ``Start -> Anaconda2'' menu
+\item Change directory into the \texttt{wst-2019} directory
+\item Type ``install''
+\item Change directory into the \texttt{wst-2019/examples} directory
+\item Run the examples (e.g., \texttt{wst sp sp\_ex1.yml})
+
+\end{enumerate}
+\end{itemize}
+
+
+\section{Compiling the Water Security Toolkit Source Code}
+
+Compiling WST from the source code is an advanced topic and targeted
+only at potential developers. It assumes familiarity with compilers and
+build terminology. General users are strongly recommended to use the 
+pre-built binary packages whenever possible.  
+
+Compiling WST from the source code uses the Python VirtualEnv package to
+set up a virtual Python environment within the WST source code
+distribution. The Python components of WST are installed into this
+virtual environment to better insulate WST from the other Python installations 
+(and vice-versa). The compiled (C++) binary
+executable files are installed into a bin directory within the
+source code distribution. Currently, WST does not support out-of-source builds.
+
+While WST can be compiled from the source code for Windows and Linux 
+operating systems, Windows users are recommended 
+to leverage the pre-built binary distributions. WST can be compiled for Linux 
+using a 3-step process:
+\begin{enumerate}
+\item Obtain the WST source code
+\item Configure the Python virtual environment
+\item Build the C++ executable files
+\end{enumerate}
+
+\subsection{Obtaining the Water Security Toolkit Source Code}
+The WST source code can either be extracted from a downloaded source zip/tar
+archive or checked out directly from the repository using git.
+The following directions assume that the source code is in the
+wst-\wstversion~directory.
+
+\subsection{Configuring the Python Virtual Environment}
+The Python virtual environment is automatically configured by the
+\code{setup} command distributed in the top-level directory of the
+source code distribution:
+\begin{unknownListing}
+cd ~/wst-`\wstversion`
+./setup
+\end{unknownListing}
+This configures WST using the system's default Python interpreter and
+the bundled versions of the Python dependencies. A different version of Python 
+can be used with WST by specifying it explicitly when running
+the \code{setup} command:
+\begin{unknownListing}
+cd ~/wst-`\wstversion`
+python2.7 ./setup
+\end{unknownListing}
+
+Setup configures the Python virtual environment within the 
+wst/python directory (e.g.,/wst-\wstversion/python). The virtual interpreter and the
+main \code{wst} command both reside in wst/python/bin directory
+(e.g.,/wst-\wstversion/python/bin/wst). If only a single virtual environment 
+is going to be on the machine, adding the wst/python/bin directory to 
+the system PATH variable is recommended. Alternatively, 
+the \code{lbin} and \code{lpython} commands (installed
+into wst/python/bin) can be used to correctly locate local binaries and
+the local virtual python interpreter. To run the \code{wst} command from anywhere
+under the main WST directory, use the \code{lbin wst} command.
+Similarly, to run the local python (virtual environment) interpreter,
+use the \code{lpython} command. It is safe to copy both \code{lbin}
+and \code{lpython} to other directories (e.g.,/bin).
+
+After the installation of the core functionality of the python environments
+a couple of installations are required. 
+
+\begin{unknownListing}
+pip install numpy
+pip install texttable
+pip install matplotlib
+\end{unknownListing}
+
+\subsection{Building the C++ Executable Files}
+
+WST relies on the GNU Autotools to manage the build process for compiled
+executables. In particular, Autoconf version 2.60 or
+newer must be installed on the system along with a relatively new C++ compiler
+and linker (e.g., gcc >= 3.4). The build process follows the normal
+\code{autoreconf -- configure -- make} sequence:
+\begin{unknownListing}
+cd ~/wst-`\wstversion`
+./setup
+autoreconf -v -i -f
+./configure
+make
+\end{unknownListing}
+It is not recommended to use the \code{make install} command. The
+resulting compiled binaries reside in wst/bin, and are easily
+accessed from anywhere under the main WST directory using the
+\code{lbin} command.
+
+This process could be simplified by using the main \code{setup} command:
+\begin{unknownListing}
+cd ~/wst-`\wstversion`
+./setup build
+\end{unknownListing}
+
+
+\section{Basic Usage of the Water Security Toolkit}\label{usage}
+
+The main command line structure to execute a WST subcommand is the following:
+\begin{unknownListing}
+wst SUBCOMMAND <configfile>
+\end{unknownListing}
+where \code{SUBCOMMAND} is the one of subcommands available under the 
+\code{wst} command and \code{configfile} is the configuration file associated 
+with the specified subcommand. The subcommands include the following:
+\begin{itemize}
+\item \code{tevasim}
+\item \code{sim2Impact}
+\item \code{sp} 
+\item \code{flushing} 
+\item \code{booster\_msx}
+\item \code{booster\_mip}
+\item \code{inversion}
+\item \code{grabsample}
+\item \code{visualization}
+\end{itemize}
+Each subcommand is described in more detail in Chapters \ref{chap:tevasim} 
+through \ref{chap:visualization}.
+ 
+In addition, the \code{---help} option prints information 
+about the different subcommand options available. 
+\begin{unknownListing}
+wst --help
+\end{unknownListing}
+
+Each subcommand has the option to generate a template configuration file by using 
+the following command line:
+\begin{unknownListing}
+wst SUBCOMMAND --template <configfile>
+\end{unknownListing}
+where \code{configfile} is the name of the template configuration file created for 
+the specified \code{SUBCOMMAND}.
+
+\section{Verifying Installation of the Water Security Toolkit}\label{simple_example}
+
+An example using one of the WST subcommands can be used to verify 
+the proper installation of WST. This example uses the WST subcommand \code{tevasim}, 
+which is documented in Chapter \ref{chap:tevasim}.
+
+\begin{enumerate}
+  \item A template configuration file for the \code{tevasim} subcommand 
+  can be generated using the following command line, in which verify-wst.yml 
+  is the template configuration file to be created:
+    \begin{unknownListing}
+wst tevasim --template verify-wst.yml
+\end{unknownListing}
+    This example assumes that the wst/bin directory was added to the PATH variable. 
+	If the path was not modified, the \code{wst} command would be replaced with the full 
+	path to the main WST script (e.g., C:\textbackslash wst-\wstversion\textbackslash bin\textbackslash wst)
+	in this and all subsequent commands.
+  \item The EPANET input file for the example network (Net3.inp) needs to be copied from the
+    wst/examples/Net3 directory to the current working directory, since it is 
+	the network file referenced in the generated template file. On Windows (assuming WST 
+	is installed to C:\textbackslash wst-\wstversion), the command line to copy this file is the following:
+    \begin{unknownListing}
+copy C:\wst-`\wstversion`\examples\Net3\Net3.inp
+\end{unknownListing}
+    On Linux (assuming WST is installed to \textasciitilde/wst-\wstversion), the command line 
+	to copy this file is the following:
+    \begin{unknownListing}
+cp ~/wst-`\wstversion`/examples/Net3/Net3.inp
+\end{unknownListing}
+  \item The \code{tevasim} subcommand using this example is executed with the following 
+  command line:
+    \begin{unknownListing}
+wst tevasim verify-wst.yml
+\end{unknownListing}
+    This runs the \code{tevasim} subcommand and produces the output shown in Figure \ref{fig:tevasim_getting started}
+\end{enumerate}
+
+\begin{figure}[h]
+\unknownInputListing{examples/tevasim/template_screen.txt}{}{1}{11}
+\caption{The \code{tevasim} template screen output.}
+\label{fig:tevasim_getting started}
+\end{figure}
+
+
+\section{Uninstalling the Water Security Toolkit}
+
+As WST does not rely on a formal installer, uninstalling WST only requires
+deleting the main WST directory (regardless if the 
+pre-built binaries were installed or WST was built from the source code). 
+If the wst/bin and/or wst/python/bin directories were added to the system
+PATH variable, these entries should be removed also.
+
+% LocalWords:  WST Sandia wst exe tevasim yml inp TEVA basicstyle
+% LocalWords:  lineskip EPANET

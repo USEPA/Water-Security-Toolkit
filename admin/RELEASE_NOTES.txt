@@ -1,0 +1,8 @@
+Installation Notes
+
+1. This installer requires the installation of Python.  Windows installers are available at http://www.python.org/download/ .
+
+2. We recommend the use of the default installation path.  If other installation paths are required, note that the installation path cannot contain a space.
+
+3. The TEVA-SPOT Toolkit installation is contains a collection of Python packages and binary executables.  Most of these are licensed with the BSD open source license.  However, some components use other open source licenses.
+

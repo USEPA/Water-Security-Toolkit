@@ -1,0 +1,93 @@
+An abundant supply of safe, high-quality drinking water is critical to modern industrialized societies. 
+At home, water is used for drinking, cooking, washing clothes and bathing. At work, water 
+is used to operate restaurants, hospitals and manufacturing plants. In our communities, 
+water is used for fighting fires. Consequently, contamination of drinking 
+water infrastructure could severely impact the public health and economic vitality of a community. 
+The distributed physical layout of drinking water systems makes them inherently vulnerable to a variety 
+of incidents, such as terrorist attacks, accidents and even natural disasters. 
+The physical destruction of water infrastructure can disrupt water service to communities; 
+specifically key facilities such as hospitals, power stations and military installations. Similarly, 
+contamination with deadly agents could result in large numbers of illnesses and fatalities.
+
+Since the events of September 11, 2001, water utilities have had increasing concerns about 
+the possibility of harm to our water quality due to an accidental or intentional contamination incident within a distribution network. 
+The U.S. EPA's Response Protocol Toolbox \citep{ResponseProtocolToolbox} provides recommendations on actions that 
+water utilities can take to minimize potential impacts to consumers following a contamination threat or incident. 
+Detection and consequence management are major steps in this protocol. EPA has also developed modeling and 
+simulation tools to assist in the detection of contamination incidents in water distribution networks. 
+The Threat Ensemble Vulnerability Assessment-Sensor Placement Optimization Tool, or TEVA-SPOT \citep{TEVASPOTusermanual}, 
+identifies the optimal placement of online water quality monitoring sensors to detect contamination incidents. 
+Another EPA developed tool to assist in detection is the CANARY event detection system \citep{CANARY}, 
+which analyzes water quality data from sensors and identifies periods of anomalous water quality. 
+These tools work together to help form a contamination warning system (CWS). The overall goal of a 
+CWS is to detect contamination incidents in time to reduce potential public health and economic consequences. 
+The current terminology for a CWS is a water quality surveillance and response system. For more information 
+on CWS, see U.S. EPA Water Security Initiative \citep{WSI}.
+
+Should a CWS detect the presence of contamination in a water distribution network, consequence management must be employed. 
+Decision-making tools that assist water utilities in evaluating and planning various response strategies 
+are needed to support rapid response to contamination incidents. The Water Security Toolkit (WST) is a suite 
+of tools that help provide the information necessary to make good decisions 
+resulting in the minimization of further human exposure to contaminants, and the maximization of the 
+effectiveness of intervention strategies. WST is intended to assist in: 
+\begin{itemize}
+\item Planning response actions to natural disasters and terrorist attacks, 
+\item Developing consequence management plans, 
+\item Informing large-scale exercises/training, 
+\item Planning response actions to address traditional utility challenges, such as pipe breaks and water quality problems and 
+\item Evaluating implications of different response strategies. 
+\end{itemize}
+For water utilities with hydraulic modeling expertise, WST combined with EPANET-RTX \citep{EPANETRTX,HatchettetalRTX2011,JankeetalRTX2011} 
+could use data from CANARY, other sensor stations and field investigations to optimize and 
+implement response actions in real-time. 
+
+WST assists in the evaluation of multiple response actions in order to select the most 
+beneficial consequence management strategy. It includes hydraulic and water quality 
+modeling software and optimization methodologies to identify: (1) sensor locations to detect contamination,
+(2) locations in the network in which the contamination was introduced, (3) hydrants to 
+remove contaminated water from the distribution system, (4) locations in the network to inject 
+decontamination agents to inactivate, remove or destroy contaminants and (5) locations in the network to take grab
+sample to confirm contamination or cleanup.
+
+This user manual describes the different components of WST. 
+\ifEPAReport
+It is also available as a Sandia Report (\citet{WSTSandreport}).
+\else
+It is also available as an EPA Report (\citet{WSTEPAreport}).
+\fi
+The manual contains one chapter on each of the water security tools:
+\begin{itemize}
+\item Contaminant transport
+\item Impact assessment
+\item Sensor placement
+\item Hydrant flushing 
+\item Booster placement
+\item Source identification
+\item Grab sampling
+\item Visualization
+\end{itemize}
+Another chapter discusses advanced topics and provides case studies. 
+WST uses YAML format configuration files to supply input parameters to each water security tool.  
+Additional information on the YAML format can be found in File Formats Section \ref{formats_yamlFile}.
+
+The contaminant transport simulation, impact assessment and sensor placement optimization tools were all 
+developed as part of the TEVA-SPOT Toolkit \citep{TEVASPOTusermanual}. All functionality in TEVA-SPOT has been replicated 
+in WST using new, user friendly YAML format configuration files. WST builds upon the simulation and optimization 
+framework of TEVA-SPOT and adds several new features. These features were all 
+developed to model possible response action plans once a contamination incident has been detected in the system. 
+These action plans include redirecting flow by opening hydrants and closing valves, injecting decontaminant 
+to inactivate biological agents and using sensor measurements to identify possible source locations.
+
+The main data requirement to use WST is a calibrated water utility network model. Additional input data is 
+dependent on the WST application. This includes information on the simulated contamination incident(s) 
+(e.g., type, location(s), amount), the impact metric (e.g., extent of contamination, population exposed) 
+and the response actions (e.g., flushing hydrants, injecting disinfectant). To optimize a response action, 
+WST must be given additional information about the potential locations for water quality sensors, hydrants to flush, valves to close, 
+disinfectant booster stations and manual grab samples. The operating characteristics of these different response 
+actions are also required, such as the detection limits of the water quality sensors, the rate and duration that 
+hydrants can be flushed, the control settings for injecting disinfectant at booster stations and the number of manual 
+grab samples that can be taken at the same time. More details on the data requirements are provided 
+in the chapter describing each of the specific water security tool. In addition, each chapter has example applications. 
+All examples are included with WST and can be found in the examples folder. These examples use simple networks 
+and data files that are also distributed with WST. The examples shown in this user manual are all executed on a 
+Linux computer, so the CPU time for each example might not be the same on computers with different operating systems. 

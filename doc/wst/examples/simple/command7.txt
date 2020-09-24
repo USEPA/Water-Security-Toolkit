@@ -1,0 +1,55 @@
+Usage: evalsensor [options...] <sensor-file> <impact-file1>
+                              [<impact-file2>...]
+Usage: evalsensor [options...] none <impact-file1> [<impact-file2>...]
+A command to read in one or more sensor placements and summarize their
+performance according to various metrics.
+
+options:
+
+      --all-locs-feasible     A boolean flag that indicates that all locations
+                              are treated as feasible.
+      --costs                 A file with the cost information for each
+                              location id.
+      --debug                 A boolean flag that adds output information
+                              about each incident.
+      --format                The type of output that the evaluation will
+                              generate:
+                               cout  Generates output that is easily read.
+                                      (default)
+                               xls   Generates output that is easily
+                                      imported into a MS Excel spreadsheet.
+                               xml   Generates an XML-formated output that
+                                      is used to communicate with the TEVA
+                                      GUI.  (Not currently supported.)
+      --gamma                 The fraction of the tail distribution used to
+                              compute the VaR and TCE performance measures.
+                              (The default value is 0.05).
+  -h, --help                  Display usage information
+      --incident-weights      A file with the weights of the different
+                              contamination incidents.
+      --nodemap               A file with the node map information, for
+                              translating node IDs into junction labels.
+  -r, --responseTime          This parameter indicates the number of minutes
+                              that are needed to respond to the detection of a
+                              continant.  As the response time increases, the
+                              impact increases because the contaminant affects
+                              the network for a greater length of time. Unit:
+                              minutes.
+      --sc-probabilities      A file with the probability of detection for
+                              each sensor category.
+      --scs                   A file with the sensor category information for
+                              each location id.
+      --version               Display version information
+
+arguments:
+
+  sensor-file:  A sensor placement file, which contains one or more sensor
+      placements that will be evaluated.  If 'none' is specified, then
+      evalsensor will evaluate impacts with no sensors.
+
+  impact-file:  A file that contains the impact data concerning contamination
+      incidents.  If one or more impact files are specified, then evaluations
+      are performed for each impact separately.
+
+Note that options like 'responseTime' can be specified with the syntax
+'--responseTime 10.0' or '--responseTime=10.0'.

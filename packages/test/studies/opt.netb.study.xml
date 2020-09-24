@@ -1,0 +1,64 @@
+<experimental-study name="opt.netb">
+  <!--
+	These experiments confirm that the correct impact file
+	is generated from one of the Net3 TSO files in the sp/etc
+	directory.
+   -->
+  <tags>
+    <tag>nightly-snuffles</tag>
+  </tags>
+
+  <experiment name="netb-invalid">
+    <factors>
+      <factor>
+        <level>network=netb impact-dir=/reservoir1/ImpactData/NetB objective=pe ub=ns,5 _optimum=21781.989872457</level>
+      </factor>
+      <factor name="solver">
+        <level name="lagrangian">solver=lagrangian disable\-aggregation="all" </level>
+        <level name="lagrangian">solver=lagrangian </level>
+        <level name="heuristic0">solver=heuristic heuristic-representation=0 _tolerance=1e-2 </level>
+        <level name="heuristic1">solver=heuristic heuristic-representation=1 _tolerance=1e-2 </level>
+        <level name="heuristic2">solver=heuristic heuristic-representation=2 _tolerance=1e-2 </level>
+      </factor>
+      <factor>
+	<level>memmon=true sensor-locations=/reservoir1/ImpactData/NetB/valid.nodes</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="netb-orig">
+    <factors>
+      <factor>
+        <level>network=netb impact-dir=/reservoir1/ImpactData/NetB objective=pe ub=ns,5 _optimum=21781.989872457</level>
+      </factor>
+      <factor name="solver">
+        <level name="lagrangian">solver=lagrangian disable\-aggregation="all"</level>
+        <level name="lagrangian">solver=lagrangian</level>
+        <level name="heuristic2">solver=heuristic heuristic-representation=2 _tolerance=1e-2</level>
+        <level name="heuristic0">solver=heuristic heuristic-representation=0 _tolerance=1e-2</level>
+      </factor>
+      <factor>
+	<level>memmon=true</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <analysis name="ValidValue" type="validation">
+    <category>validation</category>
+    <data experiment="valid"/>
+    <options>_measurement="Value" _value=_optimum _cmp_operator=eq _tolerance=1e-2</options>
+  </analysis>
+
+  <analysis name="InvalidValue" type="validation">
+    <category>validation</category>
+    <data experiment="invalid"/>
+    <options>_measurement="Value" _value=_optimum _cmp_operator=eq _tolerance=1e-2</options>
+  </analysis>
+
+</experimental-study>

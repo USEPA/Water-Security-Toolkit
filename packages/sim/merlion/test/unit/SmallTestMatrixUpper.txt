@@ -1,0 +1,97 @@
+CSCMatrix U
+5
+5
+14
+1
+0 1
+2
+0 2
+1 1
+3
+0 3
+1 2
+2 -1
+3
+0 4
+2 -2
+3 1
+5
+0 5
+1 4
+2 -3
+3 2
+4 1
+NRHS
+4
+Vector b0
+1
+1
+1
+1
+1
+Vector U_sol0
+4
+1
+-2
+-1
+1
+Vector Ut_sol0
+1
+-1
+0
+-3
+6
+Vector b1
+1
+2
+3
+4
+5
+Vector U_sol1
+30
+-6
+-6
+-6
+5
+Vector Ut_sol1
+1
+0
+0
+0
+0
+Vector b2
+0
+0
+3
+4
+-4
+Vector U_sol2
+-75
+46
+-15
+12
+-4
+Vector Ut_sol2
+0
+0
+-3
+-2
+-9
+Vector b3
+10
+0
+5
+1
+0
+Vector U_sol3
+-1
+14
+-7
+1
+0
+Vector Ut_sol3
+10
+-20
+-15
+-69
+123

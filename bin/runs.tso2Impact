@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# runs.tso2Impact
+#
+# Jon Berry, 7/13/2005
+#
+# precondition: .tso files generated
+# postcondition: impact files generated for delays of 0, 4, and 12 hours
+# 
+# usage: runs.impact2Dat <teva_directory> <threshold>
+#	<teva_directory> is the directory under /..../TEVADatabase
+#       <threshold> is the concentration threshold
+
+if [ $# -ne 2 ]
+then
+    echo "usage: runs.tso2Impact <teva_directory> <threshold>"
+    exit 1
+fi
+
+tso2Impact $1.0 0   $2 /reservoir1/TEVADatabase/$1 "output.group*.tso" 
+tso2Impact $1.4 4   $2 /reservoir1/TEVADatabase/$1 "output.group*.tso" 
+tso2Impact $1.12 12 $2 /reservoir1/TEVADatabase/$1 "output.group*.tso" 

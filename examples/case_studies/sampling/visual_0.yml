@@ -1,0 +1,138 @@
+configure:
+  output prefix: '0'
+network:
+  epanet file: /home/dbhart/wst-test/examples/case_studies/sampling/SCENARIO_SIGNALS/INPUTS/true.inp
+visualization:
+  layers:
+  - fill:
+      color: red
+    label: Contaminated Nodes
+    location type: node
+    locations: []
+    shape: circle
+  - fill:
+      color: yellow
+    label: Uncertain Nodes
+    location type: node
+    locations:
+    - '35'
+    - '40'
+    - '60'
+    - '61'
+    - '101'
+    - '103'
+    - '105'
+    - '107'
+    - '109'
+    - '111'
+    - '113'
+    - '115'
+    - '117'
+    - '119'
+    - '120'
+    - '121'
+    - '123'
+    - '125'
+    - '127'
+    - '129'
+    - '131'
+    - '139'
+    - '141'
+    - '143'
+    - '145'
+    - '147'
+    - '149'
+    - '151'
+    - '153'
+    - '157'
+    - '159'
+    - '161'
+    - '163'
+    - '167'
+    - '169'
+    - '171'
+    - '173'
+    - '177'
+    - '179'
+    - '181'
+    - '183'
+    - '184'
+    - '185'
+    - '187'
+    - '189'
+    - '191'
+    - '193'
+    - '195'
+    - '197'
+    - '199'
+    - '201'
+    - '203'
+    - '204'
+    - '205'
+    - '206'
+    - '207'
+    - '208'
+    - '209'
+    - '213'
+    - '215'
+    - '217'
+    - '229'
+    - '231'
+    - '239'
+    - '241'
+    - '251'
+    - '253'
+    - '255'
+    - '257'
+    - '259'
+    - '261'
+    - '263'
+    - '265'
+    - '267'
+    - '269'
+    - '271'
+    - '273'
+    - '275'
+    - '1'
+    - '2'
+    shape: circle
+  - fill:
+      color: '#a0b0f8'
+    label: Clean Nodes
+    location type: node
+    locations:
+    - '10'
+    - '15'
+    - '20'
+    - '50'
+    - '601'
+    - '164'
+    - '166'
+    - '211'
+    - '219'
+    - '225'
+    - '237'
+    - '243'
+    - '247'
+    - '249'
+    - River
+    - Lake
+    - '3'
+    shape: circle
+  - fill:
+      color: black
+    label: Grab Sample Locations
+    location type: node
+    locations:
+    - '113'
+    - '117'
+    - '273'
+    shape: diamond
+  legend:
+    location:
+    - 800
+    - 20
+  screen:
+    size:
+    - 1200
+    - 800

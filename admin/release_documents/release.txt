@@ -1,0 +1,104 @@
+TEVA-SPOT Software Release Process Checklist
+============================================
+
+***************************** PLAN ****************************** 
+
+1. Release requested by
+   ____ project manager
+   ____ customer(s)
+   ____ other: __________________________________________________
+
+2. Release motivated by
+   ____ new features
+   ____ bug fixes
+   ____ other: __________________________________________________
+
+3. Release number: ______________________________________________
+
+4. Release stable directory: ____________________________________
+
+5. Release tagged directory: ____________________________________
+
+6. Release distribution directory ("D"): ________________________
+
+7. ____ Identify customer(s)
+
+8. ____ Identify stakeholder(s) 
+
+9. Dates:
+
+   create stable, tagged and "D" directories:____________________
+
+   release manifest checked in to "D"/docs: _____________________
+
+   release test plan checked in to "D"/docs: ____________________
+
+   configure/install working: ___________________________________
+
+   testing complete: ____________________________________________
+
+   documentation complete: ______________________________________
+
+   customer satisfaction plan created, checked in: ______________
+
+   release: _____________________________________________________ 
+
+9. Release to:
+   ____ internal
+   ____ external
+   ____ specific customer: _______________________________
+
+10. Targeted testing platforms:
+   ____ Linux IA-32
+   ____ Linux IA-64
+   ____ Windows Cygwin
+   ____ Windows Cygwin/MinGW
+   ____ Windows native 32-bit
+   ____ Windows native em64t
+
+11. Release formats (check all that apply):
+   ____ zip file
+   ____ CD
+   ____ other: __________________________________________________
+
+*****************************  DO ****************************** 
+Initials
+   |
+   V
+
+ ___ Communicate release plan to developers, in particular the
+     dates, directories and manifest.
+
+ ___ Create and check in customer satisfaction plan [customerSatisfaction.txt]
+
+ ___ Test code in stable branch and resolve issues.
+
+ ___ Create change log.
+ 
+ ___ Copy final code to be released into release directory, and
+     tar files, tests, change logs into dist directory.
+
+***************************** CHECK **************************** 
+
+ ___ Verify that all bugs, features and documentation identified in
+      the PLAN have been resolved.
+
+ ___ Verify that all necessary Release Process Checklists and
+      required attachments have been completed.
+
+***************************** ACT **************************** 
+ ___ Copy the final code into the release directory.
+
+ ___ Update the distribution information in the distribution directory.
+     ___ Test results
+     ___ Release documentation
+     ___ Release tarball
+
+ ___ Certify release (project leader), date: ___________________
+
+ ___ Deliver and announce release, date: _______________________
+
+ ___ Update or improve release process if appropriate
+
+ ___ Initiate plan for customer satisfaction, date: ____________
+                                                            109,11        Bo

@@ -1,0 +1,30 @@
+impact data:
+- name: ec
+  impact file: ${CWD}/Net3/Net3_ec.impact
+  nodemap file: ${CWD}/Net3/Net3.nodemap
+- name: mc
+  impact file: ${CWD}/Net3/Net3_mc.impact
+  nodemap file: ${CWD}/Net3/Net3.nodemap
+objective:
+- name: obj1
+  goal: ec
+  statistic: MEAN
+constraint:
+- name: const1
+  goal: NS
+  statistic: TOTAL
+  bound: 5.0
+sensor placement:
+  type: default
+  objective: obj1
+  constraint: const1
+  presolve: True
+  compute greedy ranking: True
+solver:
+  type: glpk
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: ${CWD}/sp_ex2/Net3
+  debug: 0

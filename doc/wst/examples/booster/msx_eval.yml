@@ -1,0 +1,41 @@
+network:
+  epanet file: Net3.inp  
+scenario:
+  tsi file: Net3_EColi_TSB.tsi
+  msx file: Net3_EColi_TSB.msx          
+  msx species: EC  
+impact:
+  erd file: null 
+  metric: [MC]
+  tai file: null
+  response time: 0
+  detection limit: [0.0]
+  detection confidence: 1
+  msx species: EC
+booster msx:
+  detection: ['15', '35', '219', '253']   
+  toxin species: EC
+  decon species: CL
+  feasible nodes: ['101','141','171','215','219','255']
+  infeasible nodes: NONE    
+  max boosters: 6             
+  type: FLOWPACED                        
+  strength: 4.0
+  response time: 0.0      
+  duration: 720     
+solver:
+  type: EVALUATE
+  options:
+    crossover_rate: 0.8
+    crossover_type: uniform
+    fitness_type: linear_rank
+    initialization_type: unique_random
+    max_function_evaluations: 30000
+    max_iterations: 1000
+    mutation_rate: 1
+    mutation_type: offset_uniform
+    population_size: 50
+    seed: 11011011
+  verbose: True
+configure:
+  output prefix: msx_eval

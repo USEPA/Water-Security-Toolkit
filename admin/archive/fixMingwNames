@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+#
+# "make install" on mingw adds arch name to some of
+# the files that get installed.  This script removes
+# it.
+
+arch=i686-pc-mingw32-
+
+dirs=$(ls)
+
+for dir in $dirs; do
+  if test -d $dir; then
+    cd $dir
+    files=$(ls)
+    for file in $files; do
+      newfile=${file#$arch}
+      if [ $file != $newfile ] ; then
+        mv $file $newfile
+      fi
+    done
+    cd ..
+  fi
+done

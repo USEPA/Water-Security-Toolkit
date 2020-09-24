@@ -1,0 +1,10 @@
+; Input creates a unit concentration (1 g/m^3 or mg/L)
+2 FLOWPACED 1 0 3600
+
+; Input creates a unit concentration 1 g/m^3 or mg/L)
+; units of MASS in TSG file are mg/min
+2 MASS 1.308996938995747 3600 7200
+
+; Input creates a unit concentration (1 g/m^3 or mg/L)
+; units of MASS in TSG file are mg/min
+3 MASS 1.308996938995747 3600 7200

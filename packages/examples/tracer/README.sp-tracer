@@ -1,0 +1,2 @@
+../../../bin/sp-tracer --path=../../.. --inp=Net3.inp Net3.wlist
+../../../bin/sp-tracer --path=../../.. --ages=Net3.ages Net3.wlist --objective=awd --ub=ns,3 --solver=pico --ub=nfd,0.1

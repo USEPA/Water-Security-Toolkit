@@ -1,0 +1,126 @@
+<experimental-study name="heuristic1">
+  <tags>
+    <tag>nightly</tag>
+  </tags>
+
+  <experiment name="heuristic1-net1">
+    <factors>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+        <level>-\-ub=ns,10</level>
+        <level>-\-ub=ns,25</level>
+        <level>-\-ub=ns,50</level>
+        <level>-\-ub=ns,100</level>
+        <level>-\-ub=ns,200</level>
+        <level>-\-ub=ns,400</level>
+      </factor>
+      <factor name="goals">
+        <level>-\-objective=ec_mean</level>
+        <level>-\-objective=mc_mean</level>
+        <level>-\-objective=nf_mean</level>
+        <level>-\-objective=nfd_mean</level>
+        <level>-\-objective=pe_mean</level>
+        <level>-\-objective=td_mean</level>
+        <level>-\-objective=vc_mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-impact-dir=/reservoir1/testcases/network1 -\-network=net1bio</level>
+        <level>-\-impact-dir=/reservoir1/testcases/network1 -\-network=net1chem</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-study</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="heuristic1-net2">
+    <factors>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+        <level>-\-ub=ns,10</level>
+        <level>-\-ub=ns,50</level>
+        <level>-\-ub=ns,100</level>
+        <level>-\-ub=ns,500</level>
+        <level>-\-ub=ns,1000</level>
+        <level>-\-ub=ns,2000</level>
+      </factor>
+      <factor name="goals">
+        <level>-\-objective=ec_mean</level>
+        <level>-\-objective=mc_mean</level>
+        <level>-\-objective=nf_mean</level>
+        <level>-\-objective=nfd_mean</level>
+        <level>-\-objective=pe_mean</level>
+        <level>-\-objective=td_mean</level>
+        <level>-\-objective=vc_mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-impact-dir=/reservoir1/testcases/network2 -\-network=net2bio</level>
+        <level>-\-impact-dir=/reservoir1/testcases/network1 -\-network=net2chem</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-study</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="heuristic1-net3">
+    <factors>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+        <level>-\-ub=ns,10</level>
+        <level>-\-ub=ns,50</level>
+        <level>-\-ub=ns,100</level>
+        <level>-\-ub=ns,500</level>
+        <level>-\-ub=ns,1000</level>
+        <level>-\-ub=ns,2000</level>
+      </factor>
+      <factor name="goals">
+        <level>-\-objective=ec_mean</level>
+        <level>-\-objective=mc_mean</level>
+        <level>-\-objective=nf_mean</level>
+        <level>-\-objective=nfd_mean</level>
+        <level>-\-objective=pe_mean</level>
+        <level>-\-objective=td_mean</level>
+        <level>-\-objective=vc_mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-impact-dir=/reservoir1/testcases/network3 -\-network=net3bio</level>
+        <level>-\-impact-dir=/reservoir1/testcases/network1 -\-network=net3chem</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-study</executable>
+    </controls>
+  </experiment>
+
+  <analyze>
+    <data experiment="heuristic1-net1"/>
+    <test name="sp-status for heuristic-net1" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+  <analyze>
+    <data experiment="heuristic1-net2"/>
+    <test name="sp-status for heuristic-net2" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+  <analyze>
+    <data experiment="heuristic1-net3"/>
+    <test name="sp-status for heuristic-net3" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+</experimental-study>

@@ -1,0 +1,7 @@
+====================
+Optimization Results
+====================
+Lower Bound: 9972.647685
+
+Solutions: []
+Locations: []

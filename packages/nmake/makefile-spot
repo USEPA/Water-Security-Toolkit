@@ -1,0 +1,147 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build solver code
+##
+## it depends on the output of makefile-sim, makefile-hia, and makefile-cat
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake /F makefile-spot all" builds solvers using static libraries
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS 
+## the shared flags are never used in healthImpacts, functions are not exported
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530 /wd4018 /wd4101 /wd4715 /wd4244
+CFLAGS = $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+all: headers \
+     static\grasp.exe \
+     static\randomsample.exe \
+     static\sideconstraints.exe \
+     static\imperfect.exe \
+     static\new_randomsample.exe \
+     static\new_imperfect.exe 
+
+headers:
+     copy teva_config.txt teva_config.h
+
+##
+## location of libutilib
+##
+UTILIB_DIR=$(TPL)\acro\packages\utilib
+UTILIB_LIB_DIR=$(UTILIB_DIR)\mvs\nmake
+UTILIB_LIB=$(UTILIB_LIB_DIR)\static\libutilib.lib
+UTILIB_DLL=$(UTILIB_LIB_DIR)\shared\libutilib.lib
+UTILIB_INCLUDE= \
+  /I $(UTILIB_LIB_DIR) \
+  /I $(UTILIB_DIR)\src
+
+
+##
+## ATT grasp
+##
+##
+GRASP_DIR = $(PACKAGES)\spot\grasp
+GRASP_INCLUDES = $(UTILIB_INCLUDE) /I . /I ./sp
+GRASP_FLAGS = -DNDEBUG
+GRASP_BASIC=\
+  $(GRASP_DIR)\basics.cpp \
+  $(GRASP_DIR)\bossa_random.cpp \
+  $(GRASP_DIR)\bossa_timer.cpp \
+  $(GRASP_DIR)\constructive.cpp \
+  $(GRASP_DIR)\cover_instance.cpp \
+  $(GRASP_DIR)\distance.cpp \
+  $(GRASP_DIR)\elite.cpp \
+  $(GRASP_DIR)\euclidean_instance.cpp \
+  $(GRASP_DIR)\geo_instance.cpp \
+  $(GRASP_DIR)\graph_instance.cpp \
+  $(GRASP_DIR)\hybrid_instance.cpp \
+  $(GRASP_DIR)\impact_instance.cpp \
+  $(GRASP_DIR)\ImpactCache.cpp \
+  $(GRASP_DIR)\instance_factory.cpp \
+  $(GRASP_DIR)\matrix_instance.cpp\
+  $(GRASP_DIR)\path_relink.cpp \
+  $(GRASP_DIR)\search.cpp \
+  $(GRASP_DIR)\search_tables.cpp \
+  $(GRASP_DIR)\solution.cpp
+
+GRASP_LIBS= $(UTILIB_LIB) static\libsp.lib psapi.lib
+GRASP_EXEC = static\grasp.exe static\randomsample.exe static\sideconstraints.exe static\imperfect.exe
+GRASP_OBJ = grasp.obj randomsample.obj sideconstraints.obj imperfect.obj memmon.obj
+
+static\grasp.exe: $(GRASP_DIR)\grasp.cpp $(GRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(GRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+psapi.lib:
+	
+static\randomsample.exe: $(GRASP_DIR)\randomsample.cpp $(GRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(GRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+static\sideconstraints.exe: $(GRASP_DIR)\sideconstraints.cpp $(GRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(GRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+static\imperfect.exe: $(GRASP_DIR)\imperfect.cpp $(GRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(GRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+##
+## SNL grasp
+##
+##
+NEWGRASP_DIR = $(PACKAGES)\spot\newgrasp
+NEWGRASP_BASIC=\
+    $(NEWGRASP_DIR)\ImpactCache.cpp\
+    $(NEWGRASP_DIR)\ProblemInstance.cpp\
+    $(NEWGRASP_DIR)\SideConstraintInstance.cpp\
+    $(NEWGRASP_DIR)\ImperfectInstance.cpp\
+    $(NEWGRASP_DIR)\ProblemSolver.cpp\
+    $(NEWGRASP_DIR)\solution.cpp\
+    $(NEWGRASP_DIR)\InitialSolution.cpp\
+    $(NEWGRASP_DIR)\MeanSolution.cpp\
+    $(NEWGRASP_DIR)\WorstSolution.cpp\
+    $(NEWGRASP_DIR)\VarSolution.cpp\
+    $(NEWGRASP_DIR)\TceSolution.cpp\
+    $(NEWGRASP_DIR)\PreProcess.cpp
+
+
+NEWGRASP_EXEC = static\new_randomsample.exe static\new_imperfect.exe
+NEWGRASP_OBJ = new_randomsample.obj new_imperfect.obj 
+
+static\new_imperfect.exe: $(NEWGRASP_DIR)\new_imperfect.cpp $(NEWGRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(NEWGRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+static\new_randomsample.exe: $(NEWGRASP_DIR)\new_randomsample.cpp $(NEWGRASP_BASIC) $(GRASP_LIBS)
+     $(CPP) $(CFLAGS) $(CPPFLAGS) $(LINKDBG) $(GRASP_FLAGS) /I $(NEWGRASP_DIR) $(GRASP_INCLUDES) /Fe$@ $**
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(GRASP_OBJ) $(NEWGRASP_OBJ)
+
+clean: clean-objs
+        @-del /Q $(GRASP_EXEC) $(NEWGRASP_EXEC)
+        @-del /Q static\new_randomsample.*
+        @-del /Q static\new_imperfect.*
+        @-del /Q static\grasp.*
+        @-del /Q static\randomsample.*
+        @-del /Q static\sideconstraints.*
+        @-del /Q static\imperfect.*

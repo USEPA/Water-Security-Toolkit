@@ -1,0 +1,26 @@
+network:
+  epanet file: Net3/Net3.inp
+measurements:
+  grab samples: Net3/Net3_MEASURES.dat
+inversion:
+  algorithm: csa 
+  formulation: MIP_discrete_nd
+  model format: PYOMO    
+  horizon: 480.0        
+  num injections: 1.0  
+  measurement failure: 0.05  
+  positive threshold: 100.0 
+  negative threshold: 0.0
+  feasible nodes: null    
+  candidate threshold: null 
+  confidence: null        
+  output impact nodes: false 
+solver:
+  type: glpk     
+  options:        
+  logfile: null    
+  verbose: 0         
+  initial points: []
+configure:
+  output prefix: ${CWD}/inversion_ex3/Net3 
+  debug: 0         

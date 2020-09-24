@@ -1,0 +1,65 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{scenario}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{signals}]\hfill
+\\Name of file or directory with information to generate 
+                or load signals. If a file is provided the list of inp tsg tuples
+                 will be simulated and the information stored in signals files. If
+                a directory with the signals files is specified, the signal files will
+                be read and loaded in memory. This input is only valid for the uq
+                subcommand and the grabsample subcommand with probability based formulations.
+
+                Required input.
+  \end{description}
+  \item[{uq}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{analysis time}]\hfill
+\\The time at which the manual grab sample should be taken. 
+                The algorithm determines the best possible manual grab sample location(s)
+                based upon this time. Units: Minutes from the simulation start time in the
+                EPANET 2.00.12 INP file.
+    \item[{threshold}]\hfill
+      \\This threshold determines whether or not an incident impacts a
+      location (mg/L).
+    \item[{filter scenarios}]\hfill
+\\ This options enables filtering scenarios. Only those scenarios 
+                that match at least one of the measurements are considered
+                in the optimal sampling analysis, default = False.
+    \item[{measurement failure}]\hfill
+\\The probability that a sensor gives an incorrect reading. Must be between 0 and 1. 
+                
+                Required input for the Bayesian algorithm, default = 0.05.
+    \item[{confidence}]\hfill
+\\The probability cut-off value for classifying nodes as certain to be contaminated, 
+                uncertain to be contaminated and certain to not be contaminated. The value is 
+                between 0 and 1. Nodes with probability greater than (((1-confidence)/2)+confidence) are 
+                classified likely to be contaminated or likely yes LY, 
+                nodes with probability less than ((1-confidence)/2) are classified likely not contaminated
+                LN and nodes with probability in between are uncertain nodes UN.
+                
+                Required for node classification, default = 0.95 (unitless).
+  \end{description}
+  \item[{measurements}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{grab samples}]\hfill
+\\The name of the file that contains all the measurements from 
+                the manual grab samples and the fixed sensors. The measurement file 
+                format is documented in File Formats Section \ref{formats_measFile}.
+
+                Optional input.
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

@@ -1,0 +1,41 @@
+# tevasim configuration template
+network:
+  epanet file: Net3.inp              # EPANET 2.00.12 network file
+  water quality timestep: INP        # DEVELOPER OPTION Water quality timestep
+                                     #   [min], default = read from INP
+  simulation duration: INP           # DEVELOPER OPTION Simulation duration
+                                     #   [min], default = read from INP
+scenario:
+  location: [NZD]                    # Injection location: List of ALL, NZD,
+                                     #   or EPANET ID
+  type: MASS                         # Injection type: MASS, CONCEN,
+                                     #   FLOWPACED, or SETPOINT
+  strength: 100.0                    # Injection strength [g/min or g/m3
+                                     #   depending on type]
+  species: null                      # Injection species. Required for EPANET-
+                                     #   MSX
+  start time: 0                      # Injection start time [min]
+  end time: 1440                     # Injection end time [min]
+  tsg file: null                     # Overrides location, type, strength,
+                                     #   species, start and end time
+  tsi file: null                     # Overrides TSG file
+  scn file: null                     # DEVELOPER OPTION
+  dvf file: null                     # DEVELOPER OPTION Decision variable file
+  msx file: null                     # Multi-species extension file
+  msx species: null                  # MSX species to save
+  merlion: false                     # True or False
+  erd compression: LZMA              # RLE or LZMA
+  merlion nsims: 100                 # DEVELOPER OPTION Recommended [1-100]
+  ignore merlion warnings: true      # DEVELOPER OPTION
+configure:
+  output prefix: Net3                # Output file prefix
+  compute greedy ranking: false      # If True, then compute a greedy ranking
+                                     #   of sensors.  Default = False
+  ampl executable: ampl              # DEVELOPER OPTION
+  pyomo executable: pyomo            # DEVELOPER OPTION
+  tevasim executable: tevasim        # DEVELOPER OPTION
+  sim2Impact executable: tso2Impact  # DEVELOPER OPTION
+  sp executable: sp                  # DEVELOPER OPTION
+  coliny executable: coliny          # DEVELOPER OPTION
+  dakota executable: dakota          # DEVELOPER OPTION
+  debug: 0                           # Debugging level. Default = 0

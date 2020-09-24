@@ -1,0 +1,20 @@
+Setting up IP data file...
+Running PICO...
+------------------------------------------------------------------------------
+Sensor placement id:        24582
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            41 29 73 71 82 
+Sensor junctions:           167 143 231 225 255 
+
+Impact File:                /home/wehart/teva-sp/packages/sp/test/test1_mc.impact
+Number of events          : 236
+Min impact:                 0
+Mean impact:                26769.4
+Lower quartile impact:      221.057
+Median impact:              2267.44
+Upper quartile impact:      19844.3
+Value at Risk (VaR) (  5%): 144271
+TCE                 (  5%): 144275
+Max impact:                 144321
+------------------------------------------------------------------------------

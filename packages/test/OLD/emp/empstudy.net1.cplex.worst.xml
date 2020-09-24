@@ -1,0 +1,40 @@
+<experimental-study name="teva-sp">
+  <tags>
+    <tag>smoke</tag>
+    <tag>nightly</tag>
+  </tags>
+
+
+  <!-- assumes that 
+       runexp empstudy.net1.gentso.xml
+       runexp empstudy.net1.genimpact.xml
+       have been run -->
+
+
+  <experiment name="worst.50000">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>\-\-network=net1sanTEVA</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,20</level>
+      </factor>
+      <factor name="threshold">
+        <level>-\-threshold=mc,50000</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=cplexamp</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+</experimental-study>

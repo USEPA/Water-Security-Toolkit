@@ -1,0 +1,33 @@
+configure:
+  ampl executable: ampl
+  output prefix: test
+  pyomo executable: pyomo
+inversion:
+  algorithm: bayesian
+  candidate threshold: 0.1
+  confidence: 0.95
+  feasible nodes: Cycle2_Likely_Nodes.dat
+  formulation: MIP_discrete
+  horizon: 1440
+  ignore merlion warnings: true
+  measurement failure: 0.05
+  model format: AMPL
+  negative threshold: 0.1
+  num injections: null
+  output impact nodes: true
+  positive threshold: 100.0
+  wqm file: null
+measurements:
+  grab samples: MEASURES.dat
+network:
+  epanet file: Net3.inp
+  simulation duration: null
+  water quality timestep: null
+solver:
+  initial points: []
+  logfile: null
+  name: solver1
+  options: null
+  problem writer: lp
+  type: cplexamp
+  verbose: 0

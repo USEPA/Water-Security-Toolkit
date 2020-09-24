@@ -1,0 +1,15 @@
+; this file is used instead of the one included with the distro (in tpl/lzma)
+; because that one only includes  LzmaCompress and LzmaUncompress
+EXPORTS
+  LzmaCompress
+  LzmaUncompress
+  LzmaDec_Free
+  LzmaDec_Init
+  LzmaDec_Allocate
+  LzmaDec_DecodeToBuf
+  LzmaEnc_Destroy
+  LzmaEnc_Encode
+  LzmaEnc_WriteProperties
+  LzmaEnc_SetProps
+  LzmaEnc_Create
+  LzmaEncProps_Init

@@ -1,0 +1,67 @@
+read_impact_files:  Net3_ec.impact
+read_impact_files:  Net3_mc.impact
+Note: witness aggregation disabled for grasp
+
+Number of Nodes                :  97
+Number of Contamination Impacts: 9480
+
+WARNING: Location aggregation does not work with side constraints
+WARNING: Turning off location aggregation
+Number of sensors=5
+Objective=ec
+Statistic=tce
+Impact file=Net3_ec.impact
+Delay=0
+
+Running iterated descent SNL grasp for *perfect* sensor model
+Iterated descent completed
+# No weights file: Net3_ec.impact.prob
+# No weights file: Net3_mc.impact.prob
+------------------------------------------------------------------------------
+Sensor placement id:        9321
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            4 15 29 70 78 
+Sensor junctions:           35 111 143 219 247 
+
+Impact File:                Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                15332.8458
+Lower quartile impact:      1650.0000
+Median impact:              10660.0000
+Upper quartile impact:      26641.8000
+Value at Risk (VaR) (  5%): 40825.8000
+TCE                 (  5%): 50267.5083
+Max impact:                 71329.0000
+
+Impact File:                Net3_mc.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                29350.7370
+Lower quartile impact:      133.1430
+Median impact:              1277.5100
+Upper quartile impact:      23944.9000
+Value at Risk (VaR) (  5%): 144271.0000
+TCE                 (  5%): 144275.1667
+Max impact:                 144321.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_ec.impact
+------------------------------------------------------------------------------
+-1	59035.8890
+4	33458.5542
+15	22345.5492
+29	17121.4559
+78	15503.7144
+70	15332.8458
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_mc.impact
+------------------------------------------------------------------------------
+-1	137028.5263
+78	58137.1639
+29	40727.3168
+70	33852.2344
+4	29595.1123
+15	29350.7370
+Done with sp

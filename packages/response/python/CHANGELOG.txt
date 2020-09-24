@@ -1,0 +1,4 @@
+Update: 09-09-2009, David Hart
+ - Update to move from R dependency to NumPy pakcage
+
+Original Code: 08-18-2009, Jonathan Lane

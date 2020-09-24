@@ -1,0 +1,22 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+
+setenv bindir `pwd`/../bin
+setenv moddir `pwd`/../../etc/mod
+
+setenv NETDIR /reservoir1/networkData/TEVAPhaseI
+setenv TSGDIR /reservoir1/TSIMDatabase
+setenv TSODIR /reservoir1/TSIMDatabase/DynamicModelJournalPaper/network1
+setenv IMPACTDIR /reservoir1/ImpactData/DynamicModelJournalPaper/network1
+
+#\rm testNet1.tsi testNet1.mc.720* net1sanTEVA.mc.0.out testNet1.mc.0.log
+
+#../../tevalibs/tevasim -tsg $TSGDIR/generic.tsg -tsi testNet1.tsi -tso net1sanTEVA.tso $NETDIR/net1sanTEVA.inp net1sanTEVA.out
+
+../bin/tso2Impact net1sanTEVA.mc.720 net1sanTEVA.tso -mc -minQuality 1e-7 -detectionDelay 720
+
+### Optimal via deprecated Dynamic.mod: 
+$bindir/sp --path=$bindir --path=$moddir --network=net1sanTEVA.mc.720 --objective=mc --ub=ns,20 --solver=pico --delay=720
+cat net1sanTEVA.mc.0log 

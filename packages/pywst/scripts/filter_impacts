@@ -1,0 +1,136 @@
+#! /usr/bin/env python
+#
+# Process an impact file to generate another
+#
+
+import sys
+import os
+import re
+import math
+from operator import itemgetter
+
+if len(sys.argv) < 2:
+   print "filter_impacts [--threshold=<val>] [--percent=<num>] [--num=<num>] [--rescale] [--round] <impact-file> <out-file>"
+   sys.exit(1)
+
+percent=None
+num=None
+rescale=False
+rounding=False
+threshold=None
+
+arg=1
+while sys.argv[arg][0:2] == "--":
+  tokens=sys.argv[arg].split("=")
+  if tokens[0][2:] == "percent":
+     percent=eval(tokens[1])
+     if (percent > 100) or (percent <= 0):
+        print "ERROR: bad percentage value",percent
+        sys.exit(1)
+  elif tokens[0][2:] == "num":
+     num=eval(tokens[1])
+  elif tokens[0][2:] == "threshold":
+     threshold=eval(tokens[1])
+  elif tokens[0][2:] == "rescale":
+     rescale=True
+  elif tokens[0][2:] == "rounding":
+     rounding=True
+  else:
+     print "ERROR: unknown option " + sys.argv[arg]
+     sys.exit(1)
+  arg=arg+1
+
+if not os.path.exists(sys.argv[arg]):
+   print "File \"" + sys.argv[arg] + "\" does not exist."
+   sys.exit(1)
+
+#
+# Scenario/Facility data
+#
+scenario={}
+demands = set()
+worst={}
+
+#
+# Read in input file
+#
+INPUT = open(sys.argv[arg])
+state = 0
+prev = -1
+for line in INPUT:
+  if state == 0:
+     #
+     # Processing first line
+     #
+     m = eval(line)
+     state = 1
+  elif state == 1:
+     #
+     # Processing second line
+     #
+     line2 = line
+     state = 2
+  elif state == 2:
+     #
+     # Processing scenarios
+     #
+     tokens = re.split('[\t ]+',line)
+     if prev == -1:
+        scenario[tokens[0]] = []
+        demands.add(tokens[0])
+     scenario[tokens[0]].append( map(eval,tokens) )
+     demands.add(tokens[1])
+     prev = eval(tokens[1])
+     if prev == -1:
+        worst[tokens[0]] = eval(tokens[3])
+INPUT.close()
+
+#
+# Sort the iterator by the values
+#
+items = worst.items()
+items.sort(key=itemgetter(1), reverse=True)
+#
+# Find the first 'num' items that are the worst
+#
+if percent is not None:
+   num = int(round(m*percent/100.0,0))
+   if num == 0:
+      num=1
+if num is None:
+   num=m
+if threshold is not None:
+   ndx=0
+   for item in items:
+     if ndx>=num:
+        break
+     if item[1] < threshold:
+        num=ndx
+	break
+     ndx=ndx+1
+#
+# Write output 
+#
+OUTPUT = open(sys.argv[arg+1],"w")
+print >>OUTPUT,num
+print >>OUTPUT,line2,
+ndx=0
+for item in items:
+  for tokens in scenario[item[0]]:
+    print >>OUTPUT, tokens[0],tokens[1],tokens[2],
+    if rescale:
+       if tokens[3]<=0:
+          print >>OUTPUT, -math.log10(-tokens[3]+1.0)
+       else:
+          print >>OUTPUT, math.log10(tokens[3]+1.0)
+    elif rounding:
+       val = int(round(math.log10(abs(tokens[3])+1.0),0)-1.0)
+       if val < 0.0:
+	  val=0.0;
+       print >>OUTPUT,"1e"+`val`
+    else:
+       print >>OUTPUT, tokens[3]
+  ndx=ndx+1
+  if ndx>=num:
+     break
+OUTPUT.close() 

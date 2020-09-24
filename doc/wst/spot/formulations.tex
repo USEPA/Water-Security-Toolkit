@@ -1,0 +1,71 @@
+%{\bf WEH: update this section with recent sensor placement publications.}
+%Add in reference to our guidance document, the review paper, and others contained in guidance doc bibliography.
+
+SPOT integrates solvers for sensor placement that have been developed by Sandia National Laboratories and the Environmental Protection Agency, along with a variety of academic collaborators~\cite{MurUbeJan06,MurBerHar06,CarGreHarKonLauLinMorPhi06,HarBerMurPhiRieWat07,BerHarPhiUbeWat06,BerFleHarPhiWat05}.
+SPOT includes (1) general-\/purpose heuristic solvers that
+consistently locate optimal solutions in minutes, (2) integer-\/ and
+linear-\/programming heuristics that find solutions of provable quality,
+(3) exact solvers that find globally optimal solutions, and (4) bounding
+techniques that can evaluate solution optimality. These solvers optimize
+a representation of the sensor placement problem that may be either
+implicit or explicit. However, in either case the mathematical formulation for this problem can be described.
+
+This section describes the mixed integer programming (MIP) formulations optimized by the SPOT solvers. This presentation assumes that the reader is familiar with MIP modeling. First, the standard SPOT formulation, eSP, is described which minimizes expected impact given a sensor budget. Subsequently, several other sensor placement formulations that SPOT solvers can optimize are presented. This discussion is limited to a description of the mathematical structure of these sensor placement problems. In many cases, SPOT has more than one optimizer for these formulations. These optimizers are described later in this manual. However, the goal of this section is to describe the mathematical structure of these formulations.
+
+\section{The Standard SPOT Formulation}\label{formulations_formulationsCanonical}
+
+The most widely studied sensor placement formulation for CWS design is to minimize the expected impact of an ensemble of contamination incidents given a sensor budget. This formulation has also become the standard formulation in SPOT, since it can be effectively used to select sensor placements in large water distribution networks.
+
+A MIP formulation for expected-\/impact sensor placement is: \[ \label{eqn:SP} \begin{array}{llll} {\rm (eSP)} & \min & \sum_{a \in {\cal A}} \alpha_a \sum_{i \in {\cal L}_a} d_{ai} x_{ai} &\\ & {\rm s.t.} & \sum_{i\in {\cal L}_a} x_{ai} = 1 & \forall a \in {\cal A}\\ & & x_{ai} \le s_i & \forall a \in {\cal A}, i \in {\cal L}_a\\  & & \sum_{i \in L} c_i s_i \le p&\\ & & s_i \in \{0,1\} & \forall i \in L\\ & & 0 \leq x_{ai} \leq 1 & \forall a \in {\cal A}, i \in {\cal L}_a \end{array} \] This MIP minimizes the expected impact of a set of contamination incidents defined by ${\cal A}$. For each incident $a \in {\cal A}$, $\alpha_a$ is the weight of incident $a$, frequently a probability. This formulation integrates contamination simulation results, which are reported at a set of {\itshape locations\/} from the full set, denoted $L$, where a location refers to a network junction. For each incident $a$, ${\cal L}_a \subseteq L$ is the set of locations that can be contaminated by $a$. Thus, a perfect sensor at a location $i \in {\cal L}_a$ can detect contamination from incident $a$ at the time contamination first arrives at location $i$. Each incident is {\itshape witnessed\/} by the first sensor to see it. For each incident $a \in {\cal A}$ and location $i \in {\cal L}_a$, $d_{ai}$ defines the impact of the contamination incident $a$ if it is witnessed by location $i$. This impact measure assumes that as soon as a sensor witnesses contamination, then any further contamination impacts are mitigated (perhaps after a suitable delay that accounts for the response time of the water utility). The $s_i$ variables indicate where sensors are placed in the network; $c_i$ is the cost of placing a sensor at location $i$, and $p$ is the budget.
+
+
+The $x_{ia}$ variables indicate whether incident $a$ is witnessed by a sensor at location $i$. A given set of sensors may not be able to witness all contamination incidents. To account for this, $L$ contains a {\itshape dummy\/} location, $q$. This dummy location is in all subsets ${\cal L}_a$. If the dummy location witnesses and incident, it generally means that no real sensor can detect that incident. The impact for this location is handled in two different ways: (1) it is the impact of the contamination incident after the entire contaminant transport simulation has finished, which estimates the impact that would occur without an online CWS, or (2) it has zero impact. The first approach treats detection by this dummy location as a penalty. The second approach simply ignores the detection by this dummy, though this only makes sense with an additional side-\/constraint on the maximum number of failed detections.  Without this extra side constraint, selecting the dummy to witness each event, essentially placing no sensors, would appear to give zero impact, or total protection.
+
+The current implementation of eSP contains an additional set of constraints for the case where dummy impact is zero:
+$$x_{aq} \leq 1-s_i \hspace*{.25in} \forall a \in {\cal A}, i \in {\cal L}_a \setminus \{q\}.$$  This constraint does not allow the selection of the zero-impact dummy for incidents that are truly witnessed by a real sensor.  Because this constraint only makes sense when coupled with a side constraint on the maximum number of failed detections, we will not explicitly include it in MIP formulations in this section.  However, the user should be aware of its existance because it affects the computation of sensor placement average impact.  Without this constraint, if a sensor placement is allowed to miss $r$ incidents, then the MIP will choose the (zero-impact) dummy for the $r$ highest impact events, whether the event is detected or not.  With this constraint, all true detections are counted.  Different sensor placements will have varying numbers of incidents contributing to the average impact.  Thus the optimal sensor placement, and the value of the optimal sensor placement, will be different when this constraint is there compared to when it is not.
+
+
+The eSP formulation with the above extra constraint set is a slight generalization of the sensor placement model described by Berry et al. ~\cite{BerHarPhiUbeWat06}. Berry et al. treat the impact of the dummy as a penalty.  In that case the extra constraints are redundant. The impact of a dummy detection is no smaller than all other impacts for each incident, so the witness variable $x_{ai}$ for the dummy will only be selected if no sensors have been placed that can detect this incident with smaller impact.
+
+Berry et al. note that eSP without the extra constraints is identical to the well-\/known $p$-\/median facility location problem \citep{MirFra90} when $c_i=1$. In the $p$-\/median problem, $p$ facilities (e.g., central warehouses) are to be located on $m$ potential sites such that the sum of distances $d_{ai}$ between each of $n$ customers (e.g., retail outlets) and the nearest facility $i$ is minimized. In comparing eSP and $p$-\/median problems, there is equivalence between (1) sensors and facilities, (2) contamination incidents and customers, and (3) contamination impacts and distances. While eSP allows placement of {\itshape at\/} {\itshape most\/} $p$ sensors, $p$-\/median formulations generally enforce placement of all $p$ facilities; in practice, the distinction is irrelevant unless $p$ approaches the number of possible locations.
+
+\section{Robust SPOT Formulations}\label{formulations_formulationsRobust}
+
+The eSP model can be viewed as optimizing one particular statistic of the distribution of impacts defined by the contaminant transport simulations. However, other statistics may provide more \char`\"{}robust\char`\"{} solutions, that are less sensitive to changes in this   distribution~\cite{WatHarMur06a}. Consider the following reformulation of eSP: \[ \label{eqn:rSP} \begin{array}{llll} {\rm (rSP)} & \min & Impact_{f}(\alpha,d,x) &\\ & {\rm s.t.} & \sum_{i\in {\cal L}_a} x_{ai} = 1 &\forall a \in {\cal A}\\ & & x_{ai} \le s_i & \forall a \in {\cal A}, i \in {\cal L}_a\\ & & \sum_{i \in L} c_i s_i \le p&\\ & & s_i \in \{0,1\} & \forall i \in L\\ & & 0 \leq x_{ai} \leq 1 & \forall a \in {\cal A}, i \in {\cal L}_a \end{array} \] The function $Impact_ {f}(\alpha,d,x)$ computes a statistic of the impact distribution. The following functions are supported in  SPOT (see Watson, Hart and Murray~\cite{WatHarMur06a} for further discussion of these statistics):   
+\begin{itemize}
+\item {\bfseries Mean:} This is the statistic used in eSP.
+
+
+\item {\bfseries VaR:} Value-\/at-\/Risk (VaR) is a percentile-\/based metric. Given a confidence level $\beta\in(0,1)$, the VaR is the value of the distribution at the $1-\beta$ percentile \cite{TopVlaZen02}. The value of VaR is less than the TCE value (see below).
+
+Mathematically, suppose a random variable $W$ describes the distribution of possible impacts. Then \[ {\rm VaR}(W,\beta) = \min \{ w \mid \Pr[W \le w] \ge \beta \}. \] Note that the distribution $W$ changes with each sensor placement. Further, VaR can be computed using the $\alpha$, $d$ and $x$ values.
+
+
+\item {\bfseries TCE:} The Tail-\/Conditioned Expectation (TCE) is a related metric which measures the conditional expectation of impact exceeding VaR at a given confidence level. Given a confidence level $1-\beta$, TCE is the expectation of the worst impacts with probability $\beta$. This value is between VaR and the worst-\/case value.
+
+Mathematically, then \[ {\rm TCE}(\beta) = {\rm E}\left[ W \mid W \ge {\rm VaR}(\beta) \right]. \] The Conditional Value-\/at-\/Risk (CVaR) is a linearization of TCE investigated by Uryasev and Rockafellar \cite{rockafellar02cvar}. CVaR approximates TCE with a continuous, piecewise-\/linear function of $\beta$, which enables the use of CVaR in a MIP models for rSP.
+
+
+\item {\bfseries Worst:} The worst impact value can be easily computed, since a finite number of contamination incidents are simulated. Further, rSP can be reworked to formulate a worst-\/case MIP formulation. However, this statistic is sensitive to changes in the number of contamination incidents that are modeled; adding additional contamination incidents may significantly impact this statistic.
+
+
+\end{itemize}
+
+\section{Min-\/Cost Formulations}\label{formulations_formulationsMinCost}
+
+A standard variant of eSP and rSP is to minimize cost while constraining the impact to be below a specified threshold, $u$ . For example, the eSP MIP can be revised to formulate a MIP to minimize cost: \[ \begin{array}{llll} {\rm (ceSP)} & \min & \sum_{i \in L} c_i s_i & \\ & {\rm s.t.} & \sum_{i\in {\cal L}_a} x_{ai} = 1 &\forall a \in {\cal A}\\ & & x_{ai} \le s_i & \forall a \in {\cal A}, i \in {\cal L}_a\\  & & \sum_{a \in {\cal A}} \alpha_a \sum_{i \in {\cal L}_a} d_{ai} x_{ai} \leq u&\\ & & s_i \in \{0,1\} & \forall i \in L\\ & & 0 \leq x_{ai} \leq 1 & \forall a \in {\cal A}, i \in {\cal L}_a \end{array} \] Minimal cost variants of rSP can also be easily formulated.
+
+\section{Formulations with Multiple Objectives}\label{formulations_formulationsMultiObj}
+
+CWS design generally requires the evaluation and optimization of a variety of performance objectives. Some performance objectives cannot be simultaneously optimized, and thus a CWS design must be selected from a trade-\/off between these   
+objectives~\cite{WatGreHar04a}.
+
+SPOT supports the analysis of these trade-\/offs with the specification of additional constraints on impact measures. For example, a user can minimize the expected extent of contamination (ec) while constraining the worst-\/case time to detection (td). SPOT allows for the specification of more than one impact constraint. However, the SPOT solvers cannot reliably optimize formulations with more than one impact constraint.
+
+\section{The SPOT Formulation with Imperfect Sensors}\label{formulations_formulationsImperfect}
+
+The previous sensor placement formulations make the implicit assumption that sensors work perfectly. That is, they never fail to detect a contaminant when it exists, and they never generate an erroneous detection when no contaminant exists. In practice, sensors are imperfect, and they generate these types of errors.
+
+SPOT addresses this issue by supporting a formulation that models simple sensor failures~\cite{BerryCHLPW09}. Each sensor, $s_i$, has an associated probability of failure, $p_i$. With these probabilities, we can easily assess the probability that a contamination incident will be detected by a particular sensor. Thus, it is straightforward to compute the expected impact of a contamination incident.
+
+This formulation does not explicitly allow for the specification of probabilities of false detections. These probabilities do not impact the performance of a CWS during a contamination incident. Instead, they impact the day-\/to-\/day maintenance and use of the CWS; erroneous detections create work for the CWS users, which is an ongoing cost. The overall likelihood of false detections is simply a function of the sensors that are selected. In cases where every sensor has the same likelihoods, this implies a simple constraint on the number of sensors. 

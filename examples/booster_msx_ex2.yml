@@ -1,0 +1,35 @@
+network:
+  epanet file: Net3/Net3.inp  
+scenario:
+  tsi file: Net3/Net3_EColi_TSB.tsi
+  msx file: Net3/Net3_EColi_TSB.msx          
+  msx species: EColi  
+impact:
+  erd file: null 
+  metric: [MC]
+  tai file: null
+  response time: 0
+  detection limit: [0.0]
+  detection confidence: 1
+  msx species: EColi
+booster msx:
+  detection: ['15', '35', '219', '253']   
+  toxin species: EColi
+  decon species: CL
+  feasible nodes: NZD
+  infeasible nodes: NONE    
+  max boosters: 6             
+  type: FLOWPACED                        
+  strength: 4.0
+  response time: 0.0      
+  duration: 720     
+solver:
+  type: coliny:StateMachineLS                        
+  options: 
+    verbosity: 2
+    max_fcn_evaluations: 5 
+  logfile: null                      
+  verbose: 0     
+configure:
+  output prefix: ${CWD}/booster_msx_ex2/Net3
+  debug: 0

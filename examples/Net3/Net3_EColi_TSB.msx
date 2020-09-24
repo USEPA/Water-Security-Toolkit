@@ -1,0 +1,104 @@
+[TITLE]
+E Coli and 3-component TSB Model 
+
+
+[OPTIONS]
+  AREA_UNITS M2              ;Surface concentration is mass/m2
+  RATE_UNITS SEC             ;Reaction rates are conc/sec
+  SOLVER     EUL             ;5-th order Runge-Kutta integrator
+  TIMESTEP   60              ;300 sec (5 min) solution time step
+  RTOL       0.001           ;Relative concentration tolerance
+  ATOL       0.001           ;Absolute concentration tolerance
+  COMPILER   NONE
+
+[SPECIES]
+  BULK EColi   MG           ;E Coli Concentration (CFU/L)
+  BULK CL   MG           ;Free Chlorine Concentration(mg/L)
+  BULK T1 	 MG		    ;TSB Component 1 -- Fast Rxn (mL/L)
+  BULK T2 	 MG		    ;TSB Component 2 -- Moderate Rxn (mL/L)
+  BULK T3 	 MG		    ;TSB Component 3 -- Slow Rxn (mL/L)
+
+
+[COEFFICIENTS]
+  CONSTANT k1   	0.0813	;T1 reaction rate (L/mL/sec)
+  CONSTANT k2	0.0119	;T2 reaction rate (L/mL/sec)
+  CONSTANT k3	0.0000167	;T3 reaction rate (L/mL/sec)
+  CONSTANT r1	0.057		;T1-C stoichiometric ratio (mL/mg)
+  CONSTANT r2	0.013		;T2-C stoichiometric ratio (mL/mg)
+  CONSTANT r3	0.018		;T3-C stoichiometric ratio (mL/mg)
+  CONSTANT k4	0.0078	;E reaction rate (L/mg/sec)
+
+
+[TERMS]
+
+
+[PIPES]
+  ;Reaction terms
+  RATE    EColi   - k4*EColi*CL
+  RATE    CL   - k1*T1*CL - k2*T2*CL - k3*T3*CL 
+  RATE    T1   - k1*r1*T1*CL
+  RATE    T2   - k2*r2*T2*CL
+  RATE    T3   - k3*r3*T3*CL
+  
+
+
+[TANKS]
+
+
+[SOURCES]
+  ; Sources of chlorine, as setpoint concentration of 1 mg/L
+  SETPOINT   River   CL   1
+  SETPOINT   Lake    CL   1
+
+[QUALITY]
+;  Initial conditions (= 0 if not specified here)
+  GLOBAL   CL   1            ;Assume global initial free chlorine concentration (uncomment if desired)
+
+
+[PATTERNS]
+  ;Set up pattern for injection of TSB-EColi mixture, 1-hr pattern step, injection starting at hour 73.  
+  ;Total duration: 7 days (= 168 hours).
+
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000   
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   INJ1     1.00000     1.00000     1.00000     1.00000     1.00000     1.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+ 
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   INJ1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+
+[REPORT]
+NODES   ALL
+SPECIE EColi	YES 5
+SPECIE CL   YES 5
+SPECIE T1   YES 5
+SPECIE T2   YES 5
+SPECIE T3   YES 5

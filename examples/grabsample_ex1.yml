@@ -1,0 +1,32 @@
+network:
+  epanet file: Net3/Net3.inp 
+scenario:
+  location: null                     
+  type: null                         
+  strength: null                     
+  species: null                      
+  start time: null                   
+  end time: null                     
+  tsg file: Net3/Net3_gs_profile.tsg 
+  tsi file: null                     
+  msx file: null                     
+  msx species: null                  
+  merlion: true                              
+grabsample:
+  model format: PYOMO                 
+  sample time: 1890.0                
+  threshold: null                    
+  fixed sensors: Net3/Net3_fixed_sensors   
+  feasible nodes: null       
+  num samples: 2                       
+  greedy selection: false 
+  with weights: True           
+solver:
+  type: glpk      
+  options: {}                                        
+  logfile: null                      
+  verbose: 0                         
+  initial points: []
+configure:
+  output prefix: grabsample_ex1/Net3   
+  debug: 0

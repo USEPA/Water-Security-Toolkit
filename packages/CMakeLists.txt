@@ -1,0 +1,8 @@
+add_subdirectory(cat)
+add_subdirectory(csa)
+add_subdirectory(detect)
+add_subdirectory(healthImpacts)
+add_subdirectory(network)
+add_subdirectory(sim)
+add_subdirectory(spot)
+add_subdirectory(tevaUtils)

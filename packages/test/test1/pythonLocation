@@ -1,0 +1,11 @@
+#!/bin/csh
+##
+## python command depends on whether test is running
+## in a source/build/dist tree or in a binary installation.
+##
+
+if (-e ../../python) then
+  echo python
+else
+  echo `pwd`/../../../python/bin/python
+endif

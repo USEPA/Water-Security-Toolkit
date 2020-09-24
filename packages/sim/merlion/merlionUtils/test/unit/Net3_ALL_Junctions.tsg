@@ -1,0 +1,6 @@
+; 0-8 hours 
+ALL MASS 10000 0 28799
+; 0-15 minutes
+ALL MASS 10000 0 899
+; 0-24 hours
+ALL MASS 10000 0 86399

@@ -1,0 +1,4 @@
+add_subdirectory(tevasim)
+add_subdirectory(merlion)
+add_subdirectory(TEVAEpanetJNI)
+add_subdirectory(TEVAEpanetMSXJNI)

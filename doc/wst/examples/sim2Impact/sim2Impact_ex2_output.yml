@@ -1,0 +1,12 @@
+# sim2Impact output
+general:
+  version: 1.5                         # WST version
+  date: '2019-03-05'                   # Run date
+  cpu time: 0.477                      # CPU time (sec)
+  directory: C:/WST-1.5/examples/sim2Impact_ex2
+  log file: Net3sim2Impact_output.log  # Log file
+sim2Impact:
+  impact file: [Net3_mc.impact]        # Impact file
+  id file: [Net3_mc.id]                # ID file
+  nodemap file: Net3.nodemap           # Nodemap file
+  scenariomap file: Net3.scenariomap   # Scenariomap file

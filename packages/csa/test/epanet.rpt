@@ -1,0 +1,520 @@
+  Page 1                                    Sun Feb  2 18:31:38 2014
+
+  ******************************************************************
+  *                           E P A N E T                          *
+  *                   Hydraulic and Water Quality                  *
+  *                   Analysis for Pipe Networks                   *
+  *                         Version 2.00.12                        *
+  ******************************************************************
+  
+  Analysis begun Sun Feb  2 18:31:38 2014
+
+   
+  Hydraulic Status:
+  -----------------------------------------------------------------------
+     0:00:00: Balanced after 5 trials
+     0:00:00: Reservoir River is emptying
+     0:00:00: Reservoir Lake is closed
+     0:00:00: Tank 1 is filling at 13.10 ft
+     0:00:00: Tank 2 is filling at 23.50 ft
+     0:00:00: Tank 3 is filling at 29.00 ft
+   
+     1:00:00: Balanced after 3 trials
+   
+     1:30:25: Pump 335 changed by Tank 1 control
+     1:30:25: Pipe 330 changed by Tank 1 control
+     1:30:25: Balanced after 4 trials
+     1:30:25: Pipe 330 changed from closed to open
+     1:30:25: Pump 335 changed from open to closed
+   
+     2:00:00: Balanced after 3 trials
+   
+     3:00:00: Balanced after 2 trials
+   
+     3:58:31: Balanced after 6 trials
+     3:58:31: Tank 3 is closed at 35.50 ft
+     3:58:31: Pipe 20 changed from open to temporarily closed
+   
+     4:00:00: Balanced after 2 trials
+   
+     4:56:03: Balanced after 5 trials
+     4:56:03: Tank 2 is closed at 40.30 ft
+     4:56:03: Pipe 50 changed from open to temporarily closed
+   
+     5:00:00: Balanced after 2 trials
+   
+     5:21:06: Balanced after 7 trials
+     5:21:06: Tank 1 is closed at 32.10 ft
+     5:21:06: Pipe 40 changed from open to temporarily closed
+   
+     6:00:00: Balanced after 2 trials
+   
+     7:00:00: Balanced after 2 trials
+   
+     8:00:00: Balanced after 2 trials
+   
+     9:00:00: Balanced after 2 trials
+   
+    10:00:00: Balanced after 2 trials
+   
+    11:00:00: Balanced after 2 trials
+   
+    12:00:00: Balanced after 2 trials
+   
+    13:00:00: Balanced after 2 trials
+   
+    14:00:00: Balanced after 2 trials
+   
+    15:00:00: Balanced after 2 trials
+   
+    16:00:00: Balanced after 2 trials
+   
+    17:00:00: Balanced after 2 trials
+   
+    18:00:00: Balanced after 2 trials
+   
+    19:00:00: Balanced after 2 trials
+   
+    20:00:00: Balanced after 2 trials
+   
+    21:00:00: Balanced after 2 trials
+   
+    22:00:00: Balanced after 2 trials
+   
+    23:00:00: Balanced after 2 trials
+   
+    24:00:00: Balanced after 2 trials
+   
+    25:00:00: Balanced after 2 trials
+   
+    26:00:00: Balanced after 2 trials
+   
+    27:00:00: Balanced after 2 trials
+   
+    28:00:00: Balanced after 2 trials
+   
+    29:00:00: Balanced after 3 trials
+   
+    30:00:00: Balanced after 2 trials
+   
+    31:00:00: Balanced after 2 trials
+   
+    32:00:00: Balanced after 2 trials
+   
+    33:00:00: Balanced after 2 trials
+   
+    34:00:00: Balanced after 2 trials
+   
+    35:00:00: Balanced after 2 trials
+   
+    36:00:00: Balanced after 2 trials
+   
+    37:00:00: Balanced after 2 trials
+   
+    38:00:00: Balanced after 2 trials
+   
+    39:00:00: Balanced after 2 trials
+   
+    40:00:00: Balanced after 3 trials
+   
+    41:00:00: Balanced after 2 trials
+   
+    42:00:00: Balanced after 2 trials
+   
+    43:00:00: Balanced after 3 trials
+   
+    44:00:00: Balanced after 2 trials
+   
+    45:00:00: Balanced after 2 trials
+   
+    46:00:00: Balanced after 2 trials
+   
+    47:00:00: Balanced after 2 trials
+   
+    48:00:00: Balanced after 2 trials
+   
+    49:00:00: Balanced after 2 trials
+   
+    50:00:00: Balanced after 3 trials
+   
+    51:00:00: Balanced after 3 trials
+   
+    52:00:00: Balanced after 3 trials
+   
+    53:00:00: Balanced after 3 trials
+   
+    54:00:00: Balanced after 3 trials
+   
+    55:00:00: Balanced after 3 trials
+   
+    56:00:00: Balanced after 3 trials
+   
+    57:00:00: Balanced after 3 trials
+   
+    58:00:00: Balanced after 3 trials
+   
+    59:00:00: Balanced after 2 trials
+   
+    60:00:00: Balanced after 2 trials
+   
+    61:00:00: Balanced after 2 trials
+   
+    62:00:00: Balanced after 2 trials
+   
+    63:00:00: Balanced after 3 trials
+   
+    64:00:00: Balanced after 3 trials
+   
+    65:00:00: Balanced after 2 trials
+   
+    66:00:00: Balanced after 3 trials
+   
+    67:00:00: Balanced after 3 trials
+   
+    68:00:00: Balanced after 3 trials
+   
+    69:00:00: Balanced after 2 trials
+   
+    70:00:00: Balanced after 2 trials
+   
+    71:00:00: Balanced after 2 trials
+   
+    72:00:00: Balanced after 2 trials
+   
+    73:00:00: Balanced after 2 trials
+   
+    74:00:00: Balanced after 3 trials
+   
+    75:00:00: Balanced after 3 trials
+   
+    76:00:00: Balanced after 3 trials
+   
+    77:00:00: Balanced after 3 trials
+   
+    78:00:00: Balanced after 2 trials
+   
+    79:00:00: Balanced after 3 trials
+   
+    80:00:00: Balanced after 3 trials
+   
+    81:00:00: Balanced after 3 trials
+   
+    82:00:00: Balanced after 2 trials
+   
+    83:00:00: Balanced after 2 trials
+   
+    84:00:00: Balanced after 2 trials
+   
+    85:00:00: Balanced after 3 trials
+   
+    86:00:00: Balanced after 2 trials
+   
+    87:00:00: Balanced after 3 trials
+   
+    88:00:00: Balanced after 3 trials
+   
+    89:00:00: Balanced after 2 trials
+   
+    90:00:00: Balanced after 3 trials
+   
+    91:00:00: Balanced after 3 trials
+   
+    92:00:00: Balanced after 3 trials
+   
+    93:00:00: Balanced after 2 trials
+   
+    94:00:00: Balanced after 2 trials
+   
+    95:00:00: Balanced after 2 trials
+   
+    96:00:00: Balanced after 2 trials
+   
+    97:00:00: Balanced after 3 trials
+   
+    98:00:00: Balanced after 3 trials
+   
+    99:00:00: Balanced after 3 trials
+   
+   100:00:00: Balanced after 3 trials
+   
+   101:00:00: Balanced after 3 trials
+   
+   102:00:00: Balanced after 3 trials
+   
+   103:00:00: Balanced after 3 trials
+   
+   104:00:00: Balanced after 3 trials
+   
+   105:00:00: Balanced after 3 trials
+   
+   106:00:00: Balanced after 2 trials
+   
+   107:00:00: Balanced after 3 trials
+   
+   108:00:00: Balanced after 2 trials
+   
+   109:00:00: Balanced after 3 trials
+   
+   110:00:00: Balanced after 3 trials
+   
+   111:00:00: Balanced after 3 trials
+   
+   112:00:00: Balanced after 3 trials
+   
+   113:00:00: Balanced after 3 trials
+   
+   114:00:00: Balanced after 3 trials
+   
+   115:00:00: Balanced after 3 trials
+   
+   116:00:00: Balanced after 3 trials
+   
+   117:00:00: Balanced after 2 trials
+   
+   118:00:00: Balanced after 2 trials
+   
+   119:00:00: Balanced after 2 trials
+   
+   120:00:00: Balanced after 2 trials
+   
+   121:00:00: Balanced after 3 trials
+   
+   122:00:00: Balanced after 3 trials
+   
+   123:00:00: Balanced after 3 trials
+   
+   124:00:00: Balanced after 3 trials
+   
+   125:00:00: Balanced after 3 trials
+   
+   126:00:00: Balanced after 3 trials
+   
+   127:00:00: Balanced after 3 trials
+   
+   128:00:00: Balanced after 3 trials
+   
+   129:00:00: Balanced after 3 trials
+   
+   130:00:00: Balanced after 2 trials
+   
+   131:00:00: Balanced after 3 trials
+   
+   132:00:00: Balanced after 2 trials
+   
+   133:00:00: Balanced after 3 trials
+   
+   134:00:00: Balanced after 3 trials
+   
+   135:00:00: Balanced after 3 trials
+   
+   136:00:00: Balanced after 3 trials
+   
+   137:00:00: Balanced after 3 trials
+   
+   138:00:00: Balanced after 3 trials
+   
+   139:00:00: Balanced after 3 trials
+   
+   140:00:00: Balanced after 3 trials
+   
+   141:00:00: Balanced after 2 trials
+   
+   142:00:00: Balanced after 2 trials
+   
+   143:00:00: Balanced after 2 trials
+   
+   144:00:00: Balanced after 2 trials
+   
+   145:00:00: Balanced after 2 trials
+   
+   146:00:00: Balanced after 3 trials
+   
+   147:00:00: Balanced after 3 trials
+   
+   148:00:00: Balanced after 3 trials
+   
+   149:00:00: Balanced after 3 trials
+   
+   150:00:00: Balanced after 3 trials
+   
+   151:00:00: Balanced after 3 trials
+   
+   152:00:00: Balanced after 3 trials
+   
+   153:00:00: Balanced after 3 trials
+   
+   154:00:00: Balanced after 3 trials
+   
+   155:00:00: Balanced after 3 trials
+   
+   156:00:00: Balanced after 3 trials
+   
+   157:00:00: Balanced after 3 trials
+   
+   158:00:00: Balanced after 3 trials
+   
+   159:00:00: Balanced after 3 trials
+   
+   160:00:00: Balanced after 3 trials
+   
+   161:00:00: Balanced after 3 trials
+   
+   162:00:00: Balanced after 3 trials
+   
+   163:00:00: Balanced after 3 trials
+   
+   164:00:00: Balanced after 3 trials
+   
+   165:00:00: Balanced after 2 trials
+   
+   166:00:00: Balanced after 2 trials
+   
+   167:00:00: Balanced after 2 trials
+   
+   168:00:00: Balanced after 2 trials
+   
+   169:00:00: Balanced after 2 trials
+   
+   170:00:00: Balanced after 3 trials
+   
+   171:00:00: Balanced after 3 trials
+   
+   172:00:00: Balanced after 3 trials
+   
+   173:00:00: Balanced after 3 trials
+   
+   174:00:00: Balanced after 3 trials
+   
+   175:00:00: Balanced after 3 trials
+   
+   176:00:00: Balanced after 3 trials
+   
+   177:00:00: Balanced after 3 trials
+   
+   178:00:00: Balanced after 3 trials
+   
+   179:00:00: Balanced after 3 trials
+   
+   180:00:00: Balanced after 3 trials
+   
+   181:00:00: Balanced after 3 trials
+   
+   182:00:00: Balanced after 3 trials
+   
+   183:00:00: Balanced after 3 trials
+   
+   184:00:00: Balanced after 3 trials
+   
+   185:00:00: Balanced after 3 trials
+   
+   186:00:00: Balanced after 2 trials
+   
+   187:00:00: Balanced after 3 trials
+   
+   188:00:00: Balanced after 3 trials
+   
+   189:00:00: Balanced after 2 trials
+   
+   190:00:00: Balanced after 2 trials
+   
+   191:00:00: Balanced after 2 trials
+   
+   192:00:00: Balanced after 2 trials
+   
+   193:00:00: Balanced after 2 trials
+   
+   194:00:00: Balanced after 3 trials
+   
+   195:00:00: Balanced after 3 trials
+   
+   196:00:00: Balanced after 3 trials
+   
+   197:00:00: Balanced after 3 trials
+   
+   198:00:00: Balanced after 3 trials
+   
+   199:00:00: Balanced after 4 trials
+   
+   200:00:00: Balanced after 3 trials
+   
+   201:00:00: Balanced after 3 trials
+   
+   202:00:00: Balanced after 3 trials
+   
+   203:00:00: Balanced after 3 trials
+   
+   204:00:00: Balanced after 3 trials
+   
+   205:00:00: Balanced after 3 trials
+   
+   206:00:00: Balanced after 3 trials
+   
+   207:00:00: Balanced after 3 trials
+   
+   208:00:00: Balanced after 3 trials
+   
+   209:00:00: Balanced after 2 trials
+   
+   210:00:00: Balanced after 2 trials
+   
+   211:00:00: Balanced after 3 trials
+   
+   212:00:00: Balanced after 3 trials
+   
+   213:00:00: Balanced after 2 trials
+   
+   214:00:00: Balanced after 2 trials
+   
+   215:00:00: Balanced after 2 trials
+   
+   216:00:00: Balanced after 2 trials
+   
+   217:00:00: Balanced after 2 trials
+   
+   218:00:00: Balanced after 3 trials
+   
+   219:00:00: Balanced after 3 trials
+   
+   220:00:00: Balanced after 3 trials
+   
+   221:00:00: Balanced after 3 trials
+   
+   222:00:00: Balanced after 3 trials
+   
+   223:00:00: Balanced after 4 trials
+   
+   224:00:00: Balanced after 3 trials
+   
+   225:00:00: Balanced after 3 trials
+   
+   226:00:00: Balanced after 3 trials
+   
+   227:00:00: Balanced after 3 trials
+   
+   228:00:00: Balanced after 3 trials
+   
+   229:00:00: Balanced after 3 trials
+   
+   230:00:00: Balanced after 3 trials
+   
+   231:00:00: Balanced after 3 trials
+   
+   232:00:00: Balanced after 3 trials
+   
+   233:00:00: Balanced after 2 trials
+   
+   234:00:00: Balanced after 3 trials
+   
+   235:00:00: Balanced after 3 trials
+   
+   236:00:00: Balanced after 3 trials
+   
+   237:00:00: Balanced after 3 trials
+   
+   238:00:00: Balanced after 2 trials
+   
+   239:00:00: Balanced after 3 trials
+   
+   240:00:00: Balanced after 2 trials
+   
+  Analysis ended Sun Feb  2 18:31:39 2014

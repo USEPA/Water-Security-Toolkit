@@ -1,0 +1,13 @@
+# inversion output
+general:
+  version: 1.5                                   # WST version
+  date: '2019-03-05'                             # Run date
+  cpu time: 0.15                                 # CPU time (sec)
+  directory: C:/wst-1.5/examples/inversion_ex3
+  log file: Net3inversion_output.log             # Log file
+inversion:
+  tsg file: Net3profile.tsg
+  likely nodes file: Net3Likely_Nodes.dat
+  candidate nodes: ['125', '149', '151', '153']  # List of candidate injection nodes
+  node likeliness: [1.0, 1.0, 1.0, 1.0]          # Likeliness measure of each node being true
+                                                 #   injection node.

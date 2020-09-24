@@ -1,0 +1,26 @@
+<AnalysisModule name="tso2Impact Analysis" library_name="tso2ImpactModule">
+	<ModuleInputs>
+		<Input name="outputFileRoot" value="test1" >
+		</Input>
+		<Input name="detectionDelay" value="0" >
+		</Input>
+		<Input name="minQuality" value="0.0" >
+		</Input>
+		<Input name="mcSelected" value="0" >
+		</Input>
+		<Input name="vcSelected" value="0" >
+		</Input>
+		<Input name="nfdSelected" value="0" >
+		</Input>
+		<Input name="ecSelected" value="0" >
+		</Input>
+		<Input name="pkSelected" value="0" >
+		</Input>
+		<Input name="pdSelected" value="0" >
+		</Input>
+		<Input name="peSelected" value="1" >
+		</Input>
+		<Input name="HIAParameters" value="HIATest.xml" >
+		</Input>
+	</ModuleInputs>
+</AnalysisModule>

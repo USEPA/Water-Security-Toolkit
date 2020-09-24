@@ -1,0 +1,17 @@
+# uq configuration template
+scenario:
+  signals: Net3/uq/list_scenarios.dat    # Signal files, overrides TSG or TSI files
+uq:
+  analysis time: 60                      # Analysis time (min)
+  threshold: 0.01                        # Contamination threshold. Default 0.01  (mg/L)
+  confidence: 0.9                        # Probability confidence for candidate nodes. (unitless)
+measurements:
+  grab samples: null                     # Measurements file name
+configure:
+  output prefix: ${CWD}/uq_ex1/Net3      # Output file prefix
+  output directory: ${CWD}/uq_ex1        # Output directory
+  debug: 0                               # Debugging level, default = 0
+
+
+
+

@@ -1,0 +1,11 @@
+impact:
+  erd file: [Net3/Net3.erd]
+  metric: [MC]
+  tai file: null 
+  response time: 60 
+  detection limit: [0.1]
+  detection confidence: 1  
+  msx species: null    
+configure:
+  output prefix: ${CWD}/sim2Impact_ex2/Net3
+  debug: 0     

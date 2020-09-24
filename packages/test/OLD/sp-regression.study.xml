@@ -1,0 +1,356 @@
+<experimental-study name="sp-regression">
+  <tags>
+    <tag>OLD</tag>
+  </tags>
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_file">
+        <level>"-tsg test1.tsg -tsi test1.tsi"</level>
+      </factor>
+      <factor name="tso_file">
+        <level>"-tso test1.tso"</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>"Net3.inp Net3.out"</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -tso</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>"test1 test1.tso"</level>
+      </factor>
+      <factor name="objectives">
+        <level>"-mc -vc -td -nfd -ec -epanetin Net3.inp"</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -impact</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1a">	<!-- The old "test1a" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this basic mc_mean            -->
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1f">	<!-- The old "test1f" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests costs files        -->
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="costs">
+        <level>-\-costs=test1\-id\-costs</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=cost,20</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1g">	<!-- The old "test1g" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests the Excel format   -->
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="costs">
+        <level>-\-costs=test1\-id\-costs</level>
+      </factor>
+      <factor name="format">
+        <level>-\-format=xls</level>
+      </factor>
+      <factor name="summary">
+        <level>-\-summary=test1g.xls</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=cost,20</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+
+  <experiment name="test1h">	<!-- The old "test1h" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests ec and thresholding-->
+        <level>ec</level>	<!-- (witness aggregation)         -->
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="threshold">
+        <level>-\-threshold=ec,20000.0</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1i">	<!-- The old "test1i" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests mc_worst           -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1jk">	<!-- The old "test1[jk]" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests mc_cvar            -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>cvar</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="gamma">
+        <level>-\-gamma=0.05</level>	<!-- test1j -->
+        <level>-\-gamma=0.01</level>	<!-- test1k -->
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1l">	<!-- The old "test1l" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests a side constraint  -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="side_constraint">
+        <level>-\-ub=vc,35000</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1aa">	<!-- The old "test1laa" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0      -->
+      <factor name="goals">	<!-- this tests heuristic/worst      -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1m">	<!-- The old "test1m" from teva-sp -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0    -->
+      <factor name="goals">	<!-- this tests sens. loc. file    -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="sensor_locations">
+        <level>-\-sensor\-locations=test1\-sensor\-locations</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1no">	<!-- The old "test1[no]" from teva-sp  -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0        -->
+      <factor name="goals">	<!-- this tests fixed sens. loc. file  -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="sensor_locations">
+        <level>-\-sensor\-locations=test1\-fixed\-locations</level>
+        <level>-\-sensor\-locations=test1\-valid\-locations</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="test1p">	<!-- The old "test1p" from teva-sp     -->
+    <factors>			<!-- releases 1.0.0 to spot-1.0        -->
+      <factor name="goals">	<!-- this tests basic heuristic        -->
+        <level>mc</level>	
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="sensor_locations">
+        <level>-\-sensor\-locations=test1\-fixed\-locations</level>
+        <level>-\-sensor\-locations=test1\-valid\-locations</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <analyze>
+    <data experiment="sp-simple-mean"/>
+    <test name="sp-status for sp-simple-mean" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+  <analyze>
+    <data experiment="sp-simple-worst"/>
+    <test name="sp-status for sp-simple-worst" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+<!--
+  <analyze>
+    <data experiment="sp-simple-mean"/>
+    <baseline>spot.sp-simple-mean.baseline.xml</baseline>
+    <test name="HeuristicBaseline" type="baseline">
+      <options>_measurement="Mean impact" _tolerance=0</options>
+    </test>
+  </analyze>
+
+  <analyze>
+    <data experiment="sp-simple-worst"/>
+    <baseline>spot.sp-simple-worst.baseline.xml</baseline>
+    <test name="HeuristicBaseline" type="baseline">
+      <options>_measurement="Max impact" _tolerance=0</options>
+    </test>
+  </analyze>
+-->
+
+</experimental-study>

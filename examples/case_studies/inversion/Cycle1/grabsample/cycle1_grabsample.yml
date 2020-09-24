@@ -1,0 +1,32 @@
+# grabsample configuration template
+network:
+  epanet file: Net3.inp    # EPANET network file name
+scenario:
+  location: null           # Injection location: ALL, NZD or EPANET ID
+  type: null               # Injection type: MASS, CONCEN, FLOWPACED, or SETPOINT
+  strength: null           # Injection strength [mg/min or mg/L depending on type]
+  species: null            # Injection species, required for EPANET-MSX
+  start time: null         # Injection start time [min]
+  end time: null           # Injection end time [min]
+  tsg file: cycle1_profile.tsg       # TSG file name, overrides injection parameters above
+  tsi file: null           # TSI file name, overrides TSG file
+  msx file: null           # Multi-species extension file name
+  msx species: null        # MSX species to save
+  merlion: false           # Use Merlion as WQ simulator, true or false
+grabsample:
+  model format: PYOMO      # Grab sample model format: AMPL or PYOMO
+  sample time: 540.0       # Sampling time (min)
+  threshold: null          # Contamination threshold. Default 0.001
+  fixed sensors: fixed_sensors.dat      # Fixed sensor nodes
+  feasible nodes: null     # Feasible sampling nodes
+  num samples: 3        # Maximum number of grab samples, default = 1
+  greedy selection: false  # Perform greedy selection. No optimization
+solver:
+  type: glpk               # Solver type
+  options:                 # A dictionary of solver options
+  logfile: null            # Redirect solver output to a logfile
+  verbose: 0               # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: cycle1_      # Output file prefix
+  debug: 0                 # Debugging level, default = 0

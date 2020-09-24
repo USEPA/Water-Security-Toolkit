@@ -1,0 +1,46 @@
+# runampl.enum
+#
+# Jon Berry, 7/13/2005
+# adapted from script of Jean-Paul Watson's
+#
+# precondition: .dat file generated
+# postcondition: the top 100 most-optimal solutions have been generated
+#		 and stored.
+# 
+# usage:     ampl < runampl.enum > enum.out
+#
+# Note: currently need to change hardcoded .dat file.  Python-izing
+#       this script (like "runampl") would improve things.
+
+model ../DynamicEnum.mod; 
+data NetD.5min.bio.0.dat;
+
+set nextSolution;
+let numSolutionsFound := 0;
+param cons1;
+param cons2;
+
+option cplex_options 'integrality=0 '; 
+
+for {si in SolutionIndices} {
+	solve;
+	let nextSolution := setof {i in TrueLocations: i != dummyLocation 
+				   and s[i] == 1} i; 
+	let Consumptions[si] := massConsumed;
+	let PrevSolutions[si] := nextSolution;
+	let numSolutionsFound := si;
+}
+
+for {ssi in SolutionIndices} {
+	display ssi; 
+	for {k in PrevSolutions[ssi]} {
+		printf "%d ", k;
+	}
+	printf "\n";;
+}
+
+for {j in 1..(numSolutionsFound-1)} {
+	let cons1:=card(PrevSolutions[j] inter PrevSolutions[j+1])/Budget;
+	let cons2:=card(PrevSolutions[1] inter PrevSolutions[j+1])/Budget;
+	printf "%d %14.2lf %6.2lf %6.2lf\n",j,Consumptions[j],cons1,cons2;
+}

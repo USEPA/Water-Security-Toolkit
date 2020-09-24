@@ -1,0 +1,26 @@
+Validating input for GRASP heuristic
+Number of sensors=5
+Objective=mc
+Statistic=mean
+Impact file=./test1_mc.impact
+Delay=0
+Running GRASP heuristic
+GRASP completed - sensors written to file=test1.sensors
+------------------------------------------------------------------------------
+Sensor placement id:        0
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            2 4 59 70 81 
+Sensor junctions:           15 35 203 219 253 
+
+Impact File:                ./test1_mc.impact
+Number of events          : 236
+Min impact:                 0
+Mean impact:                21787
+Lower quartile impact:      289.354
+Median impact:              1355.14
+Upper quartile impact:      9272.39
+Value at Risk (VaR):        144271
+TCE:                        144275
+Max impact:                 144321
+------------------------------------------------------------------------------

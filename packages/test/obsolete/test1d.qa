@@ -1,0 +1,20 @@
+Setting up IP data file...
+Running PICO...
+------------------------------------------------------------------------------
+Sensor placement id:        2308
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            29 41 4 70 81 
+Sensor junctions:           143 167 35 219 253 
+
+Impact File:                ./test1_mc.impact
+Number of events          : 236
+Min impact:                 0
+Mean impact:                23400.6
+Lower quartile impact:      166.811
+Median impact:              1823.78
+Upper quartile impact:      13423.7
+Value at Risk (VaR):        144271
+TCE:                        144275
+Max impact:                 144321
+------------------------------------------------------------------------------

@@ -1,0 +1,188 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build threat assess codes
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+##  nmake /F makefile-hia dlls JDK_ROOT=C:\Java\jdk1.6.0 NOT TESTED - TODO
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+   
+ANLDIR=$(PACKAGES)\tevaUtils\anl
+ANLUTILS_DIR=$(ANLDIR)\ANLUtils
+ANLUTILS_DLL=$(ANLDIR)\libs\$(LIBSUBDIR)\ANLUtils.dll
+ANLUTILS_LIB=$(ANLDIR)\libs\$(LIBSUBDIR)\ANLUtils.lib
+ANLUTILS_INCLUDE=/I $(ANLUTILS_DIR)\include /I $(ANLUTILS_DIR)\src /I $(ANLUTILS_DIR)\include
+   
+TEVAUTIL_DIR=$(PACKAGES)\tevaUtils
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS 
+## the shared flags are never used in healthImpacts, functions are not exported
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530
+CFLAGS = -DMT_NO_INLINE $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES  $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+all: headers \
+     static\libthreatassess.lib \
+     static\threat_assess.exe
+
+dll: dlls
+
+dlls: headers \
+      shared\libthreatassess.dll \
+      shared\libHIAModule.dll
+
+##
+## Create a teva_config.h - the configuration file from autotools
+##
+##
+headers:
+    copy teva_config.txt teva_config.h
+
+##
+## Create directories to keep static and shared files separated
+##
+##
+static:
+    if not exist static mkdir static
+
+shared:
+    if not exist shared mkdir shared
+
+ERD_LIB_INC = $(PACKAGES)\tevaUtils\erd\erd\include
+
+##
+## THREAT ASSESS LIBRARY
+##
+##
+THREATASSESS_DIR=$(PACKAGES)\healthImpacts\threatAssess
+DCDFLIB_DIR= $(PACKAGES)\healthImpacts\dcdfLib
+MTWIST_DIR= $(THREATASSESS_DIR)\mtwist-0.6
+
+THREATASSESS_INCLUDE= \
+ /I $(THREATASSESS_DIR) \
+ /I $(DCDFLIB_DIR) \
+ /I $(MTWIST_DIR) \
+ /I $(TEVAUTIL_DIR)\tso\src \
+ /I $(TEVAUTIL_DIR)\anl\include \
+ /I $(ERD_LIB_INC)
+
+THREATASSESS_SRC = \
+    $(THREATASSESS_DIR)\hia.c \
+    $(THREATASSESS_DIR)\nrutil.c \
+    $(THREATASSESS_DIR)\sss.c \
+    $(THREATASSESS_DIR)\tai.c \
+    $(THREATASSESS_DIR)\ta_input.c \
+    $(THREATASSESS_DIR)\ta_utils.c \
+    $(THREATASSESS_DIR)\dose.c \
+    $(THREATASSESS_DIR)\ingest.c \
+    $(THREATASSESS_DIR)\response.c \
+    $(THREATASSESS_DIR)\runif_if.c \
+    $(THREATASSESS_DIR)\spline_if.c \
+    $(THREATASSESS_DIR)\splines.c \
+    $(MTWIST_DIR)\mtwist.c \
+    $(DCDFLIB_DIR)\dcdflib.c
+
+THREATASSESS_OBJ = $(THREATASSESS_SRC:.c=.obj)
+
+{$(THREATASSESS_DIR)}.c.{$(THREATASSESS_DIR)}.obj:
+    $(CC) $(CFLAGS) $(THREATASSESS_INCLUDE) /Fo$@ /c $*.c
+
+$(MTWIST_DIR)\mtwist.obj: $(MTWIST_DIR)\mtwist.c
+    $(CC) $(CFLAGS) /I $(MTWIST_DIR) /Fo$@ /c $**
+
+$(DCDFLIB_DIR)\dcdflib.obj: $(DCDFLIB_DIR)\dcdflib.c
+    $(CC) $(CFLAGS) -DDPMPAR_OPT /I $(DCDFLIB_DIR) /Fo$@ /c $**
+
+# the following also has a dependency (indirectly) on static\liberd.lib, but if it is included
+# lib warns about already defined symbols. 
+static\libthreatassess.lib: static $(THREATASSESS_OBJ) 
+    lib /out:static\libthreatassess.lib $(THREATASSESS_OBJ) static\libtsoutil.lib
+
+shared\libthreatassess.dll: shared $(THREATASSESS_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libthreatassess.lib /out:shared\libthreatassess.dll $(THREATASSESS_OBJ) \
+     shared\libtsoutil.lib shared\liberd.lib
+
+##
+## HIA LIBRARY shared only
+##
+##
+HIA_DIR=$(PACKAGES)\healthImpacts\hia
+HIA_SRC = \
+ $(HIA_DIR)\src\HealthImpactsAggr.c  \
+ $(HIA_DIR)\src\HealthImpactsIA.c  \
+ $(HIA_DIR)\src\HealthImpactsJNI.c \
+ $(HIA_DIR)\src\HealthImpactsUtil.c
+
+HIA_OBJ = $(HIA_SRC:.c=.obj)
+
+HIA_FLAGS=-D_FILE_OFFSET_BITS=64
+
+HIA_INCLUDE = /I $(HIA_DIR)\include \
+  /I $(TEVAUTIL_DIR)/anl/include \
+  /I $(THREATASSESS_DIR) \
+  $(THREATASSESS_INCLUDE) \
+  $(ANLUTILS_INCLUDE) \
+  /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32"
+
+{$(HIA_DIR)\src}.c.{$(HIA_DIR)\src}.obj:
+    $(CC) $(CFLAGS) $(HIA_FLAGS) $(HIA_INCLUDE) /Fo$@ /c $*.c
+
+shared\libHIAModule.dll: shared $(HIA_OBJ) shared\libthreatassess.dll
+    link $(LINK_FLAGS) /dll /out:shared\libHIAModule.dll $(HIA_OBJ) shared\libAnalysisModule.lib shared\libthreatassess.lib $(ANLUTILS_LIB)
+
+##
+## THREAT_ASSESS EXECUTABLE
+##
+##
+THREAT_ASSESS_SRC = $(THREATASSESS_DIR)\teva-assess.c
+THREAT_ASSESS_OBJ = $(THREAT_ASSESS_SRC:.c=.obj)
+THREAT_ASSESS_INCLUDE = $(THREATASSESS_INCLUDE)
+
+$(THREAT_ASSESS_OBJ): $(THREAT_ASSESS_SRC)
+    $(CC) $(CFLAGS) $(THREAT_ASSESS_INCLUDE) /Fo$@ /c $**
+
+static\threat_assess.exe:  $(THREAT_ASSESS_OBJ) static\libthreatassess.lib
+     $(CC) $(LINKDBG) /Fe$@ $**
+
+OBJ_FILES = $(THREATASSESS_OBJ) $(HIA_OBJ) $(THREAT_ASSESS_OBJ)
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake dlls " will build the shared versions
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+clean:
+        @-del /Q $(OBJ_FILES)
+        @-del /Q teva_config.h
+        @-del /Q static\libthreatassess.*
+        @-del /Q static\threat_assess.*
+        @-del /Q shared\libthreatassess.*
+        @-del /Q shared\libHIAModule.*

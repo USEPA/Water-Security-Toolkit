@@ -1,0 +1,16 @@
+- Add timeouts for tests
+
+- Test dependencies: explicitly setup inter-test dependecies
+
+- EXACT under PyUnit: enable automatic creation of an 'experiment', but execute the experiment within PyUnit
+
+- Test restart...
+    Q: how manage slow tests?
+    Q: denote tests as fast/slow?
+    IDEA: keep an archive of test results, and revise 'run()' to ignore tests
+        if this archive file has not been deleted by the user
+    IDEA: start tests if the archive if more recent than key files...
+        Don't rerun evalsensor tests if the evalsensor executable is older
+            than the archive results
+
+

@@ -1,0 +1,11 @@
+WST tevasim subcommand
+---------------------------
+Validating configuration file
+Running contaminant transport simulations
+
+WST normal termination
+---------------------------
+Directory: C:/wst-1.5/examples/
+Results file: Net3tevasim_output.yml
+Log file: Net3tevasim_output.log
+

@@ -1,0 +1,266 @@
+<Results expfile="teva-sp.64.exp.xml">
+<Experiment LogFile="teva-sp.64.sp-simple-64-1">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>1</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:54"
+  />
+  <StartTime>2006-04-26 16:02:54</StartTime>
+  <RunTime unit="seconds">0.163067</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=mc --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="1">mc</Factor>
+    <Factor name="measure" level="1">default</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="107385">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21787</Value>
+     <Value name="Median Impact" type="numeric/double">1355.14</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.64.sp-simple-64-2">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>2</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:54"
+  />
+  <StartTime>2006-04-26 16:02:54</StartTime>
+  <RunTime unit="seconds">0.161592</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=mc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="1">mc</Factor>
+    <Factor name="measure" level="2">mean</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="299601">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21787</Value>
+     <Value name="Median Impact" type="numeric/double">1355.14</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.64.sp-simple-64-3">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>3</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:55"
+  />
+  <StartTime>2006-04-26 16:02:55</StartTime>
+  <RunTime unit="seconds">0.224016</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=mc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="1">mc</Factor>
+    <Factor name="measure" level="3">worst</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="248027">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 14 40 46 73</Value>
+     <Value name="Junctions">15 109 166 179 231</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">259.066</Value>
+     <Value name="Mean Impact" type="numeric/double">38309</Value>
+     <Value name="Median Impact" type="numeric/double">2388.02</Value>
+     <Value name="UQuartile Impact" type="numeric/double">57853.8</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144271</Value>
+     <Value name="Max Impact" type="numeric/double">144271</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.64.sp-simple-64-4">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>4</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:55"
+  />
+  <StartTime>2006-04-26 16:02:55</StartTime>
+  <RunTime unit="seconds">0.801492</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=vc --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="2">vc</Factor>
+    <Factor name="measure" level="1">default</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="479093">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32452</Value>
+     <Value name="Median Impact" type="numeric/double">18340</Value>
+     <Value name="UQuartile Impact" type="numeric/double">31085.9</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.64.sp-simple-64-5">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>5</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:56"
+  />
+  <StartTime>2006-04-26 16:02:56</StartTime>
+  <RunTime unit="seconds">0.158818</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=vc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="2">vc</Factor>
+    <Factor name="measure" level="2">mean</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="72197">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32452</Value>
+     <Value name="Median Impact" type="numeric/double">18340</Value>
+     <Value name="UQuartile Impact" type="numeric/double">31085.9</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.64.sp-simple-64-6">
+  <Category>teva-sp.64.sp-simple-64</Category>
+  <Name>6</Name>
+  <Key
+      KernelName="Linux"
+      HostName="snuffles"
+      KernelRelease="2.6.10-1.770_FC3smp"
+      KernelVersion="#1 SMP Thu Feb 24 18:36:43 EST 2005"
+      Machine="x86_64"
+      Processor="x86_64"
+      Platform="x86_64"
+      OS="Linux snuffles 2.6.10-1.770_FC3smp #1 SMP Thu Feb 24 18:36:43 EST 2005 x86_64 x86_64 x86_64 GNU/Linux"
+      Scenario="test"
+      Date="2006-04-26 16:02:56"
+  />
+  <StartTime>2006-04-26 16:02:56</StartTime>
+  <RunTime unit="seconds">0.233669</RunTime>
+  <CommandLine>../bin/sp --path=../../../bin --path=../../etc/mod --print-log --objective=vc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor name="goals" level="2">vc</Factor>
+    <Factor name="measure" level="3">worst</Factor>
+    <Factor name="impact_prefix" level="1">\-\-network=test1</Factor>
+    <Factor name="sensors" level="1">-\-ub=ns,5</Factor>
+    <Factor name="solver" level="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="220766">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 10 59 78</Value>
+     <Value name="Junctions">15 35 101 203 247</Value>
+     <Value name="Impact File">/reservoir1/teva/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">7105.51</Value>
+     <Value name="Mean Impact" type="numeric/double">36092.3</Value>
+     <Value name="Median Impact" type="numeric/double">18974.2</Value>
+     <Value name="UQuartile Impact" type="numeric/double">38535.3</Value>
+     <Value name="VaR Impact" type="numeric/double">133760</Value>
+     <Value name="TCE Impact" type="numeric/double">221771</Value>
+     <Value name="Max Impact" type="numeric/double">356402</Value>
+  </Trial>
+</Experiment>
+</Results>

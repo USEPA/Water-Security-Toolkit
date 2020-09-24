@@ -1,0 +1,5 @@
+acro     https://software.sandia.gov/svn/acro/acro-utilib/releases/4.3.4
+lzma     https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12
+pyepanet https://software.sandia.gov/svn/teva/epanet/pyepanet/trunk
+sundry   https://software.sandia.gov/svn/public/acro/sundry/trunk
+vpykit   https://software.sandia.gov/svn/public/fast/vpykit/trunk

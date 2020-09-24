@@ -1,0 +1,89 @@
+[TITLE]
+Chlorine simulation and injection of BIO agent at node 105
+
+[OPTIONS]
+  AREA_UNITS M2              ;Surface concentration is mass/m2
+  RATE_UNITS SEC             ;Reaction rates are concentration/sec
+  SOLVER     RK5             ;5-th order Runge-Kutta integrator
+  TIMESTEP   60              ;300 sec (5 min) solution time step
+  RTOL       0.001           ;Relative concentration tolerance
+  ATOL       0.001           ;Absolute concentration tolerance
+
+
+[SPECIES]
+  BULK BIO   MG             ;Biological Agent
+  BULK CLF   MG             ;Free Chlorine  
+
+
+[COEFFICIENTS]
+  CONSTANT Knom   5.787037E-06      ;Chlorine reduction rate due to NOM rate constant (0.5 1/day)
+  CONSTANT K2	0.001			;Reaction rate
+  CONSTANT K3	0.01			;Reaction rate
+
+[TERMS]
+
+[PIPES]
+  ;Chlorine loss due to reduction by NOM and reaction with bio
+  RATE    BIO   - K3*CLF*BIO
+  RATE    CLF   - Knom*CLF - K2*CLF*BIO
+
+
+
+[TANKS]
+
+
+
+[SOURCES]
+  ; Sources of chlorine, fixed concentration of 1 mg/L at river and lake sources 
+  ; and models booster stations at each of the three tanks
+  SETPOINT   River   CLF   1
+  SETPOINT   Lake    CLF   1
+  SETPOINT   50	     CLF   1    ; tank 1
+  SETPOINT   40      CLF   1    ; tank 2
+  SETPOINT   20      CLF   1    ; tank 3
+
+  ; Source for BIO
+  ; This is commented out here because it is specified in tsg file for tevasim runs
+  ; Uncomment below line in order to run this file in epanet-msx
+    ;MASS  105  BIO    2.42E7 1
+
+
+
+[QUALITY]
+;  Initial conditions (= 0 if not specified here)
+  GLOBAL   CLF   1            ;Assume initial free chlorine concentration at all nodes (uncomment if desired)
+
+[PATTERNS]
+  ;Set up pattern for injection of TSB-EColi mixture, 1-hr pattern step, injection from hour 73 to 84.  
+  ; Total duration: 5 days (= 120 hours).
+  ; Below is really only needed for epanetmsx run (not tevasim) but will be ignored by tevasim.
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+   1     1.00000     1.00000     1.00000     1.00000     1.00000     1.00000
+   1     1.00000     1.00000     1.00000     1.00000     1.00000     1.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+ 
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+   1     0.00000     0.00000     0.00000     0.00000     0.00000     0.00000
+
+
+[REPORT]
+NODES   ALL
+SPECIE BIO	YES

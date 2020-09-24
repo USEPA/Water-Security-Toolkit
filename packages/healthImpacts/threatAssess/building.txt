@@ -1,0 +1,5 @@
+The follwoing files should be compiled to form a statically-linked
+library: hia.c sss.c ta_input.c ta_utils.c tai.c nrutil.c
+
+To create the teva-assess executable, compile the teva-assess.c file and
+link it with the hia library (from above files) and the tso api library.

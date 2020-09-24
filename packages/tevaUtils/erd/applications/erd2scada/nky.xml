@@ -1,0 +1,131 @@
+<canary-database>
+  
+  <run-mode>batch</run-mode>
+  
+  
+  <input-options short-id="NKY" type="db" location="jdbc:mysql://localhost:3306/canary" table="_devdata_9" timestep-field="Timestep" username="CANARY" password="MyPass3" />
+
+
+  <jdbc-driver 
+    driver-class="com.mysql.jdbc.Driver"
+    datasource-class="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource"
+    classpath="C:\classes\mysql-connector-java-5.1.6\mysql-connector-java-5.1.6-bin.jar" 
+    type="mysql" 
+    to-date-func="str_to_date"
+    to-date-fmt="%m/%d/%Y %H:%i:%s" >
+  </jdbc-driver>
+  
+  <messaging type="internal" username="CANARY" password="CANARY" />
+  
+  <output-options short-id="default"  type="files" location="output" table="output" username="CANARY" password="CANARY" />
+<!-->  <output-options short-id="NKY"  type="jdbc" location="jdbc:mysql://melusine.sandia.gov:3306/canary" table="output" username="CANARY" password="CANARY" />  </-->
+  
+  <timing-options 
+    data-interval="00:05:00" 
+    poll-interval="00:00:02" 
+    start-date="03/01/2007 00:00:00 AM" 
+    end-date="04/01/2007 00:00:00 AM" 
+    dynamic-start="false" 
+    datetime-format="mm/dd/yyyy HH:MM:SS PM" >
+<!-->\textbf{Notes regarding "timing-options"}\begin{description}
+\item{data-interval} - indicates the spacing between data timesteps.
+\item{poll-interval} - \emph{NOT RELATED TO DATA} This indicates how long to 
+sleep between messaging calls.
+\item{start-date} - The absolute start data for data timing; this should be
+as close to the real start of data as possible, especially for batch runs where 
+the selection of data can be controlled. If this is too far in advance of the 
+real data start, then it will take SIGNIFICANTLY more memory on your computer, 
+and may cause errors.  For realtime runs this should be left blank, allowing the
+first "TIMESTEP" command to be taken from the messenger, or from the system 
+current date/time.
+\item{end-date} - The last timestep to process for off-line batch runs. This is,
+again, not necessary in realtime modes.
+\item{dynamic-start} - Tells CANARY to get the first date/time it sees (from the
+irst file read or TIMESTEP message recieved) and use it as the start-date.
+\item{datetime-format} - Tells CANARY what format should be used in the MESSAGES 
+passed to and from the controller.  This is separate from the date/time format 
+used in the data-files and database sheets. The database sheets are configured 
+in the "jdbc-driver" tags, and CSV files are expected to be in a 
+US-locale-standard format (i.e., m/d/yyyy or yyyy-mm-dd, NOT the latin/euro 
+standard d/m/yyyy).
+\end{description}</-->
+  </timing-options>
+  
+  <general-settings>
+    
+
+    <signal short-id="instrument-1" scada-id="instrument-1-flow" signal-type="FLOW"  units="gpm" epanet-ID="20" epanet-index="2"
+    precision="0.01" data-min="0" data-max="100"   for-info-only="true" description="Hach 1720D Turbidimeter"   />
+    
+    <signal short-id="instrument-2" scada-id="instrument-2-pressure" signal-type="PRESSURE" units="psi" epanet-ID="20" epanet-index="20"
+    precision="0.01" data-min="0.035" data-max="5.0"   for-info-only="false" description="Pressure meter"     />
+    
+    <signal short-id="pump_1" scada-id="pump1nonreset_runtime" signal-type="RUNTIME"  units="sec" epanet-ID="30" threshold="5"
+    precision="1" data-min="" data-max="" for-info-only="false" description="runtime for pump 1"  />
+	
+	<signal short-id="pump_2" scada-id="pump2flowGPM" signal-type="FLOW"  units="gpm" epanet-ID="31" threshold="10" 
+    precision="1" data-min="" data-max="" for-info-only="false" description="instantaneous flowrate for pump 1"  />
+	
+	<signal short-id="clearwell_2" scada-id="clearwell2flowGPM" signal-type="BOUNDARYFLOW"  units="gpm" epanet-ID="36" 
+    precision="1" data-min="" data-max="" for-info-only="false" description="instantaneous flowrate for clearwell 2"  />
+	
+	
+	
+	<signal short-id="valve_1" scada-id="valve_1_status" signal-type="VALVESTAT"  units="" epanet-ID="20" epanet-index="10"
+    precision="1" data-min="0" data-max="1" for-info-only="false" description="valve status for pump link"  />
+
+    <signal short-id="P_0x00050001_003" scada-id="P_0x00050001_003" signal-type="WQ"   units="{\mu}S/cm" 
+    precision="1.0" data-min="0.5" data-max="2000.0"   for-info-only="false" description="Hach/GLI On-line Conductivity Monitor"   />
+
+    <signal short-id="P_0x00850000_004" scada-id="P_0x00850000_004" signal-type="WQ"  units="mg/L" 
+    precision="0.01" data-min="0.0" data-max="5.0"  for-info-only="false" description="Hach Total Organic Carbon Meter"  />
+
+    <signal short-id="P_0x00030000_005" scada-id="P_0x00030000_005" signal-type="WQ"  units="deg C"
+    precision="0.1" data-min="0" data-max="50"   for-info-only="true" description="Hach Temperature Monitor"   />
+
+    <signal short-id="P_0x000E0000_006" scada-id="P_0x000E0000_006" signal-type="OP"  units="PSI"
+    precision="0.1" data-min="0" data-max="50"   for-info-only="true" description="Hach Temperature Monitor"   />
+
+    <signal short-id="P_0x02580000_007" scada-id="P_0x02580000_007" signal-type="ALM"  
+    alarm-scope="P_0x001C0000_000" normal-value="0" bad-value="1"   desprition="sensor failure alarm for Hach Turbidimeter"   />
+    
+    <signal short-id="P_0x02590000_008" scada-id="P_0x02590000_008" signal-type="ALM"  
+    alarm-scope="P_0x00830000_001" normal-value="0" bad-value="1"  description="sensor failure alarm for CL17 monitor"  />
+
+    <signal short-id="P_0x025A0000_009" scada-id="P_0x025A0000_009" signal-type="ALM"  
+    alarm-scope="P_0x00120000_002" normal-value="0" bad-value="1"  description="sensor failure alarm for pH monitor"  />
+    
+    <signal short-id="P_0x025C0000_010" scada-id="P_0x025C0000_010" signal-type="ALM" 
+    alarm-scope="P_0x00050001_003" normal-value="0" bad-value="1"   description="sensor failure alarm for Hach Conductivity meter"   />
+    
+    <signal short-id="P_0x025D0000_011" scada-id="P_0x025D0000_011" signal-type="ALM" 
+    alarm-scope="P_0x00850000_004" normal-value="0" bad-value="1"   description="sensor failure alarm for Hach TOC meter"   />
+
+    <signal short-id="P_0x025B0000_012" scada-id="P_0x025B0000_012" signal-type="ALM"  
+    alarm-scope="P_0x00030000_005" normal-value="0" bad-value="1"   description="sensor failure alarm for Hach Temperature meter"   />
+    
+    <signal short-id="P_0x025E0000_013" scada-id="P_0x025E0000_013" signal-type="ALM"  
+    alarm-scope="P_0x000E0000_006" normal-value="0" bad-value="1"   description="sensor failure alarm for Hach Pressure meter"   />
+
+    <signal short-id="NKY_OTL1_OPS_TOPT" scada-id="NKY_OTL1_OPS_TOPT"  for-info-only="false" parameter_type="FLOW" signal-type="OP" units=" " precision="0.01" description="total output" />
+    <signal short-id="NKY_OTL1_OPS_DHXX" scada-id="NKY_OTL1_OPS_DHXX"  for-info-only="false" parameter_type="FLOW" signal-type="OP" units=" " precision="0.01" description="total output" />
+    <signal short-id="NKY_OTL1_H2O_TRCX" scada-id="NKY_OTL1_H2O_TRCX"  for-info-only="false" parameter_type="CL" signal-type="WQ" units=" " precision="0.01" description="total output" />
+    <signal short-id="NKY_OTL1_H20_PHXX" scada-id="NKY_OTL1_H20_PHXX"  for-info-only="false" parameter_type="pH" signal-type="WQ" units=" " precision="0.01" description="total output" />   
+    <signal short-id="NKY_OTL1_H20_CDTY" scada-id="NKY_OTL1_H20_CDTY"  for-info-only="false" parameter_type="COND" signal-type="WQ" units=" " precision="0.01" description="total output" />   
+    
+    <algorithm short-id="ALG_B" mFile="LPC" window="1800" threshold="0.75 0.9 1.0" use-bed="true" binom-win-min="12"  binom-win-max="180"   binom-p-value="0.5" binom-threshold="0.90" />
+
+    <location short-id="NKY" scada-id="NKY" description="Woodleigh Water Works" >
+      <use-input id="NKY" />
+      <use-output id="default" />
+      <use-signal id="P_0x001C0000_000" />
+      <use-signal id="P_0x00830000_001" /> 
+      <use-signal id="P_0x00120000_002" /> 
+      <use-signal id="P_0x00050001_003" /> 
+      <use-signal id="P_0x00850000_004" />
+      <use-algorithm id="ALG_B" />
+    </location>
+    
+   </general-settings>
+  
+</canary-database>

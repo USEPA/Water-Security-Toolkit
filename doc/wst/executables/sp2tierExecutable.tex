@@ -1,0 +1,55 @@
+\subsection{Overview}\label{sp2tierExecutable_spOverview}
+
+The {\bfseries sp-2tier} executable provides a interface for sensor placement using a two-tiered approach in TEVA-\/SPOT.  This executable calls the {\bfseries sp} script.  In tier 1, {\bfseries sp-2tier} transforms the impact file using geographic aggregation.  The aggregated impact file is used to filter out candidate sensor placement locations.  In tier 2, {\bfseries sp-2tier} refines the original impact file to include only candidate locations for the final sensor placement.  {\bfseries sp-2tier} uses {\bfseries spotSkeleton} to define the geographic proximity used to transform the original impact file.  See \doxyref{Section 5.9}{p.}{solvers_solvers5a}. for additional information on the two-tiered sensor placement approach.
+
+\subsection{Command-\/Line Help}\label{sp2tierExecutable_spUsage}
+\lstinputlisting{examples/simple/command10.txt} 
+
+\subsection{Description}\label{sp2tierExecutable_Description}
+Based on the command line naming conventions, the following files are required for execution of {\bfseries sp-2tier}: 
+\begin{center} 
+  \begin{tabular}{ | p{4.2cm} | p{11.8cm} | } 
+    \hline 
+    INPUT FILE & DESCRIPTION  \\ \hline 
+    {\ttfamily NETWORK}.inp &Original EPANET input file  \\ \hline
+    {\ttfamily NETWORK}\_{\ttfamily OBJECTIVE}\\.impact &Impact file for a single objective, output from tevasim/tso2impact using the original EPANET input file.  \\ \hline
+    {\ttfamily NETWORK}.nodemap &Nodemap file used to translate between epanetID (used in the inp file) and nodeID (used in the impact file). \\ \hline 
+  \end{tabular} 
+\end{center} 
+
+From the data directory, {\bfseries sp-2tier} creates a results directory called {\ttfamily NETWORK}\_{\ttfamily SKELETON}.  For example, Net3\_8 contains output files from  {\bfseries sp-2tier} using Net3 and a skeleton threshold of 8 inches.  The following files are generated during the execution of {\bfseries sp-2tier}:
+\begin{center} 
+  \begin{tabular}{ | p{4.2cm} | p{11.8cm} | }
+    \hline 
+    OUTPUT FILE & DESCRIPTION  \\ \hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}.inp &Skeletonized EPANET inp file  \\\hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}.map &Map file (notation in epanetID) \\\hline
+    {\ttfamily SKELETON}\_time.out &Time used to run spotSkeleton \\\hline 
+    {\ttfamily SKELETON}\_memmon.out &Memory used to run spotSkeleton \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}\\\_{\ttfamily OBJECTIVE}.impact &Impact file after geographic aggregation \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}\\.nodemap &Nodemap file after geographic aggregation \\\hline 
+    aggregate\_time.out &Time used to aggregate the impact file \\\hline
+    aggregate\_memmon.out &Memory used to aggregate the impact file \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}.log &sp log file for tier 1 sensor placement \\\hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}.sensors &sp sensors file for tier 1 sensor placement \\\hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}.config &sp config file for tier 1 sensor placement \\\hline
+    sp1\_{\ttfamily SKELETON}.out &sp output file for tier 1 sensor placement.  Contains memory used. \\\hline
+    sp1\_time.out &Time used to run tier 1 sensor placement \\\hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}\\R\_{\ttfamily OBJECTIVE}.impact &Refined impact file based on sp1 result \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}\\R.nodemap &Refined nodemap file. This file contains 4 columns (as opposed to the standard 2 for nodemap files) and is used to convert between refined nodeID and epanetID on the original network. Col1 = nodeID in the refined impact file. Col2 = supernode membership. Col3 = nodeID in the original impact file. Col4 = epanetID in the original inp file \\\hline
+    refine\_time.out &Time used to refine the impact file \\\hline
+    refine\_memmon.out &Memory used to refine the impact file \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}R.log &sp log file for tier 2 sensor placement \\\hline
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}\\R.sensors &sp sensors file for tier 2 sensor placement \\\hline 
+    {\ttfamily NETWORK}\_{\ttfamily SKELETON}R.config &sp config file for tier 2 sensor placement \\\hline 
+    sp2\_{\ttfamily SKELETON}R.out &sp output file for tier 2 sensor placement.  Contains memory used.  \\\hline 
+    sp2\_time.out &Time used to run tier 2 sensor placement \\ \hline
+  \end{tabular} 
+\end{center} 
+
+\subsection{Notes}\label{sp2tierExecutable_spNotes} 
+
+\begin{itemize} 
+\item {\bfseries sp-2tier} will not recreate the skeletonized inp and map files if the file {\ttfamily NETWORK}\_{\ttfamily SKELETON}.map is in the results directory {\ttfamily NETWORK}\_{\ttfamily SKELETON}. 
+\item {\bfseries sp-2tier} will not recreate the aggregated impact file if the file {\ttfamily NETWORK}\_{\ttfamily SKELETON}\_{\ttfamily OBJECTIVE}.impact is in the results directory {\ttfamily NETWORK}\_{\ttfamily SKELETON}. 
+\end{itemize} 

@@ -1,0 +1,11 @@
+# flushing output
+general:
+  version: 1.5                       # WST version
+  date: '2019-03-04'                 # Run date
+  cpu time: 3.715                    # CPU time (sec)
+  directory: C:/wst-1.5/examples/flushing_ex3
+  log file: Net3flushing_output.log  # Log file
+flushing:
+  nodes: ['101', '127']              # List of nodes to flush
+  pipes: []                          # List of pipes to close
+  objective: 10758.9                 # Objective value

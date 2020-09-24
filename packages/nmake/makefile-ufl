@@ -1,0 +1,48 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build the ufl executable
+##
+
+TOP=..\..
+
+UFL_SRC_DIR=$(TOP)\tpl\sundry\src
+UFL_INCLUDE_DIR=$(TOP)\tpl\sundry
+
+
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS 
+
+CPPFLAGS = $(CPPFLAGS) /I $(UFL_INCLUDE_DIR) $(WINFLAGS)
+
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530 /wd4018 /wd4101 /wd4715
+
+CFLAGS = $(CFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+all: static\ufl.exe
+
+UFL_SRC = $(UFL_SRC_DIR)\ufl.cpp $(UFL_SRC_DIR)\VolVolume.cpp
+UFL_OBJ = $(UFL_SRC:.cpp=.obj)
+
+
+SP_OBJ = $(SP_SRC:.cpp=.obj)
+
+sp_includes:
+    if not exist sp mkdir sp
+    copy $(SP_DIR)\*.h sp
+
+{$(UFL_SRC_DIR)}.cpp.{$(UFL_SRC_DIR)}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) /Fo$@ /c $*.cpp
+
+static\ufl.exe: $(UFL_OBJ)
+     link $(LINK_FLAGS) $(LINKDBG) /out:$@ $(UFL_OBJ)
+     
+clean:
+     @-del /Q $(UFL_OBJ)
+     @-del static\ufl.*
+

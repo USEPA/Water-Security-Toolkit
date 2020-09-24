@@ -1,0 +1,296 @@
+<!-- ***************************************************************
+     ** teva-sp.cygwin.exp.xml                                    **
+     ***************************************************************
+     ** Creation: 12/19/2005                                      **
+     ** Last Mod: 12/19/2005                                      **
+     **                                                           **
+     ** Description:                                              **
+     ** A base experimental study for epanet example 3 (heuristic **
+     ** and PICO).                                                **
+     ***************************************************************
+-->
+<experimental-study name="teva-sp">
+  <tags>
+    <tag>study</tag>
+  </tags>
+
+<!-- ****************************************************************
+     ** Generate a .tso file for epanet example 3.              *****
+     ****************************************************************
+-->
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_file">
+        <level>-tsg test1.tsg -tsi test1.tsi</level>
+      </factor>
+      <factor name="tso_file">
+        <level>-tso test1.tso</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>Net3.inp Net3.out</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -tso</executable>
+    </controls>
+  </experiment>
+
+<!-- ****************************************************************
+     ** Generate .impact files for epanet example 3             *****
+     ****************************************************************
+-->
+
+  <experiment name="tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>test1 test1.tso</level>
+      </factor>
+      <factor name="objectives">
+        <level>-mc -vc -td -nfd -pe bio.tai -ec -epanetin Net3.inp</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -impact</executable>
+    </controls>
+  </experiment>
+
+<!-- ********************************************************************
+     ** Run a full factorial experiment for objectives and measures *****
+     ** supported by both the heuristic and PICO. Objective ec is   *****
+     ** not included since it's too hard for PICO.                  *****
+     ********************************************************************
+-->
+
+  <experiment name="sp-simple-basic">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+        <level>pe</level>
+        <level>vc</level>
+        <level>td</level>
+        <level>nfd</level>
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+        <level>mean</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=pico</level>
+        <level>--solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ********************************************************************
+     ** Test ec objective for the local search heuristic only       *****
+     ********************************************************************
+-->
+
+  <experiment name="sp-simple-ec-heuristic">
+    <factors>
+      <factor name="goals">
+	<level>ec</level>
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+        <level>mean</level>
+        <level>var</level>
+        <level>tce</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ********************************************************************
+     ** Test tce measure for the local search heuristic only        *****
+     ********************************************************************
+-->
+
+  <experiment name="sp-simple-tce-heuristic">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+        <level>vc</level>
+        <level>td</level>
+        <level>nfd</level>
+	<level>ec</level>
+      </factor>
+      <factor name="measure">
+        <level>tce</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ********************************************************************
+     ** Test cvar measure for PICO only                             *****
+     ********************************************************************
+-->
+
+  <experiment name="sp-simple-cvar-pico">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+        <level>vc</level>
+        <level>td</level>
+        <level>nfd</level>
+      </factor>
+      <factor name="measure">
+        <level>cvar</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ****************************************************************
+     ** Run a targeted test of witness aggregation (mc_mean) *******
+     ****************************************************************
+-->
+
+  <experiment name="sp-simple-aggregation">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="absolute_aggregation">
+        <level>--threshold=mc,10000.0</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ****************************************************************
+     ** Run a targeted test of side constraints (mc_mean, ec_mean)**
+     ****************************************************************
+-->
+
+  <experiment name="sp-simple-side">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="side_constraint">
+        <level>--ub=ec,8000.0</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+<!-- ****************************************************************
+     ** Run a targeted test of side constraints with aggregation   **
+     ** (mc_mean, ec_mean)                                         **
+     ****************************************************************
+-->
+
+  <experiment name="sp-simple-side">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>mean</level>
+      </factor>
+      <factor name="side_constraint">
+        <level>--ub=ec,8000.0</level>
+      </factor>
+      <factor name="mc-threshold">
+        <level>--threshold=mc,10000.0</level>
+      </factor>
+      <factor name="ec-threshold">
+        <level>--threshold=ec,4000.0</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>--network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>--ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>--solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <analyze>
+    <data experiment="sp-simple-basic"/>
+    <baseline>teva-sp.cygwin.sp-simple-basic.baseline.xml</baseline>
+    <test name="HeuristicPICOCompareBaseline" type="baseline">
+      <options>_measurement="Mean Impact" _tolerance=0</options>
+    </test>
+</analyze>
+
+</experimental-study>

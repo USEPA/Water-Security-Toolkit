@@ -1,0 +1,64 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{impact}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{erd file}]\hfill
+\\The name of the ERD database file that contains the 
+                contaminant transport simulation results. It is 
+                created by running the \code{tevasim} subcommand.
+                Multiple ERD files (entered as a list, i.e., [<file1>, <file2>]) can be combined to
+                generate a single impact file. This can be used to combine
+                simulation results from different types of contaminants, in
+                which the ERD files were generated from different
+                TSG files.
+                
+                Required input.
+    \item[{metric}]\hfill
+\\The impact metric used to compute the impact file. Options
+                include EC, MC, NFD, PD, PE, PK, TD or VC. One impact file 
+                is created for each metric selected. These metrics are 
+                defined in Section \ref{impact_measures}.
+                
+                Required input.
+    \item[{tai file}]\hfill
+\\The name of the TAI file that contains health impact information. 
+                The TAI file format is documented in File Formats Section \ref{formats_taiFile}.
+                
+                Required input if a public health metric is used (PD, PE or PK).
+    \item[{response time}]\hfill
+\\The number of minutes that are needed to respond to the
+                detection of a contaminant. This represents the time that it takes
+                a water utility to stop the spread of the contaminant in the network and 
+                eliminate the consumption of contaminated water. As the response time increases,
+                the impact increases because the contaminant affects the network
+                for a greater length of time.  
+                
+                Required input, default = 0 minutes.
+    \item[{detection limit}]\hfill
+\\The minimum concentration that must be exceeded before a sensor can detect a contaminant.
+                There must be one threshold for each ERD file. The units of
+                these detection limits depend on the units of the contaminant
+                simulated for each ERD file (e.g., number of cells of a
+                biological agent).  
+                
+                Required input, default = 0.
+    \item[{detection confidence}]\hfill
+\\The number of sensors that must detect an incident before
+                the impacts are calculated.  
+                
+                Required input, default = 1 sensor.
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

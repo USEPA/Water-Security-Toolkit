@@ -1,0 +1,12 @@
+{
+  "solver type": "lagrangian", 
+  "run date": "2014-06-14 09:09:14", 
+  "problem type": "default", 
+  "lower bound": 9819.3353910000005, 
+  "CPU time": 0.19668102264404297, 
+  "EPANET node ID": [], 
+  "modeling language": "none", 
+  "upper bound": null, 
+  "objective": null, 
+  "node ID": []
+}

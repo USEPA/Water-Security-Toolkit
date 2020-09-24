@@ -1,0 +1,60 @@
+# booster_mip configuration template
+network:
+  epanet file: Net1.inp        # EPANET network file name
+scenario:
+  location: null               # Injection location: ALL, NZD or EPANET ID
+  type: null                   # Injection type: MASS, CONCEN, FLOWPACED, or SETPOINT
+  strength: null               # Injection strength [mg/min or mg/L depending on type]
+  species: null                # Injection species, required for EPANET-MSX
+  start time: null             # Injection start time [min]
+  end time: null               # Injection end time [min]
+  tsg file: Net1.tsg           # TSG file name, overrides injection parameters above
+  tsi file: null               # TSI file name, overrides TSG file
+  msx file: null               # Multi-species extension file name
+  msx species: null            # MSX species to save
+  merlion: false               # Use Merlion as WQ simulator, true or false
+booster mip:
+  detection: Net1.sensors   # Sensor locations to detect contamination scenarios
+  model type: LIMIT          # Booster model type: NEUTRAL or LIMIT
+  model format: PYOMO          # Booster optimization model: AMPL or PYOMO
+  stoichiometric ratio: [0.01]  # Stoichiometric ratio [decon/toxin], LIMIT model only
+  objective: PD                # Objective to minimize
+  PD dose threshold: 1.0e-08   # The contaminant dose above which a person is
+                               #   considered dosed. Required input for PD objective.
+                               #   Equivalent to 'DOSE_THRESHOLDS <num>' TAI file
+                               #   option.
+  PD demand per capita: 0.1152  # Per capita usage rate used to determine per-node
+                               #   population (flow units/person). Flow units match those
+                               #   of the EPANET input file, which is likely
+                               #   GPM. Required input for PD objective. Equivalent to
+                               #   the 'POPULATION demand <num>' TAI file option.
+  PD ingestion rate: 2.0       # Daily volumetric ingestion rate per person
+                               #   (liters/day).  Required input for PD
+                               #   objective. Equivalent to the 'INGESTIONRATE <num>' TAI
+                               #   file option.
+  PD ingestion type: demand    # Equivalent to the 'INGESTIONTYPE <name>' TAI file
+                               #   option. Only 'demand' is supported.
+  PD dose type: total          # Equivalent to the 'DOSETYPE <name>' TAI file
+                               #   option. Only 'total' is supported.
+  toxin decay coefficient: 0   # Toxin decay coeffienct: None, INP or number
+  decon decay coefficient: 0   # Decontaminant decay coefficient: None, INP or number
+  feasible nodes: ALL          # Feasible booster nodes
+  infeasible nodes: NONE       # Infeasbile booster nodes
+  max boosters: [0]            # Maximum number of booster stations
+  type: FLOWPACED              # Booster source type: MASS or FLOWPACED
+  strength: 4.0                # Booster source strength [mg/min or mg/L depending on type]
+  response time: 0.0           # Time [min] between detection and booster injection
+  duration: 1440.0              # Time [min] for booster injection
+  evaluate: false              # Evaluate booster placement: true or false,  default = false
+solver:
+  type: cplexamp                   # Solver type
+  options:                     # A dictionary of solver options
+  logfile: null                # Redirect solver output to a logfile
+  verbose: 0                   # Solver verbosity level
+  initial points: []
+configure:
+  output prefix:           # Output file prefix
+  debug: 0                     # Debugging level, default = 0
+boostersim:
+eventDetection:
+boosterimpact:

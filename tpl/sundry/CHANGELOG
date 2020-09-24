@@ -1,0 +1,68 @@
+###############################################################################
+#                                                                             #
+# Sundry Release 1.2 Changelog                                                #
+#                                                                             #
+###############################################################################
+
+-------------------------------------------------------------------------------
+Sundry 1.2.2 (2012/10/08)
+-------------------------------------------------------------------------------
+
+- Minor portability fix for Windows platforms
+
+-------------------------------------------------------------------------------
+Sundry 1.2.1 (2011/11/01)
+-------------------------------------------------------------------------------
+
+- Prototype CMake build harness
+
+- Tracking Acro repository reorganization
+
+-------------------------------------------------------------------------------
+Sundry 1.2 (2009/08/12)
+-------------------------------------------------------------------------------
+
+- Improved build harness supporting parallel builds
+
+-------------------------------------------------------------------------------
+Sundry 1.1 (2008/12/14)
+-------------------------------------------------------------------------------
+
+- Reset the scaling during the UFL rounding heurisic to force the selection of
+  the dummy.
+
+- Portability fixes for gcc 4.3.1
+
+- Reject incumbents that don't use the dummy. 
+
+- Run incumbent heuristic only on fractional variables.
+
+- Fix to Vol bug that led to NaN values in pstar solution.
+
+- Exit with a non-zero exit code when ufl picks too many locations.
+
+- Randomized rounding in heuristics() now sorts in descending order before 
+  picking locations. This removes the bias caused by the original sensor 
+  order, where the early locations were more likely to get picked. 
+
+- Turn on scaling of side constraints.  This should make the Lagrangian more 
+  robust.
+
+- Bug fix to avoid seg fault when no feasible solution was found. 
+   Initialize ix and icost to zero.
+
+- UFL::heuristics() now checks the side constraints and only returns integer 
+  solutions that satisfy the side constraints as well. We should also keep 
+  track of best infeasible point if there are no feasible points w.r.t. the 
+  side constrints, since the side constraints are "soft". 
+
+- Modification to the Lagrangian code to handle the trivial case where 
+  there are enough sensors to cover all feasible/helpful locations.
+ 
+
+-------------------------------------------------------------------------------
+Sundry 1.0 (2007/02/20)
+-------------------------------------------------------------------------------
+
+Setup of an initial Acro project for sundry solvers that get generated, but
+which don't fit nicely into existing Acro projects.

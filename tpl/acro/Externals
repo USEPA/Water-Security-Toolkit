@@ -1,0 +1,9 @@
+admin     -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/admin
+bin       -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/bin
+bootstrap -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/bootstrap
+config    -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/config
+doc       -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/doc
+include   -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/include
+mvs       -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/mvs
+test      -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/test
+userapps  -r7640 https://software.sandia.gov/svn/acro/common/tags/1.7.3/userapps

@@ -1,0 +1,6 @@
+<AnalysisModule name="Hello World Analysis" library_name="HelloAnalysis">
+	<ModuleInputs>
+		<Input name="Hello" value="3"> 
+		</Input>
+	</ModuleInputs>
+</AnalysisModule>

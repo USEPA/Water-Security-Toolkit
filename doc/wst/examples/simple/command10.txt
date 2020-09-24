@@ -1,0 +1,78 @@
+Usage: sp_2tier [options]
+
+Options:
+  -h, --help            show this help message and exit
+  -n NETWORK, --network=NETWORK
+                        Name of network file
+  --objective=OBJECTIVE
+                        Objective names have the form: <goal>_<statistic>
+                        ..The objective goals are:
+                        ....cost   the cost of sensor placement
+                        ....ec     extent of contamination
+                        ....dec    detected extent of contamination
+                        ....td     time to detection
+                        ....dtd    detected time to detection
+                        ....mc     mass consumed
+                        ....dmc    detected mass consumed
+                        ....nfd    number of failed detections
+                        ....ns     the number of sensors
+                        ....pe     population exposed
+                        ....dpe    detected population exposed
+                        ....pk     population killed
+                        ....dpk    detected population killed
+                        ....pd     population dosed
+                        ....dpd    detected population dosed
+                        ....vc     volume consumed
+                        ....dvc    detected volume consumed
+                        ..The objective statistics are:
+                        ....mean   the mean impact
+                        ....median the median impact
+                        ....var    value-at-risk of impact distribution
+                        ....tce    tail-conditioned expectation of imp dist
+                        ....cvar   approximation to TCE used with IPs
+                        ....worst  the worst impact
+                        An objective name of the form <goal> is assumed to
+                        refer to the objective <goal>_mean.
+  --skeleton=SKELETON   Specifies the pipe diameter threshold used in
+                        spotSkeleton.
+  --stat=STAT           Statistic used in geographic aggregation of the input
+                        file.  Options include:
+                        ...min
+                        ...max
+                        ...mean
+                        ...median
+                        Streaming algorithms are used to aggregate the impact
+                        file. For the median option, the impact file must be
+                        sorted.
+  --ub1-constraint=UB1_CONSTRAINT, --ub1=UB1_CONSTRAINT
+                        This option specifies a constraint (<objective>,<ub-
+                        value>) on the maximal value of an objective type in
+                        tier 1.
+  --ub2-constraint=UB2_CONSTRAINT, --ub2=UB2_CONSTRAINT
+                        This option specifies a constraint (<objective>,<ub-
+                        value>) on the maximal value of an objective type in
+                        tier 2.
+  --solver1=SOLVER1     This option specifies the type of solver that is used
+                        to find sensor placement(s) in tier 1.  The following
+                        solver types are currently supported:
+                        ..att_grasp  multistart local search heuristic (AT&T)
+                        ..snl_grasp  TEVA-SPOT license-free grasp clone
+                        ..lagrangian lagrangian relaxation heuristic solver
+                        ..pico       mixed-integer programming solver (PICO)
+                        ..glpk       mixed-integer programming solver (GLPK)
+                        ..picoamp    MIP solver with AMPL
+                        ..cplexamp   commercial MIP solver
+                        The default solver is snl_grasp.
+  --solver2=SOLVER2     This option specifies the type of solver that is used
+                        to find sensor placment(s) in tier 2.  The following
+                        solver types are currently supported:
+                        ..att_grasp  multistart local search heuristic (AT&T)
+                        ..snl_grasp  TEVA-SPOT license-free grasp clone
+                        ..lagrangian lagrangian relaxation heuristic solver
+                        ..pico       mixed-integer programming solver (PICO)
+                        ..glpk       mixed-integer programming solver (GLPK)
+                        ..picoamp    MIP solver with AMPL
+                        ..cplexamp   commercial MIP solver
+                        The default solver is snl_grasp.
+  --path=PATH           Add this path to the set of paths searched for
+                        executables and IP models.

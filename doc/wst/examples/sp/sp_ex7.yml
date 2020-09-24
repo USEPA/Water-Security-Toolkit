@@ -1,0 +1,27 @@
+impact data:
+- name: impact1
+  impact file: Net3/Net3_ec.impact
+  nodemap file: Net3/Net3.nodemap
+objective:
+- name: obj1
+  goal: NS
+  statistic: TOTAL
+constraint:
+- name: const1
+  goal: impact1
+  statistic: MEAN
+  bound: 5000.0
+sensor placement:
+  type: min-sensors
+  objective: obj1
+  constraint: const1
+  presolve: True
+  compute greedy ranking: True
+solver:
+  type: cbc
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: ${CWD}/sp_ex7/Net3
+  debug: 0

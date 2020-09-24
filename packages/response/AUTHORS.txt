@@ -1,0 +1,3 @@
+Authors:
+ initial development: Jonathan Lane
+ maintenance and updates: David Hart

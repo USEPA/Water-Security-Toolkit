@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Run another script and strip its output 
+# 
+
+cwd=`pwd`/
+
+bash $1 | sed 's#'$cwd'##g'

@@ -1,0 +1,1 @@
+***Usage: sideconstraints <configuration-file> <num-samples> <random-seed> <impact-file-representation> <time-limit> [solution-file]

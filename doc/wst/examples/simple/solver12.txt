@@ -1,0 +1,68 @@
+read_impact_files:  Net3_dec.impact
+read_impact_files:  Net3_nfd.impact
+
+Number of Nodes                :  97
+Number of Contamination Impacts: 9480
+
+WARNING: Location aggregation does not work with side constraints
+WARNING: Turning off location aggregation
+Number of sensors=5
+Objective=dec
+Statistic=mean
+Impact file=Net3_dec.impact
+Delay=0
+
+Running glpsol...
+... glpsol done
+Running PICO...
+... PICO done
+# No weights file: Net3_dec.impact.prob
+# No weights file: Net3_nfd.impact.prob
+------------------------------------------------------------------------------
+Sensor placement id:        9380
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            19 28 54 63 75 
+Sensor junctions:           119 141 193 207 239 
+
+Impact File:                Net3_dec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                8184.5182
+Lower quartile impact:      0.0000
+Median impact:              6949.0000
+Upper quartile impact:      12530.0000
+Value at Risk (VaR) (  5%): 25960.0000
+TCE                 (  5%): 33323.2833
+Max impact:                 42994.8000
+
+Impact File:                Net3_nfd.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                0.2500
+Lower quartile impact:      0.0000
+Median impact:              0.0000
+Upper quartile impact:      0.0000
+Value at Risk (VaR) (  5%): 1.0000
+TCE                 (  5%): 1.0000
+Max impact:                 1.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_dec.impact
+------------------------------------------------------------------------------
+-1	0.0000
+19	4845.7771
+28	3613.4678
+54	10806.3631
+63	7097.6114
+75	8184.5182
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_nfd.impact
+------------------------------------------------------------------------------
+-1	1.0000
+75	0.2712
+28	0.2500
+19	0.2500
+54	0.2500
+63	0.2500
+Done with sp

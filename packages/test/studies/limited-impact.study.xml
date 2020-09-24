@@ -1,0 +1,63 @@
+<experimental-study name="limited-impact">
+  <!--
+	These experiments confirm that the correct impact file
+	is generated from one of the Net3 TSO files in the sp/etc
+	directory.
+   -->
+  <tags>
+    <tag>nightly</tag>
+    <tag>limited</tag>
+  </tags>
+
+  <experiment name="limited-tso2Impact-small">
+    <factors>
+      <factor name="impact_prefix">
+        <level>network=small tsofile="smallb.tso" tsofile="smallc.tso"
+	       detectionLimit="3000000" detectionLimit="3"
+       </level>
+      </factor>
+      <factor name="objective">
+        <level>objective=td objective=pe
+	       taifile="bio.tai" taifile="chem.tai"
+	</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -multi-impact</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="limited-tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>network=Net3 frequency=quarterly</level>
+        <level>network=Net3 frequency=hourly</level>
+      </factor>
+      <factor name="objective">
+        <level>pe-bio</level>
+        <level>pe-chem</level>
+        <level>pk-bio</level>
+        <level>pk-chem</level>
+        <level>pd-bio</level>
+        <level>pd-chem</level>
+
+        <level>dpe-bio</level>
+        <level>dpe-chem</level>
+        <level>dpk-bio</level>
+        <level>dpk-chem</level>
+        <level>dpd-bio</level>
+        <level>dpd-chem</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -impact</executable>
+    </controls>
+  </experiment>
+
+
+  <analysis name="LimitedImpactDiff" type="validation">
+    <category>validation</category>
+    <data experiment="limited-tso2Impact"/>
+    <options>_measurement="ImpactDiffs" _value=0 _cmp_operator=eq</options>
+  </analysis>
+</experimental-study>

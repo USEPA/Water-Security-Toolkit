@@ -1,0 +1,15 @@
+\begin{align}
+\min \;\; \frac{1}{\|N\|}\sum_{n\in N} \frac{1}{\|T^{\text{Q}}\|}\sum_{t\in T^{\text{Q}}} & (c_{n,t}-c^*_{n,t})^2 \\
+{\rm s.t.}\qquad \bold{G}_{n,t}\vec{c} &= \bold{D}_{n,t}\vec{m} &&\forall \; n \in N,\; t \in T^{\text{Q}} \label{mass_balance} \\
+m_{b,t} &\leq y_{b}I_{b,t} &&\forall \; b\in B,\; t\in T^{\text{Q}} \\
+m_{n,t} &= 0 &&\forall \; n\in N\setminus B,\; t\in T^{\text{Q}} \\
+c^{\text{L}} \leq c_{n,t}& \leq c^{\text{U}} &&\forall \; n\in N,\; t\in T^{\text{Q}} \\
+c_{n,t^{\text{Q}}_{\text{first}}-1} &= c_{n,t^{\text{Q}}_{\text{last}}} &&\forall \; n\in N \\
+\sum_{b\in B}y_{b} &\leq M \\
+c_{n,t}&\geq 0&&\forall \; n\in N,\; t\in T \\
+m_{n,t}&\geq 0&&\forall \; n\in N,\; t\in T^{\text{Q}} \\
+y_{b} &\in \{0,1\} &&\forall \; b\in B 
+\end{align}
+
+Note:
+The dimension of $\vec{c}$ and the column dimensions of $\bold{G}$ are $\|N\|*\|T\|$, and $T^{\text{Q}} \subset T$ is the set of timesteps over which water quality bounds and cyclical concentration conditions are enforced. If the number of timesteps $t\in T$ prior to the start of the water quality period $T^{\text{Q}}$ is large enough, a substantial number of concentration variables involved in the second equation will be freed allowing the network to initialize to a cyclical concentration solution over the water quality period without the need for the full set of mass balance equations defined in the Merlion water quality model $\bold{G}$.

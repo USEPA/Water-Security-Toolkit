@@ -1,0 +1,23 @@
+impact data:
+- name: impact1
+  impact file: Net3_mc.impact
+  nodemap file: Net3.nodemap
+objective:
+- name: obj
+  goal: impact1
+  statistic: MEAN
+constraint:
+- name: con
+  goal: NS
+  statistic: TOTAL
+  bound: 5
+solver:
+  type: att_grasp
+sensor placement:
+  type: p-median
+  objective: obj
+  constraint: con
+  presolve: True
+configure:
+  debug: 0
+  keepfiles: True

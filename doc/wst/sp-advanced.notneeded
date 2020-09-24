@@ -1,0 +1,228 @@
+The following section describes several alternate sensor placement formulations 
+that the \code{sp} subcommand can optimize. These include: 
+robust sensor placement, 
+multi-criteria analysis, 
+sensor placement with penalties and 
+minimizing the number of sensors.
+
+\subsection{Robust Optimization of Sensor Locations}\label{solvers_solvers4}
+
+The expected-impact sensor placement (eSP) model described in Section \ref{sp_formulation} 
+can be viewed as optimizing one particular statistic of the 
+distribution of impacts defined by the contaminant transport simulations. 
+However, other statistics could provide more \char`\"{}robust\char`\"{} solutions, 
+that are less sensitive to changes in this distribution~\citep{WatHarMur06a}. 
+Consider the following reformulation of eSP for robust sensor placement (rSP): 
+
+\begin{align}
+\text{  minimize } &Impact_{f}(\alpha,d,x) \\
+\text{subject to } \qquad &\sum_{i\in {\cal L}_a} x_{ai} = 1 &&\forall a \in A\\ 
+&x_{ai} \le s_i &&\forall a \in A, i \in {\cal L}_a\\  
+&\sum_{i \in L} c_i s_i \le p\\ 
+&s_i \in \{0,1\} &&\forall i \in L\\ 
+&0 \leq x_{ai} \leq 1 &&\forall a \in A, i \in {\cal L}_a 
+\end{align}
+
+The function $Impact_ {f}(\alpha,d,x)$ computes a statistic of the impact 
+distribution. The following functions are supported in WST (see~\citet{WatHarMur06a}
+for further discussion of these statistics):   
+\begin{itemize}
+\item {\bfseries Mean:} This is the statistic used in eSP.
+\item {\bfseries VaR:} Value-\/at-\/Risk (VaR) is a percentile-\/based metric. 
+Given a confidence level $\beta\in(0,1)$, the VaR is the value of the distribution 
+at the $1-\beta$ percentile \citep{TopVlaZen02}. The value of VaR is less than 
+the TCE value (see below).
+Mathematically, suppose a random variable $W$ describes the distribution of possible 
+impacts. Then 
+\begin{equation}
+{\rm VaR}(W,\beta) = \min \{ w \mid \Pr[W \le w] \ge \beta \} 
+\end{equation}
+Note that the distribution $W$ changes with each sensor placement. Further, VaR 
+can be computed using the $\alpha$, $d$ and $x$ values.
+\item {\bfseries TCE:} The Tail-\/Conditioned Expectation (TCE) is a related 
+metric which measures the conditional expectation of impact exceeding VaR at a 
+given confidence level. Given a confidence level $1-\beta$, TCE is the expectation 
+of the worst impacts with probability $\beta$. This value is between VaR and 
+the worst-\/case value.
+Mathematically, then
+\begin{equation}
+{\rm TCE}(\beta) = {\rm E}\left[ W \mid W \ge {\rm VaR}(\beta) \right]
+\end{equation}
+The Conditional Value-\/at-\/Risk (CVaR) is a linearization of TCE investigated by 
+\citet{rockafellar02cvar}. CVaR approximates TCE with a 
+continuous, piecewise-\/linear function of $\beta$, which enables the use of 
+CVaR in a MIP models for rSP.
+\item {\bfseries Worst:} The worst impact value can be easily computed, since a 
+finite number of contamination incidents are simulated. Further, rSP can be 
+reworked to formulate a worst-\/case MIP formulation. However, this statistic 
+is sensitive to changes in the number of contamination incidents that are modeled; 
+adding additional contamination incidents might significantly impact this statistic.
+\end{itemize}
+
+The example YML file in Figure \ref{fig:sp_robust} demonstrates the optimization of sensor placements
+using the TCE measure. TCE is the mean value of the worst incidents in
+the ensemble being evaluated. Given a confidence level $1-\beta$, TCE is
+the expectation of the worst impacts with probability $\beta$. Compared
+with our first example, this finds a better solution in
+terms of TCE, although the mean performance is slightly worse.
+\begin{figure}[h]
+  \unknownInputListing{examples/sp/sp_robust.yml}{}{1}{38}
+  \caption{The \code{sp} configuration file for robust sensor placement.}
+  \label{fig:sp_robust}
+\end{figure}
+
+Results from this example are shown in Figure \ref{fig:sp_robust_screen_output}.
+\begin{figure}[h]
+  \unknownInputListing{examples/sp/sp_robust_screen_output.txt}{}{1}{38}
+  \caption{The \code{sp} screen output for robust sensor placement.}
+  \label{fig:sp_robust_screen_output}
+\end{figure}
+
+Note that the greedy ordering of sensors is less useful in this
+case. Although the objective was to minimize TCE, the greedy ordering uses
+the mean value to select each sensor location.
+
+\subsection{Multi-\/Criteria Analysis}\label{solvers_solvers7}
+
+The \code{sp} subcommand supports multi-\/objective analysis through an iterative 
+process. WST does not have a general \char`\"{}pareto search\char`\"{} optimizer. 
+Instead, users can specify constraints that ensure that previously optimized 
+objectives are \char`\"{}close\char`\"{} to their previous values. In this way, 
+the user can explicitly search for trade-\/offs between one-\/or-\/more 
+performance objectives.
+
+The example above consider the extent-\/of-\/contamination objective. The sensor 
+placements generated can be assessed as to how they minimize other objectives 
+like the expected mass of contaminant consumed using \code{evalsensor}. Consider 
+the solution generated by the previous example (which minimized 
+{\ttfamily ec\_\-tce}), which was copied into the file 
+{\ttfamily Net3\_\-ec.sensors}.
+
+The command
+\lstinputlisting[firstline=29,lastline=29]{examples/simple/solver9.sh} % anchor=evalsensor
+generates the following output:
+\lstinputlisting[]{examples/simple/solver9.txt}
+
+The mean mass consumed is 70907, which is far from the optimal value of 21782 (which was computed separately). 
+The robust optimization example in the previous section is revisited here; \char`\"{}extent of contamination -\/ tce\char`\"{} 
+is still the primary objective, but now a \char`\"{}side constraint\char`\"{} is imposed that precludes any 
+solution that admits an average mass consumed of worse than 30,000 units. 
+The command
+\lstinputlisting[]{examples/simple/solver10.sh} % anchor=evalsensor
+generates the following output:
+\lstinputlisting[]{examples/simple/solver10.txt}
+
+Note that the primary objective, minimizing the TCE of the \char`\"{}extent of contamination\char`\"{} measure, has gotten worse: 
+it is now 50267 rather than 26376. However, the side constraint has been honored, and the mean mass consumed value is now 29350 rather than 70907.
+
+
+\subsection{Sensor Placements without Penalties}\label{solvers_solvers9}
+
+A fundamental issue for sensor placement is how to handle the fact
+that a limited budget of sensors will not be able to cover all possible
+incidents. WST addresses this issue by providing impact measures that
+integrate an impact 'penalty' for incidents that are not detected by a CWS
+design. Thus, in the previous examples there was an implicit trade-\/off
+between impact reduction and reduction in the number of contamination
+incidents that are detected.
+
+WST also includes impact measures that do not contain these penalties,
+which allows a user to more directly assess the performance of a CWS
+design in the context where detections have occurred. For example, the
+time-\/to-\/detection measure (td) includes a penalty for undetected
+incidents, but the detected-\/time-\/to-\/detection measure (dtd) has
+no penalty (or, more precisely, a zero penalty).
+
+For example, consider the simple example above, which minimizes the
+extent of contamination. The \code{evalsensors} command is applied to the final
+solution to evaluate the {\bfseries ec}, {\bfseries dec} and {\bfseries
+nfd} impact measures:
+\lstinputlisting[firstline=22,lastline=23]{examples/simple/solver11.sh} % anchor=evalsensor
+This generates the following output:
+\lstinputlisting[]{examples/simple/solver11.txt}
+
+In this example, the final sensor placement fails to detect 25\% of
+the incidents. It is noteworthy that this does not impact the mean
+performance very much, since the impact penalty has led to a final
+solution that fails to detect few incidents with high penalties.
+
+Note that minimizing {\bfseries dtd} does not really make sense. With
+zero sensors, no incidents are detected, which means that the final
+impact measurement is zero! Thus, minimizing {\bfseries dtd} requires
+the additional constraint on the number of failed detections (nfd)
+as well as a limit on the number of sensors (or total sensor costs).
+
+Only the 'pico' WST solver currently supports optimization with 'detected' impact measures. For example:
+\lstinputlisting[firstline=16,lastline=17]{examples/simple/solver12.sh}
+generates the following output:
+\lstinputlisting[]{examples/simple/solver12.txt}
+
+\subsection{Minimizing the Number of Sensors}\label{solvers_solvers2b}
+
+The sensor placement problem can be inverted by minimizing the number of sensors subject 
+to a constraint on the extent of contamination. Note that the following example finds a 
+solution with a single sensor that meets the goal of 40000 mean extent of contamination.
+The command
+\lstinputlisting[firstline=23,lastline=24]{examples/simple/solver6.sh} % anchor=sp
+generates the following output:
+\lstinputlisting[]{examples/simple/solver6.txt}
+
+\if 0
+\subsection{Two-\/tiered Sensor Placement Approach}\label{solvers_solvers5a}
+
+The two-tiered sensor placement approach uses geographic aggregation on the large 
+impact files to select candidate locations for secondary optimization. While the 
+approach uses detailed hydraulic calculations, it avoids solving sensor placement 
+using the large impact file directly, a process that can exceed the memory available 
+on a personal computer. Geographic aggregation combines witness locations over 
+all scenarios based on their geographic proximity. To maintain hydraulic equivalence 
+as much as possible, skeletonization is used to define geographic proximity. This 
+process is similar to witness aggregation, where witness locations for a single 
+scenario are combined based upon their witness quality. In both cases, the number 
+of possible sensor locations is reduced.  
+
+Geographic aggregation reduces the impact file by grouping nodes that are co-located 
+in the skeletonization process. In essence, this reduces the impact file to include 
+only skeletonized nodes (i.e. supernodes) defined in the skeletonized network.  
+From the skeletonized viewpoint, the contaminant hits a supernode when it first 
+crosses the curve defining the supernode. Depending upon the direction the 
+contaminant approaches, it will hit the real nodes inside the supernodes in 
+different orders. With geographic aggregation, the minimum, maximum, mean, or 
+median could be used to group the time and impact for the real nodes in each 
+supernode. For a sensor on a single real node in the supernode, the maximum 
+statistic is pessimistic for incidents that the node detects. Similarly, using 
+the minimum is always optimistic. For example, consider one supernode that 
+represents four nodes in the original network. The impact values for those nodes 
+are 100, 200, 250, and 300. After geographic aggregation, the impact value is 100 
+using the minimum, 300 using the maximum, 212.5 using the mean, and 225 using the median. 
+The time associated with each of these impacts is grouped the same way. The new time and 
+impact pair is the aggregated representation of the impact file for that node.  
+For this supernode, four lines of the impact file are reduced to one. This 
+aggregation is performed for each scenario and each supernode. While this greatly 
+reduces the size of the impact file, the number of scenarios remains the same.  
+This method is not influenced by the modified hydraulics of the skeletonized network;
+rather, the original impact file is modified to reflect geographic aggregation 
+from the skeletonized network.  
+
+In the first-tier (Tier 1), sensor placement filters candidate sensor locations 
+based on a geographic aggregation of the impact file. Heuristically, sensor 
+placement in this course search identifies supernodes that are promising regions 
+for sensors. Only real nodes within these selected supernodes are considered 
+candidate sensor locations. All other locations from the impact file generated 
+from the original, most-refined network model are removed. The second-tier (Tier 2) 
+sensor placement uses this refined impact file to place sensors in the original network.  
+Since sensor placement in each tier runs on a smaller impact file than a direct placement 
+on the original network, the two-tiered approach reduces the maximum memory requirement. 
+
+The two-tiered sensor placement approach can be run using \doxyref{sp-2tier} {p.}{sp2tierExecutable}.   
+The method calls \doxyref{spotSkeleton} {p.}{skelExecutable} to define geographic 
+proximity from skeletonized networks. The two-tiered method has been shown to 
+maintain solution quality while greatly reducing the memory footprint need for 
+sensor placement. For additional details, see \citet{KliPhiJan11review}.  
+
+The {\bfseries sp-2tier} executable is run with the following command line: 
+\lstinputlisting[firstline=16,lastline=17]{examples/simple/solver16.sh}
+
+This command generates aggregated and refined impact files, along with output files from {\bfseries sp} based on Tier 1 and Tier 2 sensor placement.
+
+\fi

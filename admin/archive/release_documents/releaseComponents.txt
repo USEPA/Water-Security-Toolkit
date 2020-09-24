@@ -1,0 +1,50 @@
+$Id: releaseComponents.txt 1597 2006-10-19 17:07:19Z lafisk $
+
+Release Components Checklist
+============================
+
+Software module:  SPOT
+
+Required features:
+
+
+
+___ configure architecture
+
+___ testing architecture
+
+___ documentation
+    ____ tutorial
+    ____ user guide
+    ____ code commenting
+    ____ copyright notices
+    ____ installation instructions
+    ____ web pages
+    ____ testing coverage information
+
+___ bugs
+    ____ all unresolved bugs of severity "normal" and greater
+    ____
+
+Software module:_acro-pico___________________________
+
+Required features:
+
+
+
+___ configure architecture
+
+___ testing architecture
+
+___ documentation
+    ____ tutorial
+    ____ user guide
+    ____ code commenting
+    ____ copyright notices
+    ____ installation instructions
+    ____ web pages
+    ____ testing coverage information
+
+___ bugs
+    ____ all unresolved bugs of severity "normal" and greater
+    ____

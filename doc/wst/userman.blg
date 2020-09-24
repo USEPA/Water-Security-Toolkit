@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: userman.aux
+The style file: apalike.bst
+Database file #1: sensors.bib
+Warning--empty title in Daskin95
+Warning--empty title in ElloumiEtAl04
+Warning--empty institution in ERDusermanual
+Warning--there's a number but no volume in KliPhiJan13
+Warning--there's a number but no volume in Merlion12
+Warning--there's a number but no volume in TopVlaZen02
+You've used 33 entries,
+            1935 wiz_defined-function locations,
+            682 strings with 10859 characters,
+and the built_in function-call counts, 12554 in all, are:
+= -- 1187
+> -- 652
+< -- 17
++ -- 226
+- -- 224
+* -- 1075
+:= -- 2329
+add.period$ -- 108
+call.type$ -- 33
+change.case$ -- 282
+chr.to.int$ -- 31
+cite$ -- 39
+duplicate$ -- 439
+empty$ -- 778
+format.name$ -- 265
+if$ -- 2368
+int.to.chr$ -- 3
+int.to.str$ -- 0
+missing$ -- 23
+newline$ -- 177
+num.names$ -- 100
+pop$ -- 250
+preamble$ -- 1
+purify$ -- 277
+quote$ -- 0
+skip$ -- 297
+stack$ -- 0
+substring$ -- 624
+swap$ -- 24
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 190
+warning$ -- 6
+while$ -- 79
+width$ -- 0
+write$ -- 445
+(There were 6 warnings)

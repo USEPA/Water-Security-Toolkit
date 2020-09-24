@@ -1,0 +1,58 @@
+# # YML input file for visualization
+network:
+  epanet file: Net3.inp                              # EPANET network file name
+visualization:
+  screen:
+    color: white                                     # Screen color, HEX or predefined code
+    size: [1000, 600]                                # Screen size [width, height] in pixels
+  legend:
+    color: white                                     # Legend color, HEX or predefined code
+    scale: 1.0                                       # Legend text size multiplier, float
+    location: [10, 10]                               # Legend location [left, bottom] in pixels
+  nodes:
+    color: null                                      # Node color, HEX or predefined code
+    size: null                                       # Node size, float
+    opacity: 0.6                                     # Node opacity, float between 0.0 and 1.0
+  links:
+    color: null                                      # Link color, HEX or predefined code
+    size: null                                       # Link size, float
+    opacity: 0.6                                     # Link opacity, float between 0.0 and 1.0
+  layers:
+    -
+      file: /Users/aseth/new_wst/examples/case_studies/inversion/Cycle2/inversion/cycle2_inversion_output.yml
+      fill:
+        color: '#aa0000'
+        opacity: 0.6
+        size: ['[''inversion''][''node likeliness''][i]*100']
+      label: Possible source locations
+      line:
+        color: '#aa0000'
+        opacity: 0.8
+        size: 1
+      locations: ['[''inversion''][''candidate nodes''][i]']
+      shape: Circle
+    -
+      label: Optimal sample locations                # Label used in legend
+      locations: ['[''grabsample''][''nodes''][i]']  # Data locations, list of EPANET IDs
+      file: /Users/aseth/new_wst/examples/case_studies/inversion/Cycle2/grabsample/cycle2_grabsample_output.yml
+                                                     # Locations from file, yaml format
+      location type: node                            # Location type, node or link
+      shape: [square]                                # Marker shape, predefined name
+      fill:
+        color: blue                                  # Fill color, HEX or predefined code
+        size: 15                                     # Fill size, float
+        opacity: 0.6                                 # Fill opacity, float between 0.0 and 1.0
+        color range: null                            # Fill color range [min, max]
+        size range: null                             # Fill size range [min, max]
+        opacity range: null                          # Fill opacity range [min, max]
+      line:
+        color: null                                  # Line color, HEX or predefined code
+        size: null                                   # Line size, float
+        opacity: 0.6                                 # Line opacity, float between 0.0 and 1.0
+        color range: null                            # Line color range [min, max]
+        size range: null                             # Line size range [min, max]
+        opacity range: null                          # Line opacity range [min, max]
+configure:
+  output prefix: /Users/aseth/new_wst/examples/case_studies/inversion/Cycle2/grabsample/cycle2_
+                                                     # Output file prefix
+  debug: 0                                           # Debugging level, default = 0

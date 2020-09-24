@@ -1,0 +1,21 @@
+# tevasim configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+scenario:
+  location: [NZD]                        # Injection location: ALL, NZD or EPANET ID
+  type: MASS                             # Injection type: MASS, CONCEN, FLOWPACED, or SETPOINT
+  strength: 100.0                        # Injection strength [mg/min or mg/L depending on
+                                         #   type]
+  species: null                          # Injection species, required for EPANET-MSX
+  start time: 0                          # Injection start time [min]
+  end time: 1440                         # Injection end time [min]
+  tsg file: null                         # TSG file name, overrides injection parameters above
+  tsi file: null                         # TSI file name, overrides TSG file
+  signals: null                          # Signal files, overrides TSG or TSI files
+  msx file: null                         # Multi-species extension file name
+  msx species: null                      # MSX species to save
+  merlion: false                         # Use Merlion as WQ simulator, true or false
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

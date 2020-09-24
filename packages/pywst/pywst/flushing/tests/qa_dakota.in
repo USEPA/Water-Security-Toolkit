@@ -1,0 +1,37 @@
+# DAKOTA INPUT FILE - based on dakota_rosenbrock_ea_opt.in
+strategy
+ single_method
+method
+ max_iterations = 100
+ max_function_evaluations = 2000
+ coliny_ea
+  population_size = 50
+  initialization_type
+   unique_random
+  fitness_type
+   linear_rank
+  replacement_type
+   elitist = 1
+  crossover_rate = 0.8
+  crossover_type
+   uniform
+  mutation_rate = 1
+  mutation_type
+   offset_uniform
+  seed = 11011011
+model
+ single
+variables
+ discrete_design_range = 12
+  lower_bounds = 1 1 1 1 1 1 1 1 1 1 1 1
+  upper_bounds = 0 0 0 0 0 0 0 0 0 0 0 0
+  descriptors = 'fl0' 'fl1' 'cl0' 'cl1' 'cl2' 'cl3' 'cl4' 'cl5' 'cl6' 'cl7' 'cl8' 'cl9'
+interface
+ analysis_drivers = '/home/kaklise/src/wst/python/bin/python wst_fwd.py'
+  system
+   parameters_file = 'tevaopt.in'
+   results_file = 'results.out'
+responses
+ num_objective_functions = 1
+ no_gradients
+ no_hessians

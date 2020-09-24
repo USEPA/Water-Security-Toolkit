@@ -1,0 +1,902 @@
+<Results expfile="teva-sp.cygwin.exp.xml">
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-1">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>1</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:28"
+  />
+  <StartTime>2005-12-19 23:32:28</StartTime>
+  <RunTime unit="seconds">12.550372</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_worst --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="704839">
+     <Value name="Total Time" type="numeric/double">9.5</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">3584</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">14 41 28 29 40</Value>
+     <Value name="Junctions">109 167 141 143 166</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">247.879</Value>
+     <Value name="Mean Impact" type="numeric/double">66419.9</Value>
+     <Value name="Median Impact" type="numeric/double">30222.1</Value>
+     <Value name="UQuartile Impact" type="numeric/double">137296</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144271</Value>
+     <Value name="Max Impact" type="numeric/double">144271</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-2">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>2</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:31"
+  />
+  <StartTime>2005-12-19 23:32:31</StartTime>
+  <RunTime unit="seconds">2.201823</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="508903">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">8 14 29 54 60</Value>
+     <Value name="Junctions">601 109 143 193 204</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">382.484</Value>
+     <Value name="Mean Impact" type="numeric/double">69811.2</Value>
+     <Value name="Median Impact" type="numeric/double">49669.5</Value>
+     <Value name="UQuartile Impact" type="numeric/double">140413</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144271</Value>
+     <Value name="Max Impact" type="numeric/double">144271</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-3">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>3</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:36"
+  />
+  <StartTime>2005-12-19 23:32:36</StartTime>
+  <RunTime unit="seconds">5.2697</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_mean --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="310990">
+     <Value name="Total Time" type="numeric/double">2.3</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">2408</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21796.3</Value>
+     <Value name="Median Impact" type="numeric/double">1364.71</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-4">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>4</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:39"
+  />
+  <StartTime>2005-12-19 23:32:39</StartTime>
+  <RunTime unit="seconds">1.924676</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="738899">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21796.3</Value>
+     <Value name="Median Impact" type="numeric/double">1364.71</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-5">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>5</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:52"
+  />
+  <StartTime>2005-12-19 23:32:52</StartTime>
+  <RunTime unit="seconds">12.530422</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=pe_worst --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">pe</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="125977">
+     <Value name="Total Time" type="numeric/double">9.6</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">3808</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">14 29 40 77 26</Value>
+     <Value name="Junctions">109 143 166 243 131</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_pe.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">3.21427e-06</Value>
+     <Value name="Mean Impact" type="numeric/double">0.00107436</Value>
+     <Value name="Median Impact" type="numeric/double">8.51172e-05</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0.00246765</Value>
+     <Value name="VaR Impact" type="numeric/double">0.00376662</Value>
+     <Value name="TCE Impact" type="numeric/double">0.00376781</Value>
+     <Value name="Max Impact" type="numeric/double">0.00376921</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-6">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>6</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:32:54"
+  />
+  <StartTime>2005-12-19 23:32:54</StartTime>
+  <RunTime unit="seconds">2.124938</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=pe_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">pe</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="702599">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">14 26 29 40 77</Value>
+     <Value name="Junctions">109 131 143 166 243</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_pe.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">3.21427e-06</Value>
+     <Value name="Mean Impact" type="numeric/double">0.00107436</Value>
+     <Value name="Median Impact" type="numeric/double">8.51172e-05</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0.00246765</Value>
+     <Value name="VaR Impact" type="numeric/double">0.00376662</Value>
+     <Value name="TCE Impact" type="numeric/double">0.00376781</Value>
+     <Value name="Max Impact" type="numeric/double">0.00376921</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-7">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>7</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:00"
+  />
+  <StartTime>2005-12-19 23:33:00</StartTime>
+  <RunTime unit="seconds">5.308686</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=pe_mean --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">pe</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="656451">
+     <Value name="Total Time" type="numeric/double">2.4</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">1680</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_pe.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">2.14011e-06</Value>
+     <Value name="Mean Impact" type="numeric/double">0.000564302</Value>
+     <Value name="Median Impact" type="numeric/double">3.20292e-05</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0.00023548</Value>
+     <Value name="VaR Impact" type="numeric/double">0.00376977</Value>
+     <Value name="TCE Impact" type="numeric/double">0.0037701</Value>
+     <Value name="Max Impact" type="numeric/double">0.00377045</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-8">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>8</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:03"
+  />
+  <StartTime>2005-12-19 23:33:03</StartTime>
+  <RunTime unit="seconds">1.984653</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=pe_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">pe</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="480491">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_pe.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">2.14011e-06</Value>
+     <Value name="Mean Impact" type="numeric/double">0.000564302</Value>
+     <Value name="Median Impact" type="numeric/double">3.20292e-05</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0.00023548</Value>
+     <Value name="VaR Impact" type="numeric/double">0.00376977</Value>
+     <Value name="TCE Impact" type="numeric/double">0.0037701</Value>
+     <Value name="Max Impact" type="numeric/double">0.00377045</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-9">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>9</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:27"
+  />
+  <StartTime>2005-12-19 23:33:27</StartTime>
+  <RunTime unit="seconds">24.207775</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_worst --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="3">vc</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="532094">
+     <Value name="Total Time" type="numeric/double">20.8</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">1860</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 10 59 75</Value>
+     <Value name="Junctions">15 35 101 203 239</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">37976.1</Value>
+     <Value name="Median Impact" type="numeric/double">19304.5</Value>
+     <Value name="UQuartile Impact" type="numeric/double">41987.8</Value>
+     <Value name="VaR Impact" type="numeric/double">139895</Value>
+     <Value name="TCE Impact" type="numeric/double">229409</Value>
+     <Value name="Max Impact" type="numeric/double">356402</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-10">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>10</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:30"
+  />
+  <StartTime>2005-12-19 23:33:30</StartTime>
+  <RunTime unit="seconds">2.175602</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="3">vc</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="982506">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 6 10 59</Value>
+     <Value name="Junctions">15 35 50 101 203</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">10107.2</Value>
+     <Value name="Mean Impact" type="numeric/double">41535.3</Value>
+     <Value name="Median Impact" type="numeric/double">22139.1</Value>
+     <Value name="UQuartile Impact" type="numeric/double">45884.4</Value>
+     <Value name="VaR Impact" type="numeric/double">186440</Value>
+     <Value name="TCE Impact" type="numeric/double">260363</Value>
+     <Value name="Max Impact" type="numeric/double">356402</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-11">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>11</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:36"
+  />
+  <StartTime>2005-12-19 23:33:36</StartTime>
+  <RunTime unit="seconds">5.740324</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_mean --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="3">vc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="424068">
+     <Value name="Total Time" type="numeric/double">2.4</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">3660</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32859.7</Value>
+     <Value name="Median Impact" type="numeric/double">18404.2</Value>
+     <Value name="UQuartile Impact" type="numeric/double">32160.4</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-12">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>12</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:39"
+  />
+  <StartTime>2005-12-19 23:33:39</StartTime>
+  <RunTime unit="seconds">1.965333</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="3">vc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="312128">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32859.7</Value>
+     <Value name="Median Impact" type="numeric/double">18404.2</Value>
+     <Value name="UQuartile Impact" type="numeric/double">32160.4</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-13">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>13</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:51"
+  />
+  <StartTime>2005-12-19 23:33:51</StartTime>
+  <RunTime unit="seconds">11.639058</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=td_worst --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="4">td</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="100682">
+     <Value name="Total Time" type="numeric/double">8.6</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">3248</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">3</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">11 40 70</Value>
+     <Value name="Junctions">103 166 219</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_td.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">425</Value>
+     <Value name="Mean Impact" type="numeric/double">1463.96</Value>
+     <Value name="Median Impact" type="numeric/double">1180</Value>
+     <Value name="UQuartile Impact" type="numeric/double">2880</Value>
+     <Value name="VaR Impact" type="numeric/double">2880</Value>
+     <Value name="TCE Impact" type="numeric/double">2880</Value>
+     <Value name="Max Impact" type="numeric/double">2880</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-14">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>14</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:53"
+  />
+  <StartTime>2005-12-19 23:33:53</StartTime>
+  <RunTime unit="seconds">1.904759</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=td_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="4">td</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="417560">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">19 44 73 91 94</Value>
+     <Value name="Junctions">119 173 231 273 Lake</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_td.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">430</Value>
+     <Value name="Mean Impact" type="numeric/double">1468.43</Value>
+     <Value name="Median Impact" type="numeric/double">1205</Value>
+     <Value name="UQuartile Impact" type="numeric/double">2880</Value>
+     <Value name="VaR Impact" type="numeric/double">2880</Value>
+     <Value name="TCE Impact" type="numeric/double">2880</Value>
+     <Value name="Max Impact" type="numeric/double">2880</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-15">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>15</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:33:59"
+  />
+  <StartTime>2005-12-19 23:33:59</StartTime>
+  <RunTime unit="seconds">5.309728</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=td_mean --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="4">td</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="776025">
+     <Value name="Total Time" type="numeric/double">2.4</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">3900</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_td.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">155</Value>
+     <Value name="Mean Impact" type="numeric/double">871.504</Value>
+     <Value name="Median Impact" type="numeric/double">755</Value>
+     <Value name="UQuartile Impact" type="numeric/double">1155</Value>
+     <Value name="VaR Impact" type="numeric/double">2880</Value>
+     <Value name="TCE Impact" type="numeric/double">2880</Value>
+     <Value name="Max Impact" type="numeric/double">2880</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-16">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>16</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:34:01"
+  />
+  <StartTime>2005-12-19 23:34:01</StartTime>
+  <RunTime unit="seconds">1.89459</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=td_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="4">td</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="944793">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_td.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">155</Value>
+     <Value name="Mean Impact" type="numeric/double">871.504</Value>
+     <Value name="Median Impact" type="numeric/double">755</Value>
+     <Value name="UQuartile Impact" type="numeric/double">1155</Value>
+     <Value name="VaR Impact" type="numeric/double">2880</Value>
+     <Value name="TCE Impact" type="numeric/double">2880</Value>
+     <Value name="Max Impact" type="numeric/double">2880</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-17">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>17</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:34:05"
+  />
+  <StartTime>2005-12-19 23:34:05</StartTime>
+  <RunTime unit="seconds">3.306009</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=nfd_worst --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="5">nfd</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="672687">
+     <Value name="Total Time" type="numeric/double">0.9</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">4088</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">2</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">73 26</Value>
+     <Value name="Junctions">231 131</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_nfd.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">0</Value>
+     <Value name="Mean Impact" type="numeric/double">0.241525</Value>
+     <Value name="Median Impact" type="numeric/double">0</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0</Value>
+     <Value name="VaR Impact" type="numeric/double">1</Value>
+     <Value name="TCE Impact" type="numeric/double">1</Value>
+     <Value name="Max Impact" type="numeric/double">1</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-18">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>18</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:34:07"
+  />
+  <StartTime>2005-12-19 23:34:07</StartTime>
+  <RunTime unit="seconds">1.85467</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=nfd_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="5">nfd</Factor>
+    <Factor id="1">worst</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="295493">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 71 75 82 86</Value>
+     <Value name="Junctions">15 225 239 255 263</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_nfd.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">0</Value>
+     <Value name="Mean Impact" type="numeric/double">0.165254</Value>
+     <Value name="Median Impact" type="numeric/double">0</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0</Value>
+     <Value name="VaR Impact" type="numeric/double">1</Value>
+     <Value name="TCE Impact" type="numeric/double">1</Value>
+     <Value name="Max Impact" type="numeric/double">1</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-19">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>19</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:34:11"
+  />
+  <StartTime>2005-12-19 23:34:11</StartTime>
+  <RunTime unit="seconds">3.136676</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=nfd_mean --network=test1 --ub=ns,5 --solver=pico   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="5">nfd</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="1">--solver=pico</Factor>
+  </Description>
+  <Trial id="0" seed="525805">
+     <Value name="Total Time" type="numeric/double">0.7</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">2740</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 59 71 77 81</Value>
+     <Value name="Junctions">15 203 225 243 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_nfd.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">0</Value>
+     <Value name="Mean Impact" type="numeric/double">0.114407</Value>
+     <Value name="Median Impact" type="numeric/double">0</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0</Value>
+     <Value name="VaR Impact" type="numeric/double">1</Value>
+     <Value name="TCE Impact" type="numeric/double">1</Value>
+     <Value name="Max Impact" type="numeric/double">1</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.cygwin.sp-simple-basic-20">
+  <Category>teva-sp.cygwin.sp-simple-basic</Category>
+  <Name>20</Name>
+  <Key
+      KernelName="CYGWIN_NT-5.1"
+      HostName="S868904"
+      KernelRelease="1.5.16(0.128/4/2)"
+      KernelVersion="2005-04-25 20:26"
+      Machine="i686"
+      Processor="unknown"
+      Platform="unknown"
+      OS="Cygwin"
+      Scenario="test"
+      Date="2005-12-19 23:34:13"
+  />
+  <StartTime>2005-12-19 23:34:13</StartTime>
+  <RunTime unit="seconds">1.882721</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=nfd_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="5">nfd</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">--network=test1</Factor>
+    <Factor id="1">--ub=ns,5</Factor>
+    <Factor id="2">--solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="642728">
+     <Value name="Total Time" type="numeric/double">ERROR</Value>
+     <Value name="Sensor Placement ID" type="numeric/integer">0</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 71 73 77 81</Value>
+     <Value name="Junctions">15 225 231 243 253</Value>
+     <Value name="Impact File">C:/cygwin/home/jberry/tmp/teva-sp/packages/sp/test/test1_nfd.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">0</Value>
+     <Value name="Mean Impact" type="numeric/double">0.114407</Value>
+     <Value name="Median Impact" type="numeric/double">0</Value>
+     <Value name="UQuartile Impact" type="numeric/double">0</Value>
+     <Value name="VaR Impact" type="numeric/double">1</Value>
+     <Value name="TCE Impact" type="numeric/double">1</Value>
+     <Value name="Max Impact" type="numeric/double">1</Value>
+  </Trial>
+</Experiment>
+</Results>

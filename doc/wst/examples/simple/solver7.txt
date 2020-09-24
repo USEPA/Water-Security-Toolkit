@@ -1,0 +1,44 @@
+read_impact_files:  Net3_ec.impact
+
+Number of Nodes                :  97
+Number of Contamination Impacts: 9480
+
+Number of sensors=5
+Objective=ec
+Statistic=mean
+Impact file=Net3_ec.impact
+Delay=0
+
+Running glpsol...
+... glpsol done
+Running PICO...
+... PICO done
+# No weights file: Net3_ec.impact.prob
+------------------------------------------------------------------------------
+Sensor placement id:        9273
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            17 33 37 50 66 
+Sensor junctions:           115 151 161 185 211 
+
+Impact File:                Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                9359.6864
+Lower quartile impact:      0.0000
+Median impact:              7640.0000
+Upper quartile impact:      14120.0000
+Value at Risk (VaR) (  5%): 27335.0000
+TCE                 (  5%): 32282.3000
+Max impact:                 45300.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_ec.impact
+------------------------------------------------------------------------------
+-1	59035.8890
+37	27097.7191
+66	18228.2936
+33	13993.9475
+17	11316.9263
+50	9359.6864
+Done with sp

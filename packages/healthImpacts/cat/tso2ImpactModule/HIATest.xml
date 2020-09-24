@@ -1,0 +1,27 @@
+<AnalysisModuleOptions name="Health Impacts Analysis">
+
+	<ModuleInputs>
+		<Input name="ContaminantName"        value="TestContam"/>
+		<Input name="DoseResponseA"   value="1"/>
+		<Input name="DoseResponseM"   value="1"/>
+		<Input name="DoseResponseN"   value="1"/>
+		<Input name="DoseResponseTau" value="1"/>
+		<Input name="BodyMass"        value="70"/>
+
+		<Input name="LD50"            value="1.69E8"/>
+		<Input name="Beta"            value="0.52"/>
+
+		<Input name="DoseResponseType"  value="probit"/>
+
+		<Input name="Normalize"       value="0"/>
+		<Input name="LatencyTime"     value="24"/>
+		<Input name="FatalityTime"    value="48"/>
+		<Input name="IngestionRate"   value="2.0"/>
+		<Input name="FatalityRate"    value="0.3"/>
+		<Input name="UsageRate"       value="0.139"/>
+		<Input name="DoseType"        value="total" />
+		<Input name="IngestionType"   value="demand"/>
+		<Input name="Population"      value="demand"/>
+		<Input name="NumWorstCaseToKeep"       value="1"/>
+	</ModuleInputs>
+</AnalysisModuleOptions>

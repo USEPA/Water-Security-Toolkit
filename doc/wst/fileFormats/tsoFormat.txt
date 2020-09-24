@@ -1,0 +1,52 @@
+nnodes      int; number of network nodes
+nlinks      int; number of network pipes
+ntanks      int; number of network tanks
+njunctions  int; number of network junctions (=nnodes-ntanks)
+nsteps      int; number of simulation output time steps
+rstep       float; simulation output reporting time step in hours
+fltmax      float; maximum value of float data type
+tankindex(1),,tankindex(ntanks)
+	    int; tank node indices
+nodeID(1),,nodeID(nnodes)
+	    int byte character strings of network node IDs (names)
+(xnode(1),,xnode(nnodes)
+(ynode(1),,ynode(nnodes))
+	    float; (x,y) coordinates of all network nodes
+(fromnode(1),,(fromnode(nlinks))
+(tonode(1),,tonode(nlinks))
+            int; connecting node index pairs for all network links, each integer node 
+            index is in the range [1,nnodes].
+d(1,1),,d(nnodes,1)
+d(1,2),,d(nnodes,2)
+.
+.
+.
+d(1,nsteps),,d(nnodes,nsteps)
+            float; water demand at each node and time step.  D(i,j) is the demand at 
+            node i in time step j.  The units are the flow units selected for Epanet.
+N	    int; The number of contaminant source nodes for this 
+	    scenario
+Nindex(1), Mass Rate(1), Start Time(1), Stop Time(1)
+.
+.
+.
+Nindex(N), Mass Rate(N), Start Time(N), Stop Time(N)
+            Nindex (int): The contaminant source nodes are nodeID(Nindex(1)),,
+            nodeID(Nindex(N)); Mass Rate (float): The mass rate (mg/min) for each 
+            source node; Start Time (long): start time (seconds) for each source 
+            node; Stop Time (long): stop time (seconds) for each source node
+M
+Nindex(1) c(1),,c(nsteps)
+Nindex(2) c(1),,c(nsteps)
+.
+.
+.
+Nindex(M) c(1),,c(nsteps)
+            float; sparse format threat scenario contaminant concentrations at M nodes 
+            nodeID(Nindex(1)), , nodeID(Nindex(M)) for all time steps.  Nodes excluded 
+            from the list Nindex(1), , Nindex(M) have zero concentration for every time 
+            step. 
+
+            The data items starting from N describe the contaminant concentrations for 
+            one scenario, and are repeated in sequence for every threat scenario 
+            specified in the TSI file.

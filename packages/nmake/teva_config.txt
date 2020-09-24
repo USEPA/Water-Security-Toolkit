@@ -1,0 +1,202 @@
+/* teva_config.h for the nmake builds */
+
+/* software build cpu is sparc */
+/* #undef TEVA_SPOT_BUILD_CPU_SPARC */
+
+/* software build cpu is x86 */
+#ifndef TEVA_SPOT_BUILD_CPU_X86 
+#define TEVA_SPOT_BUILD_CPU_X86  1 
+#endif
+
+/* software build cpu is 64 bit x86 */
+/* #undef TEVA_SPOT_BUILD_CPU_X86_64 */
+
+/* software build os is cygwin */
+/* #undef TEVA_SPOT_BUILD_CYGWIN  */
+
+/* software build os is linux */
+/* #undef TEVA_SPOT_BUILD_LINUX */
+
+/* software build os is solaris */
+/* #undef TEVA_SPOT_BUILD_SOLARIS */
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+/* #undef TEVA_SPOT_HAVE_DLFCN_H */
+
+/* define if the compiler supports exceptions */
+#ifndef TEVA_SPOT_HAVE_EXCEPTIONS 
+#define TEVA_SPOT_HAVE_EXCEPTIONS  /**/ 
+#endif
+
+/* define if the compiler supports the explicit keyword */
+#ifndef TEVA_SPOT_HAVE_EXPLICIT 
+#define TEVA_SPOT_HAVE_EXPLICIT  /**/ 
+#endif
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+/* #undef TEVA_SPOT_HAVE_INTTYPES_H  */
+
+/* define if the compiler supports member templates */
+#ifndef TEVA_SPOT_HAVE_MEMBER_TEMPLATES 
+#define TEVA_SPOT_HAVE_MEMBER_TEMPLATES  /**/ 
+#endif
+
+/* Define to 1 if you have the <memory.h> header file. */
+#ifndef TEVA_SPOT_HAVE_MEMORY_H 
+#define TEVA_SPOT_HAVE_MEMORY_H  1 
+#endif
+
+/* define that mpi's mpe is being used */
+/* #undef TEVA_SPOT_HAVE_MPE */
+
+/* define that mpi is being used */
+/* #undef TEVA_SPOT_HAVE_MPI */
+
+/* define if the compiler implements namespaces */
+#ifndef TEVA_SPOT_HAVE_NAMESPACES 
+#define TEVA_SPOT_HAVE_NAMESPACES  /**/ 
+#endif
+
+/* define if system defines realpath function */
+/* #undef TEVA_SPOT_HAVE_REALPATH */
+
+/* define if system defines rint function */
+/* #undef TEVA_SPOT_HAVE_RINT */
+
+/* define if system defines srandom/random function */
+/* #undef TEVA_SPOT_HAVE_SRANDOM */
+
+/* define if system defines log2 function */
+/* #undef TEVA_SPOT_HAVE_LOG2 */
+
+/* define if the compiler has stringstream */
+#ifndef TEVA_SPOT_HAVE_SSTREAM 
+#define TEVA_SPOT_HAVE_SSTREAM  /**/ 
+#endif
+
+/* define if the compiler supports ISO C++ standard library */
+#ifndef TEVA_SPOT_HAVE_STD 
+#define TEVA_SPOT_HAVE_STD  /**/ 
+#endif
+
+/* Define to 1 if you have the <stdint.h> header file. */
+/* #undef TEVA_SPOT_HAVE_STDINT_H  */
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#ifndef TEVA_SPOT_HAVE_STDLIB_H 
+#define TEVA_SPOT_HAVE_STDLIB_H  1 
+#endif
+
+/* Define to 1 if you have the `strcasecmp' function. */
+/* #undef TEVA_SPOT_HAVE_STRCASECMP  */
+
+/* Define to 1 if you have the `stricmp' function. */
+#ifndef TEVA_SPOT_HAVE_STRICMP 
+#define TEVA_SPOT_HAVE_STRICMP  1 
+#endif
+
+/* Define to 1 if you have the <strings.h> header file. */
+/* #undef TEVA_SPOT_HAVE_STRINGS_H  */
+
+/* Define to 1 if you have the <string.h> header file. */
+#ifndef TEVA_SPOT_HAVE_STRING_H 
+#define TEVA_SPOT_HAVE_STRING_H  1 
+#endif
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#ifndef TEVA_SPOT_HAVE_SYS_STAT_H 
+#define TEVA_SPOT_HAVE_SYS_STAT_H  1 
+#endif
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#ifndef TEVA_SPOT_HAVE_SYS_TYPES_H 
+#define TEVA_SPOT_HAVE_SYS_TYPES_H  1 
+#endif
+
+/* Define to 1 if you have the <unistd.h> header file. */
+/* #undef TEVA_SPOT_HAVE_UNISTD_H  */
+
+/* software host will be cygwin */
+/* #undef TEVA_SPOT_HOST_CYGWIN */
+
+/* software host is GNU */
+/* #undef TEVA_SPOT_HOST_GNU */
+
+/* software host will be linux */
+/* #undef TEVA_SPOT_HOST_LINUX */
+
+/* software host will be mingw */
+/* #undef TEVA_SPOT_HOST_MINGW  */
+
+/* software host will be solaris */
+/* #undef TEVA_SPOT_HOST_SOLARIS */
+
+/* Define to the sub-directory in which libtool stores uninstalled libraries.
+   */
+#ifndef TEVA_SPOT_LT_OBJDIR 
+#define TEVA_SPOT_LT_OBJDIR  ".libs/" 
+#endif
+
+/* Name of package */
+#ifndef TEVA_SPOT_PACKAGE 
+#define TEVA_SPOT_PACKAGE  "teva-spot" 
+#endif
+
+/* Define to the address where bug reports for this package should be sent. */
+#ifndef TEVA_SPOT_PACKAGE_BUGREPORT 
+#define TEVA_SPOT_PACKAGE_BUGREPORT  "wehart@sandia.gov" 
+#endif
+
+/* Define to the full name of this package. */
+#ifndef TEVA_SPOT_PACKAGE_NAME 
+#define TEVA_SPOT_PACKAGE_NAME  "teva-spot" 
+#endif
+
+/* Define to the full name and version of this package. */
+#ifndef TEVA_SPOT_PACKAGE_STRING 
+#define TEVA_SPOT_PACKAGE_STRING  "teva-spot 2.2" 
+#endif
+
+/* Define to the one symbol short name of this package. */
+#ifndef TEVA_SPOT_PACKAGE_TARNAME 
+#define TEVA_SPOT_PACKAGE_TARNAME  "teva-spot" 
+#endif
+
+/* Define to the version of this package. */
+#ifndef TEVA_SPOT_PACKAGE_VERSION 
+#define TEVA_SPOT_PACKAGE_VERSION  "2.2" 
+#endif
+
+/* The number of bytes in type unsigned char * */
+#ifndef TEVA_SPOT_SIZEOF_UNSIGNED_CHAR_P 
+#define TEVA_SPOT_SIZEOF_UNSIGNED_CHAR_P  4 
+#endif
+
+/* Define to 1 if you have the ANSI C header files. */
+#ifndef TEVA_SPOT_STDC_HEADERS 
+#define TEVA_SPOT_STDC_HEADERS  1 
+#endif
+
+/* software target will be cygwin */
+/* #undef TEVA_SPOT_TARGET_CYGWIN */
+
+/* software target will be linux */
+/* #undef TEVA_SPOT_TARGET_LINUX */
+
+/* software target will be mingw */
+#ifndef TEVA_SPOT_TARGET_MINGW 
+#define TEVA_SPOT_TARGET_MINGW  1 
+#endif
+
+/* software target will be solaris */
+/* #undef TEVA_SPOT_TARGET_SOLARIS */
+
+/* Define if want to build with soplex enabled */
+/* #undef TEVA_SPOT_USING_SOPLEX */
+
+/* Version number of package */
+#ifndef TEVA_SPOT_VERSION 
+#define TEVA_SPOT_VERSION  "2.2" 
+#endif
+ 
+/* once: _TEVA_CONFIG_H */

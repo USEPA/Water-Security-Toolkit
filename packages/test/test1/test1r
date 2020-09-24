@@ -1,0 +1,17 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+
+setenv bindir `bindirLocation`
+setenv moddir `moddirLocation`
+setenv python `pythonLocation`
+
+if (! -e test1.tso) then
+   $bindir/tevasim --tsg test1.tsg --tsi test1.tsi --tso test1.tso Net3.inp Net3.out
+endif
+if (! -e test1_vc.impact ) or (! -e test1_nfd.impact) then
+   $bindir/tso2Impact --vc --nfd test1 test1.tso 
+endif
+
+$python $bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=vc --ub=ns,2 --ub=nfd,0.20 --numsamples=10 --solver=heuristic --seed=1

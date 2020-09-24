@@ -1,0 +1,15 @@
+#!/bin/csh
+##
+## Test1 test script, runs valgrind on all executables.  Valgrind
+## results are in current directory in files named "memcheck.*".
+##
+
+setenv bindir `bindirLocation`
+setenv moddir `moddirLocation`
+setenv python `pythonLocation`
+
+valgrind -v --tool=memcheck --log-file-exactly=memcheck.tevasim.test1a $bindir/tevasim --tsg test1.tsg --tsi test1.tsi --tso test1.tso Net3.inp Net3.out
+
+valgrind -v --tool=memcheck --log-file-exactly=memcheck.tso2Impact.test1a $bindir/tso2Impact --mc --vc --td --nfd test1 test1.tso 
+
+$python $bindir/sp --debug --memcheck=all --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico

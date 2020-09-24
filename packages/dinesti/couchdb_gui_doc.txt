@@ -1,0 +1,424 @@
+{
+   "_id": "gui",
+   "_rev": "11621-c022429d25770a6b8e926b90e75b8be3",
+   "config_clock_test_start": 1367816400,
+   "config_clock_testing": true,
+   "config_event_cl_max": 2,
+   "config_clock_show_ampm": false,
+   "config_event_cl_min": 0.3,
+   "config_clock_repeat": false,
+   "config_training_mph": 4,
+   "config_event_inp_uuid": "BDHKBAAHHHIKGZTZVPJKXFIKDQBSV",
+   "config_time_continue": false,
+   "config_training_sample_count": 3,
+   "config_event_epoch_start.PUB": 1364792400,
+   "config_event_ph_max": 9,
+   "config_event_epoch_repeat": 604800,
+   "config_event_sample_delay": 3600,
+   "config_erd_exe": "/Users/smcgee/Repos/wst_trunk/packages/sim/merlion/applications/jsonwriter2",
+   "config_server_save_temp": false,
+   "config_training_sample_delay": 3600,
+   "config_inp_exe": "/Users/smcgee/Repos/wst_trunk/packages/sim/merlion/applications/jsonwriter",
+   "config_event_turb_max": 1,
+   "config_clock_interval": 1000,
+   "config_event_horizon_hours": 48,
+   "config_install_dir": "/Users/smcgee/Repos/wst_trunk/",
+   "config_event_ph_min": 7.5,
+   "config_event_cond_min": 100,
+   "config_event_epoch_repeat.PUB": 604800,
+   "config_gis_dir": "/Users/smcgee/Dropbox/wst/",
+   "config_event_cond_max": 300,
+   "config_training_horizon_hours": 12,
+   "config_clock_show_seconds": false,
+   "Date": "2013-07-09T16:30:54.001Z",
+   "config_erd_dynamic_type": 5,
+   "config_event_epoch_start": 1367730000,
+   "config_event_sample_count": 3,
+   "_attachments": {
+       "d3.v2.js": {
+           "content_type": "text/javascript",
+           "revpos": 40,
+           "digest": "md5-Ezb0NLIm648chwklQOATKQ==",
+           "length": 254424,
+           "stub": true
+       },
+       "ClassInversionNavigator.js": {
+           "content_type": "text/javascript",
+           "revpos": 11435,
+           "digest": "md5-VmztSHvK1+ffch2vJLR06w==",
+           "length": 10959,
+           "stub": true
+       },
+       "ClassFilterList.js": {
+           "content_type": "text/javascript",
+           "revpos": 11440,
+           "digest": "md5-gmQ5fWzxDulGCljTs7weJA==",
+           "length": 13755,
+           "stub": true
+       },
+       "ClassLockButton.js": {
+           "content_type": "text/javascript",
+           "revpos": 11443,
+           "digest": "md5-f+EEKDxG7Z9XDC+e9bIpEA==",
+           "length": 5575,
+           "stub": true
+       },
+       "ClassGradient.js": {
+           "content_type": "text/javascript",
+           "revpos": 11432,
+           "digest": "md5-pybjWtAARTAETEYFH7WZ1Q==",
+           "length": 2655,
+           "stub": true
+       },
+       "ClassConfigPanel.js": {
+           "content_type": "text/javascript",
+           "revpos": 11601,
+           "digest": "md5-VrmmKbRYHBKP2uN4fmahtw==",
+           "length": 57185,
+           "stub": true
+       },
+       "SVGPan-smm-new.js": {
+           "content_type": "text/javascript",
+           "revpos": 11102,
+           "digest": "md5-5O5OeklyhuTbdDh0/4tFTg==",
+           "length": 7388,
+           "stub": true
+       },
+       "ClassSimList.js": {
+           "content_type": "text/javascript",
+           "revpos": 11409,
+           "digest": "md5-dUKh4gWw2TkvExTLNvFp8A==",
+           "length": 21090,
+           "stub": true
+       },
+       "ClassLabel.js": {
+           "content_type": "text/javascript",
+           "revpos": 11419,
+           "digest": "md5-h5K2krIB974aoLVWDTTWGA==",
+           "length": 5452,
+           "stub": true
+       },
+       "ClassTimebox.js": {
+           "content_type": "text/javascript",
+           "revpos": 11415,
+           "digest": "md5-+hLJ6jOTXlOVhadZDurOUA==",
+           "length": 1624,
+           "stub": true
+       },
+       "ClassDataGrid.js": {
+           "content_type": "text/javascript",
+           "revpos": 11400,
+           "digest": "md5-kG5vZwPhZc/GBTDYwMrSOw==",
+           "length": 22020,
+           "stub": true
+       },
+       "ClassImpactView.js": {
+           "content_type": "text/javascript",
+           "revpos": 11600,
+           "digest": "md5-6xweVX751HV1pH22KdeTgQ==",
+           "length": 21149,
+           "stub": true
+       },
+       "ClassEventView.js": {
+           "content_type": "text/javascript",
+           "revpos": 11405,
+           "digest": "md5-dkUMK/TCBNGHZdQYbJjB4w==",
+           "length": 56348,
+           "stub": true
+       },
+       "ClassGrabSample.js": {
+           "content_type": "text/javascript",
+           "revpos": 11428,
+           "digest": "md5-bAR4wHx3vTy9exfo6AnK3g==",
+           "length": 17081,
+           "stub": true
+       },
+       "ClassDateList.js": {
+           "content_type": "text/javascript",
+           "revpos": 11412,
+           "digest": "md5-7bEvfK4piKjunOGj+4a2wg==",
+           "length": 5773,
+           "stub": true
+       },
+       "ClassDropdown.js": {
+           "content_type": "text/javascript",
+           "revpos": 11410,
+           "digest": "md5-HLiIJEpgEuES56Ooi1RCZg==",
+           "length": 14975,
+           "stub": true
+       },
+       "ClassMeasureGen.js": {
+           "content_type": "text/javascript",
+           "revpos": 11424,
+           "digest": "md5-7WwqQIk/egKrrRFcVevqkA==",
+           "length": 15591,
+           "stub": true
+       },
+       "ClassTabview.js": {
+           "content_type": "text/javascript",
+           "revpos": 11416,
+           "digest": "md5-4zt5YW8sKJLMh4vdxBzi1A==",
+           "length": 12772,
+           "stub": true
+       },
+       "kml.py": {
+           "content_type": "text/plain",
+           "revpos": 11445,
+           "digest": "md5-bhXgTMuHphs+gJSL/pE3bA==",
+           "length": 45120,
+           "stub": true
+       },
+       "json2_main.cpp": {
+           "content_type": "text/x-c",
+           "revpos": 10910,
+           "digest": "md5-nRHc9fScgOgitra9ljUIZA==",
+           "length": 34117,
+           "stub": true
+       },
+       "ClassCheckbox.js": {
+           "content_type": "text/javascript",
+           "revpos": 11414,
+           "digest": "md5-hXmXYYpCXE3JFY9JAQyFxw==",
+           "length": 2194,
+           "stub": true
+       },
+       "gui.html": {
+           "content_type": "text/html",
+           "revpos": 11615,
+           "digest": "md5-PTYFNiaSnobr6azJr2oVnw==",
+           "length": 54910,
+           "stub": true
+       },
+       "ClassBitMasker.js": {
+           "content_type": "text/javascript",
+           "revpos": 11441,
+           "digest": "md5-zKRLSg9CiDQUmo//QsGEZw==",
+           "length": 4435,
+           "stub": true
+       },
+       "ClassCouch.js": {
+           "content_type": "text/javascript",
+           "revpos": 11399,
+           "digest": "md5-HgymoygRj8gJPfDJsjIuOQ==",
+           "length": 10352,
+           "stub": true
+       },
+       "ClassSvgButton.js": {
+           "content_type": "text/javascript",
+           "revpos": 11442,
+           "digest": "md5-GaL25Vywi1mKDmpKAs0xOQ==",
+           "length": 11316,
+           "stub": true
+       },
+       "ClassTimeLine.js": {
+           "content_type": "text/javascript",
+           "revpos": 11407,
+           "digest": "md5-jViXM4hJlFd44g9xfrAgYg==",
+           "length": 6815,
+           "stub": true
+       },
+       "ClassControl.js": {
+           "content_type": "text/javascript",
+           "revpos": 11418,
+           "digest": "md5-uSCjgk/Lb6Khjw0BEeBXvg==",
+           "length": 8813,
+           "stub": true
+       },
+       "ClassClock.js": {
+           "content_type": "text/javascript",
+           "revpos": 11620,
+           "digest": "md5-UGIqcBGYfOgTbwpsHNQnQQ==",
+           "length": 4568,
+           "stub": true
+       },
+       "ClassEventGrabView.js": {
+           "content_type": "text/javascript",
+           "revpos": 11406,
+           "digest": "md5-tpCWWeJTaD6hUpaAjLyeQg==",
+           "length": 15496,
+           "stub": true
+       },
+       "ClassNetworkFiles.js": {
+           "content_type": "text/javascript",
+           "revpos": 11425,
+           "digest": "md5-z3cG8f1FyH5m+1blzWvkuQ==",
+           "length": 14969,
+           "stub": true
+       },
+       "ClassFileChooser.js": {
+           "content_type": "text/javascript",
+           "revpos": 11420,
+           "digest": "md5-s50oNwlWlFwtLzt2wcmN0g==",
+           "length": 6810,
+           "stub": true
+       },
+       "ClassTextarea.js": {
+           "content_type": "text/javascript",
+           "revpos": 11417,
+           "digest": "md5-L6BcJDK4s70y1TXvM7nlYg==",
+           "length": 4651,
+           "stub": true
+       },
+       "ClassNetworkList.js": {
+           "content_type": "text/javascript",
+           "revpos": 11411,
+           "digest": "md5-by3+HvVCZq580PSMj3F+qw==",
+           "length": 2582,
+           "stub": true
+       },
+       "ClassInversionGrid.js": {
+           "content_type": "text/javascript",
+           "revpos": 11436,
+           "digest": "md5-Cyg/R/Ci8Ozr/ACnwtTEcQ==",
+           "length": 7266,
+           "stub": true
+       },
+       "ClassCloseButton.js": {
+           "content_type": "text/javascript",
+           "revpos": 11431,
+           "digest": "md5-SoyhzIaMOyZXxcbKqG666w==",
+           "length": 293,
+           "stub": true
+       },
+       "ClassButton.js": {
+           "content_type": "text/javascript",
+           "revpos": 11421,
+           "digest": "md5-qJDAm9mmgZoSn8QMgebpkw==",
+           "length": 2224,
+           "stub": true
+       },
+       "ClassNetworkView.js": {
+           "content_type": "text/javascript",
+           "revpos": 11434,
+           "digest": "md5-xIAkEVyA0Cwxt1WE5LXTxg==",
+           "length": 109686,
+           "stub": true
+       },
+       "ClassNetPopup.js": {
+           "content_type": "text/javascript",
+           "revpos": 11408,
+           "digest": "md5-0YRcWw/zH6DWfNlKYEOIzg==",
+           "length": 9524,
+           "stub": true
+       },
+       "json_main.cpp": {
+           "content_type": "text/x-c",
+           "revpos": 11444,
+           "digest": "md5-/QHOgxbqxrlc/rri4swBZg==",
+           "length": 5414,
+           "stub": true
+       },
+       "ClassInversion.js": {
+           "content_type": "text/javascript",
+           "revpos": 11422,
+           "digest": "md5-KxTFxGB3pdmW/LCWzo/oXw==",
+           "length": 15852,
+           "stub": true
+       },
+       "ClassEvents.js": {
+           "content_type": "text/javascript",
+           "revpos": 11427,
+           "digest": "md5-17sIPvDaiMwvb/0HD9NCig==",
+           "length": 17624,
+           "stub": true
+       },
+       "License.txt": {
+           "content_type": "text/plain",
+           "revpos": 11446,
+           "digest": "md5-kdtINQ/edcrrTgGeiSu+Sg==",
+           "length": 1632,
+           "stub": true
+       },
+       "ClassManageNetworks.js": {
+           "content_type": "text/javascript",
+           "revpos": 11437,
+           "digest": "md5-i+cJgaFeO780OYX39f2Zug==",
+           "length": 269,
+           "stub": true
+       },
+       "ClassNodeGraph.js": {
+           "content_type": "text/javascript",
+           "revpos": 11402,
+           "digest": "md5-/SvHgOakHSQUHyjQpbumkg==",
+           "length": 50659,
+           "stub": true
+       },
+       "ClassInputPopup.js": {
+           "content_type": "text/javascript",
+           "revpos": 11429,
+           "digest": "md5-Xmc3ms+NZadtUFgiNoIB7A==",
+           "length": 4283,
+           "stub": true
+       },
+       "ClassTextbox.js": {
+           "content_type": "text/javascript",
+           "revpos": 11413,
+           "digest": "md5-wQ2K5zntE4Ppi1QvPz8a8Q==",
+           "length": 7904,
+           "stub": true
+       },
+       "ClassVoterRegistration.js": {
+           "content_type": "text/javascript",
+           "revpos": 11398,
+           "digest": "md5-Ab2VPAPiT7phixlIdb82bQ==",
+           "length": 1180,
+           "stub": true
+       },
+       "ClassWaiting.js": {
+           "content_type": "text/javascript",
+           "revpos": 11602,
+           "digest": "md5-jTf4wZ0oU/ed7U7T74KiAA==",
+           "length": 8347,
+           "stub": true
+       },
+       "ClassGlobalData.js": {
+           "content_type": "text/javascript",
+           "revpos": 11397,
+           "digest": "md5-bIN7qALKkv1WDwsh1lc6Tw==",
+           "length": 14358,
+           "stub": true
+       },
+       "local.ini": {
+           "content_type": "text/plain",
+           "revpos": 11611,
+           "digest": "md5-ZbOE5udBLf8DBFl68yC1dQ==",
+           "length": 5487,
+           "stub": true
+       },
+       "ClassTraining.js": {
+           "content_type": "text/javascript",
+           "revpos": 11426,
+           "digest": "md5-MH0QJzwrCKlx0vf6dFjBIQ==",
+           "length": 15368,
+           "stub": true
+       },
+       "ClassVerifyPopup.js": {
+           "content_type": "text/javascript",
+           "revpos": 11430,
+           "digest": "md5-M9N6kyySWqD00zfv5bhFTw==",
+           "length": 5550,
+           "stub": true
+       },
+       "ClassImpact.js": {
+           "content_type": "text/javascript",
+           "revpos": 11423,
+           "digest": "md5-BJNCTD47M8zLIE2+QvX+1A==",
+           "length": 14749,
+           "stub": true
+       },
+       "ClassHttpRequest.js": {
+           "content_type": "text/javascript",
+           "revpos": 11401,
+           "digest": "md5-4eeRsRDa5SLd1fPaCqikYQ==",
+           "length": 4655,
+           "stub": true
+       },
+       "ClassRunList.js": {
+           "content_type": "text/javascript",
+           "revpos": 11433,
+           "digest": "md5-XLuhvNlh9zACLBbVbYLVpQ==",
+           "length": 17943,
+           "stub": true
+       }
+   }
+}

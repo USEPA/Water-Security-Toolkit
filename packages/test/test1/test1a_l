@@ -1,0 +1,17 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+
+setenv bindir `bindirLocation`
+setenv moddir `moddirLocation`
+setenv python `pythonLocation`
+
+if (! -e test1.tso) then
+   $bindir/tevasim --tsg test1.tsg --tsi test1.tsi --tso test1.tso Net3.inp Net3.out
+endif
+if (! -e test1_mc.impact) or (! -e test1_pe.impact) or (! -e test1_vc.impact) or (! -e test1_ec.impact) then
+   $bindir/tso2Impact --mc --vc --ec --pe --epanetin Net3.inp test1 test1.tso ../data/Net3/chem.tai
+endif
+
+$python $bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=lagrangian  --disable-aggregation=all --ub=pe,800 --ub=ec,15000 --ub=vc,25000 --memmon --debug --print-log

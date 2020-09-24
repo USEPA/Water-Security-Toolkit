@@ -1,0 +1,67 @@
+# sp configuration template
+impact data:
+  -
+    name: impact1                  # Impact block name
+    impact file: Net3_mc.impact    # Impact file name
+    nodemap file: Net3.nodemap     # Nodemap file name
+    weight file: null              # Weight file name
+cost:
+  -
+    name: null                     # Cost block name
+    cost file: null                # Cost file name
+objective:
+  -
+    name: obj1                     # Objective block name
+    goal: impact1                  # Optimization objective
+    statistic: MEAN                # Objective statistic
+    gamma: 0.05                    # Gamma, required with statistics VAR or CVAR
+constraint:
+  -
+    name: const1                   # Constraint block name
+    goal: NS                       # Constraint goal
+    statistic: TOTAL               # Constraint statistic
+    gamma: 0.05                    # Gamma, required with statistics VAR or CVAR
+    bound: 5                       # Constraint upper bound
+aggregate:
+  -
+    name: null                     # Aggregation block name
+    type: null                     # Aggregation type: THRESHOLD, PERCENT or RATIO
+    goal: null                     # Aggregation goal
+    value: null                    # Aggregation value
+    conserve memory: 0             # Aggregation conserve memory
+    distinguish detection: 0       # Detection goal
+    disable aggregation: [0]       # Aggregation disable aggregation
+imperfect:
+  -
+    name: null                     # Imperfect block name
+    sensor class file: null        # Imperfect sensor class file
+    junction class file: null      # Imperfect junction class file
+sensor placement:
+  -
+    type: default                  # Sensor placement problem type
+    modeling language: NONE        # Modeling language: NONE, PYOMO or AMPL, default = NONE
+    objective: obj1                # Objective block name used in sensor placement
+    constraint: [const1]           # Name of constraint block(s) used in sensor placement
+    imperfect: null                # Imperfect block name used in sensor placement
+    aggregate: null                # Aggregate block name used in sensor placement
+    compute bound: false           # Compute bounds: true or false, default = false
+    presolve: true                 # Presolve problem: true or false, default = true
+    compute greedy ranking: false  # Compute greedy ranking of sensor locations, default =
+                                   #   false
+    location:
+      -
+        feasible nodes: ALL     # Feasible sensor nodes
+        infeasible nodes: NONE  # Infeasible sensor nodes
+        fixed nodes: NONE       # Fixed sensor nodes
+        unfixed nodes: NONE     # Unfixed sensor nodes
+solver:
+  type: snl_grasp                        # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

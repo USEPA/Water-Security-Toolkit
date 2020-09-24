@@ -1,0 +1,1445 @@
+<!--
+Copyright (2013) Sandia Corporation. Under the terms of Contract
+DE-AC04-94AL85000 with Sandia Corporation, the U.S. Government 
+retains certain rights in this software.
+
+This software is released under the FreeBSD license as described 
+in License.txt
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+		<script type="text/javascript" src="d3.v2.js"></script>
+		<script type="text/javascript" src="SVGPan-smm-new.js"></script>
+		<script type="text/javascript" src="ClassGlobalData.js"></script>
+		<script type="text/javascript" src="ClassVoterRegistration.js"></script>
+		<script type="text/javascript" src="ClassCouch.js"></script>
+		<script type="text/javascript" src="ClassHttpRequest.js"></script>
+		<script type="text/javascript" src="ClassControl.js"></script>
+		<script type="text/javascript" src="ClassDataGrid.js"></script>
+		<script type="text/javascript" src="ClassRunList.js"></script>
+		<script type="text/javascript" src="ClassSimList.js"></script>
+		<script type="text/javascript" src="ClassTimeLine.js"></script>
+		<script type="text/javascript" src="ClassNodeGraph.js"></script>
+		<script type="text/javascript" src="ClassNetPopup.js"></script>
+		<script type="text/javascript" src="ClassFilterList.js"></script>
+		<script type="text/javascript" src="ClassDropdown.js"></script>
+		<script type="text/javascript" src="ClassNetworkList.js"></script>
+		<script type="text/javascript" src="ClassDateList.js"></script>
+		<script type="text/javascript" src="ClassTextbox.js"></script>
+		<script type="text/javascript" src="ClassCheckbox.js"></script>
+		<script type="text/javascript" src="ClassTimebox.js"></script>
+		<script type="text/javascript" src="ClassTabview.js"></script>
+		<script type="text/javascript" src="ClassTextarea.js"></script>
+		<script type="text/javascript" src="ClassLabel.js"></script>
+		<script type="text/javascript" src="ClassButton.js"></script>
+		<script type="text/javascript" src="ClassFileChooser.js"></script>
+		<script type="text/javascript" src="ClassInversion.js"></script>
+		<script type="text/javascript" src="ClassImpact.js"></script>
+		<script type="text/javascript" src="ClassMeasureGen.js"></script>
+		<script type="text/javascript" src="ClassNetworkFiles.js"></script>
+		<script type="text/javascript" src="ClassImpactView.js"></script>
+		<script type="text/javascript" src="ClassTraining.js"></script>
+		<script type="text/javascript" src="ClassEvents.js"></script>
+		<script type="text/javascript" src="ClassConfigPanel.js"></script>
+		<script type="text/javascript" src="ClassGrabSample.js"></script>
+		<script type="text/javascript" src="ClassInputPopup.js"></script>
+		<script type="text/javascript" src="ClassVerifyPopup.js"></script>
+		<script type="text/javascript" src="ClassSvgButton.js"></script>
+		<script type="text/javascript" src="ClassLockButton.js"></script>
+		<script type="text/javascript" src="ClassCloseButton.js"></script>
+		<script type="text/javascript" src="ClassGradient.js"></script>
+		<script type="text/javascript" src="ClassInversionNavigator.js"></script>
+		<script type="text/javascript" src="ClassInversionGrid.js"></script>
+		<script type="text/javascript" src="ClassEventView.js"></script>
+		<script type="text/javascript" src="ClassEventGrabView.js"></script>
+		<script type="text/javascript" src="ClassNetworkView.js"></script>
+		<script type="text/javascript" src="ClassManageNetworks.js"></script>
+		<script type="text/javascript" src="ClassWaiting.js"></script>
+		<script type="text/javascript" src="ClassClock.js"></script>
+		<script type="text/javascript" src="ClassBitMasker.js"></script>
+		<style type="text/css">
+			html, body {
+				width: 100%;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			g, svg {
+				font-family: Tahoma,Consolas,Lucida Console,Verdana,sans-serif;
+				font-size: 12px;
+			}
+			.input_label {
+				font-size: 11px;
+			}
+		</style>
+		<title>dinesti</title>
+	</head>
+	<body onKeyPress="onKeyPress()" onKeyDown="onKeyDown()" onKeyUp="onKeyUp()" onDragStart="return false">
+	</body>
+</html>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript" title="global constants">
+	//Distribution Network Security Tool(kit) Interface (dinesti)
+	var path = location.pathname;
+	var path = path.split("/");
+	var search = location.search;
+	var iloc = search.indexOf("?");
+	//var search = location.hash;
+	//var iloc = search.indexOf("#");
+	if (search.length > 1 && iloc == 0) {
+		var db = search.substring(1);
+		Couch.setDbName(db, null);
+	} else 
+	if (location.port.length > 0) {
+		Couch.setDbName(path[1], null);
+	} else {
+		Couch.setDbName(path[2], path[1]);
+	}
+	//
+	// global constants
+	//
+	var MOUSE_CLICK_LEFT    =   1;
+	var MOUSE_CLICK_RIGHT   =   3;
+	var MAX_PAGE_WIDTH      = 700;
+	var MAX_PAGE_HEIGHT     = 500;
+	var SUFFIX_MAX_LENGTH   =   1;
+	var MENU_LEFT           =  10;
+	var MENU_WIDTH          = 170;
+	var MENU_HEIGHT         = 430;
+	var NETWORK_VIEW_BORDER =  20;
+	var PANEL_WIDTH         = 480;
+	var PANEL_HEIGHT        = 450;//MENU_HEIGHT+20
+	var m_Titles = [
+	//	{"id":null,"title":""},		
+		//{"id":1,"title":"View Network"},
+		{"id":1,"title":"Manage Network Files"},
+		{"id":2,"title":"Contaminant Simulation"},
+		{"id":5,"title":"Impact Study"},
+	//	{"id":6,"title":"Measurement Generator"},
+	//	{"id":3,"title":"Source Inversion"},
+	//	{"id":4,"title":"Grab Sample Locator"},
+		{"id":7,"title":"Inversion Training"},
+		{"id":8,"title":"Past Events"},
+		{"id":9,"title":"Configure"},
+		];
+	//
+	var m_NetworkView = null;
+	var m_Waiting = null;
+	var m_Clock = null;
+	var m_NetworkFilesList = null;
+	var m_SimList = null;
+	var m_ImpactList = null;
+	var m_MeasureGenList = null;
+	var m_InversionList = null;
+	var m_GrabList = null;
+	var m_TrainingList = null;
+	var m_EventsList = null;
+	var m_Config = null;
+	//
+	var m_KeydownVoting = new VoterRegistration();
+	//
+	//
+</script>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript" title="event handlers">
+	//
+	// event handlers
+	//
+	
+	//
+	// track the changes to the couch database
+	//
+	fCouchDbChanges = function(nSince) {
+		var sCon = GlobalData.CouchDb + "_changes?feed=longpoll";
+		//var sCon = GlobalData.CouchDb + "_changes?feed=continuous";
+		//sCon = sCon + "&style=all_docs";
+		//sCon = sCon + "&heartbeat=1000";
+		if (nSince != null)
+			sCon = sCon + "&since=" + nSince
+		var http = Couch.HttpFactory("GET", sCon)
+		http.bAlertError = false;
+		http.bLogRequests = false;
+		http.Send(function(e,res) {
+			if (GlobalData.config_clock_update_now) {
+				m_Clock.update();
+				GlobalData.config_clock_update_now = false;
+			}				
+			if (!res || !res.data) {
+				fCouchDbChanges();
+				return;
+			}
+			if (nSince != null) {
+				for (var i = 0; i < res.data.results.length; i++) {
+					if (res.data.results[i].deleted) {
+						//////////////////////////////////////////////////////////////////////////////
+						m_NetworkFilesList.updateData();
+						NetworkFiles.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_SimList.updateData();
+						//////////////////////////////////////////////////////////////////////////////
+						m_ImpactList.updateData();
+						//Impact.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_MeasureGenList.updateData();
+						//MeasureGen.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_InversionList.updateData();
+						Inversion.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_GrabList.updateData();
+						GrabSample.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_TrainingList.updateData();
+						Training.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						m_EventsList.updateData();
+						Events.cleanUpDeleted(res.data.results[i].id);
+						//////////////////////////////////////////////////////////////////////////////
+						continue;
+					}
+					if (res.data.results[i].id == "time")
+						continue;
+					Couch.GetDoc(res.data.results[i].id, function(data) {
+						if (data) {
+							if (false) {
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data._id == "gui") {
+								m_ConfigPanel.updateData(false, data);
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_InpList) {
+								m_NetworkFilesList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_NetworkFilesList) {
+								m_NetworkFilesList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_SimList) {
+								m_SimList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_ImpactList) {
+								m_ImpactList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_GenList) {
+								m_MeasureGenList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_InversionList) {
+								m_InversionList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_TrainingList) {
+								m_TrainingList.updateData(data);
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_EventsList) {
+								m_EventsList.updateData(data);
+							//////////////////////////////////////////////////////////////////////////////
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_EventsLog) {
+								m_EventsList.updateLog(data);
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_EventsGrabGrid) {
+								m_TrainingList.updateGrabGrid(data);
+								m_EventsList.updateGrabGrid(data);
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_EventsCanaryGrid) {
+								m_TrainingList.updateCanaryGrid(data);
+								m_EventsList.updateCanaryGrid(data);
+							//////////////////////////////////////////////////////////////////////////////
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_MeasureList) {
+								m_InversionList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_GrabList) {
+								m_GrabList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							} else if (data.m_ScenariosList) {
+								m_GrabList.updateData();
+							//////////////////////////////////////////////////////////////////////////////
+							}
+						}
+					});
+				}
+			}
+			//start watching for changes starting at last seq
+			var t = setTimeout(function() {
+				fCouchDbChanges(res.data.last_seq);
+			}, 500);
+		});
+	}
+	fCouchDbChanges();
+	
+	function UpdateNetworkLists() {
+		////////////////////////////////////////////////////////////////////////
+		// add a method here to update any list that contains a list of networks
+		////////////////////////////////////////////////////////////////////////
+		m_SimList.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+		m_ImpactList.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+		m_MeasureGenList.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+		m_GrabList.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+		m_InversionList.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+		m_ConfigPanel.updateNetworkList();
+		////////////////////////////////////////////////////////////////////////
+	}
+	
+	//
+	// trap window events
+	//
+	window.onresize = function(e) {
+		ResizeWindow();
+		window.scrollTo(0,0);
+	};
+	window.onmousewheel = function(e) {
+	}
+	window  .onkeydown  = onKeyDown   ("window"  );
+	window  .onkeypress = onKeyPress  ("window"  );
+	window  .onkeyup    = onKeyUp     ("window"  );
+	document.onkeydown  = onKeyDown   ("document");
+	document.onkeypress = onKeyPress  ("document");
+	document.onkeyup    = onKeyUp     ("document");
+	
+	//
+	// Handle the event when the main window is resized
+	//
+	function ResizeWindow() {
+		var nWidth  = window.innerWidth  + window.pageXOffset;
+		var nHeight = window.innerHeight + window.pageYOffset;
+		//
+		d3.select("#gBG")
+			.style("width", convertToPx(nWidth))
+			.style("height", convertToPx(nHeight))
+			;
+		d3.select("#svgBG")
+			.style("width", convertToPx(nWidth))
+			.style("height", convertToPx(nHeight))
+			;
+		d3.select("#rectBG")
+			.attr("width" ,nWidth )
+			.attr("height",nHeight)
+			;
+		//
+		// add the following line to the constructor of the class:
+		//	GlobalData.resizeHooks[uniqueString] = {"this": this, "function": this.resizeWindow};
+		for (id in GlobalData.resizeHooks) {
+			var hook = GlobalData.resizeHooks[id];
+			hook.function.call(hook.this, nWidth, nHeight);
+		}
+		return {"w": nWidth, "h": nHeight};
+	}
+	////
+	function onMouseMove(sid) {
+		var m_this = null;		
+		switch (sid) {
+			case "svgTitle":
+			case "svgTitle1":
+			case "svgTitle2":
+			case "svgClockLoading":
+			case "svgBG":
+				for (var i = 0; i < m_Titles.length + 1; i++) {
+					var sel = d3.select("#" + "poly" + i);
+					sel.attr("stroke", d3.rgb(100,100,100));
+				}
+				break;
+			case "gStartEventButton":
+			case "svg0":
+			case "poly0":
+				for (var i = 1; i < m_Titles.length + 1; i++) {
+					var sel = d3.select("#" + "poly" + i);
+					sel.attr("stroke", d3.rgb(100,100,100));
+				}
+				break;
+		}
+		d3.select("#"+sid).each(function() { m_this = this; });
+		var sel = d3.select("#" + sid);
+		var sidPrefix = getPrefix1(sid);
+		var id        = getSuffix1(sid);
+		switch (sidPrefix) {
+			case "g":
+			case "svg":
+			case "poly":
+				var point = d3.svg.mouse(m_this);
+				if (id > 0) {
+					// the svg's after svg0 overlap svg0 and interupt the mouseout event prematurely
+					if (point[0] > 19 && point[1] > 9 && point[1] < 443 && point[0] < 472) {
+						d3.select("#" + "poly" + id).attr("stroke", d3.rgb(  0,  0,  0));
+					} else {
+						d3.select("#" + "poly" + id).attr("stroke", d3.rgb(100,100,100));
+					}
+					//
+					if (point[0] < 12 && point[1] > 9 && point[1] < 443) {
+						d3.select("#" + "poly" + 0).attr("stroke", d3.rgb(  0,  0,  0));
+					} else {
+						d3.select("#" + "poly" + 0).attr("stroke", d3.rgb(100,100,100));
+					}
+				} else if (id == 0) {
+					if (point[0] > 10 && point[1] > 1 && point[1] < 433 && point[0] < 182) {
+						d3.select("#" + "poly" + 0).attr("stroke", d3.rgb(  0,  0,  0));
+					} else {
+						d3.select("#" + "poly" + 0).attr("stroke", d3.rgb(100,100,100));
+					}
+				}
+				break;
+		}
+	}
+	////
+	function onMouseOver(sid) {
+		m_NetworkView.onMouseOver(sid);
+		var sel = d3.select("#" + sid);
+		var sidPrefix = getPrefix1(sid);
+		var id        = getSuffix1(sid);
+		switch (sidPrefix) {
+			case "rect":
+				onMouseOver("text" + id);
+				break;
+			case "text":
+				sel.attr("fill", d3.rgb(250,250,250));
+				sel.style("text-shadow", "#dddddd 0px 0px 8px");
+				break;
+		}
+		//
+		var dataInFrontOf = sel.attr("data-InFrontOf");
+		if (dataInFrontOf && dataInFrontOf.length > 0) {
+			d3.select("#" + dataInFrontOf).attr("stroke", d3.rgb(0,0,0));
+		} else {
+			var data = data;
+		}
+	}
+	////
+	function onMouseOut(sid) {
+		m_NetworkView.onMouseOut(sid);
+		var sel = d3.select("#" + sid);
+		switch (sid) {
+			case "poly0":
+				sel.attr("stroke",d3.rgb(100,100,100));
+				return;
+		}
+		var sidPrefix = getPrefix1(sid);
+		var id        = getSuffix1(sid);
+		switch (sidPrefix) {
+			case "rect":
+				onMouseOut("text" + id);
+				return;
+			case "text":
+				sel.style("text-shadow", "");
+				sel.attr("fill",d3.rgb(20,20,20));
+				return;
+		}
+	}
+	////
+	function onMouseUp(sid) {
+		////////////////////////////////////////////////////////////////////////////////
+		// these are for the scrollbar drag stuff
+		////////////////////////////////////////
+		if (m_NetworkFilesList) m_NetworkFilesList.onMouseUp();
+		////////////////////////////////////////
+		if (m_SimList) m_SimList.onMouseUp();
+		////////////////////////////////////////
+		if (m_ImpactList) m_ImpactList.onMouseUp();
+		////////////////////////////////////////
+		if (m_MeasureGenList) m_MeasureGenList.onMouseUp();
+		////////////////////////////////////////
+		if (m_GrabList) m_GrabList.onMouseUp();
+		////////////////////////////////////////
+		if (m_InversionList) m_InversionList.onMouseUp();
+		////////////////////////////////////////
+		if (m_TrainingList) m_TrainingList.onMouseUp();
+		////////////////////////////////////////
+		if (m_EventsList) m_EventsList.onMouseUp();
+		////////////////////////////////////////
+		if (m_NetworkView && m_NetworkView.m_NodeGraph) m_NetworkView.m_NodeGraph.onMouseUp();
+		////////////////////////////////////////
+		if (m_NetworkView && m_NetworkView.m_InversionGrid) m_NetworkView.m_InversionGrid.onMouseUp();
+		////////////////////////////////////////
+		if (m_EventView) m_EventView.onMouseUp();
+		////////////////////////////////////////
+		var sel = d3.select("#"+sid);
+		var sidPrefix = getPrefix1(sid);
+		var id        = getSuffix1(sid);
+		switch (sidPrefix) {
+			case "rect":
+				if (d3.event.which == MOUSE_CLICK_RIGHT) {
+				} else if (d3.event.which == MOUSE_CLICK_LEFT ) {
+					for (var i = 1; i <= m_Titles.length; i++) {
+						if (i != id)
+							setHidden("g" + i + "i", "svg" + i);
+					}
+					setVisible("g" + id + "i", "svg" + id);
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_NetworkFilesList && id == m_NetworkFilesList.nPanel.toString())
+						m_NetworkFilesList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_SimList && id == m_SimList.nPanel.toString())
+						m_SimList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_ImpactList && id == m_ImpactList.nPanel.toString())
+						m_ImpactList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_MeasureGenList && id == m_MeasureGenList.nPanel.toString())
+						m_MeasureGenList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_InversionList && id == m_InversionList.nPanel.toString())
+						m_InversionList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_GrabList && id == m_GrabList.nPanel.toString())
+						m_GrabList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_TrainingList && id == m_TrainingList.nPanel.toString())
+						m_TrainingList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_EventsList && id == m_EventsList.nPanel.toString())
+						m_EventsList.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_ConfigPanel && id == m_ConfigPanel.nPanel.toString())
+						m_ConfigPanel.show();
+					else
+						m_ConfigPanel.hide();
+					////////////////////////////////////////////////////////////////////////////////////
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_EventView && id == m_TrainingList.nPanel.toString())
+						m_EventView.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_EventView && id == m_EventsList.nPanel.toString())
+						m_EventView.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_EventGrabView && id == m_TrainingList.nPanel.toString())
+						m_EventGrabView.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+					if (m_EventGrabView && id == m_EventsList.nPanel.toString())
+						m_EventGrabView.updateLabels();
+					////////////////////////////////////////////////////////////////////////////////////
+				}
+				return;
+		}
+	}
+	////
+	function onMouseDown(sid) {
+	}
+	////
+	function onMouseWheel(sid_or_e) {
+		var e, sid;
+		if (typeof(sid_or_e) == "string") {
+			alert("");
+			sid = sid_or_e;
+			e = window.event;
+		} else {
+			e = sid_or_e ? sid_or_e : window.event;
+			sid = e.target.id;
+			if (sid == null)
+				sid = e.target.parentElement.id;
+		}
+		//
+		// get prefix id
+		//
+		var sidPrefix = getPrefix2(sid);
+		var id        = getSuffix2(sid);
+		switch (sidPrefix) {
+			case "gNetworkView":
+			case "rectNetworkView":
+			case "Node":
+			case "Valve":
+			case "Pump":
+			case "Pipes":
+			case "Sensor":
+			//case "svgNodePopup": // TODO - obselete?
+			case "svgNetPopupNodePopup":
+			case "imageNetworkView":
+				SVGPan_handleMouseWheel(e);
+				return;
+		}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// add here any InputPopup controls so they will scroll with the mouse wheel
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if (m_MeasureGenList && m_MeasureGenList.ViewResultsPopup && sid == m_MeasureGenList.ViewResultsPopup.Textarea.sid)
+			return m_MeasureGenList.ViewResultsPopup.Textarea.stopScroll(e);
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if (m_InversionList && m_InversionList.InputPopup && sid == m_InversionList.InputPopup.Textarea.sid)
+			return m_InversionList.InputPopup.Textarea.stopScroll(e);
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if (m_GrabList && m_GrabList.InputPopup && sid == m_GrabList.InputPopup.Textarea.sid)
+			return m_GrabList.InputPopup.Textarea.stopScroll(e);
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		switch (sid) {
+			////////////////////////////////////////////////////////////////////////////////////////////////////
+			// add here any text areas that need to be able to scroll with the mouse wheel
+			////////////////////////////////////////////////////////////////////////////////////////////////////
+			case m_ImpactList.textInjections.sid:
+				return m_ImpactList.textInjections.stopScroll(e);
+			case m_ImpactList.textSensors.sid:
+				return m_ImpactList.textSensors.stopScroll(e);
+			case m_ImpactList.textAssets.sid:
+				return m_ImpactList.textAssets.stopScroll(e);
+			case m_MeasureGenList.textSensors.sid:
+				return m_MeasureGenList.testSensors.stopScroll(e);
+			case m_TrainingList.textSensors.sid:
+				return m_TrainingList.textSensors.stopScroll(e);
+			case m_EventsList.textLog.sid:
+				return m_EventsList.textLog.stopScroll(e);
+			case m_ConfigPanel.textLog.sid:
+				return m_ConfigPanel.textLog.stopScroll(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////
+			case m_NetworkView.dotsizeid:
+				var delta;
+				if (e.wheelDelta) {
+					delta = e.wheelDelta / 3600; // Chrome/Safari
+				}else{
+					delta = e.detail / -90; // Mozilla
+				}
+				var z = 1 + delta; // Zoom factor: 0.9/1.1
+				//
+				m_NetworkView.nStrokeWidth *= z;
+				GlobalData.nStrokeWidth    *= z;
+				m_NetworkView.NodePopup.hide();
+				m_NetworkView.resizeDot();
+		}
+		//
+		// get parent id
+		// its easiest to trap scrolling list if we trap them by their parent id
+		//
+		if (e) {
+			var psid = e.target.parentElement.id;
+			//////////////////////////////////////////////
+			// each of these is for a list of input files
+			//////////////////////////////////////////////
+			if (m_InversionList && psid == m_InversionList.listInvData.sid)
+				return m_InversionList.listInvData.stopScroll(e);
+			//////////////////////////////////////////////
+			if (m_GrabList && psid == m_GrabList.listGrabData.sid)
+				return m_GrabList.listGrabData.stopScroll(e);
+			//////////////////////////////////////////////
+			switch (psid) {
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case m_NetworkView.NodeFilter.List.sid:
+					e.cancelBubble = true;
+					return;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gCanaryGrid":
+				case "svgCanaryGrid":
+					m_EventView.CanaryGrid.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gGrabEventGrid":
+				case "svgGrabEventGrid":
+					m_EventView.GrabGrid.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////// each of these is for a RunList class
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gNetworkFiles":
+				case "svgNetworkFiles":
+					m_NetworkFilesList.NetworkFiles.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gSimList":
+				case "svgSimList": // TODO - this isnt a RunList subclass but it should be...
+					m_SimList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gImpact":
+				case "svgImpact":
+					m_ImpactList.ImpactList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gGen":
+				case "svgGen":
+					m_MeasureGenList.GenList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gInversion":
+				case "svgInversion":
+					m_InversionList.InversionList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gGrab":
+				case "svgGrab":
+					m_GrabList.GrabList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gTraining":
+				case "svgTraining":
+					m_TrainingList.TrainingList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gEvents":
+				case "svgEvents":
+					m_EventsList.EventsList.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				case "gInversionGridGrid":
+				case "svgInversionGridGrid":
+					m_NetworkView.m_InversionGrid.onMouseWheel(e);
+					return cancelEvent(e);
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			}
+			//
+			// get parent prefix id
+			//
+			var sidPrefix = getPrefix2(psid);
+			var id        = getSuffix2(psid);
+			switch (sidPrefix) {
+				//case "svgNodePopup": // TODO - obselete?
+				case "svgNetPopupNodePopup":
+					SVGPan_handleMouseWheel(e);
+					return;
+			}
+		}
+		return cancelEvent(e);
+	}
+	////
+	function onKeyDown(sid) {
+		var sid2 = null;
+		if (window.event) {
+			if (window.event.srcElement) //IE9
+				sid2 = window.event.srcElement.id; //IE9
+			if (window.event.target)
+				sid2 = window.event.target.id;
+			// sid2.length > 0 for text boxes and list boxes
+		}
+		if (!sid) {
+			if (sid2 == "") {
+				var bNetworkHidden = !(m_NetworkView && m_NetworkView.isVisible());
+				var bEventHidden   = !(m_EventView   && m_EventView.isVisible()  );
+				if (window.event.altKey && window.event.metaKey) {
+					window.event.returnValue = true; // this allows key press events for the apple key and option key together
+				} else if (window.event.metaKey && window.event.keyCode == 82) {
+					window.event.returnValue = true; // this allows key press event for the apple key and -R- which refreshes the web page
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				// this stops keydown events when any one of the "voters" says stop, like a delete-confirm dialog.
+				} else if (!m_KeydownVoting.pollVoters()) {
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_NetworkFilesList && m_NetworkFilesList.isVisible() && !m_NetworkFilesList.NetworkFiles.disabled) { // TODO - disabled to disabled() and use a private variable like m_disabled
+					m_NetworkFilesList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_SimList && m_SimList.isVisible()) {
+					m_SimList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_ImpactList && m_ImpactList.isVisible()) {
+					m_ImpactList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_MeasureGenList && m_MeasureGenList.isVisible()) {
+					m_MeasureGenList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_InversionList && m_InversionList.isVisible()) {
+					m_InversionList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && m_GrabList && m_GrabList.isVisible()) {
+					m_GrabList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && bEventHidden && m_TrainingList && m_TrainingList.isVisible()) {
+					m_TrainingList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (bNetworkHidden && bEventHidden && m_EventsList && m_EventsList.isVisible()) {
+					m_EventsList.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (!bNetworkHidden && m_NetworkView.m_InversionGrid) {
+					m_NetworkView.m_InversionGrid.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (!bEventHidden) {
+					var keyCode = window.event.keyCode; 
+					//m_EventView.CanaryGrid.onKeyDown("");
+					//m_EventView.GrabGrid.onKeyDown("");
+					m_EventView.queueKeyDown(keyCode);
+					/* *///////////////////////////////////////////////
+					/* */if (false) {//////////////////////////////////
+					/* */m_EventView.queueKeyDown(keyCode);
+					/* */m_EventView.queueKeyDown(keyCode);
+					/* */}/////////////////////////////////////////////
+					/* *///////////////////////////////////////////////
+					window.event.returnValue = false;
+				} else if (!bEventHidden && m_EventView.CanaryGrid) {
+					m_EventView.CanaryGrid.onKeyDown("");
+					window.event.returnValue = false;
+				} else if (!bEventHidden && m_EventView.GrabGrid) {
+					m_EventView.GrabGrid.onKeyDown("");
+					window.event.returnValue = false;
+			////////////////////////////////////////////////////////////////////////////////////////////////////////////
+				} else if (false) {
+				}
+			}
+		} else {
+			// this code is not actually needed. you can still scroll a disabled text area.
+			var keyCode = (window && window.event) ? window.event.keyCode : -1;
+			if (m_EventsList && sid == "g" + m_EventsList.nPanel + "i") {
+				switch (sid2) {
+					case m_EventsList.textLog.sid:
+						switch (keyCode) {
+							case 16: // shift
+							case 35: // end
+							case 36: // home
+							case 37: // arrow left
+							case 38: // arrow up
+							case 39: // arrow right
+							case 40: // arrow down
+							case 91: // meta
+								break;
+							default:
+								break;
+						}
+				}
+			}
+			var sidPrefix = getPrefix2(sid);
+			var id        = getSuffix2(sid);
+			switch (sidPrefix) {
+			}
+		}
+	}
+	////
+	function onKeyPress(sid) {
+		if (!sid) {
+		}
+		switch (sid) {
+			case "":
+				break;
+		}
+	}
+	////
+	function onKeyUp(sid) {
+		if (!sid) {
+		}
+		switch (sid) {
+			case "":
+				break;
+		}
+	}
+	////
+	function onChange(sid) {
+		var m_this = null;
+		d3.select("#"+sid).each(function() { m_this = this; });
+		var sidPrefix = getPrefix2(sid);
+		var id        = getSuffix2(sid);
+		switch (sidPrefix) {
+		}
+		//
+		switch (sid) {
+		}
+	}
+	////
+	function onInput(sid) {
+	}
+	function onClick(sid) {
+		switch (sid) {
+			case m_StartEvent.sid:
+				if (m_EventsList) {
+					var id = m_EventsList.nPanel;
+					for (var i = 1; i <= m_Titles.length; i++) {
+						if (i != id)
+							setHidden("g" + i + "i", "svg" + i);
+					}
+					//
+					m_ConfigPanel.hide();
+					//
+					if (id > 0) {
+						m_EventsList.onEvent();
+						setVisible("g" + id + "i", "svg" + id);
+					}
+				}
+				break;
+		}
+	}
+	function onDblClick(sid) {
+	}
+	////
+	function setHidden(sid_g, sid_svg) {
+		setHidden_g  (sid_g  );
+		setHidden_svg(sid_svg);
+	}
+	function setHidden_g(sid_g) {
+		d3.select("#" + sid_g).style("visibility","hidden");
+	}
+	function setHidden_svg(sid_svg) {
+		d3.select("#" + sid_svg).attr ("display","none");
+	}
+	function setVisible(sid_g, sid_svg) {
+		setVisible_g  (sid_g  );
+		setVisible_svg(sid_svg);
+	}
+	function setVisible_g(sid_g) {
+		d3.select("#" + sid_g).style("visibility","inherit");
+	}
+	function setVisible_svg(sid_svg) {
+		d3.select("#" + sid_svg).attr("display","inherit");
+	}
+	function getPrefix1(sid) {
+		//var suffix = sid.substring(sid.length - 1 - SUFFIX_MAX_LENGTH, sid.length - 1);
+		//suffix.charCodeAt(0);
+		if (47 < sid.charCodeAt(sid.length - SUFFIX_MAX_LENGTH) < 58)
+			return sid.substring(0, sid.length - SUFFIX_MAX_LENGTH);
+		else
+			return sid;
+	}
+	function getSuffix1(sid) {
+		var sidSuffix = sid.substring(sid.length - SUFFIX_MAX_LENGTH, sid.length);
+		return parseInt(sidSuffix);
+	}
+	function getPrefix2(sid) {
+		var index = getSep2(sid,"_");
+		if (index > -1)
+			return sid.substring(0,index);
+		return "";
+	}
+	function getSuffix2(sid) {
+		var index = getSep2(sid,"_")
+		if (index > -1)
+			return sid.substring(index + 1,sid.length); 
+		return "";
+	}
+	function getSuffixIndex(sid) {
+		var s = getSuffix2(sid);
+		return parseInt(s);
+	}
+	function getSep2(sid,sep) {
+		var code = sep.charCodeAt(0);
+		for (var i = sid.length - 1; i > -1; i--) {
+			if (sid.charCodeAt(i) == code) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	function convertPxStrToInt(s) {
+		return parseInt(s.substring(0, s.length - 2));
+	}
+</script>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript" title="main">
+	var m_body = d3.select("body")
+		;
+	var m_gBG = m_body.append("g").attr("class","WST_background").attr("id","gBG")
+		.style("position","absolute")
+		.style("left", convertToPx(0))
+		.style("top", convertToPx(0))
+		;
+	var m_svgBG = m_gBG.append("svg").attr("id","svgBG")
+		.style("position","absolute")
+		.style("left", convertToPx(0))
+		.style("top", convertToPx(0))
+		;
+	//
+	var m_gradientBG = new Gradient("gradientBG", "svgBG", 0, 0, 0, 100);
+	m_gradientBG.addStop(  0, d3.rgb(198,211,230), 1.0);
+	m_gradientBG.addStop(100, d3.rgb( 95,108,128), 1.0);
+	m_gradientBG.create();
+	//
+	var m_rectBG = m_svgBG.append("rect").attr("id","rectBG")
+		.style("position", "absolute")
+		.style("left", convertToPx(0))
+		.style("top" , convertToPx(0))
+		.attr("fill", "url(#gradientBG)")
+		;
+	var m_gAll = m_gBG.append("g").attr("id","gAll")
+		.style("position", "absolute")
+		.style("left", convertToPx(0))
+		.style("top" , convertToPx(0))
+		;
+	var m_gTitle = m_gAll.append("g").attr("class","gTitle").attr("id","gTitle")
+		.style("position", "absolute")
+		.style("left", convertToPx(MENU_LEFT + 0))
+		.style("top" , convertToPx(0))
+		;
+	var m_svgTitle = m_gTitle.append("svg").attr("class","svgTitle").attr("id","svgTitle")
+		.attr("width" , 900)
+		.attr("height", 70)
+		;
+	var m_groupTitle = m_svgTitle.append("g").attr("class","groupTitle").attr("id","grougTitle")
+		.style("position", "relative")
+		.style("left", convertToPx(200))
+		.style("top" , convertToPx(200))
+		;
+	m_groupTitle.append("text").attr("class","svgTitle").attr("id","svgTitle1")
+		.text("dinesti")
+		.style("font-family", "Lucida Console,san-serif")
+		.style("font-weight", "bold")
+		.style("font-size", convertToPx(34))
+		.attr("fill", d3.rgb(0,0,0))
+		.attr("fill-opacity", 0)
+		.attr("x", 10)
+		.attr("y", 40)
+		.style("text-shadow", "#444444 4px 2px 15px")
+		.transition()
+		.delay(0)
+		.duration(800)
+		.attr("fill-opacity", 1)
+		;
+	m_groupTitle.selectAll(".Title-colon")
+		.data([0,1])
+		.enter().append("circle")
+		.attr("class","Title-colon")
+		.attr("cx",165)
+		.attr("cy",function(d,i) { return 14 * i + 23; })
+		.attr("r",3)
+		.attr("fill",d3.rgb(0,0,0))
+		.attr("fill-opacity", 0)
+		.transition()
+		.delay(0)
+		.duration(800)
+		.attr("fill-opacity", 0.8)
+		;
+	m_groupTitle.append("text").attr("class","svgTitle").attr("id","svgTitle2")
+		.text("Distribution Network Simulation Toolkit Interface")
+		.style("font-family", "Verdana,san-serif")
+		.style("font-size", convertToPx(20))
+		.attr("fill", d3.rgb(86,86,86))
+		.attr("x", 180)
+		.attr("y", 38)
+		.style("text-shadow", "#eeeeee 5px 2px 9px")
+		.transition()
+		.delay(0)
+		.duration(800)
+		.attr("fill", d3.rgb(86,86,86))
+		;
+	var m_g0 = m_gAll.append("g").attr("class","MainWindow").attr("id","g0")
+		.style("position","absolute")
+		.style("left", convertToPx(0))
+		.style("top" , convertToPx(60))
+		;
+	var m_svg0 = m_g0.append("svg").attr("class","MainWindow").attr("id","svg0")
+		.attr("width" , 192)
+		.attr("height", MENU_HEIGHT + 10)
+		.attr("opacity", 1)
+		.style("border-radius", convertToPx(6))
+		;
+	//
+	m_body.node().oncontextmenu = function(){return false;};
+	m_gBG .node().oncontextmenu = function(){return false;};
+	m_gAll.node().oncontextmenu = function(){return false;};
+	//
+	m_svg0.append("rect").attr("class","MainWindow").attr("id","poly0")
+		.attr("fill", d3.rgb(130,130,130))
+		.attr("fill-opacity", 0.5)
+		.attr("stroke", d3.rgb(130,130,130))
+		.attr("stroke-opacity", 1.0)
+		.attr("stroke-width", 2)
+		.attr("x", MENU_LEFT)
+		.attr("y", 1)
+		.attr("width", MENU_WIDTH)
+		.attr("height", MENU_HEIGHT)
+		.attr("rx", 6)
+		.attr("ry", 6)
+		;
+	////
+	m_svg0.selectAll("text.Titles")
+		.data(m_Titles)
+		.enter().append("text")
+		.attr("class", "Titles")
+		.attr("id", function(d,i) { return "text" + (i + 1); })
+		.attr("fill", d3.rgb(20,20,20))
+		.attr("fill-opacity", 0)
+		.text(function(d,i) { return d.title; })
+		.attr("x",12 + MENU_LEFT)
+		.attr("y", function(d,i) { return 8 + i * 26;})
+		.transition()
+		.delay(function(d,i) { return i * 100; })
+		.duration(300)
+		.attr("fill", d3.rgb(20,20,20))
+		.attr("fill-opacity", 1.0)
+		.attr("x",12 + MENU_LEFT)
+		.attr("y", function(d,i) { return 20 + i * 26; })
+		;
+	////
+	m_svg0.selectAll("rect.TextCovers")
+		.data(m_Titles)
+		.enter().append("rect")
+		.attr("class", "TextCovers")
+		.attr("id", function(d,i) { return "rect" + (i + 1); })
+		.attr("x",10 + MENU_LEFT)
+		.attr("y", function(d,i) { return 6 + i * 26;})
+		.attr("width", MENU_WIDTH - 20)
+		.attr("height", 22)
+		.attr("stroke", "black")
+		.attr("stroke-width", 1)
+		.attr("stroke-opacity", 0)
+		.attr("fill-opacity", 0)
+		.attr("cursor", "pointer")
+		;
+	////
+	// TODO - use MENU_LEFT and MENU_WIDTH
+    //new Button(sText, sParentId, uniqueString, dataInFrontOf, left, top, width, height) {
+	var m_StartEvent = new Button("Source Inversion", m_g0.attr("id"), "StartEventButton", "poly0", 30, 310, 130, 100);
+	m_StartEvent.d3control.style("font-size", convertToPx(20));
+	//
+	// make input panels
+	//
+	m_gAll.selectAll("g.InputPanels")
+		.data(m_Titles)
+		.enter().append("g")
+		.attr("class","InputPanels")
+		.attr("id", function(d,i) { return "g" + (i + 1); })
+		.style("position", "absolute")
+		.style("left", convertToPx(MENU_LEFT + MENU_WIDTH - 10))
+		.style("top", convertToPx(51))
+		.append("svg")
+		.attr("class","InputPanels")
+		.attr("id",function(d,i) { return "svg" + (i + 1); })
+		.attr("width" , PANEL_WIDTH)
+		.attr("height", PANEL_HEIGHT)
+		.attr("display", "none")
+		;
+
+	////
+	ResizeWindow();
+	////
+
+	//////////////////////////////////////////////////////////////////////////////////
+	function pass_parent(p, i, child_array) {
+		var c = [], n = child_array.length, j;
+		for (j = 0; j < n; j++) c.push({p:p, i:i, d:child_array[j]});
+		return c;
+	}
+
+	var percentages = [.1,.1,.1,.1,.2,.2,.2,.4,.7, 1];
+	d3.selectAll("svg.InputPanels")
+		.selectAll("polygon.Fades")
+		.data(function(d,i) { return pass_parent(d, i, percentages); })
+		.enter().append("polygon")
+		.attr("class", "Fades")
+		.attr("stroke-width", 0)
+		.attr("fill", d3.rgb(100,100,100))
+		.attr("fill-opacity", function(d,i) { return d.d; })
+		.attr("points", function(d,i) {
+			return (22-i) + "," + (40-i+d.i*26) + " "
+				 +   5    + "," + (24  +d.i*26) + " "
+				 + (22-i) + "," + ( 8+i+d.i*26) + " ";
+				})
+		;
+
+	//////////////////////////////////////////////////////////////////////////////////
+	var w = PANEL_WIDTH - 10;
+	var h = PANEL_HEIGHT - 10;
+	d3.selectAll("svg.InputPanels")
+		.append("polygon")
+		.attr("class","InputPanels")
+		.attr("id",function(d,i) { return "poly" + (i + 1); })
+		.attr("stroke", function(d,i) {
+			var n = 100;// - i * 6;
+			return "rgba(" + n + "," + n + "," + n + ",1.0)" ;
+			})
+		.attr("fill"  , function(d,i) {
+			var n = 100 - i * 9;
+			return "rgba(" + n + "," + n + "," + n + ",0.5)";
+			})
+		.attr("stroke-width", 2)
+		.attr("points", function(d,i) {
+			return    " 020,010 "
+					+ w + ",010 "
+					+ w + "," + h 
+					+ " 020," + h
+					+ " 020," + (38 + i * 26)
+					+ " 005," + (24 + i * 26)
+					+ " 020," + (10 + i * 26);
+			})
+		;
+</script>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript" title="add input panels">
+	var panelIndex = 0;
+	for (var title in m_Titles) {
+		panelIndex++;
+		var dataInFrontOf = "poly" + panelIndex;
+		var bFirstTime = true;
+		switch (m_Titles[title].id) {
+			case 1:
+				m_NetworkFilesList = new NetworkFiles(panelIndex, dataInFrontOf, onMouseOver);
+				m_NetworkFilesList.updateData(SetTrue(bFirstTime));
+				break;
+			case 2:
+				m_SimList = new SimList(panelIndex, dataInFrontOf, onMouseOver);
+				m_SimList.updateData(SetTrue(bFirstTime));
+				break;
+			case 3:
+				m_InversionList = new Inversion(panelIndex, dataInFrontOf, onMouseOver);
+				m_InversionList.updateData(SetTrue(bFirstTime));
+				break;
+			case 4:
+				m_GrabList = new GrabSample(panelIndex, dataInFrontOf, onMouseOver);
+				m_GrabList.updateData(SetTrue(bFirstTime));
+				break;
+			case 5:
+				m_ImpactList = new Impact(panelIndex, dataInFrontOf, onMouseOver);
+				m_ImpactList.updateData(SetTrue(bFirstTime));
+				break;
+			case 6:
+				m_MeasureGenList = new MeasureGen(panelIndex, dataInFrontOf, onMouseOver);
+				m_MeasureGenList.updateData(SetTrue(bFirstTime));
+				break;
+			case 7:
+				m_TrainingList = new Training(panelIndex, dataInFrontOf, onMouseOver);
+				m_TrainingList.updateData(SetTrue(bFirstTime));
+				break;
+			case 8:
+				m_EventsList = new Events(panelIndex, dataInFrontOf, onMouseOver);
+				m_EventsList.updateData(SetTrue(bFirstTime));
+				break;
+			case 9:
+				m_ConfigPanel = new ConfigPanel(panelIndex, dataInFrontOf, onMouseOver);
+				m_ConfigPanel.updateData(SetTrue(bFirstTime));
+				break;
+			case null:
+				break;
+		}
+	}
+
+	if (m_InversionList == null) {
+		m_InversionList = new Inversion(0, "", onMouseOver);
+		m_InversionList.updateData(SetTrue(bFirstTime));
+	}
+	if (m_GrabList == null) {
+		m_GrabList = new GrabSample(0, "", onMouseOver);
+		m_GrabList.updateData(SetTrue(bFirstTime));
+	}
+	if (m_MeasureGenList == null) {
+		m_MeasureGenList = new MeasureGen(0, "", onMouseOver);
+		m_MeasureGenList.updateData(SetTrue(bFirstTime));
+	}
+	if (m_TrainingList == null) {
+		m_TrainingList = new Events(0, "", onMouseOver);
+		m_TrainingList.updateData(SetTrue(bFirstTime));
+	}
+	if (m_EventsList == null) {
+		m_EventsList = new Events(0, "", onMouseOver);
+		m_EventsList.updateData(SetTrue(bFirstTime));
+	}
+	
+	var m_EventView = new EventView("gAll");
+	var m_NetworkView = new NetworkView("gAll", 1);//, NETWORK_VIEW_BORDER, NETWORK_VIEW_BORDER);
+	var m_EventGrabView = new EventGrabView("gAll");
+	var m_Waiting = new Waiting("gAll");
+	//
+	var m_Clock = new Clock("gAll");
+	Couch.getDoc(this, "gui", function(data) {
+		ConfigPanel.staticStoreData(data);
+		m_Clock.update();
+	});
+</script>
+<!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<script type="text/javascript" title="add mouse events listeners to each element type">
+	//
+	// add mouse event handlers to all the different pieces 
+	//
+	addListeners();
+	m_NetworkView.addListeners();
+	/////////////////////////////////////
+	if (m_NetworkFilesList) m_NetworkFilesList.addListeners();
+	/////////////////////////////////////
+	if (m_SimList) m_SimList.addListeners();
+	/////////////////////////////////////
+	//if (m_ImpactList) m_ImpactList.addListeners();
+	/////////////////////////////////////
+	if (m_InversionList) m_InversionList.addListeners();
+	/////////////////////////////////////
+	if (m_GrabList) m_GrabList.addListeners();
+	/////////////////////////////////////
+	//if (m_StartEvent) m_StartEvent.addListeners();
+	/////////////////////////////////////
+	if (m_ConfigPanel) m_ConfigPanel.addListeners();
+	/////////////////////////////////////
+	//
+	function addListeners() {
+		addListener("g"      )
+		addListener("svg"    )
+		addListener("rect"   )//svg
+		addListener("polygon")//svg
+		addListener("path"   )//svg
+		addListener("circle" )//svg
+		addListener("text"   )//svg
+		addListener("input"  )//form
+		addListener("select" )//form
+		addListener("option" )//form
+		addListener("button" )//form
+		//if (window.addEventListener)
+		//	window.addEventListener("DOMMouseScroll", window_handleMouseWheel, false);
+		//window.onmousewheel = window_handleMouseWheel; // i dont know what this does...
+	}
+	function addListener(sSelector) {
+		d3.selectAll(sSelector)
+			.on("mousemove" , function() { onMouseMove (this.id); })
+			.on("mouseover" , function() { onMouseOver (this.id); })
+			.on("mouseout"  , function() { onMouseOut  (this.id); })
+			.on("mouseup"   , function() { onMouseUp   (this.id); })
+			.on("mousedown" , function() { onMouseDown (this.id); })
+			.on("mousewheel", function() { onMouseWheel(d3.event); })//this.id); })
+			.on("keydown"   , function() { onKeyDown   (this.id); })
+			.on("keypress"  , function() { onKeyPress  (this.id); })
+			.on("keyup"     , function() { onKeyUp     (this.id); })
+			.on("input"     , function() { onInput     (this.id); })
+			.on("change"    , function() { onChange    (this.id); })
+			.on("click"     , function() { onClick     (this.id); })
+			.on("dblclick"  , function() { onDblClick  (this.id); })
+			;
+	}
+	//
+	var m_SVGPan = null;
+	m_SVGPan = new SVGPan(m_NetworkView.svgid, m_NetworkView.x, m_NetworkView.y);
+	//
+	function SVGPan_handleMouseWheel(e) {
+		e = e ? e : window.event;
+		m_SVGPan.onMouseWheel(e);
+		m_NetworkView.hideNodePopup();
+	}
+//	function window_handleMouseWheel(e) {
+//		e = e ? e : window.event;
+//		onMouseWheel(e);
+//	}
+	function cancelEvent(e) {
+		e = e ? e : window.event;
+		if (e.stopPropagation)
+			e.stopPropagation();
+		if (e.preventDefault)
+			e.preventDefault();
+		e.cancelBubble = true;
+		e.cancel = true;
+		e.returnValue = false;
+		return false;
+	}
+	function getWheelDelta(e) {
+		if (e.wheelDeltaY) {
+			return e.wheelDeltaY; // Chrome/Safari
+		}else{
+			return e.detail * -6; // Mozilla (Firefox)
+		}
+	}
+	function getWheelDeltaX(e) {
+		if (e.wheelDeltaX) {
+			return e.wheelDeltaX; // Chrome/Safari
+		}else{
+			return 0; // TODO
+			return e.detail * -6; // Mozilla (Firefox)
+		}
+	}
+	function getOffset(e) {
+		if (e.offsetX && e.offsetY)
+			return {"x":e.offsetX, "y":e.offsetY};
+		else
+			return {"x":0        , "y":0        };
+	}
+    /////////////////////////////////////////////////////////////////////////////////////
+	function document_onMouseMove(e) {
+		var obj = document.elementFromPoint(e.clientX, e.clientY);
+		if (document_transferToNetwork(e)) {
+				var sid = obj.id;
+				m_NetworkView.onMouseMove(sid, e);
+		}
+
+		/////////////////////////////////////////////////////////////////////////////
+		if (e) {
+			//if (e.screenX != GlobalData.x || e.screenY != GlobalData.y) console.log(GlobalData.x, GlobalData.y);
+			GlobalData.x = e.screenX;
+			GlobalData.y = e.screenY;
+		} else {
+			//if (e.window.event.screenX != GlobalData.x || e.window.event.screenY != GlobalData.y) console.log(GlobalData.x, GlobalData.y);
+			GlobalData.x = window.event.screenX;
+			GlobalData.y = window.event.screenY;
+		}
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_NetworkFilesList && m_NetworkFilesList.NetworkFiles)
+			m_NetworkFilesList.NetworkFiles.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_SimList)
+			m_SimList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_ImpactList && m_ImpactList.ImpactList)
+			m_ImpactList.ImpactList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_MeasureGenList && m_MeasureGenList.GenList)
+			m_MeasureGenList.GenList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_InversionList && m_InversionList.InversionList)
+			m_InversionList.InversionList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_GrabList && m_GrabList.GrabList)
+			m_GrabList.GrabList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_TrainingList && m_TrainingList.TrainingList)
+			m_TrainingList.TrainingList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		if (m_EventsList && m_EventsList.EventsList)
+			m_EventsList.EventsList.doDrag();
+		/////////////////////////////////////////////////////////////////////////////
+		
+		if (m_NetworkView.m_NodeGraph)
+			m_NetworkView.m_NodeGraph.doDrag(GlobalData.x,GlobalData.y);
+		if (m_NetworkView.m_NodeGraph.TimeLine)
+			m_NetworkView.m_NodeGraph.TimeLine.doDrag(GlobalData.x,GlobalData.y);
+	}
+
+	function document_onMouseUp(e) {
+		var obj = document.elementFromPoint(e.clientX, e.clientY);
+		if (document_transferToNetwork(e)) {
+				var sid = obj.id;
+				m_NetworkView.onMouseUp(sid, e);
+		}
+	}
+	//
+	function document_onMouseOver(e) {
+		var obj = document.elementFromPoint(e.clientX, e.clientY);
+		if (document_transferToNetwork(e)) {
+				var sid = obj.id;
+				m_NetworkView.onMouseOver(sid);
+		}
+	}
+	//
+	function document_onClick(e) {
+		var obj = document.elementFromPoint(e.clientX, e.clientY);
+		if (document_transferToNetwork(e)) {
+				var sid = obj.id;
+				m_NetworkView.onClick(sid);
+		}
+	}
+	//
+	function document_transferToNetwork(e) {
+		var obj = document.elementFromPoint(e.clientX, e.clientY);
+		if (obj == null) return false;
+		var parent = obj.parentElement;
+		if (parent == null) return false;
+		var pid = parent.id;
+		var prePid = getPrefix2(pid);
+		var sufPid = getSuffix2(pid);
+		switch (prePid) {
+			case "gNetworkViewView":
+			case "m_List":
+				return true;
+				break;
+		}
+		return false;
+	}
+	document.onmousemove = document_onMouseMove;
+	document.onmouseup   = document_onMouseUp;
+	document.onmouseover = document_onMouseOver;
+	document.onclick     = document_onClick;
+	//document.body.style.overflow = "hidden";
+	//
+	//
+	// TODO
+	//
+	// 1. show downstream pipes on network view?
+	// 1. editing team name on EventView causes required server call to get suggested
+	// 1. 
+	// 7. add corner drag resize to inversion grid
+	// 7. add bottom drag resize to network node list
+	// 7. write out wqm file with wst subcommand and yml?
+	// 9. change name of view, m_ScenariosList to m_ScenariosListByGrabSample
+	//    change name of view, m_MeasureList   to m_MeasureListByInversion
+	// 9. firefox - mouse wheel scroll doesnt work on past events panel
+</script>
+

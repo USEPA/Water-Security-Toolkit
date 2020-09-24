@@ -1,0 +1,324 @@
+#!/usr/bin/env python
+#  _________________________________________________________________________
+#
+#  TEVA-SPOT Toolkit: Tools for Designing Contaminant Warning Systems
+#  Copyright (c) 2008 Sandia Corporation.
+#  This software is distributed under the BSD License.
+#  Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
+#  the U.S. Government retains certain rights in this software.
+#  For more information, see the README file in the top software directory.
+#  _________________________________________________________________________
+#
+# Two-tiered sensor placment using the geographic aggregation
+#
+
+import sys
+import os
+import shutil
+from optparse import OptionParser
+
+# Define executable/path 
+tevaspot_scripts_dir=os.path.dirname(os.path.abspath(__file__))
+spot_dir = tevaspot_scripts_dir+'/../../..'
+aggskelDir = spot_dir+'/packages/pywst/scripts'
+skelExe =spot_dir+'/packages/network/spotSkeleton'
+spExe = spot_dir+'/python/bin/sp'
+#spPath = '--path='+spot_dir+'/bin --path='+spot_dir+'/etc'
+pythonExe = spot_dir+'/tpl/acro/bin/lpython'
+memmonExe = spot_dir+'/tpl/acro/bin/memmon'
+
+# Command line help
+objective_help=\
+                 "Objective names have the form: <goal>_<statistic>     " \
+                 "..The objective goals are:                            " \
+                 "....cost   the cost of sensor placement               " \
+                 "....ec     extent of contamination                    " \
+                 "....dec    detected extent of contamination           " \
+                 "....td     time to detection                          " \
+                 "....dtd    detected time to detection                 " \
+                 "....mc     mass consumed                              " \
+                 "....dmc    detected mass consumed                     " \
+                 "....nfd    number of failed detections                " \
+                 "....ns     the number of sensors                      " \
+                 "....pe     population exposed                         " \
+                 "....dpe    detected population exposed                " \
+                 "....pk     population killed                          " \
+                 "....dpk    detected population killed                 " \
+                 "....pd     population dosed                           " \
+                 "....dpd    detected population dosed                  " \
+                 "....vc     volume consumed                            " \
+                 "....dvc    detected volume consumed                   " \
+                 "..The objective statistics are:                       " \
+                 "....mean   the mean impact                            " \
+                 "....median the median impact                          " \
+                 "....var    value-at-risk of impact distribution       " \
+                 "....tce    tail-conditioned expectation of imp dist   " \
+                 "....cvar   approximation to TCE used with IPs         " \
+                 "....worst  the worst impact                           " \
+                 "An objective name of the form <goal> is assumed to " \
+                 "refer to the objective <goal>_mean.  "
+
+skeleton_help=\
+             "Specifies the pipe diameter threshold used in spotSkeleton."
+
+stat_help=\
+            "Statistic used in geographic aggregation of the input     " \
+            "file.  Options include:                                   " \
+            "...min                                                    " \
+            "...max                                                    " \
+            "...mean                                                   " \
+            "...median                                                 " \
+            "Streaming algorithms are used to aggregate the impact     " \
+            "file. For the median option, the impact file must be      " \
+            "sorted. "
+
+ub1_constraint_help=\
+            "This option specifies a constraint (<objective>,<ub-value>) " \
+            "on the maximal value of an objective type in tier 1. "
+
+ub2_constraint_help=\
+             "This option specifies a constraint (<objective>,<ub-value>) " \
+             "on the maximal value of an objective type in tier 2. " 
+
+solver1_help=\
+               "This option specifies the type of solver that is used "\
+               "to find sensor placement(s) in tier 1.  The following solver "\
+               "types are currently supported:                        "\
+               "..att_grasp  multistart local search heuristic (AT&T) "\
+               "..snl_grasp  TEVA-SPOT license-free grasp clone       "\
+               "..lagrangian lagrangian relaxation heuristic solver   "\
+               "..pico       mixed-integer programming solver (PICO)  "\
+               "..glpk       mixed-integer programming solver (GLPK)  "\
+               "..picoamp    MIP solver with AMPL                     "\
+               "..cplexamp   commercial MIP solver                    "\
+               "The default solver is snl_grasp. "
+
+solver2_help=\
+               "This option specifies the type of solver that is used "\
+               "to find sensor placment(s) in tier 2.  The following solver "\
+               "types are currently supported:                        "\
+               "..att_grasp  multistart local search heuristic (AT&T) "\
+               "..snl_grasp  TEVA-SPOT license-free grasp clone       "\
+               "..lagrangian lagrangian relaxation heuristic solver   "\
+               "..pico       mixed-integer programming solver (PICO)  "\
+               "..glpk       mixed-integer programming solver (GLPK)  "\
+               "..picoamp    MIP solver with AMPL                     "\
+               "..cplexamp   commercial MIP solver                    "\
+               "The default solver is snl_grasp. "
+
+path_help=\
+            "Add this path to the set of paths searched for           "\
+            "executables and IP models."
+                          
+# Command line options
+parser = OptionParser()
+parser.usage = "sp_2tier [options]"
+
+parser.add_option("-n", "--network",
+                  help="Name of network file",
+                  type="string",   action="store", dest="network")
+
+parser.add_option("--objective",
+                  help=objective_help, default="",
+                  type="string",   action="store", dest="objective")
+                  
+parser.add_option("--skeleton",
+                  help=skeleton_help, default=0,
+                  type="int",   action="store", dest="skeleton")
+
+parser.add_option("--stat",
+                  help=stat_help, default="",
+                  type="string",   action="store", dest="stat")
+
+parser.add_option("--ub1-constraint", "--ub1",
+                  help=ub1_constraint_help, default="",
+                  action="store", dest="ub1_constraint", type="string")
+
+parser.add_option("--ub2-constraint", "--ub2",
+                  help=ub2_constraint_help, default="",
+                  action="store", dest="ub2_constraint", type="string")
+
+parser.add_option("--solver1",
+                  help=solver1_help,
+                  action="store", dest="solver1", type="string", default="snl_grasp")
+
+parser.add_option("--solver2",
+                  help=solver2_help,
+                  action="store", dest="solver2", type="string", default="snl_grasp")
+
+parser.add_option("--path",
+                  help=path_help,
+                  action="append", dest="path", type="string", default=[])
+
+# Command line parser
+(options, args) = parser.parse_args()
+if len(sys.argv) == 1:
+    parser.print_help()
+    sys.exit(1)
+
+network = options.network
+objective = options.objective
+skeleton = str(options.skeleton)
+method = "GeoA"
+stat = options.stat
+ub1 = options.ub1_constraint
+ub2 = options.ub2_constraint
+solver1 = options.solver1
+solver2 = options.solver2
+path = options.path
+
+# Define directories
+dataDir= os.getcwd()
+resultDir = dataDir+'/'+network+'_'+skeleton
+
+# Define input filenames
+impactFile = dataDir+'/'+network+'_'+objective+'.impact'
+nodemapFile = dataDir+'/'+network+'.nodemap'
+skeletonFile = resultDir+'/'+network+'_'+skeleton+'.map'
+tevaspotImpactFile = dataDir+'/'+network+'_'+skeleton+'sn_'\
+                     +objective+'.impact'
+tevaspotNodemapFile = dataDir+'/'+network+'_'+skeleton+'sn.nodemap' 
+
+if not os.path.exists(resultDir):
+    os.mkdir(resultDir)
+os.chdir(resultDir)
+
+if skeleton == '0':
+    print 'Run sp (original network)'
+    
+    # Run full network sp
+    runSP = spExe+\
+            ' --network='+network+\
+            ' --impact-dir='+dataDir+\
+            ' --objective='+objective+\
+            ' --ub='+ub1+\
+            ' --solver='+solver1+\
+            ' --memmon --print-log'
+    if solver1 == 'lagrangian':
+        runSP = runSP+' --disable-aggregation=all'
+    for p in path:
+        runSP = runSP+' --path='+p
+    #runSP = runSP+' '+spPath
+    runSP = runSP+' '+'> sp.out'
+    os.system('( time -p '+runSP+' ) >sp_time.out 2>&1')
+    
+    os.chdir(dataDir)
+
+else:
+    # Run spotSkeleton
+    if not os.path.exists(skeletonFile):
+        print "Run spotSkeleton"
+        runSkel = skelExe+\
+                  ' '+dataDir+'/'+network+'.inp'\
+                  ' '+skeleton+\
+                  ' '+resultDir+'/'+network+'_'+skeleton+'.inp'+\
+                  ' '+skeletonFile
+        os.system('( time -p '+memmonExe+' -v '+runSkel+' > skel_memmon.out ) >skel_time.out 2>&1')
+        
+    # Define file names and results directory
+    impactOutFile = resultDir+'/'+network+'_'+skeleton+'_'+objective+'.impact'
+    nodemapOutFile = resultDir+'/'+network+'_'+skeleton+'.nodemap'
+    
+    # Created skeleton impact file.
+    # If the skeleton impact file already exists, skip this loop
+    if not os.path.exists(impactOutFile):
+        if method == "SN":
+            if stat == "":
+                # copy tevaspotImpactFile to impactOutFile
+                shutil.copyfile(tevaspotImpactFile, impactOutFile)
+            elif stat == "weight":
+                # Run weight_impact to weight epanet created impact file
+                print "Weight impact file"
+                runPython = memmonExe+' -v '+pythonExe+\
+                    ' -c \'import sys; sys.path.append("'+aggskelDir+'"); \
+                    import aggskel; aggskel.weight_impact("'+impactFile+\
+                    '", "'+tevaspotImpactFile+\
+                    '", "'+skeletonFile+\
+                    '", "'+nodemapFile+\
+                    '", "'+tevaspotNodemapFile+\
+                    '", "'+impactOutFile+'")\' > weight_memmon.out'
+                os.system('( time -p '+runPython+' ) > weight_time.out 2>&1')
+    
+        elif method == "GeoA":
+            if (stat == "min") or (stat == "max") or (stat == "mean") or \
+                   (stat == "fist") or (stat == "last"):
+                # Run geographic_aggregation.py with select method
+                print "Aggregate impact file"
+                runPython = memmonExe+' -v '+pythonExe+\
+                    ' -c \'import sys; sys.path.append("'+aggskelDir+'"); \
+                    import aggskel; aggskel.geographic_aggregation("'+impactFile+\
+                    '", "'+skeletonFile+\
+                    '", "'+nodemapFile+\
+                    '", "'+stat+\
+                    '", "'+impactOutFile+\
+                    '", "'+nodemapOutFile+'")\' > aggregate_memmon.out'
+                os.system('( time -p '+runPython+' ) > aggregate_time.out 2>&1')
+                
+            elif (stat == "median"):
+                # Run geographic_aggregation_sorted_median.py with select method
+                print "Aggregate impact file"
+                runPython = memmonExe+' -v '+pythonExe+\
+                    ' -c \'import sys; sys.path.append("'+aggskelDir+'"); \
+                    import aggskel; aggskel.geographic_aggregation_sorted_median("'+impactFile+\
+                    '", "'+skeletonFile+\
+                    '", "'+nodemapFile+\
+                    '", "'+impactOutFile+\
+                    '", "'+nodemapOutFile+'")\' > aggregate_memmon.out'
+                os.system('( time -p '+runPython+' ) > aggregate_time.out 2>&1')
+                
+    print 'Run sp (tier 1)'       
+    # Run skeletonized sp on impactOutFile
+    runSP = spExe+\
+            ' --network='+network+'_'+skeleton+\
+            ' --impact-dir='+resultDir+\
+            ' --objective='+objective+\
+            ' --ub='+ub1+\
+            ' --solver='+solver1+\
+            ' --memmon --print-log'
+    for p in path:
+        runSP = runSP+' --path='+p
+    runSP = runSP+' '+'> sp1'+'_'+skeleton+'.out'
+    os.system('( time -p '+runSP+' ) >sp1_time.out 2>&1')
+    
+    # Sensor results
+    initialSensorFile = network+'_'+skeleton+'.sensors'
+    
+    # Refine the impact file
+    if (method == "SN"):
+        nodemapSkelFile = tevaspotNodemapFile
+    if (method == "GeoA"):
+        nodemapSkelFile = nodemapOutFile
+        
+    impactOutFile = network+'_'+skeleton+'R_'+objective+'.impact'
+    nodemapOutFile = network+'_'+skeleton+'R.nodemap'
+    
+    print "Refine impact file"
+    runPython = memmonExe+' -v '+pythonExe+\
+        ' -c \'import sys; sys.path.append("'+aggskelDir+'"); \
+        import aggskel; aggskel.refine_impact("'+impactFile+\
+        '", "'+skeletonFile+\
+        '", "'+initialSensorFile+\
+        '", "'+nodemapFile+\
+        '", "'+nodemapSkelFile+\
+        '", "'+impactOutFile+\
+        '", "'+nodemapOutFile+'")\' >refine_memmon.out'
+    os.system('( time -p '+runPython+' ) >refine_time.out 2>&1')
+    
+    # Run refined sp
+    print 'Run sp (tier 2)' 
+    runSP = spExe+\
+            ' --network='+network+'_'+skeleton+'R'+\
+            ' --objective='+objective+\
+            ' --ub='+ub2+\
+            ' --solver='+solver2+\
+            ' --memmon --print-log'
+    for p in path:
+        runSP = runSP+' --path='+p        
+    #runSP = runSP+' '+spPath
+    runSP = runSP+' '+'> sp2'+'_'+skeleton+'R.out'
+    os.system('( time -p '+runSP+' ) >sp2_time.out 2>&1')
+    
+    # Sensor results
+    finalSensorFile = network+'_'+skeleton+'R.sensors'
+    
+    os.chdir(dataDir)

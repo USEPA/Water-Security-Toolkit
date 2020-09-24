@@ -1,0 +1,165 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build infrastructure assess codes
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+##  nmake /F makefile-hia dlls JDK_ROOT=C:\Java\jdk1.6.0 NOT TESTED - TODO
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+   
+ANLDIR=$(PACKAGES)\tevaUtils\anl
+ANLUTILS_DIR=$(ANLDIR)\ANLUtils
+ANLUTILS_DLL=$(ANLDIR)\libs\$(LIBSUBDIR)\ANLUtils.dll
+ANLUTILS_LIB=$(ANLDIR)\libs\$(LIBSUBDIR)\ANLUtils.lib
+ANLUTILS_INCLUDE=/I $(ANLUTILS_DIR)\include /I $(ANLUTILS_DIR)\src /I $(ANLUTILS_DIR)\include
+   
+TEVAUTIL_DIR=$(PACKAGES)\tevaUtils
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS 
+## the shared flags are never used in healthImpacts, functions are not exported
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530
+CFLAGS = -DMT_NO_INLINE $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES  $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+all: headers \
+     static\libinfrstrassess.lib \
+     static\infrstr_assess.exe
+
+dll: dlls
+
+dlls: headers \
+      shared\libinfrstrassess.dll \
+      shared\libIIAModule.dll
+
+##
+## Create a teva_config.h - the configuration file from autotools
+##
+##
+headers:
+    copy teva_config.txt teva_config.h
+
+##
+## Create directories to keep static and shared files separated
+##
+##
+static:
+    if not exist static mkdir static
+
+shared:
+    if not exist shared mkdir shared
+
+ERD_LIB_INC = $(PACKAGES)\tevaUtils\erd\erd\include
+
+##
+## INFRASTRUCTURET ASSESS LIBRARY
+##
+##
+INFRSTRASSESS_DIR=$(PACKAGES)\infrastructureImpacts\infrastructureAssess
+
+INFRSTRASSESS_INCLUDE= \
+ /I $(INFRSTRASSESS_DIR) \
+ /I $(TEVAUTIL_DIR)\tso\src \
+ /I $(TEVAUTIL_DIR)\anl\include \
+ /I $(ERD_LIB_INC)
+
+INFRSTRASSESS_SRC = \
+    $(INFRSTRASSESS_DIR)\ia.c
+
+INFRSTRASSESS_OBJ = $(INFRSTRASSESS_SRC:.c=.obj)
+
+{$(INFRSTRASSESS_DIR)}.c.{$(INFRSTRASSESS_DIR)}.obj:
+    $(CC) $(CFLAGS) $(INFRSTRASSESS_INCLUDE) /Fo$@ /c $*.c
+
+# the following also has a dependency (indirectly) on static\liberd.lib, but if it is included
+# lib warns about already defined symbols. 
+static\libinfrstrassess.lib: static $(INFRSTRASSESS_OBJ) 
+    lib /out:static\libinfrstrassess.lib $(INFRSTRASSESS_OBJ) static\libtsoutil.lib
+
+shared\libinfrstrassess.dll: shared $(INFRSTRASSESS_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libinfrstrassess.lib /out:shared\libinfrstrassess.dll $(INFRSTRASSESS_OBJ) \
+     shared\libtsoutil.lib shared\liberd.lib
+
+##
+## IIA LIBRARY shared only
+##
+##
+IIA_DIR=$(PACKAGES)\infrastructureImpacts\iia
+IIA_SRC = \
+ $(IIA_DIR)\src\InfrstrImpactsAggr.c  \
+ $(IIA_DIR)\src\InfrstrImpactsIA.c  \
+ $(IIA_DIR)\src\InfrstrImpactsJNI.c \
+ $(IIA_DIR)\src\InfrstrImpactsUtil.c
+
+IIA_OBJ = $(IIA_SRC:.c=.obj)
+
+IIA_FLAGS=-D_FILE_OFFSET_BITS=64
+
+IIA_INCLUDE = /I $(IIA_DIR)\include \
+  /I $(TEVAUTIL_DIR)/anl/include \
+  /I $(INFRSTRASSESS_DIR) \
+  $(INFRSTRASSESS_INCLUDE) \
+  $(ANLUTILS_INCLUDE) \
+  /I "$(JDK_ROOT)\include" /I "$(JDK_ROOT)\include\win32"
+
+{$(IIA_DIR)\src}.c.{$(IIA_DIR)\src}.obj:
+    $(CC) $(CFLAGS) $(IIA_FLAGS) $(IIA_INCLUDE) /Fo$@ /c $*.c
+
+shared\libIIAModule.dll: shared $(IIA_OBJ) shared\libinfrstrassess.dll
+    link $(LINK_FLAGS) /dll /out:shared\libIIAModule.dll $(IIA_OBJ) shared\libAnalysisModule.lib shared\libinfrstrassess.lib $(ANLUTILS_LIB)
+
+##
+## INFRSTR_ASSESS EXECUTABLE
+##
+##
+INFRSTR_ASSESS_SRC = $(INFRSTRASSESS_DIR)\infrstr_assess.c
+INFRSTR_ASSESS_OBJ = $(INFRSTR_ASSESS_SRC:.c=.obj)
+INFRSTR_ASSESS_INCLUDE = $(INFRSTRASSESS_INCLUDE)
+
+$(INFRSTR_ASSESS_OBJ): $(INFRSTR_ASSESS_SRC)
+    $(CC) $(CFLAGS) $(INFRSTR_ASSESS_INCLUDE) /Fo$@ /c $**
+
+static\infrstr_assess.exe:  $(INFRSTR_ASSESS_OBJ) static\libinfrstrassess.lib
+     $(CC) $(LINKDBG) /Fe$@ $**
+
+OBJ_FILES = $(INFRSTRASSESS_OBJ) $(IIA_OBJ) $(INFRSTR_ASSESS_OBJ)
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake dlls " will build the shared versions
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+clean:
+        @-del /Q $(OBJ_FILES)
+        @-del /Q teva_config.h
+        @-del /Q static\libinfrstrassess.*
+        @-del /Q static\infrstr_assess.*
+        @-del /Q shared\libinfrstrassess.*
+        @-del /Q shared\libIIAModule.*

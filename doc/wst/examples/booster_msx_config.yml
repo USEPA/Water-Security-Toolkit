@@ -1,0 +1,47 @@
+# booster_msx configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+scenario:
+  location: ['101']                      # Injection location: ALL, NZD or EPANET ID
+  type: MASS                             # Injection type: MASS, CONCEN, FLOWPACED or SETPOINT
+  strength: 100.0                        # Injection strength [mg/min or mg/L depending on
+                                         #   type]
+  species: BIO                           # Injection species, required for EPANET-MSX
+  start time: 0                          # Injection start time [min]
+  end time: 1440                         # Injection end time [min]
+  tsg file: null                         # TSG file name, overrides injection parameters above
+  tsi file: null                         # TSI file name, overrides TSG file
+  signals: null                          # Signal files, overrides TSG or TSI files
+  msx file: Net3_bio.msx                 # Multi-species extension file name
+  msx species: BIO                       # MSX species to save
+  merlion: false                         # Use Merlion as WQ simulator, true or false
+impact:
+  erd file: null                         # ERD database file name
+  metric: [MC]                           # Impact metric
+  tai file: null                         # Health impact file name, required for public health
+                                         #   metrics
+  response time: 0                       # Time [min] needed to respond
+  detection limit: [0.0]                 # Thresholds needed to perform detection
+  detection confidence: 1                # Number of sensors for detection
+booster msx:
+  detection: [111, 127, 179]             # Sensor locations to detect contamination scenarios
+  toxin species: BIO                     # Toxin species injected in each contaminant scenario
+  decon species: CLF                     # Decontaminant injected from booster station
+  feasible nodes: ALL                    # Feasible booster nodes
+  infeasible nodes: NONE                 # Infeasible booster nodes
+  max boosters: 2                        # Maximum number of booster stations
+  type: FLOWPACED                        # Booster source type: FLOWPACED
+  strength: 4.0                          # Booster source strength [mg/L]
+  response time: 0.0                     # Time [min] between detection and booster injection
+  duration: 600.0                        # Time [min] for booster injection
+solver:
+  type: coliny_ea                        # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

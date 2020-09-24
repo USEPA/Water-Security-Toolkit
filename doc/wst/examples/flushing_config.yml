@@ -1,0 +1,50 @@
+# flushing configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+scenario:
+  location: [NZD]                        # Injection location: ALL, NZD or EPANET ID
+  type: MASS                             # Injection type: MASS, CONCEN, FLOWPACED or SETPOINT
+  strength: 100.0                        # Injection strength [mg/min or mg/L depending on
+                                         #   type]
+  species: null                          # Injection species, required for EPANET-MSX
+  start time: 0                          # Injection start time [min]
+  end time: 1440                         # Injection end time [min]
+  tsg file: null                         # TSG file name, overrides injection parameters above
+  tsi file: null                         # TSI file name, overrides TSG file
+  signals: null                          # Signal files, overrides TSG or TSI files
+  msx file: null                         # Multi-species extension file name
+  msx species: null                      # MSX species to save
+  merlion: false                         # Use Merlion as WQ simulator, true or false
+impact:
+  erd file: null                         # ERD database file name
+  metric: [PE]                           # Impact metric
+  tai file: Net3_bio.tai                 # Health impact file name, required for public health
+                                         #   metrics
+  response time: 0                       # Time [min] needed to respond
+  detection limit: [0.0]                 # Thresholds needed to perform detection
+  detection confidence: 1                # Number of sensors for detection
+flushing:
+  detection: [111, 127, 179]             # Sensor locations to detect contamination scenarios
+  flush nodes:
+    feasible nodes: NZD                  # Feasible flushing nodes
+    infeasible nodes: NONE               # Infeasible flushing nodes
+    max nodes: 2                         # Maximum number of nodes to flush
+    rate: 800.0                          # Flushing rate [gallons/min]
+    response time: 0.0                   # Time [min] between detection and flushing
+    duration: 480.0                      # Flushing duration [min]
+  close valves:
+    feasible pipes: ALL                  # Feasible pipes to close
+    infeasible pipes: NONE               # Infeasible pipes to close
+    max pipes: 0                         # Maximum number of pipes to close
+    response time: 0.0                   # Time [min] between detection and closing pipes
+solver:
+  type: StateMachineLS                   # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

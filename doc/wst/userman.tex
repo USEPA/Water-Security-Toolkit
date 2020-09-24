@@ -1,0 +1,262 @@
+
+%% ==================================================================
+%% DOCUMENT CLASS ---------------------------------------------------
+%% ==================================================================
+
+%%    Uncomment the following for <article> mode
+
+\documentclass[pdf,oneside]{book}
+
+%% ==================================================================
+%% PREAMBLE ---------------------------------------------------------
+%% ==================================================================
+
+\usepackage{type1cm}
+\usepackage{fullpage}
+%
+\usepackage{myoxygen}
+\usepackage[sort]{natbib}
+%\usepackage{apaish}
+\usepackage{color,atbeginend}
+\usepackage{fancyhdr,verbatim,extramarks}
+\usepackage{listings,arydshln,hhline,graphicx}
+%\usepackage{helvet}
+\usepackage{courier}
+%\usepackage{lastpage}
+\usepackage[small,compact]{titlesec}
+\usepackage[english]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage[titletoc]{appendix}
+\usepackage[section]{placeins}
+%\usepackage[latin9]{inputenc}
+\usepackage{lmodern} % Use the modern font family; this renders T1
+% fonts, which do not show up as being "blurry" in Adobe Acrobat
+
+\usepackage[default,scale=0.95]{opensans}
+%\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\setcounter{tocdepth}{5}
+\usepackage{tocloft} 
+\addtolength{\cftfignumwidth}{0.5em}
+\addtolength{\cfttabnumwidth}{0.5em}
+\addtolength{\cftsecnumwidth}{0.5em}
+\addtolength{\cftsubsecnumwidth}{0.5em}
+\addtolength{\cftsubsecindent}{0.5em}
+\addtolength{\cftsubsubsecindent}{1em}
+\setlength{\cftparskip}{2mm}
+
+\usepackage{subcaption}
+
+\include{macros}
+\newcommand\docTitle{User Manual}
+\newcommand{\outputprefix}{Net3}
+\newcommand{\wstversion}{1.5} % Note: the wst version must be updated manually 
+			% within examples/tevasim/template_screen.txt
+\newif\ifEPAReport
+\EPAReporttrue % to build the user manual as an EPA report, use EPAReporttrue
+		% for a SAND report, use EPAReportfalse
+
+\hypersetup{colorlinks=false}
+\parindent 0mm
+\parskip = 2mm
+%\AfterBegin{itemize}{\setlength{\itemsep}{1.75mm}}
+%\AfterBegin{enumerate}{\setlength{\itemsep}{1.75mm}}
+%\AfterBegin{description}{\setlength{\itemsep}{1.75mm}}
+%\titleformat{\chapter}[hang]{\bf\large}{\thechapter\quad}{2mm}{\large}[]
+%\titlespacing{\chapter}{0pt}{0mm}{5mm}
+
+%% Set up the XML language
+%\lstdefinestyle{XML}{language=XML, basicstyle={\ttfamily},
+  %usekeywordsintag=true, alsoletter={-}, escapechar={\#},
+  %markfirstintag=true, morestring=[b]{''}, mathescape=true,
+  %keywordstyle=\sffamily\bfseries, stringstyle=\rmfamily\textsl }
+%%% End of preamble --------------------------------------------------
+
+\lstset{aboveskip=1em,belowskip=1em,showspaces=false,showstringspaces=false}
+\lstset{frame=single,
+  basicstyle=\footnotesize ,
+  backgroundcolor=\color{white}}
+
+\newlength{\topheight}
+\setlength{\topheight}{1.0in}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%% ==================================================================
+%% MAIN DOCUMENT ----------------------------------------------------
+%% ==================================================================
+
+    \title{\sc Water Security Toolkit \docTitle:\\Version \wstversion}
+\author{
+	by\\
+	\\\\
+	Katherine Klise, David Hart, John Siirola, William Hart, Cynthia Phillips \\
+	Sandia National Laboratories\\
+	Albuquerque, NM 87185\\
+	\\
+	Carl Laird, Arpan Seth, Jose Santiago Rodriguez\\
+	Purdue University\\
+	West Lafayette, IN 47907\\
+	\\
+	Terranna Haxton, Regan Murray, Robert Janke\\
+	U.S. Environmental Protection Agency\\
+	Cincinnati, OH 45268\\
+	\\
+	Gabe Hackebeil, Angelica Mann, Shawn McGee\\
+	Texas A\&M University\\
+	College Station, TX 77843\\
+	\\
+	Thomas Taxon\\
+	Argonne National Laboratory\\
+	Lemont, IL 60439\\
+	\\\\
+	Interagency Agreement DW8992450201 \\
+	\\\\
+	Terranna Haxton\\
+	U.S. Environmental Protection Agency Project Officer \\
+	Homeland Security Research Program \\
+	Cincinnati, OH 45268
+}
+\date{}
+
+\begin{document}
+  \ifEPAReport
+    \includepdf[pages={1}]{covers/EPAReport_frontcover_v1-5.pdf}
+    \maketitle
+  \else
+    \includepdf[pages={1}]{covers/SANDReport_cover_v1-3.pdf}
+    \includepdf[pages={2}]{covers/SANDReport_cover_v1-3.pdf}
+    \includepdf[pages={3}]{covers/SANDReport_cover_v1-3.pdf}
+  \fi
+  
+  \clearpage
+%  \input{titlepg}
+  
+  \pagenumbering{roman}
+  \clearpage
+  \ifEPAReport
+    \chapter*{Disclaimer}
+    \input{Disclaimer}
+  \fi
+  
+  %\clearpage
+  %\chapter*{Forward}
+  %\input{Forward}
+
+  \clearpage
+  \chapter*{License Notice}
+  \input{LicenseNotice}
+
+  \clearpage
+  \chapter*{Acknowledgements}
+  \ifEPAReport
+    \input{EPAAcknowledgements}
+  \else
+    \input{SANDAcknowledgements}
+  \fi
+  
+  \clearpage
+  \chapter*{Acronyms}
+  \input{Acronyms}
+  
+  \clearpage
+  \chapter*{Symbols}
+  \input{Symbols}
+  
+  \cleardoublepage
+  \tableofcontents
+  \clearpage
+  \listoffigures
+  %\listoftables
+
+  %\SANDmain
+  \clearpage
+  \pagenumbering{arabic}
+
+  \chapter{Introduction}
+  \input{intro}
+
+  \chapter{Getting Started}
+  \label{chap:gettingstarted}
+  \input{gettingstarted}
+
+
+  %\part*{}
+  %\addcontentsline{toc}{part}{WST Subcommands}
+
+  \chapter{Contaminant Transport}
+  \label{chap:tevasim}
+  \input{tevasim}
+
+  \chapter{Impact Assessment}
+  \label{chap:sim2Impact}
+  \input{sim2Impact}
+
+  \chapter{Sensor Placement}
+  \label{chap:sp}
+  \input{sp}
+
+  \chapter{Hydrant Flushing}
+  \label{chap:flush}
+  \input{flushing}
+
+  \chapter{Booster Station Placement}
+  \label{chap:booster}
+  \input{booster}
+
+  \chapter{Source Identification}
+  \label{chap:inversion}
+  \input{inversion}
+  
+  \chapter{Uncertainty Quantification}
+  \label{chap:uq}
+  \input{uq}
+
+  \chapter{Grab Sampling}
+  \label{chap:grabsample}
+  \input{sampling}
+
+  \chapter{Visualization}
+  \label{chap:visualization}
+  \input{visualization}
+
+  \chapter{Advanced Topics and Case Studies}
+  \label{part2}
+  \input{appendix}
+  
+  \chapter{File Formats}
+  \label{fileFormats} 
+  \input{formats}
+  
+  \chapter{Executable Files}
+  \label{appendixExecutables}
+  \input{executables}
+  
+  \addcontentsline{toc}{part}{References}
+  \bibliographystyle{apalike}
+  \renewcommand{\bibname}{References}
+  \bibliography{sensors}
+
+  \newpage
+  \ifEPAReport
+    \includepdf[pages={1}]{covers/EPAReport_backcover_v1-5.pdf}
+  \else
+    \includepdf[pages={4}]{covers/SANDReport_cover_v1-3.pdf}
+    \includepdf[pages={5}]{covers/SANDReport_cover_v1-3.pdf}
+    \includepdf[pages={6}]{covers/SANDReport_cover_v1-3.pdf}
+  \fi
+
+  %% ==================================================================
+  % END MAIN DOCUMENT
+  %% ==================================================================
+  
+\end{document}
+

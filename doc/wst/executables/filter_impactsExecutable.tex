@@ -1,0 +1,47 @@
+%\subsection{Overview}\label{filter_impactsExecutable_filter_impactsOverview}
+The \code{filter\_\-impacts} script filters out the low-\/impact incidents from 
+an impact file. The \code{filter\_\-impacts} command reads an impact file, filters out the 
+low-\/impact incidents, rescales the impact values and outputs another 
+impact file.
+
+\subsection{Usage}\label{filter_impactsExecutable_filter_impactsUsage}
+\begin{unknownListing}
+   filter_impacts [options...] <impact-file> <out-file>
+\end{unknownListing}
+
+\subsection{Options}\label{filter_impactsExecutable_filter_impactsOptions}
+\begin{unknownListing}
+     --threshold=<val>
+     The contamination incidents with undetected impacts above a specified threshold should be kept.
+     
+     --percent=<num>
+     The percentage of contamination incidents with the worst undetected impact that should be kept.
+     
+     --num=<num>    
+     The number of contamination incidents with the worst undetected impact that should be kept.
+
+     --rescale
+     Rescale the impacts using a log10 scale.
+     
+     --round
+     Round input values to the nearest integer.
+\end{unknownListing}
+
+\subsection{Arguments}\label{filter_impactsExecutable_filter_impactsArguments}
+\begin{unknownListing}
+     <impact-file>
+     The input impact file.
+     
+     <out-file>
+     The output impact file.
+\end{unknownListing}
+
+%\subsection{Description}\label{filter_impactsExecutable_filter_impactsDescription}
+%
+%The \code{filter\_\-impacts} command reads an impact file, filters out the 
+%low-\/impact incidents, rescales the impact values, and writes out another 
+%impact file.
+%
+%\subsection{Notes}\label{filter_impactsExecutable_filter_Notes}
+%
+%None. 

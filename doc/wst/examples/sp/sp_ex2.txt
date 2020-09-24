@@ -1,0 +1,61 @@
+WST sp subcommand
+---------------------------
+Validating configuration file
+Preprocessing data
+Optimizing sensor locations with WST...
+WARNING: EPANET input file required to create HTML network graphic
+
+WST normal termination
+---------------------------
+Directory: sp_ex2
+Results file: Net3_sp_output.yml
+Log file: Net3_sp_output.log
+Visualization file: Net3_sp_output_vis.yml
+
+------------------------------------------------------------------------------
+Sensor placement id:        25849
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            16 21 28 38 65 
+Sensor junctions:           113 121 141 163 209 
+
+Impact File:                Net3/Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                8655.8064
+Lower quartile impact:      0.0000
+Median impact:              7110.0000
+Upper quartile impact:      12444.0000
+Value at Risk (VaR) (  5%): 27269.0000
+TCE                 (  5%): 29853.9750
+Max impact:                 36740.0000
+
+Impact File:                Net3/Net3_mc.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                56320.3850
+Lower quartile impact:      307.6690
+Median impact:              4200.0900
+Upper quartile impact:      137021.0000
+Value at Risk (VaR) (  5%): 143999.0000
+TCE                 (  5%): 143999.0000
+Max impact:                 143999.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3/Net3_ec.impact
+------------------------------------------------------------------------------
+-1	47126.3322
+38	23998.0814
+65	16138.4225
+16	11534.0903
+28	9821.7386
+21	8655.8064
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3/Net3_mc.impact
+------------------------------------------------------------------------------
+-1	136858.7347
+65	71509.1322
+28	56685.0096
+16	56409.8878
+38	56329.1362
+21	56320.3850

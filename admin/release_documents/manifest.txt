@@ -1,0 +1,23 @@
+==========================
+Release Manifest Checklist
+==========================
+
+___ acceptance tests:
+        
+___ documentation
+    ___ tutorial
+    ___ user guide
+    ___ code commenting
+    ___ copyright notices in source files
+    ___ installation instructions
+    ___ web pages
+    ___ testing coverage information
+    ___ package copyright documentation
+    ___ list of significant changes, bug fixes in release
+    ___ release notes
+
+___ libraries:
+    ___ static libraries:________________________________
+    ___ shared libraries:________________________________
+
+___ executables:

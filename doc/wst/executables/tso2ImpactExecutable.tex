@@ -1,0 +1,36 @@
+\subsection{Overview}\label{tso2ImpactExecutable_tso2ImpactOverview}
+
+The {\bfseries tso2Impact} executable generates one or more impact files
+from a ERD or TSO file.
+
+\subsection{Command-\/Line Help}\label{tso2ImpactExecutable_tso2ImpactUsage}
+
+\lstinputlisting{examples/command1.txt}
+
+\subsection{Description}\label{tso2ImpactExecutable_tso2ImpactDescription}
+
+The {\bfseries tso2Impact} executable generates impact files that are used for 
+sensor placement. This executable processes a ERD or TSO File \ref{formats_tsoFile}, 
+which summarizes the result of an EPANET computation. The following files are 
+generated during the execution of {\bfseries tso2Impact:} 
+\begin{itemize}
+\item $<$output-\/prefix$>$.nodemap -\/ a Node File \ref{formats_nodeFile}.
+
+
+\item $<$output-\/prefix$>$.scenariomap -\/ a Scenario File \ref{formats_scenarioFile}.
+
+
+\item $<$output-\/prefix$>$\_\-$<$impact-\/type$>$.impact -\/ an Impact File 
+\ref{formats_impactFile} for a given impact.
+
+
+\end{itemize}
+
+\subsection{Notes}\label{tso2ImpactExecutable_tso2ImpactNotes}
+
+\begin{itemize}
+\item The `-\/-\/tsoPattern` option allows a set of ERD or TSO files to be specified 
+without explicitly listing all of them on the command-\/line. The user specifies 
+a regular expression, and all files that match that expression are included in 
+the analysis. 
+\end{itemize}

@@ -1,0 +1,5 @@
+#!/bin/sh
+# This file was generated automatically by configure.  Do not edit.
+# This directory was configured as follows:
+../../../.././bin/configure --verbose --host=i686-pc-linux-gnu --target=i686-pc-linux-gnu --site=default --with-modules=yes --with-target=linux --with-host=linux --norecursion 
+# using "../../config/mf-sp-linux-linux-default"

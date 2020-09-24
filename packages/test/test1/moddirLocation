@@ -1,0 +1,11 @@
+#!/bin/csh
+##
+## Location of mod directory depends on whether test is running
+## in a source/build/dist tree or in a binary installation.
+##
+
+if (-e ../../python) then
+  echo `pwd`/../../mod
+else
+  echo `pwd`/../../../etc/mod
+endif

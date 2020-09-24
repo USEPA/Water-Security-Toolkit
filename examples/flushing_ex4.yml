@@ -1,0 +1,46 @@
+network:
+  epanet file: Net3/Net3.inp
+scenario:
+  location: ['101']                 
+  type: MASS    
+  strength: 1.450000e+010                   
+  species: null    
+  start time: 180    
+  end time: 240  
+  tsg file: null  
+  tsi file: null                    
+  msx file: null                     
+  msx species: null                
+  merlion: false                   
+impact:
+  erd file: null                    
+  metric: [PE]                    
+  tai file: Net3/Net3_bio.tai      
+  response time: 0                 
+  detection limit: [0.0]            
+  detection confidence: 1            
+  msx species: null                  
+flushing:
+  detection: ['111', '127', '179']       
+  flush nodes:                    
+    feasible nodes: NZD          
+    infeasible nodes: NONE      
+    max nodes: 3                
+    rate: 800.0                     
+    response time: 0.0            
+    duration: 480.0             
+  close valves:                  
+    feasible pipes: NONE           
+    infeasible pipes: NONE          
+    max pipes: 0                   
+    response time: 0.0              
+solver:
+  type: StateMachineLS 
+  threads: 1
+  options: 
+    misc_options: "'max_time=30'"
+  logfile: null                      
+  verbose: 0                         
+configure:
+  output prefix: ${CWD}/flushing_ex4/Net3              
+  debug: 0                         

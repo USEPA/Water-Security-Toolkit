@@ -1,0 +1,1 @@
+Usage: ufl <objective data file> <p (#open facilities)> [gap (0<=gap<=1)] [side_constraint_data_file  upper_bound]* 

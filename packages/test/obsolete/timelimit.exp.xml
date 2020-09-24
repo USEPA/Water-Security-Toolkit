@@ -1,0 +1,97 @@
+<experimental-study name="timelimit-test">
+  <tags>
+    <tag>nightly</tag>
+  </tags>
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_file">
+        <level>-tsg test1.tsg -tsi test1.tsi</level>
+      </factor>
+      <factor name="tso_file">
+        <level>-tso test1.tso</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>Net3.inp Net3.out</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -tso</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>test1 test1.tso</level>
+      </factor>
+      <factor name="objectives">
+        <level>-mc -vc -td -nfd -ec -epanetin Net3.inp</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -impact</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="worst-untimed">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>\-\-network=test1</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-ub=ns,5 -\-solver=heuristic</level>
+        <level>-\-ub=ns,5 -\-solver=pico</level>
+        <level>-\-ub=ns,5 -\-ub=vc_mean,32500.0 -\-solver=heuristic</level>
+        <level>-\-ub=ns,5 -\-ub=vc_mean,32500.0 -\-solver=pico</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-timing</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="worst-timed">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+      </factor>
+      <factor name="measure">
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>\-\-network=test1</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-ub=ns,5 -\-solver=heuristic -\-runtime=0.3</level>
+        <level>-\-ub=ns,5 -\-solver=pico -\-runtime=30.0</level>
+        <level>-\-ub=ns,5 -\-ub=vc_mean,32500.0 -\-solver=heuristic -\-runtime=0.2</level>
+        <level>-\-ub=ns,5 -\-ub=vc_mean,32500.0 -\-solver=pico -\-runtime=60.0</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -sp-timing</executable>
+    </controls>
+  </experiment>
+
+  <analyze>
+    <data experiment="worst-untimed"/>
+    <test name="sp-status for worst-untimed" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+  <analyze>
+    <data experiment="worst-timed"/>
+    <test name="sp-status for worst-timed" type="validate">
+      <options>_measurement='sp_status' _value='Pass'</options>
+    </test>
+  </analyze>
+
+</experimental-study>

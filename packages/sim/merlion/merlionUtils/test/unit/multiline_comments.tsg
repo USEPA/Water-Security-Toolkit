@@ -1,0 +1,17 @@
+; This is a comment
+;this is a comment
+
+
+
+
+197 FLOWPACED 10 0 3600
+
+NZD flowpaced 10 3600 3700
+ALL MASS 0.1 0 4200
+
+
+199 mass 100.0 4300 4400
+
+; this is a comment
+
+

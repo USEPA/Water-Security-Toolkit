@@ -1,0 +1,14 @@
+Number of sensors:          10
+Total cost:                 0
+Sensor node IDs:            2 14 26 40 41 70 71 73 77 81 
+Sensor junctions:           15 109 131 166 167 219 225 231 243 253 
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                12203.2214
+Lower quartile impact:      51.4482
+Median impact:              1047.4700
+Upper quartile impact:      5349.4100
+Value at Risk (VaR) (  5%): 94203.1000
+TCE                 (  5%): 131792.6750
+Max impact:                 144002.0000
+

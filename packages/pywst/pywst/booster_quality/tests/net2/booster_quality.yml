@@ -1,0 +1,40 @@
+# YML template: booster_mip
+# Units: time [min], mass [g], volume [m^3]
+
+network:
+  epanet file: Net2.inp #Net2_wtime_controls_6_24.inp # EPANET network inp file
+  water quality timestep: 5      # Water quality (and reporting) stepsize. INP or Numerical Value(min)
+  simulation duration: 7200 #10080        # Simulation duration. INP or Numerical Value(min)
+  ignore merlion warnings: False   # True or False
+
+booster:
+  model format: AMPL               # AMPL 
+  objective: MASS              # MASS (injected mass, MILP) or SETPOINT (deviation from source quality, MIQP) 
+  decay coefficient: INP           # Coefficient for first-order decay of booster agent. INP or Numerical Value(1/min). 
+  min quality: 0.2                 # Minimum allowable water quality [g/m3] (Numerical Value). 
+  max quality: 3 #AUTO                # Maximum allowable water quality [g/m3] (Numerical Value). 
+  setpoint quality: 1.0            # Ideal water quality setpoint[g/m3] (Numerical Value).
+  source quality: 1.0              # water quality from source nodes [g/m3] (Numerical Value). 
+  source nodes: []                 # source nodes (List). 
+  feasible nodes: ALL              # ALL, NZD, NONE, list or filename
+  infeasible nodes: NONE           # ALL, NZD, NONE, list or filename
+  fixed nodes: [1]                 # list
+  evaluate: False                  # True or False 
+  max boosters: [1,2,3,4,5,6,7,8,9,10]      # Maximum number of booster stations
+  strength: FLOWPACED 10           # FLOWPACED [g/m3] or MASS [g/min]
+  quality start: 5761              # start time [minutes] of quality concentration bounds
+
+solver:
+  executable: cplexamp             # Path to the optimization solver executable
+  options:
+    #mipgap: 0.01                  # Example option 1 for optimization solver
+    #threads: 8                    # Example option 2 for optimization solver
+    outlev: 2
+    mipdisplay: 2
+  problem writer: nl               # Problem writer used for Pyomo: nl, lp, python, ...
+
+configure:
+  output prefix: wst               # All created filenames will begin with 'output prefix-'
+  ampl executable: ampl64          # Path to the AMPL executable
+  pyomo executable: pyomo          # Path to the Pyomo executable
+

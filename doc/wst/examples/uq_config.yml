@@ -1,0 +1,17 @@
+# uq configuration template
+scenario:
+  signals: list_scenarios                # Signal files, overrides TSG or TSI files
+uq:
+  analysis time: 60                      # Analysis time (min)
+  threshold: 0.01                        # Contamination threshold. Default 0.01 (mg/L)
+  confidence: 0.9                        # Probability confidence for candidate nodes (unitless) 
+measurements:
+  grab samples: null                     # Measurements file name
+configure:
+  output prefix: ''                      # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0
+
+
+
+

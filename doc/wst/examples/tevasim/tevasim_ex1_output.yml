@@ -1,0 +1,13 @@
+# tevasim output
+general:
+  version: 1.5                         # WST version
+  date: '2019-03-05'                   # Run date
+  cpu time: 4.061                      # CPU time (sec)
+  directory: C:/WST-1.5/examples/tevasim_ex1
+  log file: Net3tevasim_output.log     # Log file
+tevasim:
+  report file: Net3.rpt                # EPANET report file
+  header file: Net3.erd                # ERD header file
+  hydraulic file: Net3-1.hyd.erd       # ERD hydraulic file
+  water quality file: Net3-1.qual.erd  # ERD water quality file
+  index file: Net3.index.erd           # ERD index file

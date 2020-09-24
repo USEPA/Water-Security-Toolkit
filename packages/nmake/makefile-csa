@@ -1,0 +1,154 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build merlion applications
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+UTILIB_DIR=$(TPL)\acro\packages\utilib
+UTILIB_LIB_DIR=$(UTILIB_DIR)\mvs\nmake
+UTILIB_LIB=$(UTILIB_LIB_DIR)\static\libutilib.lib
+UTILIB_INCLUDE= \
+  /I $(UTILIB_LIB_DIR) \
+  /I $(UTILIB_DIR)\src
+TEVASIM_LOC = $(PACKAGES)\sim\tevasim
+TEVAUTIL_INCLUDE = /I $(PACKAGES)\tevaUtils\tso\src
+ERD_INCLUDE = /I $(PACKAGES)\tevaUtils\erd\erd\include
+ENL_INCLUDE = /I $(PACKAGES)\tevaUtils\erd\enl\include
+MERLION_APPS=$(TOP)\packages\sim\merlion\applications
+EPANETLIB_LOC = $(TPL)\epanet\EPANET_\src
+EPANETLIB_INCLUDE = /I . /I $(EPANETLIB_LOC) /I $(EPANETLIB_LOC)\..\include
+EPANETMSXLIB_LOC = $(TPL)\epanet\EPANET_MSX_\src
+EPANETMSXLIB_INCLUDE = /I . /I $(EPANETMSXLIB_LOC) /I $(EPANETMSXLIB_LOC)\..\include
+EPANETBTXLIB_LOC = $(TPL)\epanet\EPANET_BTX_\src
+EPANETBTXLIB_INCLUDE = /I . /I $(EPANETBTXLIB_LOC) /I $(EPANETBTXLIB_LOC)\..\include
+MERLIONLIB_LOC = $(PACKAGES)\sim\merlion\src
+MERLIONLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC)
+MERLIONUTILSLIB_LOC = $(PACKAGES)\sim\merlion\merlionUtils\src
+MERLIONUTILSLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC) /I $(EPANETLIB_LOC)  /I $(EPANETLIB_LOC)\..\include /I $(MERLIONUTILSLIB_LOC) /I $(TPL)\acro\tpl\boost
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+
+CFLAGS=$(CFLAGS) /Z7
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS -DWINDOWS
+## _USRDLL and LIBEPANET_JNI_EXPORTS are not found in our sources
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530
+CFLAGS = $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+
+all: static\libcsa.lib static\csarun.exe
+
+dll: dlls
+
+dlls: shared shared\libcsa.dll
+
+##
+## Create a teva_config.h - the configuration file from autotools
+##
+##
+headers:
+    copy teva_config.txt teva_config.h
+
+##
+## Create directories to keep static and shared files separate
+##
+##
+static:
+    @if not exist static mkdir static
+
+shared:
+    @if not exist shared mkdir shared
+
+
+
+##
+##
+## CSA LIBRARY
+##
+##
+CSA_LOC = $(PACKAGES)\csa
+CSA_C_SRC = $(CSA_LOC)\src\CSA.c
+CSA_C_OBJ = $(CSA_C_SRC:.c=.obj)
+CSA_INCLUDE = /I $(CSA_LOC)\include  \
+		  $(EPANETBTXLIB_INCLUDE) \
+		  $(EPANETLIB_INCLUDE)
+CSA_FLAGS = -DDLL
+
+{$(CSA_LOC)\src}.c.{$(CSA_LOC)\src}.obj:
+    $(CC) $(CFLAGS) $(CSA_FLAGS) $(CSA_INCLUDE) /Fo$@ /c $*.c
+
+static\libcsa.lib: static $(CSA_C_OBJ) 
+    lib /out:static\libcsa.lib $(CSA_C_OBJ) static\libepanetbtx.lib static\libepanet.lib 
+
+shared\libcsa.dll: shared $(CSA_C_OBJ)
+    link $(LINK_FLAGS) /dll /IMPLIB:shared\libcsa.lib /out:shared\libcsa.dll $(CSA_C_OBJ) static\libepanetbtx.lib static\libepanet.lib 
+
+
+##
+##
+## CSARUN EXECUTABLE
+##
+##
+CSARUN_CPP_SRC = \
+		$(CSA_LOC)\CSA_run\csarun.cpp \
+		$(CSA_LOC)\CSA_run\CSArunOptions.cpp
+CSARUN_CPP_OBJ = $(CSARUN_CPP_SRC:.cpp=.obj)
+CSARUN_INCLUDE = /I . /I $(CSA_LOC)\include /I $(CSA_LOC)\CSA_run \
+		  $(EPANETBTXLIB_INCLUDE) \
+		  $(EPANETLIB_INCLUDE) \
+		  /I $(TPL)\acro\tpl\boost \
+		  $(UTILIB_INCLUDE)
+CSARUN_FLAGS = /EHs # required to use boost library
+
+{$(CSA_LOC)\CSA_run}.cpp.{$(CSA_LOC)\CSA_run}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(CSARUN_FLAGS) $(CSARUN_INCLUDE) /Fo$@ /c $*.cpp
+
+static\csarun.exe:  $(CSARUN_CPP_OBJ) static\libcsa.lib static\libepanetbtx.lib static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+
+
+
+OBJ_FILES = $(CSARUN_CPP_OBJ) \
+	    $(CSARUN_C_OBJ)
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake dlls " will build the shared versions
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+
+clean:
+	cd $(MAKEDIR)
+		@-del /Q teva_config.h
+        @-del $(OBJ_FILES)
+        @-del /Q static\csarun.*

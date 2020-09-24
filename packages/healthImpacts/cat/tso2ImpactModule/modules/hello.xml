@@ -1,0 +1,23 @@
+<AnalysisModule name="Hello World Analysis" library_name="HelloAnalysis">
+	<ModuleInputs>
+		<InputValue name="Hello" type="int" required="true" 
+			    tooltip="A dummy user input field">
+		</InputValue>
+	</ModuleInputs>
+	<ColorRamps>
+	</ColorRamps>
+	<OutputDefinitions>
+		<ChartOutput selectionString="Average # Steps w/Nonzero Conc."
+			     showLegend="false">
+			<Description> </Description>
+			<XAxis data="RESULTS.nodeID" label="Node ID"
+			       logarithmic="false" />
+			<YAxis label="Average # steps"
+			       logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.aveNonzero"
+					name="Average # steps nz" />
+			</DataSeries>
+		</ChartOutput>
+	</OutputDefinitions>
+</AnalysisModule>

@@ -1,0 +1,22 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+## Detection: don't count impact until 2 locations have detected it
+##
+
+setenv bindir `bindirLocation`
+setenv moddir `moddirLocation`
+setenv python `pythonLocation`
+
+if (! -e test1.tso) then
+   $bindir/tevasim --tsg test1.tsg --tsi test1.tsi --tso test1.tso Net3.inp Net3.out
+endif
+
+$bindir/tso2Impact --mc --detectionConfidence 2 test1 test1.tso
+
+$python $bindir/sp --debug --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico
+
+# Remove so other tests don't skip creating the impact file
+#
+rm test1_mc.impact

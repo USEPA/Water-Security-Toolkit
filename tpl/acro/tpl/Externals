@@ -1,0 +1,4 @@
+boost   -r2734 https://software.sandia.gov/svn/tpl/boost/tags/1.40
+cxxtest -r358  https://software.sandia.gov/svn/cxxtest/trunk
+tinyxml -r2734 https://software.sandia.gov/svn/tpl/tinyxml/tags/2.5.2
+vpykit  -r2923 https://software.sandia.gov/svn/fast/vpykit/tags/1.3

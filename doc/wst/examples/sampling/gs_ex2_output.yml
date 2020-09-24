@@ -1,0 +1,13 @@
+# grabsample output
+general:
+  version: 1.5                                              # WST version
+  date: '2019-03-05'                                        # Run date
+  cpu time: 6.757                                           # CPU time (sec)
+  directory: c:/wst-1.5/examples/grabsample_ex2             # Results directory
+  log file: Net3grabsample_output.log                       # Log file
+grabsample:
+  nodes: ['50', '115', '3']                                 # List of grabsample nodes
+  objective: 9.193169619999995                              # Objective value
+  threshold: null                                           # Threshold
+  count: 3                                                  # Count
+  time: 720.0                                               # Time

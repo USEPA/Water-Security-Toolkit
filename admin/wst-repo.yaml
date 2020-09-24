@@ -1,0 +1,166 @@
+---
+__repo__: https://software.sandia.gov/svn/wst
+dist:
+  trunk:
+    externals:
+      pyutilib.virtualenv: pyutilib.virtualenv % trunk
+merlion:
+  tags/1.0:
+    branched-from: trunk
+  tags/1.1:
+    branched-from: trunk
+  tags/1.2:
+    branched-from: trunk
+  tags/1.3:
+    branched-from: trunk
+  tags/spot-2.5.2:
+    branched-from: trunk
+  trunk: 
+pywst:
+  tags/1.0:
+    branched-from: trunk
+  tags/1.1:
+    branched-from: trunk
+  tags/1.2:
+    branched-from: trunk
+  tags/1.3:
+    branched-from: trunk
+  tags/spot-2.5.1:
+    branched-from: trunk
+  tags/spot-2.5.2:
+    branched-from: trunk
+  tags/spot-2.5.2.1:
+    branched-from: tags/spot-2.5.2.1
+  trunk: 
+wst:
+  tags/1.0:
+    branched-from: trunk
+    externals:
+      packages/pywst: https://software.sandia.gov/svn/teva/wst/pywst/tags/1.0 @ 541
+      packages/sim/merlion: https://software.sandia.gov/svn/teva/wst/merlion/tags/1.0 @ 541
+      packages/tevaUtils/erd: https://epanet.svn.sourceforge.net/svnroot/epanet/ERD/trunk @ 432
+      tpl/acro: https://software.sandia.gov/svn/public/acro/acro-utilib/releases/4.3 @ 7429
+      tpl/epanet/EPANET_: https://epanet.svn.sourceforge.net/svnroot/epanet/BASE/trunk @ 432
+      tpl/epanet/EPANET_MSX_: https://epanet.svn.sourceforge.net/svnroot/epanet/MSX/trunk @ 432
+      tpl/lzma: https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12 @ 2647
+      tpl/pyepanet: https://epanet.svn.sourceforge.net/svnroot/epanet/pyepanet/trunk @ 432
+      tpl/sundry: https://software.sandia.gov/svn/public/acro/sundry/tags/1.2.1 @ 7429
+      tpl/vpykit: https://software.sandia.gov/svn/public/fast/vpykit/tags/1.1 @ 2779
+  tags/1.1:
+    branched-from: trunk
+    externals:
+      admin/packaging/autodist: https://software.sandia.gov/svn/public/pyutilib/pyutilib.autodist/tags/1.1 @ 3245
+      packages/pywst: https://software.sandia.gov/svn/teva/wst/pywst/tags/1.1 @ 1634
+      packages/sim/merlion: https://software.sandia.gov/svn/teva/wst/merlion/tags/1.1 @ 1634
+      packages/tevaUtils/erd: https://software.sandia.gov/svn/teva/epanet/ERD/trunk @ 447
+      tpl/acro: https://software.sandia.gov/svn/public/acro/acro-utilib/releases/4.3.2 @ 7613
+      tpl/epanet/EPANET_: https://software.sandia.gov/svn/teva/epanet/BASE/trunk @ 447
+      tpl/epanet/EPANET_MSX_: https://software.sandia.gov/svn/teva/epanet/MSX/trunk @ 447
+      tpl/lzma: https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12 @ 2718
+      tpl/pyepanet: https://software.sandia.gov/svn/teva/epanet/pyepanet/trunk @ 447
+      tpl/sundry: https://software.sandia.gov/svn/public/acro/sundry/trunk @ 7613
+      tpl/vpykit: https://software.sandia.gov/svn/public/fast/vpykit/tags/1.3 @ 2899
+  tags/1.1.1:
+    branched-from: tags/1.1
+    externals:
+      admin/packaging/autodist: https://software.sandia.gov/svn/pyutilib/pyutilib.autodist/tags/1.1 @ 3245
+      packages/pywst: https://software.sandia.gov/svn/wst/pywst/tags/1.1 @ 1634
+      packages/sim/merlion: https://software.sandia.gov/svn/wst/merlion/tags/1.1 @ 1634
+      packages/tevaUtils/erd: https://software.sandia.gov/svn/epanet/ERD/trunk @ 448
+      tpl/acro: https://software.sandia.gov/svn/acro/acro-utilib/releases/4.3.2 @ 7613
+      tpl/epanet/EPANET_: https://software.sandia.gov/svn/epanet/BASE/trunk @ 447
+      tpl/epanet/EPANET_MSX_: https://software.sandia.gov/svn/epanet/MSX/trunk @ 448
+      tpl/lzma: https://software.sandia.gov/svn/tpl/lzma_sdk/tags/9.12 @ 2718
+      tpl/pyepanet: https://software.sandia.gov/svn/epanet/pyepanet/trunk @ 451
+      tpl/sundry: https://software.sandia.gov/svn/acro/sundry/trunk @ 7613
+      tpl/vpykit: https://software.sandia.gov/svn/fast/vpykit/tags/1.3 @ 2899
+  tags/1.2:
+    branched-from: trunk
+    externals:
+      admin/packaging/autodist: https://software.sandia.gov/svn/pyutilib/pyutilib.autodist/tags/1.2 @ 3471
+      packages/pywst: https://software.sandia.gov/svn/wst/pywst/tags/1.2 @ 2088
+      packages/sim/merlion: https://software.sandia.gov/svn/wst/merlion/tags/1.2 @ 2088
+      packages/tevaUtils/erd: https://software.sandia.gov/svn/epanet/ERD/trunk @ 452
+      tpl/acro: https://software.sandia.gov/svn/acro/acro-utilib/releases/4.3.4 @ 7641
+      tpl/epanet/EPANET_: https://software.sandia.gov/svn/epanet/BASE/trunk @ 452
+      tpl/epanet/EPANET_MSX_: https://software.sandia.gov/svn/epanet/MSX/trunk @ 452
+      tpl/lzma: https://software.sandia.gov/svn/tpl/lzma_sdk/tags/9.12 @ 2734
+      tpl/pyepanet: https://software.sandia.gov/svn/epanet/pyepanet/trunk @ 452
+      tpl/sundry: https://software.sandia.gov/svn/acro/sundry/trunk @ 7641
+      tpl/vpykit: https://software.sandia.gov/svn/fast/vpykit/tags/1.4 @ 2930
+  tags/1.3:
+    branched-from: trunk
+    externals:
+      admin/packaging/autodist: https://software.sandia.gov/svn/pyutilib/pyutilib.autodist/tags/1.3 @ 3622
+      packages/pywst: https://software.sandia.gov/svn/wst/pywst/tags/1.3 @ 2180
+      packages/sim/merlion: https://software.sandia.gov/svn/wst/merlion/tags/1.3 @ 2180
+      packages/tevaUtils/erd: https://software.sandia.gov/svn/epanet/ERD/trunk @ 452
+      tpl/acro: https://software.sandia.gov/svn/acro/acro-utilib/releases/4.3.4 @ 7677
+      tpl/epanet/EPANET_: https://software.sandia.gov/svn/epanet/BASE/trunk @ 452
+      tpl/epanet/EPANET_MSX_: https://software.sandia.gov/svn/epanet/MSX/trunk @ 452
+      tpl/lzma: https://software.sandia.gov/svn/tpl/lzma_sdk/tags/9.12 @ 2775
+      tpl/pyepanet: https://software.sandia.gov/svn/epanet/pyepanet/trunk @ 452
+      tpl/sundry: https://software.sandia.gov/svn/acro/sundry/trunk @ 7677
+      tpl/vpykit: https://software.sandia.gov/svn/fast/vpykit/tags/1.5 @ 2950
+  tags/spot-2.5.1:
+    externals:
+      packages/sim/EPANET_MSX: https://epanet.svn.sourceforge.net/svnroot/epanet/MSX/trunk @ 418
+      packages/tevaUtils/erd: https://epanet.svn.sourceforge.net/svnroot/epanet/ERD/trunk @ 418
+      tpl/acro: https://software.sandia.gov/svn/public/acro/acro-utilib/trunk
+      tpl/build-scripts: https://software.sandia.gov/svn/public/fast/hudson/build-scripts/tags/spot-2.5.1 @ 2700
+      tpl/lzma: https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12 @ 2628
+      tpl/pywst: https://software.sandia.gov/svn/teva/wst/pywst/tags/spot-2.5.1 @ 154
+      tpl/sundry: https://software.sandia.gov/svn/public/acro/sundry/tags/1.2.1 @ 7361
+      tpl/vpykit: https://software.sandia.gov/svn/public/fast/vpykit/trunk
+  tags/spot-2.5.2:
+    branched-from: trunk
+    externals:
+      packages/pywst: https://software.sandia.gov/svn/teva/wst/pywst/tags/spot-2.5.2 @ 926
+      packages/sim/merlion: https://software.sandia.gov/svn/teva/wst/merlion/tags/spot-2.5.2 @ 857
+      packages/tevaUtils/erd: https://epanet.svn.sourceforge.net/svnroot/epanet/ERD/trunk @ 433
+      tpl/acro: https://software.sandia.gov/svn/public/acro/acro-utilib/releases/4.3.1 @ 7512
+      tpl/epanet/EPANET_: https://epanet.svn.sourceforge.net/svnroot/epanet/BASE/trunk @ 433
+      tpl/epanet/EPANET_MSX_: https://epanet.svn.sourceforge.net/svnroot/epanet/MSX/trunk @ 433
+      tpl/lzma: https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12 @ 2668
+      tpl/pyepanet: https://epanet.svn.sourceforge.net/svnroot/epanet/pyepanet/trunk @ 433
+      tpl/sundry: https://software.sandia.gov/svn/public/acro/sundry/tags/1.2.2 @ 7512
+      tpl/vpykit: https://software.sandia.gov/svn/public/fast/vpykit/tags/1.2 @ 2800
+  tags/spot-2.5.2.1:
+    branched-from: tags/spot-2.5.2
+    externals:
+      packages/pywst: https://software.sandia.gov/svn/teva/wst/pywst/tags/spot-2.5.2.1 @ 963
+      packages/sim/merlion: https://software.sandia.gov/svn/teva/wst/merlion/tags/spot-2.5.2 @ 857
+      packages/tevaUtils/erd: https://epanet.svn.sourceforge.net/svnroot/epanet/ERD/trunk @ 433
+      tpl/acro: https://software.sandia.gov/svn/public/acro/acro-utilib/releases/4.3.1 @ 7512
+      tpl/epanet/EPANET_: https://epanet.svn.sourceforge.net/svnroot/epanet/BASE/trunk @ 433
+      tpl/epanet/EPANET_MSX_: https://epanet.svn.sourceforge.net/svnroot/epanet/MSX/trunk @ 433
+      tpl/lzma: https://software.sandia.gov/svn/public/tpl/lzma_sdk/tags/9.12 @ 2668
+      tpl/pyepanet: https://epanet.svn.sourceforge.net/svnroot/epanet/pyepanet/trunk @ 433
+      tpl/sundry: https://software.sandia.gov/svn/public/acro/sundry/tags/1.2.2 @ 7512
+      tpl/vpykit: https://software.sandia.gov/svn/public/fast/vpykit/tags/1.2 @ 2800
+  trunk:
+    externals:
+      admin/packaging/autodist: pyutilib.autodist % trunk
+      packages/pywst: pywst % trunk
+      packages/sim/merlion: merlion % trunk
+      packages/tevaUtils/erd: ERD % trunk
+      tpl/acro: acro-utilib % releases/4.3.4
+      tpl/epanet/EPANET_: BASE % trunk
+      tpl/epanet/EPANET_MSX_: MSX % trunk
+      tpl/lzma: lzma_sdk % tags/9.12
+      tpl/pyepanet: pyepanet % trunk
+      tpl/sundry: sundry % trunk
+      tpl/vpykit: vpykit % trunk
+wst_data:
+  tags/1.1:
+    branched-from: trunk
+  tags/1.1.1:
+    branched-from: trunk
+  tags/1.2:
+    branched-from: trunk
+  tags/1.3:
+    branched-from: trunk
+  tags/spot-2.5.2:
+    branched-from: trunk
+  trunk: 
+...

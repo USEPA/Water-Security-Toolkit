@@ -1,0 +1,89 @@
+{
+   "_id": "_design/gui",
+   "_rev": "30-258864f157b25ced41b27cd1a887f60d",
+   "updates": {
+       "query": "function(doc,req){doc[req.query.body_key]=req.body; return [doc,'{\"rev\":\"'+doc._rev+'\"}'];}",
+       "query_set_true": "function(doc,req){doc[req.query.body_key]=true; return [doc,'{\"rev\":\"'+doc._rev+'\"}'];}",
+       "query_set_false": "function(doc,req){doc[req.query.body_key]=false; return [doc,'{\"rev\":\"'+doc._rev+'\"}'];}",
+       "query1": "function(doc,req){var key1=req.query.key1; var value1=req.query.value1; var oldval1=doc[key1]; var res='oldval1='+oldval1+', newval1=' + value1; doc[key1]=value1; return [doc,res];}",
+       "query2": "function(doc,req){var len=req.query.value1.length;var res=''+len;return[doc,res];}"
+   },
+   "lists": null,
+   "views": {
+       "gui": {
+           "map": "function(doc){if(doc._id=='gui'){emit(doc._id, {id:doc._id})}}"
+       },
+       "time": {
+           "map": "function(doc){if(doc._id=='time'){emit(doc._id, {id:doc._id})}}"
+       },
+       "m_InpList": {
+           "map": "function(doc){if(doc.m_InpList){emit(doc.Date,{rev:doc._rev,name:doc.name,fileName:doc.fileName,jsonFile:doc.jsonFile,wqmFile:doc.wqmFile,map:doc.map,dotSize:doc.dotSize,status:doc.status,TimeData:doc.TimeData, ObjectCount:doc.ObjectCount})}}"
+       },
+       "m_SimList": {
+           "map": "function(doc){if(doc.m_SimList){emit(doc.Date,{rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,input_TSG:doc.input_TSG,pid:doc.pid,statusOld:doc.statusOld,selectedNode:doc.selectedNode,selectedSource:doc.selectedSource,timer:doc.timer})}}"
+       },
+       "m_SimListHide": {
+           "map": "function(doc){if(doc.m_SimList && !doc.m_hide){emit(doc.Date,{rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,input_TSG:doc.input_TSG,pid:doc.pid,statusOld:doc.statusOld,selectedNode:doc.selectedNode,selectedSource:doc.selectedSource,timer:doc.timer})}}"
+       },
+       "m_SimListPlus": {
+           "map": "function(doc){if(doc.m_SimList){emit(doc.Date,{rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,input_TSG:doc.input_TSG,pid:doc.pid,statusOld:doc.statusOld,selectedNode:doc.selectedNode,selectedSource:doc.selectedSource,timer:doc.timer})}}"
+       },
+       "m_ImpactList": {
+           "map": "function(doc){if(doc.m_ImpactList){emit(doc.Date,{rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,pid:doc.pid,statusOld:doc.statusOld,input_TSG:doc.input_TSG,stopTime:doc.stopTime,sensors:doc.sensors,injections:doc.injections,injection_count:(doc.injections) ? doc.injections.length : 0,assets:doc.assets,timer:doc.timer,timer2:doc.timer2})}}"
+       },
+       "m_InversionList": {
+           "map": "function(doc){if(doc.m_InversionList){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_InversionListHide": {
+           "map": "function(doc){if(doc.m_InversionList && !doc.m_hide){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_InversionListByEvent": {
+           "map": "function(doc){if(doc.m_InversionList && doc.eventId){emit(doc.eventId,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_MeasureList": {
+           "map": "function(doc){if(doc.m_MeasureList){emit(doc.uuidInversion,{date:doc.Date,rev:doc._rev,fileName:doc.fileName,uuid:doc.uuidInversion})}}"
+       },
+       "m_GrabList": {
+           "map": "function(doc){if(doc.m_GrabList){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,sampleCount:doc.sampleCount,sampleTime:doc.sampleTime,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_GrabListHide": {
+           "map": "function(doc){if(doc.m_GrabList && !doc.m_hide){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,sampleCount:doc.sampleCount,sampleTime:doc.sampleTime,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_GrabListByEvent": {
+           "map": "function(doc){if(doc.m_GrabList && doc.eventId){emit(doc.eventId,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,sampleCount:doc.sampleCount,sampleTime:doc.sampleTime,docFile_INP:doc.docFile_INP,pid:doc.pid})}}"
+       },
+       "m_ScenariosList": {
+           "map": "function(doc){if(doc.m_ScenariosList){emit(doc.uuidGrab,{date:doc.Date,rev:doc._rev,fileName:doc.fileName,uuid:doc.uuidGrab})}}"
+       },
+       "m_TrainingList": {
+           "map": "function(doc){if(doc.m_TrainingList){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,logId:doc.logId,grabId:doc.grabId,canaryId:doc.canaryId,sensors:doc.sensors,scenario:doc.scenario})}}"
+       },
+       "m_EventsList": {
+           "map": "function(doc){if(doc.m_EventsList){emit(doc.Date,{date:doc.dateTime,rev:doc._rev,name:doc.name,status:doc.status,logId:doc.logId,grabId:doc.grabId,canaryId:doc.canaryId,sensors:doc.sensors})}}"
+       },
+       "m_EventsLog": {
+           "map": "function(doc){if(doc.m_EventsLog){emit(doc.eventId,{date:doc.Date,rev:doc._rev,eventId:doc.eventId})}}"
+       },
+       "m_EventsGrabGrid": {
+           "map": "function(doc){if(doc.m_EventsGrabGrid){emit(doc.eventId,{date:doc.Date,rev:doc._rev,count:(doc.grab?doc.grab.length:null),eventId:doc.eventId})}}"
+       },
+       "m_EventsCanaryGrid": {
+           "map": "function(doc){if(doc.m_EventsCanaryGrid){emit(doc.eventId,{date:doc.Date,rev:doc._rev,count:doc.canary.length,eventId:doc.eventId})}}"
+       },
+       "m_GenList": {
+           "map": "function(doc){if(doc.m_GenList){emit(doc.Date,{date:doc.Date,rev:doc._rev,name:doc.name,status:doc.status,docFile_INP:doc.doFile_INP,pid:doc.pid,docFile_INP:doc.docFile_INP,input_TSG:doc.input_TSG,sensorList:doc.sensorList,sensorStart:doc.sensorStart,sensorStop:doc.sensorStop,sensorPerHour:doc.sensorPerHour})}}"
+       },
+       "m_svgFile": {
+           "map": "function(doc){if(doc.m_svgFile){emit(doc.Date,{rev:doc._rev,inpFile:doc.inpFile,Date:doc.Date})}}"
+       },
+       "m_GisList": {
+           "map": "function(doc){if(doc.m_GisList){emit(doc.Date,{rev:doc._rev,inpFile:doc.fileName,Date:doc.Date})}}"
+       },
+       "m_UnknownList": {
+           "map": "function(doc){if(!doc.m_InpList&&!doc.m_SimList&&!doc.m_ImpactList&&!doc.m_InversionList&&!doc.m_MeasureList&&!doc.m_GrabList&&!doc.m_TrainingList&&!doc.m_EventsList&&!doc.m_EventsGrabGrid&&!doc.m_EventsCanaryGrid&&!doc.m_EventsLog&&!doc.m_ScenariosList&&!doc.m_GenList&&!doc.m_svgFile&&!doc.m_GisList&&doc._id!='gui'&&doc._id!='files'&&doc._id!='time'){emit(doc._id,{rev:doc._rev})}}"
+       },
+       "m_DeleteAll": {
+           "map": "function(doc){if(doc._id!='gui'&&doc._id!='files'&&doc._id!='time'&&doc._id!='_design/gui'){emit(doc._id,{rev:doc._rev})}}"
+       }
+   }
+}

@@ -1,0 +1,86 @@
+<experimental-study name="opt">
+  <!--
+	These experiments confirm that the correct impact file
+	is generated from one of the Net3 TSO files in the sp/etc
+	directory.
+   -->
+  <tags>
+    <tag>nightly</tag>
+    <tag>smoke</tag>
+  </tags>
+
+  <experiment name="valid">
+    <factors>
+      <factor>
+        <level>network=Net3_quarterly impact-dir=../../../../../etc/Net3 objective=mc ub=ns,5 _optimum=21781.989872457</level>
+        <!-- <level>network=Net3_hourly impact-dir=../../../../../etc/Net3 objective=mc ub=ns,5 _optimum=22786.553911016908</level> -->
+      </factor>
+      <factor name="agg">
+	<level name="noagg"> disable\-aggregation=mc </level>
+      </factor>
+      <factor name="solver">
+        <level name="pico">solver=pico _tolerance=1e-2</level>
+        <level name="heuristic">solver=heuristic _tolerance=1e-2</level>
+        <level name="lagrangian">solver=lagrangian _tolerance=2e2</level>
+      </factor>
+      <factor>
+	<level>memmon=true</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="invalid">
+    <factors>
+      <factor>
+        <level>network=Net3_quarterly impact-dir=../../../../../etc/Net3 objective=mc ub=ns,5 _optimum=21781.989872457</level>
+        <!-- <level>network=Net3_hourly impact-dir=../../../../../etc/Net3 objective=mc ub=ns,5 _optimum=22786.553911016908</level> -->
+      </factor>
+      <factor name="agg">
+	<level name="noagg"> disable\-aggregation=mc </level>
+      </factor>
+      <factor name="solver">
+        <level name="pico">solver=pico _tolerance=1e-2</level>
+        <level name="heuristic">solver=heuristic _tolerance=1e-2</level>
+        <level name="lagrangian">solver=lagrangian _tolerance=2e2</level>
+      </factor>
+      <factor>
+	<level>memmon=true sensor-locations=../../../../../etc/Net3/invalid.nodes</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <analysis name="ValidValue" type="validation">
+    <category>validation</category>
+    <data experiment="valid"/>
+    <options>_measurement="Value" _value=_optimum _cmp_operator=eq</options>
+  </analysis>
+
+  <analysis name="InvalidValue" type="validation">
+    <category>validation</category>
+    <data experiment="invalid"/>
+    <options>_measurement="Value" _value=_optimum _cmp_operator=eq</options>
+  </analysis>
+
+<!--
+  <analysis name="Baseline" type="baseline">
+    <data experiment="valid">
+	<filter>
+	   <factor name="solver">pico$</factor>
+        </filter>
+    </data>
+    <data experiment="invalid">
+	<filter>
+	   <factor name="solver">pico$</factor>
+        </filter>
+    </data>
+    <options>_measurement="Number IP Nonzeros" _sense=1.0 _ptolerance=-0.5</options>
+  </analysis>
+-->
+
+</experimental-study>

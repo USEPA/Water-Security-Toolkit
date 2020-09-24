@@ -1,0 +1,25 @@
+configure:
+  ampl executable: ampl
+  output prefix: test
+  pyomo executable: pyomo
+grabsample:
+  fixed sensors: fixed_sensors.dat
+  greedy selection: false
+  model format: AMPL
+  num samples: 3
+  sample time: 570
+  threshold: null
+network:
+  epanet file: Net3.inp
+  simulation duration: null
+  water quality timestep: null
+scenario:
+  tsg file: test_profile.tsg
+solver:
+  initial points: []
+  logfile: null
+  name: solver1
+  options: null
+  problem writer: lp
+  type: cplexamp
+  verbose: 0

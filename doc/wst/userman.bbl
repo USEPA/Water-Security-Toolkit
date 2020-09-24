@@ -1,0 +1,223 @@
+\begin{thebibliography}{}
+
+\bibitem[Adams et~al., 2013]{DakotaUserManual}
+Adams, B.~M., Ebeida, M.~S., Eldred, M.~S., Jakeman, J.~D., Swiler, L.~P.,
+  Bohnhoff, W.~J., Dalbey, K.~R., Eddy, J.~P., Hu, K.~T., and Vigil, D.~M.
+  (2013).
+\newblock Dakota, a multilevel parallel object-oriented framework for design
+  optimization, parameter estimation, uncertainty quantifcation, and
+  sensitivity analysis.
+\newblock Technical Report SAND2010-2183, Sandia National Laboratories.
+\newblock Available at \url{http://dakota.sandia.gov/documentation.html}.
+
+\bibitem[Berry et~al., 2006]{BerHarPhiUbeWat06}
+Berry, J., Hart, W.~E., Phillips, C.~E., Uber, J.~G., and Watson, J.-P. (2006).
+\newblock Sensor placement in municipal water networks with temporal integer
+  programming models.
+\newblock {\em J. Water Resources Planning and Management}, 132(4):218--224.
+
+\bibitem[{Bureau of Labor Statistics and U.S. Census Bureau}, 2005]{ATUS}
+{Bureau of Labor Statistics and U.S. Census Bureau} (2005).
+\newblock American time use survey user's guide 2003 to 2004.
+\newblock Technical report, Washington DC.
+\newblock Available at
+  \url{http://www.bls.gov/news.release/archives/atus_09142004.pdf}.
+
+\bibitem[Daskin, 1995]{Daskin95}
+Daskin, M. (1995).
+\newblock Wiley, New York.
+
+\bibitem[Davis and Janke, 2008]{DavJan08}
+Davis, M. and Janke, R. (2008).
+\newblock Importance of exposure model in estimating impacts when a water
+  distribution system is contaminated.
+\newblock {\em J. Water Resources Planning and Management}, 134(5):449--456.
+
+\bibitem[{De Sanctis} et~al., 2009]{csa}
+{De Sanctis}, A., Shang, F., and Uber, J. (2009).
+\newblock Real-time identification of possible contamination sources using
+  network backtracking methods.
+\newblock {\em Journal of Water Resources Planning and Management},
+  136:444--453.
+
+\bibitem[Elloumi et~al., 2004]{ElloumiEtAl04}
+Elloumi, S., Labb\'{e}, M., and Pochet, Y. (2004).
+\newblock {\em {INFORMS} Journal on Computing}, 16:83--94.
+
+\bibitem[EPA, 2004]{ResponseProtocolToolbox}
+EPA, U.~S. (2004).
+\newblock Response protocol toolbox: planning for and responding to drinking
+  water contamination threats and incidents.
+\newblock Technical report, U.S. Environmental Protection Agency, Office of
+  Water, Office of Ground Water and Drinking Water, Washington, D.C.
+\newblock Available at
+  \url{http://water.epa.gov/infrastructure/watersecurity/upload/2004_11_24_rptb_response_guidelines.pdf}.
+
+\bibitem[EPA, 2011]{TEVASPOTusermanual}
+EPA, U.~S. (2011).
+\newblock Teva-spot toolkit and user's manual.
+\newblock Technical report, U.S. Environmental Protection Agency.
+\newblock Available at
+  \url{http://cfpub.epa.gov/si/si_public_file_download.cfm?p_download_id=514412}.
+
+\bibitem[EPA, 2013a]{EPANETRTX}
+EPA, U.~S. (2013a).
+\newblock Epanet-rtx, real-time extension for the epanet toolkit, at open water
+  analytics.
+\newblock Technical report, U.S. Environmental Protection Agency.
+\newblock Available at
+  \url{http://openwateranalytics.github.io/epanet-rtx/index.html}.
+
+\bibitem[EPA, 2013b]{WSI}
+EPA, U.~S. (2013b).
+\newblock Water security initiative.
+\newblock Technical report, U.S. Environmental Protection Agency.
+\newblock Available at
+  \url{http://water.epa.gov/infrastructure/watersecurity/lawregs/initiative.cfm}.
+
+\bibitem[Fourer et~al., 2002]{AMPL}
+Fourer, R., Gay, D.~M., and Kernighan, B.~W. (2002).
+\newblock {\em {AMPL}: A Modeling Language for Mathematical Programming}.
+\newblock Brooks/Cole, Pacific Grove, CA, 2nd edition.
+
+\bibitem[Geib et~al., 2011]{ERDusermanual}
+Geib, C., Taxon, T., and Hatchett, S. (2011).
+\newblock Epanet results database (erd), user's guide, version 1.00.00.
+\newblock Technical report.
+
+\bibitem[Hart and McKenna, 2012]{CANARY}
+Hart, D.~B. and McKenna, S.~A. (2012).
+\newblock Canary user's manual, version 4.3.2.
+\newblock Technical Report EPA/600/R/08/040B, Washington, D,C.: U.S.
+  Environmental Protection Agency.
+\newblock Available at
+  \url{http://cfpub.epa.gov/si/si_public_file_download.cfm?p_download_id=513254}.
+
+\bibitem[Hart et~al., 2012]{PYOMO}
+Hart, W.~E., Laird, C., Watson, J., and Woodruff, D. (2012).
+\newblock {\em Pyomo - Optimization Modeling in Python}.
+\newblock Springer, 1st edition.
+
+\bibitem[Hatchett et~al., 2011]{HatchettetalRTX2011}
+Hatchett, S., Uber, J., Boccelli, D., Haxton, T., Janke, R., Kramer, A.,
+  Matracia, A., and Panguluri, S. (2011).
+\newblock Real-time distribution system modeling: development, application, and
+  insights.
+\newblock In {\em In Proc. Eleventh International Conference on Computing and
+  Control for the Water Industry, Sept. 2011, Exeter, UK}.
+
+\bibitem[Janke et~al., 2011]{JankeetalRTX2011}
+Janke, R., Morley, K., Uber, J., and Haxton, T. (2011).
+\newblock Real-time modeling for water distribution system operation:
+  Integrating security developed technologies with normal operations.
+\newblock In {\em In Proc. AWWA Distribution Systems Symposium and Water
+  Security Conference, Sept. 2011, Nashville, TN}.
+
+\bibitem[Klise et~al., 2013]{KliPhiJan13}
+Klise, K., Phillips, C., and Janke, R. (2013).
+\newblock Two-tiered sensor placement using skeletonized water distribution
+  network models.
+\newblock {\em Journal of Infrastructure Systems},
+  (10.1061/(ASCE)IS.1943-555X.0000156).
+
+\bibitem[Klise et~al., 2015]{WSTSandreport}
+Klise, K., Siirola, J., Hart, D., Hart, W., Phillips, C., Haxton, T., Murray,
+  R., Janke, R., Taxon, T., Laird, C., Seth, A., Hackebeil, G., McGee, S., and
+  Mann, A. (2015).
+\newblock Water security toolkit user manual version 1.3.
+\newblock Technical Report SAND2015-9735, Sandia National Laboratories.
+
+\bibitem[Mann et~al., 2012a]{Merlion12}
+Mann, A., Hackebeil, G., and Laird, C. (2012a).
+\newblock Explicit water quality model generation and rapid multi-scenario
+  simulation.
+\newblock {\em J. Water Resources Planning and Management},
+  (10.1061/(ASCE)WR.1943-5452.0000278).
+
+\bibitem[Mann et~al., 2012b]{Mann1}
+Mann, A., McKenna, S., Hart, W., and Laird, C. (2012b).
+\newblock Real-time inversion in large-scale water networks using discrete
+  measurements.
+\newblock {\em Computers \& Chemical Engineering}, 37:143--151.
+
+\bibitem[Mirchandani and Francis, 1990]{MirFra90}
+Mirchandani, P. and Francis, R., editors (1990).
+\newblock {\em Discrete Location Theory}.
+\newblock John Wiley and Sons, Toronto, Canada.
+
+\bibitem[Murray et~al., 2011]{MurrayAdcockRiceUberHatchett11}
+Murray, R., Adcock, N., Rice, G., Uber, J., and Hatchett, S. (2011).
+\newblock Predicting pathogen survival when introduced into a water
+  distribution system with growth medium.
+\newblock {\em In Proc. Water Quality Technology Conference, Nov. 2011,
+  Phoenix, AZ}.
+
+\bibitem[Murray et~al., 2010]{TEVASPOTCompendium10}
+Murray, R., Haxton, T., Janke, R., Hart, W.~E., Berry, J., and Phillips, C.
+  (2010).
+\newblock Sensor network design for drinking water contamination warning
+  systems: A compendium of research results and case studies using the
+  teva-spot software.
+\newblock Technical Report EPA/600/R-09/141, Cincinnati, OH Office of Research
+  and Development, National Homeland Security Research Center, Water
+  Infrastructure Protection.
+\newblock Available at
+  \url{http://cfpub.epa.gov/si/si_public_file_download.cfm?p_download_id=498251}.
+
+\bibitem[Murray et~al., 2006]{MurUbeJan06}
+Murray, R., Uber, J., and Janke, R. (2006).
+\newblock Model for estimating acute health impacts from consumption of
+  contaminated drinking water.
+\newblock {\em J. Water Resources Planning and Management: Special Issue on
+  Drinking Water Distribution Systems Security}, 132(4):293--299.
+
+\bibitem[Rockafellar and Uryasev, 2002]{rockafellar02cvar}
+Rockafellar, R.~T. and Uryasev, S. (2002).
+\newblock Conditional value-at-risk for general loss distributions.
+\newblock {\em J. of Banking and Finance}, 26(7):1443--1471.
+
+\bibitem[Rossman, 2000]{EPANETusermanual}
+Rossman, L.~A. (2000).
+\newblock Epanet 2 users manual.
+\newblock Technical report, Environmental Protection Agency.
+\newblock Available at \url{http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf}.
+
+\bibitem[Shang et~al., 2002]{Shang2002}
+Shang, F., Uber, J., and Polycarpou, M. (2002).
+\newblock Particle backtracking algorithm for water distribution system
+  analysis.
+\newblock {\em Journal of Environmental Engineering}, 128:441--450.
+
+\bibitem[Shang et~al., 2011]{ShaUbeRos11}
+Shang, F., Uber, J., and Rossman, L. (2011).
+\newblock Epanet mutli-species extension user's manual.
+\newblock Technical Report EPA/600/S-07/021, USEPA.
+\newblock Available at
+  \url{http://cfpub.epa.gov/si/si_public_file_download.cfm?p_download_id=500759}.
+
+\bibitem[Topaloglou et~al., 2002]{TopVlaZen02}
+Topaloglou, N., Vladimirou, H., and Zenios, S. (2002).
+\newblock {CVaR} models with selective hedging for international asset
+  allocation.
+\newblock {\em J. of Banking and Finance}, (26):1535--1561.
+
+\bibitem[{U.S. Geological Survey}, 2004]{USGS04}
+{U.S. Geological Survey} (2004).
+\newblock Estimated use of water in the united states in 2000.
+\newblock Technical report, U.S. Geological Survey.
+\newblock Available at
+  \url{http://pubs.usgs.gov/circ/2004/circ1268/pdf/circular1268.pdf}.
+
+\bibitem[Watson et~al., 2006]{WatHarMur06a}
+Watson, J.-P., Hart, W.~E., and Murray, R. (2006).
+\newblock Formulation and optimization of robust sensor placement problems for
+  contaminant warning systems.
+\newblock In {\em In Proc. Water Distribution System Symposium}.
+
+\bibitem[Watson et~al., 2009]{WatMurHar09}
+Watson, J.-P., Murray, R., and Hart, W.~E. (2009).
+\newblock Formulation and optimization of robust sensor placement problems for
+  drinking water contamination warning systems.
+\newblock {\em Jour. Infrastructure Systems}, 15(4):330--339.
+
+\end{thebibliography}

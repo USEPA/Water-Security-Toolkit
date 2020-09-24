@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# checks <type>
+#
+# An administrative utility to run various administrative checks
+#
+
+if [ "$1" == "" ]; then
+   echo "checks <type>"
+   echo ""
+   echo "   copyright     - check copyright information in source files"
+   echo "   gcovr         - apply gcovr report"
+   echo ""
+   exit 1;
+fi
+
+if [ "$1" == "copyright" ]; then
+   if [ -d packages/cat ]; then
+      echo "cat"
+      bin/checkCopyright packages/cat
+      echo ""
+   fi
+   if [ -d packages/detect ]; then
+      echo "detect"
+      bin/checkCopyright packages/detect
+      echo ""
+   fi
+   if [ -d packages/healthImpacts ]; then
+      echo "healthImpacts"
+      bin/checkCopyright packages/healthImpacts
+      echo ""
+   fi
+   if [ -d packages/sim ]; then
+      echo "sim"
+      bin/checkCopyright packages/sim
+      echo ""
+   fi
+   if [ -d packages/spot ]; then
+      echo "spot"
+      bin/checkCopyright packages/spot
+      echo ""
+   fi
+   if [ -d packages/teva_spot ]; then
+      echo "teva_spot"
+      bin/checkCopyright packages/teva_spot
+      echo ""
+   fi
+   if [ -d packages/tevaUtils ]; then
+      echo "tevaUtils"
+      bin/checkCopyright packages/tevaUtils
+      echo ""
+   fi
+   exit 0;
+fi
+
+
+if [ "$1" == "gcovr" ]; then
+    PWD=`pwd`
+    python/bin/gcovr -r $PWD -e '.*/test/' -e $PWD/include/tinyxml -e $PWD/packages/tevaUtils -e $PWD/packages/healthImpacts/ -e $PWD/tpl -e $PWD/packages/spot/grasp -e $PWD/packages/sim $PWD/packages/sim/merlion/applications
+    python/bin/gcovr -r $PWD -d -e '.*/test/' -e $PWD/include/tinyxml -e $PWD/packages/tevaUtils -e $PWD/packages/healthImpacts/ -e $PWD/tpl -e $PWD/packages/spot/grasp -e $PWD/packages/sim $PWD/packages/sim/merlion/applications -x > coverage.xml
+fi
