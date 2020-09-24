@@ -1,0 +1,300 @@
+$Id: svnReleaseProcess.txt 1654 2006-10-25 18:58:42Z lafisk $
+
+SPOT: Sensor Placement Optimization Toolkit
+
+This document describes the SPOT release process, in 
+particular how SVN directories are used to manage
+branches and releases.  SVN refers to the Subversion version
+control system.
+
+NOTE: SPOT was previously named teva-sp.  The SVN repository
+is named teva-sp, and the old branch and release directories
+have teva-sp in their name.  When the name of the product was
+changed to SPOT, the release numbers began again at 1.0.
+
+Our use of SVN directories to manage branches, releases and
+ongoing development (the "trunk") follows the suggestions in
+the SVN manual chapter titled "Branching and Merging".  
+
+=============================================================
+
+RELEASE NUMBERS: The format for release numbers is
+
+   major.minor.patch
+
+When a release contains significant new features, the repository
+is branched for the release, and the major number is incremented.
+The minor and patch number go to zero:
+
+   2.1.1 -> 3.0.0
+
+If the changes are not considered major, the repository is still
+branched for the release, but only the minor number is incremented:
+
+   2.1.1 -> 2.2.1
+
+When a bug is discovered in a release, we may want to fix the
+branch representing the release and just release this updated code.
+The trunk, containing all development that has occured since
+the branch, is not included.  This is called a patch release,
+and only the patch number is incremented:
+
+   2.1.1 -> 2.1.2
+
+=============================================================
+
+RELEASE DIRECTORIES: We have separate SVN URLs for the trunk,
+the branches and the releases.
+
+TRUNK: TEVA/teva-sp 
+
+The trunk is where current SPOT development is carried out.
+
+BRANCHES: TEVA/teva-sp-branches/spot-{major.minor}
+
+When we are ready to begin testing the code for a new 
+release, we copy the trunk to a branch.  New development
+can continue in the trunk while we test the code in
+the branch.
+
+RELEASES: TEVA/teva-sp-releases/sources/spot-{major.minor.patch}
+          TEVA/teva-sp-releases/dist/{binary-distribution-name}
+
+When we are satisfied with the code in the branch, we copy those
+sources to the release directory.  The code is now frozen,
+analygous to being tagged in a CVS repository.  Directories
+which have an svn:external property set on them must be
+modified to specify an svn revision number, or a release 
+directory.  They must refer to some repository that will not 
+change over time.  The goal is that release major.minor.patch 
+can be recreated in the future by checking out 
+TEVA/teva-sp-releases/sources/spot-{major.minor.patch}.
+
+If a patch release is desired, work continues in the branch
+directory, and when done is copied to a new release directory
+(the patch number is incremented).
+
+OTHER: 
+  TEVA/teva-sp-proj/spot-{major_minor}
+
+  This directory contains checklists that document the release
+  process.  These must be filled out as the release progresses.
+  This process is explained in the file
+  TEVA/teva-sp-proj/release_documents/releaseProcedure.txt.
+
+  TEVA/teva-sp-qa/spot-{major}_{minor}
+
+  Part of the release process is running tests on the code that
+  will be included in the release.  The output of the tests must
+  be saved in this directory.
+
+=============================================================
+
+NORMAL RELEASE, SVN COMMANDS: Suppose the most recent SPOT 
+release is 2.1.0.  We are now preparing to release 2.2.0.
+
+Set the environment variable URL to:
+
+      "http://engcvs.uc.edu/repos/TEVA/teva-sp"
+
+1. Create the branch directory.  Note the revision number
+   of the repository and include it in your commit message.
+
+   svn co $URL
+   cd teva-sp
+   svn info     (s'pose this says "Revision: 1618")
+   cd ..
+
+   svn copy -m "branch for 2.2 at rev 1618" $URL $URL-branches/spot-2.2
+
+2. Check out the branch directory.  Test it.  Check bug fixes
+   back into the branch directory.
+
+   svn co $URL-branches/spot-2.2
+   cd spot-2.2
+   (go to work)
+
+3. Merge bug fixes from the branch directory into the trunk.
+
+   svn diff -r 1618:HEAD $URL-branches  > diff.out
+
+   The file diff.out lists all changes in the branches repository
+   from revision 1618 (when it was branched) to present.  If you want 
+   to apply all of these changes to the trunk, go ahead:
+
+   svn co $URL
+   cd teva-sp
+   svn merge -r 1618:HEAD $URL-branches 
+
+   The diffs are merged into your working copy.  If you are sure 
+   you want to commit these changes, then:
+
+   svn ci
+
+   You can use different ranges of revision numbers if you don't
+   want to merge all of your changes into the trunk.
+
+4. Merge a change to the trunk into the branch directory.
+
+   Suppose you made a change to the trunk, and now the repository
+   is at revision 1625.  You can merge this into the branch like
+   this:
+
+   svn diff -r 1624:1625 $URL > diff.out
+
+   Read diff.out to make sure this is the diff you want to apply
+   to the branch.
+
+   cd spot-2.2
+   svn merge -r 1624:1625 $URL
+
+   You just merged that change into the working copy in your
+   current directory.  When you are sure this is what you want 
+   and you want to check it in:
+
+   svn ci
+
+5. "Tag" the branch directory by copying it to a release directory,
+    and then "freezing" the release directory.
+
+   svn copy $URL-branches/spot-2.2 $URL-releases/sources/spot-2.2.0
+
+   You will need to check out spot-2.2.0 in order to "freeze" it.  
+   You can check out the whole $URL-releases directory, but it's huge.  
+   You have a two hoices for just getting the spot-2.2.0 directory.  
+   The first example checks out the spot-2.2.0 directory.  The second
+   example does non-recursive checkouts and updates (-N) of the directory
+   tree that the spot-2.2.0 directory is in. 
+
+   svn co $URL-releases/sources/spot-2.2.0
+   cd spot-2.2.0
+
+     OR
+
+   svn co -N $URL-releases
+   cd teva-sp-releases
+   svn update -N sources
+   cd sources
+   svn update spot-2.2.0
+   cd spot-2.2.0
+
+   Freezing the directory is accomplished by locking the externally
+   linked directories to a repository revision number, and by
+   following a policy of not changing all other sources in the release 
+   directory.  If an externally linked directory is linked to
+   a repository that follows the same release procedure we do, you
+   can also freeze that directory by pointing to one of it's
+   releases.
+
+   Create a text file called "Externals" in the release directory.
+   (In this example, create "spot-2.2.0/Externals".)
+   Suppose the TEVA repository revision we want to freeze our
+   externally linked directories to is 1635.  The contents of
+   the Externals file should look like this (with {URL} replaced
+   with the actual repository URL).
+
+        test -r1635 {URL}/teva-sp-qa/test
+        packages/tevalibsTEVAUtils -r1635 {URL}/TEVAUtils/trunk
+        packages/tevalibsTEVAEpanet  -r1635   {URL}/Epanet/trunk
+        packages/tevalibsTEVAThreatSim -r1635 {URL}/ThreatSim/trunk
+        packages/tevalibsTEVAThreatAssess -r1635 {URL}/ThreatAssess/trunk
+        packages/tevalibsTEVADCDFlib -r1635  {URL}/DCDFlib/trunk
+
+   First delete the current svn:externals properties:
+
+     svn propdel svn:externals .
+     svn propdel svn:externals packages/tevalibs
+
+   Now use svn to apply these new frozen external links:
+
+     svn propset svn:externals -F Externals .
+ 
+   Also, check in the Externals file as a convenience to others.  It's
+   easier to read the Externals file than it is to remember the 
+   propget command:
+
+   svn add Externals
+   svn ci Externals
+
+   You can read more about handling externals this way at the WIKI
+   for the COIN-OR project:
+   https://projects.coin-or.org/BuildTools/wiki/pm-svn-externals
+
+   If acro-pico were under svn control, and was following the same
+   release procedure that SPOT is, we could link TEVA's acro-pico
+   directory to version 2.0 of acro-pico this way with this line
+   in the Externals file:
+
+     packages/acro-pico {URL}/acro-pico-releases/sources/2.0.0
+
+   where {URL} is the repository URL for the acro project.
+
+6. For binary releases or tar file distributions, check the
+   distribution files into the repository.
+
+   The {URL}/teva-sp-releases/source directory just mentioned
+   archives the source tree for the release.  We also archive
+   distribution files containing libraries and executables.  These
+   should be checked into {URL}/teva-sp-releases/dist.
+
+   Suppose we have created these release files:
+
+    spot_2_2_0_linux_gcc64.tar.gz
+    spot_2_2_0_win32_mingw.zip
+
+   svn co -N $URL-releases/dist
+   cd dist
+   mkdir spot_2_2_0_linux_gcc64
+   mkdir spot_2_2_0_win32_mingw
+   cp {dir}/spot_2_2_0_linux_gcc64.tar.gz spot_2_2_0_linux*
+   cp {dir}/spot_2_2_0_win32_mingw.zip spot_2_2_0_win32*
+
+   Also add the following to each of the two directories:
+
+   config.log   - The config.log file or files that were used to
+                  build the code in the tar or zip file.  There may
+                  be two if you did separate static and shared builds.
+
+   README       - The README file that went with the distribution listing
+                  changes, new features, contents, how to use, etc.
+
+   copy         - The copy script that created the distribution directory.
+                  Eventually we hope that "make install DESTDIR=" 
+                  will create the distribution directory for us.
+
+   The idea is to add enough so that we know how the tar or zip file
+   was created, and can recreate it if necessary, or use the information
+   the next time we create a distribution directory.
+
+=============================================================
+
+PATCH RELEASE, SVN COMMANDS: Suppose the most recent SPOT 
+release is 2.2.0.  Major new work has been checked into the 
+trunk.  We want to fix a single bug in the 2.2.0 release and 
+distribute it to 2.2.0 users, without the new work.  The new 
+release is 2.2.1.
+
+1. Check out the branch directory, fix the bug and test it. 
+
+   svn copy $URL-branches/spot-2.2 
+   cd spot-2.2
+
+2. If this bug exists in the trunk, merge the bugfix into the trunk.
+
+3. Freeze the branch by copying it into a new release directory.
+
+   svn copy $URL-branches/spot-2.2 $URL-releases/sources/spot-2.2.1
+
+   Freeze the externally linked directories as described above.
+
+4. For binary releases or tar file distributions, check the
+   distribution files into the repository.
+
+   svn co -N $URL-releases/dist
+   cd dist
+   mkdir spot_2_2_1_linux_gcc64
+   mkdir spot_2_2_1_win32_mingw
+   cp {dir}/spot_2_2_1_linux_gcc64.tar.gz spot_2_2_1_linux*
+   cp {dir}/spot_2_2_1_win32_mingw.zip spot_2_2_1_win32*
+
+=============================================================

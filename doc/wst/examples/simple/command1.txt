@@ -1,0 +1,93 @@
+Usage: tso2Impact [options] <output-prefix> <tso-directory-or-files>
+                              <tai-directory-or-files>
+An application that reads a TSO file (and associated TAI file if health
+impacts are to be computed) and creates one or more impact files that are used
+to formulate sensor placement problems.
+
+options:
+
+      --dec                   If this option is specified, an impact file will
+                              be generated for the `detected extent of
+                              contamination' measure.
+      --detectionConfidence   The number of sensors that must detect an event
+                              before the impacts are calculated.  Normally
+                              this is 1 sensor.
+  -d, --detectionLimit        A list of thresholds needed to perform detection
+                              with a sensor.  There must be one threshold for
+                              each .tso file. The units of these detection
+                              limits depend on the units of the contaminant
+                              simulated for each TSO file (e.g. number of
+                              cells of a biological agent).
+      --dmc                   If this option is specified, an impact file will
+                              be generated for the `detected mass consumed'
+                              measure.
+      --dpd                   If this option is specified, an impact file wll
+                              be generated for the `detected population dosed'
+                              measure.  This is an intensive measure to
+                              compute.
+      --dpe                   If this option is specified, an impact file wll
+                              be generated for the `detected population
+                              exposed' measure.  This is an intensive measure
+                              to compute.
+      --dpk                   If this option is specified, an impact file wll
+                              be generated for the `detected population
+                              killed' measure.  This is an intensive measure
+                              to compute.
+      --dtd                   If this option is specified, an impact file will
+                              be generated for the `detected
+                              time-to-detection' measure.
+      --dvc                   If this option is specified, an impact file will
+                              be generated for the `detected volume consumed'
+                              measure.
+      --dvf                   This is used to correct demands generated for
+                              flushing response calculations
+      --ec                    If this option is specified, an impact file will
+                              be generated for the `extent of contamination'
+                              measure.
+  -h, --help                  Display usage information
+      --mc                    If this option is specified, an impact file will
+                              be generated for the `mass consumed' measure.
+      --nfd                   If this option is specified, an impact file will
+                              be generated for the `number-of-failed
+                              detections' measure.
+      --pd                    If this option is specified, an impact file wll
+                              be generated for the `population dosed' measure.
+                              This is an intensive measure to compute.
+      --pe                    If this option is specified, an impact file wll
+                              be generated for the `population exposed'
+                              measure.  This is an intensive measure to
+                              compute.
+      --pk                    If this option is specified, an impact file wll
+                              be generated for the `population killed'
+                              measure.  This is an intensive measure to
+                              compute.
+  -r, --responseTime          This option indicates the number of minutes that
+                              are needed to respond to the detection of a
+                              continant.  As the response time increases, the
+                              impact increases because the contaminant affects
+                              the network for a greater length of time. Unit:
+                              minutes.
+      --species               Name of species to use in computing impacts.
+      --td                    If this option is specified, an impact file will
+                              be generated for the `time-to-detection'
+                              measure.
+      --tec                   If this option is specified, an impact file will
+                              be generated for the `timed extent of
+                              contamination' measure.
+      --vc                    If this option is specified, an impact file will
+                              be generated for the `volume consumed' measure.
+      --version               Display version information
+
+arguments:
+
+  output-prefix:  The prefix used for all files generated by tso2Impact.
+
+  erd-or-tso-file:  This argument indicates either a TSO or ERD file.
+
+  tai-directory-or-file:  This argument indicates a TAI file name.  The TAI
+      input file is a threat_assess input that specifies parameters like
+      dosage, response, lethality, etc.  There should be one TAI file for each
+      TSO file.
+
+Note that options like `responseTime' can be specified with the syntax
+`--responseTime 10.0' or `--responseTime=10.0'.

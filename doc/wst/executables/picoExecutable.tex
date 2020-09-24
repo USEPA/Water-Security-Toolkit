@@ -1,0 +1,18 @@
+\subsection{Overview}\label{picoExecutable_picoOverview}
+The {\bfseries PICO} executable used by {\ttfamily sp} that solves linear programs and mixed-\/integer linear programs.
+\subsection{Usage}\label{picoExecutable_picoUsage}
+\begin{verb}
+   PICO [options...] <input-file>
+\end{verb}
+\subsection{Options}\label{picoExecutable_picoOptions}
+Documentation of {\bfseries PICO} options is available from the PICO User Manual, which is available from   
+http://software.sandia.gov/Acro/PICO.
+\subsection{Description}\label{picoExecutable_picoDescription}
+{\bfseries PICO} is a general-\/purpose solver for linear and integer programs. This command is not directly used by the user.
+
+PICO uses public-\/domain software components, and thus it can be used without licensing restrictions. The integer programming format used in SPOT is defined with the AMPL modeling language. PICO integrates the GLPK mathprog problem reader, which is compatible with a subset of the AMPL modeling language. This enables PICO to process an integer programming formulation in SPOT that can also be used with AMPL.
+\subsection{Notes}\label{picoExecutable_picoNotes}
+
+\begin{itemize}
+\item On large-\/scale tests, we have noted that PICO's performance is often limited by the performance of the public-\/domain LP solvers that it employs. In some cases, we have noted that these solvers can be over 100 times slower than the state-\/of-\/the-\/art CPLEX LP solver. 
+\end{itemize}

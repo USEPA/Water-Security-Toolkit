@@ -1,0 +1,27 @@
+# inversion configuration template
+network:
+  epanet file: Net3.inp         # EPANET network file name
+measurements:
+  grab samples: MEASURES.dat    # Measurements file name
+inversion:
+  algorithm: bayesian       # Source inversion algorithm: optimization, bayesian, or csa
+  formulation: MIP_discrete  # Optimization formulation type, optimization only
+  model format: PYOMO           # Source inversion optimization formulation: AMPL or PYOMO
+  horizon: 1440.0               # Amount of past measurement data to use (min)
+  num injections: 1.0           # No. of possible injections
+  measurement failure: 0.05     # Probability that a sensor fails
+  positive threshold: 100.0     # Sensor threshold for positive contamination measurement
+  negative threshold: 0.0       # Sensor threshold for negative contamination measurement
+  feasible nodes: cycle2_Likely_Nodes.dat          # Feasible source nodes
+  candidate threshold: null     # Objective cut-off for candidate nodes.
+  confidence: 0.95              # Probability confidence for candidate nodes.
+  output impact nodes: true    # Print likely injection nodes file
+solver:
+  type: glpk                    # Solver type
+  options:                      # A dictionary of solver options
+  logfile: null                 # Redirect solver output to a logfile
+  verbose: 0                    # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: cycle3_           # Output file prefix
+  debug: 0                      # Debugging level, default = 0

@@ -1,0 +1,79 @@
+<experimental-study name="opt.net2">
+  <!--
+	These experiments confirm that the correct impact file
+	is generated from one of the Net3 TSO files in the sp/etc
+	directory.
+   -->
+  <tags>
+    <tag></tag>
+  </tags>
+
+  <experiment name="heuristic-sc">
+    <factors>
+      <factor>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=pe ub=ns,5 </level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 </level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=vc ub=ns,5 </level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=ec ub=ns,5 </level>
+      </factor>
+      <factor name="solver">
+        <level name="heuristic">solver=heuristic</level>
+      </factor>
+      <factor name="side-constraint">
+        <level name="none"></level>
+        <level name="mc"> ub=mc,10000000</level>
+        <level name="ec"> ub=ec,10000000</level>
+        <level name="vc"> ub=vc,10000000</level>
+        <level name="pe"> ub=pe,10000000</level>
+      </factor>
+      <factor>
+	<level>memmon=true </level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="lagrangian-sc">
+    <factors>
+      <factor>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 disable\-aggregation="all"</level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 ub=pe,10000000 disable\-aggregation="all"</level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 ub=pe,10000 disable\-aggregation="all"</level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 ub=pe,4000 disable\-aggregation="all"</level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 ub=pe,3100 disable\-aggregation="all"</level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 ub=ec,45000 ub=pe,2700 disable\-aggregation="all"</level>
+      </factor>
+      <factor name="solver">
+        <level name="lagrangian">solver=lagrangian</level>
+      </factor>
+      <factor>
+	<level>memmon=true</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="local-search-sc">
+    <factors>
+      <factor>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=ec,50000 </level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=ec,50000 ub=pe,1000000 </level>
+        <level>network=net2chem impact-dir=/reservoir1/testcases/network2 objective=mc ub=ns,5 ub=vc,250000 </level>
+      </factor>
+      <factor name="solver">
+        <level name="heuristic">solver=heuristic</level>
+      </factor>
+      <factor>
+	<level>memmon=true </level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -generic</executable>
+    </controls>
+  </experiment>
+
+</experimental-study>

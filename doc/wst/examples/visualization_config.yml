@@ -1,0 +1,64 @@
+# visualization configuration template
+network:
+  epanet file: Net3.inp                   # EPANET 2.00.12 network file name
+visualization:
+  screen:
+    color: white                          # Screen color, HEX or predefined code
+    size: [1200, 800]                     # Screen size [width, height] in pixels
+  legend:
+    color: white                          # Legend color, HEX or predefined code
+    scale: 1.0                            # Legend text size multiplier, real number
+    location: [800, 20]                   # Legend location [left, bottom] in pixels
+  nodes:
+    color: null                           # Node color, HEX or predefined code
+    size: null                            # Node size, real number
+    opacity: 0.6                          # Node opacity, real number
+  links:
+    color: null                           # Link color, HEX or predefined code
+    size: null                            # Link size, real number
+    opacity: 0.6                          # Link opacity, real number
+  layers:
+    -
+      label: pipes with different colors  # Label used in legend
+      locations: ['101', '171']           # Data locations, list of EPANET IDs
+      file: null                          # Locations from file, YAML format
+      location type: link                 # Location type, node or link
+      shape: [circle]                     # Marker shape, predefined name
+      fill:
+        color: [yellow, red]              # Fill color, HEX or predefined code
+        size: [10, 20]                    # Fill size, real number
+        opacity: [0.5, 1]                 # Fill opacity, real number
+        color range: null                 # Fill color range [min, max]
+        size range: null                  # Fill size range [min, max]
+        opacity range: null               # Fill opacity range [min, max]
+      line:
+        color: null                       # Line color, HEX or predefined code
+        size: null                        # Line size, real number
+        opacity: 0.6                      # Line opacity, real number
+        color range: null                 # Line color range [min, max]
+        size range: null                  # Line size range [min, max]
+        opacity range: null               # Line opacity range [min, max]
+    -
+      label: orange nodes                 # Label used in legend
+      locations: ['105', '35', '15']      # Data locations, list of EPANET IDs
+      file: null                          # Locations from file, YAML format
+      location type: node                 # Location type, node or link
+      shape: [diamond]                    # Marker shape, predefined name
+      fill:
+        color: orange                     # Fill color, HEX or predefined code
+        size: 10                          # Fill size, real number
+        opacity: 0.6                      # Fill opacity, real number
+        color range: null                 # Fill color range [min, max]
+        size range: null                  # Fill size range [min, max]
+        opacity range: null               # Fill opacity range [min, max]
+      line:
+        color: black                      # Line color, HEX or predefined code
+        size: 1                           # Line size, real number
+        opacity: 1                        # Line opacity, real number
+        color range: null                 # Line color range [min, max]
+        size range: null                  # Line size range [min, max]
+        opacity range: null               # Line opacity range [min, max]
+configure:
+  output prefix: Net3                     # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER   # Output directory
+  debug: 0                                # Debugging level, default = 0

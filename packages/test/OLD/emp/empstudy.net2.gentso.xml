@@ -1,0 +1,25 @@
+<experimental-study name="teva-sp">
+  <tags>
+    <tag>smoke</tag>
+    <tag>nightly</tag>
+  </tags>
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_file">
+        <level>-tsg /reservoir1/TSIMDatabase/generic.tsg -tsi generic.tsi</level>
+      </factor>
+      <factor name="tso_file">
+        <level>-tso net2sanTEVA.tso</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>"/reservoir1/networkData/TEVAPhaseI/net2sanTEVA.inp net2sanTEVA.out"</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp_test -gen-tso</executable>
+    </controls>
+  </experiment>
+
+
+</experimental-study>

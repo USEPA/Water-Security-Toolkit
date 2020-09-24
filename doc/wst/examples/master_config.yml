@@ -1,0 +1,162 @@
+# Master config file for wst
+network:
+  epanet file: null                  # EPANET 2.00.12 network file name
+scenario:
+  location: null                     # Injection location: ALL, NZD or EPANET ID
+  type: null                         # Injection type: MASS, CONCEN, FLOWPACED or
+                                     #   SETPOINT
+  strength: null                     # Injection strength [mg/min or mg/L depending
+                                     #   on type]
+  species: null                      # Injection species, required for EPANET-MSX
+  start time: null                   # Injection start time [min]
+  end time: null                     # Injection end time [min]
+  tsg file: null                     # TSG file name, overrides injection parameters
+                                     #   above
+  tsi file: null                     # TSI file name, overrides TSG file
+  signals: null                      # Signal files, overrides TSG or TSI files
+  msx file: null                     # Multi-species extension file name
+  msx species: null                  # MSX species to save
+  merlion: false                     # Use Merlion as WQ simulator, true or false
+impact:
+  erd file: null                     # ERD database file name
+  metric: null                       # Impact metric
+  tai file: null                     # Health impact file name, required for public
+                                     #   health metrics
+  response time: 0                   # Time [min] needed to respond
+  detection limit: [0.0]             # Thresholds needed to perform detection
+  detection confidence: 1            # Number of sensors for detection
+impact data: []
+cost: []
+objective: []
+constraint: []
+imperfect: []
+aggregate: []
+sensor placement: []
+flushing:
+  detection: null                    # Sensor locations to detect contamination
+                                     #   scenarios
+  flush nodes:
+    feasible nodes: ALL              # Feasible flushing nodes
+    infeasible nodes: NONE           # Infeasible flushing nodes
+    max nodes: 0                     # Maximum number of nodes to flush
+    rate: 0.0                        # Flushing rate [gallons/min]
+    response time: 0.0               # Time [min] between detection and flushing
+    duration: 0.0                    # Flushing duration [min]
+  close valves:
+    feasible pipes: ALL              # Feasible pipes to close
+    infeasible pipes: NONE           # Infeasible pipes to close
+    max pipes: 0                     # Maximum number of pipes to close
+    response time: 0.0               # Time [min] between detection and closing pipes
+booster msx:
+  detection: null                    # Sensor locations to detect contamination
+                                     #   scenarios
+  toxin species: null                # Toxin species injected in each contaminant
+                                     #   scenario
+  decon species: null                # Decontaminant injected from booster station
+  feasible nodes: ALL                # Feasible booster nodes
+  infeasible nodes: NONE             # Infeasible booster nodes
+  max boosters: null                 # Maximum number of booster stations
+  type: FLOWPACED                    # Booster source type: FLOWPACED
+  strength: null                     # Booster source strength [mg/L]
+  response time: null                # Time [min] between detection and booster
+                                     #   injection
+  duration: null                     # Time [min] for booster injection
+booster mip:
+  detection: null                    # Sensor locations to detect contamination
+                                     #   scenarios
+  model type: NEUTRAL                # Booster model type: NEUTRAL or LIMIT
+  model format: PYOMO                # Booster optimization model: AMPL or PYOMO
+  stoichiometric ratio: [0.0]        # Stoichiometric ratio [decon/toxin], LIMIT
+                                     #   model only
+  objective: MC                      # Objective to minimize
+  toxin decay coefficient: 0         # Toxin decay coefficient: None, INP or number
+  decon decay coefficient: 0         # Decontaminant decay coefficient: None, INP or
+                                     #   number
+  feasible nodes: ALL                # Feasible booster nodes
+  infeasible nodes: NONE             # Infeasible booster nodes
+  max boosters: null                 # Maximum number of booster stations
+  type: null                         # Booster source type: MASS or FLOWPACED
+  strength: null                     # Booster source strength [mg/min or mg/L
+                                     #   depending on type]
+  response time: null                # Time [min] between detection and booster
+                                     #   injection
+  duration: null                     # Time [min] for booster injection
+  evaluate: false                    # Evaluate booster placement: true or false,
+                                     #   default = false
+boostersim:
+eventDetection:
+boosterimpact:
+booster quality:
+inversion:
+  algorithm: optimization            # Source inversion algorithm: optimization,
+                                     #   bayesian or csa
+  formulation: MIP_discrete          # Optimization formulation type, optimization
+                                     #   only
+  model format: PYOMO                # Source inversion optimization formulation:
+                                     #   AMPL or PYOMO
+  merlion water quality model: true  # Use Merlion water quality model for Bayesian
+                                     #   algorithm
+  horizon: null                      # Amount of past measurement data to use (min)
+  num injections: 1.0                # No. of possible injections
+  measurement failure: 0.05          # Probability that a sensor fails
+  positive threshold: 100.0          # Sensor threshold for positive contamination
+                                     #   measurement
+  negative threshold: 0.0            # Sensor threshold for negative contamination
+                                     #   measurement
+  feasible nodes: null               # Feasible source nodes
+  candidate threshold: 0.2           # Objective cut-off for candidate nodes
+  confidence: 0.95                   # Probability confidence for candidate nodes
+  output impact nodes: false         # Print likely injection nodes file
+measurements:
+  grab samples: null                 # Measurements file name
+grabsample:
+  model format: PYOMO                # Grab sample model format: AMPL or PYOMO
+  sample criteria: distinguish       # Criteria to sample: distinguish, probability1
+                                     #   probability2
+  sample time: 720.0                 # Sampling time (min)
+  threshold: null                    # Contamination threshold. Default 0.001
+  fixed sensors: null                # Fixed sensor nodes
+  nodes metric: null                 # Map of node to metric (e.g., EC, PI)
+  list scenario ids: null            # List of scenario ids considered from the
+                                     #   signals folder
+  feasible nodes: null               # Feasible sampling nodes
+  num samples: null                  # Maximum number of grab samples, default = 1
+  greedy selection: false            # Perform greedy selection. No optimization
+  with weights: false                # Perform optimization with weights in the
+                                     #   objective function
+  filter scenarios: false            # Filters scenarios that match measurements
+uq:
+  analysis time: null                # Analysis time (min)
+  threshold: 0.01                    # Contamination threshold. Default 0.01
+  filter scenarios: false            # Filters scenarios that match measurements
+  measurement failure: 0.05          # Probability that a sensor fails
+  confidence: 0.9                    # Probability confidence for candidate nodes
+visualization:
+  screen:
+    color: white                     # Screen color, HEX or predefined code
+    size: [1000, 600]                # Screen size [width, height] in pixels
+  legend:
+    color: white                     # Legend color, HEX or predefined code
+    scale: 1.0                       # Legend text size multiplier, real number
+    location: [10, 10]               # Legend location [left, bottom] in pixels
+  nodes:
+    color: null                      # Node color, HEX or predefined code
+    size: null                       # Node size, real number
+    opacity: 0.6                     # Node opacity, real number
+  links:
+    color: null                      # Link color, HEX or predefined code
+    size: null                       # Link size, real number
+    opacity: 0.6                     # Link opacity, real number
+  layers: []
+solver:
+  type: ''                           # Solver type
+  options:                           # A dictionary of solver options
+  threads: 1                         # Number of concurrent threads or function
+                                     #   evaluations
+  logfile: null                      # Redirect solver output to a logfile
+  verbose: 0                         # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: null                # Output file prefix
+  output directory: /username        # Output directory
+  debug: 0                           # Debugging level, default = 0

@@ -1,0 +1,28 @@
+# grabsample configuration template
+network:
+  epanet file: Net3/Net3.inp             # EPANET network file name
+scenario:
+  signals: Net3/grabsample/list_scenarios.dat   # Signal files, overrides TSG or TSI files
+grabsample:
+  model format: PYOMO                    # Grab sample model format: AMPL or PYOMO
+  sample time: 720.0                     # Sampling time (min)
+  threshold: null                        # Contamination threshold. Default 0.001
+  fixed sensors: null                    # Fixed sensor nodes
+  nodes metric: null                     # Map of node to metric (e.g., EC, PI)
+  feasible nodes: null                   # Feasible sampling nodes
+  num samples: 3                         # Maximum number of grab samples, default = 1
+  sample criteria: probability1
+  filter scenarios: True
+measurements:
+  grab samples: Net3/grabsample/MEAS.dat    # Measurements file name
+solver:
+  type: glpk                           # Solver type
+  options:                               # A dictionary of solver options
+  threads: 24                            # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: grabsample_ex2/Net3                    # Output file prefix
+  output directory: grabsample_ex2       # Output directory
+  debug: 0                               # Debugging level, default = 0

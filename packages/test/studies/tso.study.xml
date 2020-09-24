@@ -1,0 +1,23 @@
+<experimental-study name="tso">
+  <!-- This study is used to create TSO files that are used in
+       the validation of subsequent stages of sensor placement. -->
+  <tags>
+    <tag>64bit</tag>
+  </tags>
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_freq">
+        <level>hourly</level>
+        <level>quarterly</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>"../../etc/Net3/Net3.inp"</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>./sp_test -gen-tso</executable>
+    </controls>
+  </experiment>
+
+</experimental-study>

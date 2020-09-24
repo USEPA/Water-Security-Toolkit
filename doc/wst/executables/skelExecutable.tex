@@ -1,0 +1,111 @@
+%\subsection{Overview}\label{skelExecutable_skelOverview}
+The skeletonizer, \code{spotSkeleton}, reduces the size of a network model by 
+grouping neighboring nodes based on the topology of the network and pipe diameter 
+threshold. Nodes that are grouped together form a new node, often referred to as a supernode.
+The \code{spotSkeleton} executable requires an EPANET 2.00.12 INP network file and a pipe 
+diameter threshold. The executable creates a skeletonized EPANET 2.00.12 INP 
+network file and map file. The map file defines the nodes that belong to each supernode.
+
+The \code{spotSkeleton} executable includes branch trimming, series pipe merging and 
+parallel pipe merging. A pipe diameter threshold determines candidate pipes for 
+skeleton steps. The \code{spotSkeleton} executable maintains pipes and nodes with 
+hydraulic controls as it creates the skeletonized network. It performs 
+series and parallel pipe merges if both pipes are below the pipe diameter 
+threshold, calculating hydraulic equivalency for each merge based on the average 
+pipe roughness of the joining pipes. For all merge steps, the larger diameter 
+pipe is retained. For a series pipe merge, demands (and associated demand 
+patterns) are redistributed to the nearest node. Branch trimming removes 
+deadend pipes smaller than the pipe diameter threshold and redistributes demands 
+(and associated demand patterns) to the remaining junction. The \code{spotSkeleton} 
+executable repeats these steps until no further pipes can be removed from the network. 
+The \code{spotSkeleton} executable creates an EPANET-compatible skeletonized 2.00.12 network INP file 
+and a map file that contains the mapping of original network model nodes into 
+skeletonized supernodes. 
+
+Under these skeletonization steps, there is a limit to how much a 
+network can be reduced based on its topology, e.g., number of deadend pipes, or 
+pipes in series and parallel. For example, sections of the network with a loop, 
+or grid, structure will not reduce under these skeleton steps. Additionally, 
+the number of hydraulic controls influences skeletonization, as all pipes and 
+nodes associated with these features are preserved.
+
+Commercial skeletonization codes include Haestad Skelebrator, MWHSoft 
+H2OMAP and MWHSoft InfoWater. 
+To validate the \code{spotSkeleton} executable, its output was compared to 
+the output of MWHSoft H2OMAP and Infowater. Input parameters were chosen to match \code{spotSkeleton} 
+options. Pipe diameter thresholds of 8 inches, 12 inches and 16 inches were 
+tested using two large networks. MWHSoft and WST skeletonizers were compared 
+using the Jaccard index. The Jaccard index measures similarity 
+between two sets by dividing the intersection of the two sets by the union of 
+the two sets. In this case, the intersection is the number of pipes that are 
+either both removed or not removed by the two skeletonizers, and the union is the 
+number of all pipes in the original network. If the two skeletonizers define 
+the same supernodes, the Jaccard index equals 1. Skeletonized networks from 
+the MWHSoft and WST skeletonizers resulted in a Jaccard index between 0.93 
+and 0.95. Thus, the \code{spotSkeleton} executable is believed to be a 
+good substitute for commercial skeletonizers.  
+
+\subsection{Usage}\label{skelExecutable_skelUsage}
+\begin{unknownListing}
+   spotSkeleton <input inp file> <pipe diameter threshold> <output inp file> <output map file>
+\end{unknownListing}
+
+\subsection{Arguments}\label{skelExecutable_skelArguments}
+\begin{unknownListing}
+     <input inp file>
+     The input EPANET 2.00.12 INP file to be skeletonized.
+     
+     <pipe diameter threshold>
+     The pipe diameter threshold that determines which pipes might be skeletonized.
+     
+     <output inp file>
+     The output EPANET 2.00.12 INP file created after skeletonization.
+     
+     <output map file>
+     The output map file that contains the mapping of original network nodes to 
+     skeletonized supernodes.	 
+\end{unknownListing}
+
+\if 0
+\subsection{Example}\label{skelExecutable_skelExample}
+The EPANET network file Net6.inp contains 
+3323 nodes, 3829 pipes, 34 tanks, 1 reservoir, 61 pumps and 2 valves. 
+This file is distributed with WST in the examples/networks folder. 
+The network is shown in Figure \ref{fig:skelExecutable-origNetwork}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.80]{graphics/Net6.pdf}
+  \caption{Original Net6 network.}
+  \label{fig:skelExecutable-origNetwork}
+\end{figure}
+
+To skeletonize the network based on a 16-inch pipe diameter threshold, the following command can be used:
+\begin{unknownListing}
+   spotSkeleton Net6.inp 16 Net6_16.inp Net6_16.map
+\end{unknownListing}
+
+This produces two files: Net6\_16.inp and Net6\_16.map. The INP file is an EPANET 2.00.12 
+compatible network file that has been skeletonized based on the rules described above.
+The MAP file contains the name of each supernode in Net6\_16.inp and the original 
+nodes in Net6.inp that belong to each supernode.  
+
+The skeletonized network Net6\_16.inp contains 
+1128 nodes and 1553 pipes. The number of tanks, reservoir, pumps and valves remains the same. 
+The skeletonized network is shown in Figure \ref{fig:skelExecutable-skelNetwork}. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.80]{graphics/Net6_16.pdf}
+  \caption{Skeletonized Net6 network using a 16-inch pipe diameter threshold.}
+  \label{fig:skelExecutable-skelNetwork}
+\end{figure}
+
+\subsection{Notes}\label{skelExecutable_picoNotes}
+\begin{itemize}
+\item Two-tiered sensor placement requires mapping 
+between the skeletonized and original network (map file). Commercial skeletonizers 
+do not provide this information directly. The MWHSoft Infowater/H2OMAP history 
+log file provides it indirectly. The history log file 
+tracks sequential skeletonization steps and records merge-\/and-\/trim operations on a 
+pipe-by-pipe basis.    
+\end{itemize} 
+\fi

@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------
+Sensor placement id:        177096
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            15 19 24 42 66 
+Sensor junctions:           111 119 127 169 211 
+
+Impact File:                c:/wst-1.5/doc/wst/examples/sp/Net3/Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                9459.9911
+Lower quartile impact:      1650.0000
+Median impact:              9694.0000
+Upper quartile impact:      14120.0000
+Value at Risk (VaR) (  5%): 24199.0000
+TCE                 (  5%): 26366.8750
+Max impact:                 28290.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: c:/wst-1.5/doc/wst/examples/sp/Net3/Net3_ec.impact
+------------------------------------------------------------------------------
+-1	47126.3322
+42	22431.5335
+66	15738.1076
+15	12523.3470
+19	10228.6606
+24	9459.9911

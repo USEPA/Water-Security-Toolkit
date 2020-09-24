@@ -1,0 +1,33 @@
+network:
+  epanet file: Net3/Net3.inp
+scenario:
+  location: [NZD]
+  type: MASS
+  strength: 5.77e8
+  start time: 0
+  end time: 360
+booster mip:
+  detection: ['15', '35', '219', '253']
+  model type: NEUTRAL 
+  model format: PYOMO 
+  stoichiometric ratio: 0   
+  objective: MC
+  toxin decay coefficient: 0
+  decon decay coefficient: 0
+  feasible nodes: NZD 
+  infeasible nodes: NONE
+  fixed nodes: []
+  max boosters: [2,4,6,8,10]                  
+  type: FLOWPACED
+  strength: 4
+  response time: 0
+  duration: 1440
+  evaluate: false
+solver:
+  type: glpk
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: ${CWD}/booster_mip_ex1/Net3
+  debug: 0

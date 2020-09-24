@@ -1,0 +1,1166 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{network}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{epanet file}]\hfill
+\\ The name of the EPANET 2.00.12 input (INP) file that defines the water distribution
+                network model.
+                
+                Required input.
+  \end{description}
+  \item[{scenario}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{location}]\hfill
+\\A list that describes the injection locations for the contamination scenarios.
+                The options are: (1) ALL, which denotes all nodes (excluding tanks and reservoirs)
+                as contamination injection locations; (2) NZD, which denotes all nodes with
+                non-zero demands as contamination injection locations; or (3) an EPANET node ID, 
+                which identifies a node as the contamination injection location. This allows 
+                for an easy specification of single or multiple contamination scenarios.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{type}]\hfill
+\\The injection type for the contamination scenarios. The options are MASS, CONCEN, FLOWPACED or SETPOINT. 
+                See the EPANET 2.00.12 user manual for additional information about source types \citep{EPANETusermanual}.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{strength}]\hfill
+\\The amount of contaminant injected into the network for the contamination scenarios.  
+                If the type option is MASS, then the units for the strength are in mg/min. 
+                If the type option is CONCEN, FLOWPACED or SETPOINT, then units are in mg/L.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{species}]\hfill
+\\The name of the contaminant species injected into the network. This is the name of a single species. 
+                It is required when using EPANET-MSX, since multiple species might be simulated, but
+                only one is injected into the network. For cases where multiple contaminants are injected,
+                a TSI file must be used.
+                
+                Required input for EPANET-MSX unless a TSG or TSI file is specified.
+    \item[{start time}]\hfill
+\\The injection start time that defines when the contaminant injection begins. 
+                The time is given in minutes and is measured from the start of the simulation. 
+                For example, a value of 60 represents an injection that starts at hour 1 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{end time}]\hfill
+\\The injection end time that defines when the contaminant injection stops.				
+                The time is given in minutes and is measured from the start of the simulation.
+                For example, a value of 120 represents an injection that ends at hour 2 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{tsg file}]\hfill
+\\The name of the TSG scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSG file will
+                override the location, type, strength, species, start and end times options specified in
+                the WST configuration file. The TSG file format is documented in File Formats Section \ref{formats_tsgFile}.
+                
+                Optional input.
+    \item[{tsi file}]\hfill
+\\The name of the TSI scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSI file will
+                override the TSG file, as well as the location, type, strength, species, start and end time options specified in
+                the WST configuration file. The TSI file format is documented in File Formats Section \ref{formats_tsiFile}.
+                
+                Optional input.
+    \item[{signals}]\hfill
+\\Name of file or directory with information to generate 
+                or load signals. If a file is provided the list of INP-TSG tuples
+                 will be simulated and the information stored in signals files. If
+                a directory with the signals files is specified, the signal files will
+                be read and loaded in memory. This input is only valid for the uq
+                subcommand and the grabsample subcommand with probability based formulations.
+
+                Optional input.
+    \item[{msx file}]\hfill
+\\The name of the EPANET-MSX multi-species file that defines the multi-species reactions to
+                be simulated using EPANET-MSX.
+                
+                Required input for EPANET-MSX.
+    \item[{msx species}]\hfill
+\\The name of the MSX species whose concentration profile will be saved by the EPANET-MSX simulation
+                and used for later calculations.
+                
+                Required input for EPANET-MSX.
+    \item[{merlion}]\hfill
+\\A flag to indicate if the Merlion water quality
+                simulator should be used. The options are true or false. 
+                If an MSX file is provided, EPANET-MSX will be used.
+                
+                Required input, default = false.
+  \end{description}
+  \item[{impact}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{erd file}]\hfill
+\\The name of the ERD database file that contains the 
+                contaminant transport simulation results. It is 
+                created by running the \code{tevasim} subcommand.
+                Multiple ERD files (entered as a list, i.e., [<file1>, <file2>]) can be combined to
+                generate a single impact file. This can be used to combine
+                simulation results from different types of contaminants, in
+                which the ERD files were generated from different
+                TSG files.
+                
+                Required input.
+    \item[{metric}]\hfill
+\\The impact metric used to compute the impact file. Options
+                include EC, MC, NFD, PD, PE, PK, TD or VC. One impact file 
+                is created for each metric selected. These metrics are 
+                defined in Section \ref{impact_measures}.
+                
+                Required input.
+    \item[{tai file}]\hfill
+\\The name of the TAI file that contains health impact information. 
+                The TAI file format is documented in File Formats Section \ref{formats_taiFile}.
+                
+                Required input if a public health metric is used (PD, PE or PK).
+    \item[{response time}]\hfill
+\\The number of minutes that are needed to respond to the
+                detection of a contaminant. This represents the time that it takes
+                a water utility to stop the spread of the contaminant in the network and 
+                eliminate the consumption of contaminated water. As the response time increases,
+                the impact increases because the contaminant affects the network
+                for a greater length of time.  
+                
+                Required input, default = 0 minutes.
+    \item[{detection limit}]\hfill
+\\The minimum concentration that must be exceeded before a sensor can detect a contaminant.
+                There must be one threshold for each ERD file. The units of
+                these detection limits depend on the units of the contaminant
+                simulated for each ERD file (e.g., number of cells of a
+                biological agent).  
+                
+                Required input, default = 0.
+    \item[{detection confidence}]\hfill
+\\The number of sensors that must detect an incident before
+                the impacts are calculated.  
+                
+                Required input, default = 1 sensor.
+  \end{description}
+  \item[{impact data}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the impact block that is used in the objective or constraint block.
+                
+                Required input.
+    \item[{impact file}]\hfill
+\\The name of the impact file that is created by \code{sim2Impact} and 
+                contains the detection time and the total
+                impact given a sensor at that node is the first to detect
+                contamination from that scenario. 
+                The impact file format is documented in File Formats Section \ref{formats_impactFile}.
+                
+                Required input.
+    \item[{nodemap file}]\hfill
+\\The name of the nodemap file that is created by \code{sim2Impact} and 
+                maps sensor placement ids to the network node labels. 
+                The nodemap file format is documented in File Formats Section \ref{formats_nodeFile}.
+                
+                Required input.
+    \item[{weight file}]\hfill
+\\The name of the weight file that specifies the weights for contamination
+                incidents. This file supports the optimization of weighted
+                impact metrics. 
+                The weight file format is documented in File Formats Section \ref{formats_weightFile}.
+                
+                Optional input, by default, incidents are optimized with weight 1.
+  \end{description}
+  \item[{cost}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the cost block that is used in the objective or constraint block.
+                
+                Optional input.
+    \item[{cost file}]\hfill
+\\The name of the cost file that contains the costs for the installation of
+                sensors throughout the distribution network. This file contains
+                EPANET ID/cost pairs.
+                The cost file format is documented in File Formats Section \ref{formats_costFile}.
+                
+                Optional input.
+  \end{description}
+  \item[{objective}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the objective block that is used in sensor placement block.
+                
+                Required input.
+    \item[{goal}]\hfill
+\\The objective of the optimization process that defines what is going to minimized. 
+                The options are the name of the impact block, the name of the cost block, 
+                the number of sensors (NS) or the number of failed detections (NFD).
+				
+				Required input.
+    \item[{statistic}]\hfill
+      \\The objective statistic. The TOTAL
+      statistic is used when the goal is NS                             or
+      NFD. When the goal is to compute a                             statistic
+      of an impact block, the options                             are MEAN,
+      MEDIAN, VAR, TCE, CVAR, TOTAL                             or WORST. For
+      example, MEAN will minimize                             the mean impacts
+      over all of the                             contamination scenarios,
+      while WORST                             will only minimize the worst
+      impacts                             from the ensemble of contamination
+      scenarios.                                  Required input.
+    \item[{gamma}]\hfill
+      \\The value of gamma that specifies the                 fraction of the
+      distribution of impacts that will                 be used to compute the
+      VAR, CVAR and TCE statistics.                 Gamma is assumed to be in
+      the interval (0,1], which means                  that gamma can be
+      greater than zero but less than or equal to one. It                 can
+      be interpreted as specifying the 100*gamma                 percent of
+      the worst contamination incidents that                 are used for
+      these calculations.                  Required input for VAR or CVAR
+      objective statistics,                 default = 0.05.
+  \end{description}
+  \item[{constraint}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the constraint block that is used in sensor placement block.
+                
+                Required input.
+    \item[{goal}]\hfill
+\\The constraint goal. The options are the name of the impact block name, 
+                the name of the cost block, the number of sensors (NS) or the number of failed detections (NFD).
+                
+                Required input.
+    \item[{statistic}]\hfill
+\\The constraint statistic. The TOTAL
+                statistic is used when the goal is NS
+                or NFD. When the goal is to compute a
+                statistic of an impact block, the options
+                are MEAN, MEDIAN, VAR, TCE, CVAR, TOTAL
+                or WORST. For example, MEAN will constrain
+                the mean impacts over all of the
+                contamination scenarios, while WORST
+                will only constrain the worst impacts
+                from the ensemble of contamination
+                scenarios.
+
+                Required input.
+    \item[{gamma}]\hfill
+\\The value of gamma that specifies the fraction of the distribution of impacts that
+                will be used to compute the VAR, CVAR and TCE statistics. Gamma
+                is assumed to be in the interval (0,1], which means that gamma 
+				can be greater than zero but less than or equal to one. It can be interpreted
+                as specifying the 100*gamma percent of the worst contamination
+                incidents that are used for these calculations.  
+                
+                Required input for VAR or CVAR objective statistics, default = 0.05.
+    \item[{bound}]\hfill
+\\The upper bound on the constraint.
+                
+                Optional input.
+  \end{description}
+  \item[{imperfect}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the imperfect block that is used in sensor placement block.
+                
+                Optional input.
+    \item[{sensor class file}]\hfill
+\\The name of the imperfect sensor class file that defines the detection probabilities
+                for all sensor categories. It is used with the imperfect-sensor model 
+                and must be specified in conjunction with a imperfect junction class file.
+                The imperfect sensor class file format is documented in File Formats Section \ref{formats_sensorClass}.
+                
+                Optional input.
+    \item[{junction class file}]\hfill
+\\The name of the imperfect junction class file that defines a sensor category for
+                each network node. It is used with the imperfect-sensor model and
+                must be specified in conjunction with a imperfect sensor class file.
+                The imperfect junction class file format is documented in File Formats Section \ref{formats_junctionClass}.
+                
+                Optional input.
+  \end{description}
+  \item[{aggregate}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the aggregation block that is used in sensor placement block.
+                
+                Optional input.
+    \item[{type}]\hfill
+\\The type of aggregation used to reduce the size of the sensor placement problem.  
+                The options are THRESHOLD, PERCENT or RATIO.
+
+                THRESHOLD is used to aggregate similar impacts by specifying a goal and a value.  
+                This is used to reduce the total size of the sensor placement formulation (for large problems).
+                Solutions generated with non-zero thresholds are not guaranteed
+                to be globally optimal.
+
+                PERCENT is an alternative method to compute the aggregation threshold 
+                in which the value (of the goal-value pair) is a real number between 0.0 and 1.0. 
+                Over all contamination incidents, compute the maximum difference, d, between the impact of the
+                contamination incident if it is not detected and the impact if it is detected
+                at the earliest possible feasible location and set the aggregation threshold to 
+                d times the aggregation percent. If both THRESHOLD and PERCENT are set to valid values, 
+                then PERCENT takes priority.
+
+                RATIO is also specified with a goal-value pair in which value is a real number between
+                0.0 and 1.0.
+                
+                Optional input.
+    \item[{goal}]\hfill
+\\The aggregation goal for the aggregation type.
+                
+                Optional input.
+    \item[{value}]\hfill
+\\The aggregation value for the aggregation type. If the aggregation type is PERCENT or RATIO,
+                then this value is a real number between 0.0 and 1.0.
+                
+                Optional input.
+    \item[{conserve memory}]\hfill
+\\The maximum number of impact files that should be read into memory 
+                at any one time. This option allows impact files to be processed in 
+                a memory conserving mode if location aggregation is chosen and the original impact
+                files are very large. For example, a conserve memory value of 10000 requests
+                that no more than 10000 impacts should be read into memory at any one 
+                time while the original impact files are being processed into smaller
+                aggregated files.  
+				
+				Optional input, default = zero to turn off this option.
+    \item[{distinguish detection}]\hfill
+\\A goal for which aggregation should not allow incidents to
+                become trivial. If the aggregation threshold is so large that all
+                locations, including the dummy, would form a single superlocation,
+                this forces the dummy to be in a superlocation by itself. Thus,
+                the sensor placement will distinguish between detecting and not
+                detecting. This option can be listed multiple times, to specify
+                multiple goals. 
+                
+                Optional input, default = 0.
+    \item[{disable aggregation}]\hfill
+\\Disable aggregation for this goal, even at value zero, which
+                would incur no error. Each witness incident will be in a separate
+                superlocation. This option can be listed multiple times to
+                specify multiple goals. ALL can be used to specify
+                all goals. 
+                
+                Optional input, default = 0.
+  \end{description}
+  \item[{sensor placement}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The sensor placement problem type. The command \code{wst sp ---help-problems} 
+                provides a list of problem types for sensor placement. For example, average-case perfect-sensor
+                is the standard problem type for sensor placement, since it uses the mean statistic, 
+                zero constraints, single objective and perfect sensors. 
+                
+                Required option, default = average-case perfect-sensor.
+    \item[{modeling language}]\hfill
+\\The modeling language to generate the sensor placement optimization 
+                problem. The options are NONE, PYOMO or AMPL. 
+
+                Required input, default = NONE.
+    \item[{objective}]\hfill
+\\The name of the objective block previously defined to be used in sensor placement.
+                
+                Required input.
+    \item[{constraint}]\hfill
+\\The name of the constraint block previously defined to be used in sensor placement.
+                
+                Required input.
+    \item[{imperfect}]\hfill
+\\The name of the imperfect block previously defined to be used in sensor placement.
+                
+                Optional input.
+    \item[{aggregate}]\hfill
+\\The name of the aggregate block previously defined to be used in sensor placement.
+                
+                Optional input.
+    \item[{compute bound}]\hfill
+\\A flag to indicate if bounds should be computed on the sensor placement
+                solution. The options are true or false. 
+                
+                Optional input, default = false.
+    \item[{presolve}]\hfill
+\\A flag to indicate if the sensor placement problem should be presolved. 
+                The options are true or false. 
+                
+                Optional input, default = true.
+    \item[{compute greedy ranking}]\hfill
+\\A flag to indicate if a greedy ranking of the sensor locations should be calculated. 
+                The options are true or false. 
+                
+                Optional input, default = false.
+    \item[{location}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the sensor placement problem.
+                The options are:
+                (1) ALL, which specifies all nodes as feasible sensor locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Required input, default = ALL.
+      \item[{infeasible nodes}]\hfill
+\\A list that defines nodes that cannot be considered for the sensor placement problem.
+                The options are:
+                (1) ALL, which specifies all nodes as infeasible sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as infeasible sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as infeasible sensor locations;
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+      \item[{fixed nodes}]\hfill
+\\A list that defines nodes that are already sensor locations.
+                The options are:
+                (1) ALL, which specifies all nodes as fixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as fixed sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as fixed sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as fixed sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+      \item[{unfixed nodes}]\hfill
+\\A list that defines nodes that are unfixed sensor locations.
+                The options are:
+                (1) ALL, which specifies all nodes as unfixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as unfixed sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as unfixed sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as unfixed sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+    \end{description}
+  \end{description}
+  \item[{flushing}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{detection}]\hfill
+\\The sensor network design used to detect contamination scenarios. The
+                sensor locations are used to compute a detection time for each 
+                contamination scenario. The options are a list of 
+                EPANET node IDs or a file name which contains a list of EPANET node IDs.
+                
+                Required input.
+    \item[{flush nodes}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible nodes}]\hfill
+\\A list that defines the nodes in the network that can be flushed. 
+                The options are: (1) ALL, which specifies all nodes as feasible flushing locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible flushing locations;
+                (3) NONE, which specifies no nodes as feasible flushing locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as feasible flushing locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible flushing locations.
+                
+                Required input, default = ALL.
+      \item[{infeasible nodes}]\hfill
+\\A list that defines the nodes in the network that cannot be flushed. 
+                The options are: (1) ALL, which specifies all nodes as infeasible flushing locations;
+                (2) NZD, which specifies all non-zero demand nodes as infeasible flushing locations;
+                (3) NONE, which specifies no nodes as infeasible flushing locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as infeasible flushing locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible flushing locations. 
+                
+                Optional input, default = NONE.
+      \item[{max nodes}]\hfill
+\\The maximum number of node locations that can be flushed simultaneously in the
+                network. The value is a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list. For example, a value of 
+                3 means that a maximum of 3 node will be identified as flushing locations 
+                during the optimization process.
+                
+                Required input.
+      \item[{rate}]\hfill
+\\The flushing rate for each node location to be flushed. A new demand pattern 
+                will be created using this rate for the node. The value is a nonnegative integer. 
+                For example, a value of 800 means that an additional demand of 800 gpm is applied 
+                at a particular node. This rate is applied to all flushing locations identified 
+                in the optimization process.
+                
+                Required input.
+      \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                the start of flushing. The value is a nonnegative integer. For example, 
+                a value of 120 represents a 120 minutes or a 2 hour delay between 
+                the time of detection and the start of flushing.
+                
+                Required input.
+      \item[{duration}]\hfill
+\\The length of time in minutes that flushing will be simulated at a particular node. 
+                The value is a nonnegative integer. For example, a value of 240 means that  
+                flushing would be simulated at a particular node for 4 hours. This duration 
+                is applied to all flushing locations identified in the optimization process.
+                
+                Required input.
+    \end{description}
+    \item[{close valves}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible pipes}]\hfill
+\\A list that defines the pipes in the network that can be closed. 
+                The options are: (1) ALL, which specifies all pipes as feasible pipes to close;
+                (2) DIAM min max, which specifies all pipes with a specific diameter as feasible pipes to close;
+                (3) NONE, which specifies no pipes as feasible pipes to close;
+                (4) a list of EPANET pipe IDs, which identifies specific pipes as feasible pipes to close; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific pipes as feasible pipes to close. 
+                
+                Required input, default = ALL.
+      \item[{infeasible pipes}]\hfill
+\\A list that defines the pipes in the network that cannot be closed. 
+                The options are: (1) ALL, which specifies all pipes as infeasible pipes to close;
+                (2) DIAM min max, which specifies all pipes with a specific diameter as infeasible pipes to close;
+                (3) NONE, which specifies no pipes as infeasible pipes to close;
+                (4) a list of EPANET pipe IDs, which identifies specific pipes as infeasible pipes to close; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific pipes as infeasible pipes to close. 
+                
+                Optional input, default = NONE.
+      \item[{max pipes}]\hfill
+\\The maximum number of pipes that can be closed simultaneously in the
+                network. The value must be a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list. For example, a value of 
+                2 means that a maximum of 2 pipes to close will be identified 
+                during the optimization process.
+                
+                Required input.
+      \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                closing pipes. The value is a nonnegative integer. For example, 
+                a value of 120 would represent a 120 minutes or a 2 hour delay between 
+                the time of detection and the start of pipe closures.
+                
+                Required input.
+    \end{description}
+  \end{description}
+  \item[{booster msx}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{detection}]\hfill
+\\The sensor network design used to detect contamination scenarios. The
+                sensor locations are used to compute a detection time for each 
+                contamination scenario in the TSG file. The options are a list of 
+                EPANET node IDs or a file name which contains a list of EPANET node IDs.
+                
+                Required input.
+    \item[{toxin species}]\hfill
+\\The name of the contaminant species that is injected in each
+                contamination scenario. This is the species that interacts with the 
+                injected disinfectant and whose impact is going to be minimized.
+                
+                Required input.
+    \item[{decon species}]\hfill
+\\The name of the decontaminant or disinfectant species that is injected from the 
+                booster stations.
+                
+                Required input.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the booster station placement problem.
+                The options are: (1) ALL, which specifies all nodes as feasible booster station locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible booster station locations;
+                (3) NONE, which specifies no nodes as feasible booster station locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as feasible booster station locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible booster station locations.
+                
+                Required input, default = ALL.
+    \item[{infeasible nodes}]\hfill
+\\A list that defines nodes that cannot be considered for the booster station placement problem.
+                The options are: (1) ALL, which specifies all nodes as infeasible booster station locations;
+                (2) NZD, which specifies non-zero demand nodes as infeasible booster station locations;
+                (3) NONE, which specifies no nodes as infeasible booster station locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as infeasible booster station locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible booster station locations. 
+                
+                Optional input, default = NONE.
+    \item[{max boosters}]\hfill
+\\The maximum number of booster stations that can be placed in the
+                network. The value must be a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list.
+                
+                Required input.
+    \item[{type}]\hfill
+\\The injection type for the disinfectant at the booster stations. The option is FLOWPACED. 
+                See the EPANET 2.00.12 user manual for additional information about source types \cite{EPANETusermanual}.
+                
+                Required input.
+    \item[{strength}]\hfill
+\\The amount of disinfectant injected into the network from the booster stations. 
+                For the source type FLOWPACED, the strength units are in mg/L.
+            
+                Required input.
+    \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                the start of injecting disinfectants from the booster stations. The value 
+                is a nonnegative integer. For example, a value of 120 represents 
+                a 120 minutes or a 2 hour delay between the time of detection and 
+                the start of booster injections.
+                
+                Required input.
+    \item[{duration}]\hfill
+\\The length of time in minutes that disinfectant will be injected at the booster 
+                stations during the simulation.	The value is a nonnegative integer. For example, 
+                a value of 240 means that a booster would simulate injection of disinfectant 
+                at a particular node for 4 hours. This duration is applied to all booster 
+                station locations identified in the optimization process.
+                
+                Required input.
+  \end{description}
+  \item[{booster mip}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{detection}]\hfill
+\\The sensor network design used to detect contamination scenarios. The
+                sensor locations are used to compute a detection time for each 
+                contamination scenario in the TSG file. The options are a list of 
+                EPANET node IDs or a file name which contains a list of EPANET node IDs.
+                
+                Required input.
+    \item[{model type}]\hfill
+\\The model type used to determine optimal booster station
+                locations. Options include NEUTRAL (complete neutralization)
+                or LIMIT (limiting reagent). 
+                
+                Required input, default = NEUTRAL.
+    \item[{model format}]\hfill
+\\The modeling language used to build the formulation specified
+                by the model type option. The options are AMPL and PYOMO. 
+				AMPL is a third party package that must be installed by 
+				the user if this option is specified. PYOMO is an open source 
+				software package that is distributed with WST. 
+                
+                Required input, default = PYOMO.
+    \item[{stoichiometric ratio}]\hfill
+\\The stoichiometric ratio used by the limiting reagent
+                model (LIMIT) represents the mass of disinfectant removed per 
+                mass of contaminant removed. The units for disinfectant mass 
+                and contaminant mass are determined by the type of injection used 
+                for each species (mg for chemical and CFU for biological).  
+                This can be a number or a list of
+                numbers greater than 0.0. When a list is specified, the
+                optimization will be performed for each number in this list. As
+                the stoichiometric ratio approaches 0, the LIMIT model converges 
+                to the NEUTRAL model.
+                
+                Required input if the model type = LIMIT.
+    \item[{objective}]\hfill
+\\The impact metric used to place the booster stations.
+                In the current version, all models support MC metric
+                (mass of toxin consumed through the node demands). The
+                PD metric is only supported in the LIMIT Pyomo model.                
+                
+                Required input, default = MC.
+    \item[{toxin decay coefficient}]\hfill
+\\The contaminant (toxin) decay coefficient. The options are 
+				(1) None, which runs the simulations without first-order decay, 
+				(2) INP, which runs the simulations with first-order decay using the
+                coefficient specified in the EPANET 2.00.12 INP file or (3) a number, which 
+				runs the simulation with first-order decay and the specified first-order
+				decay coefficient in units of (1/min) (overrides the decay coefficient 
+				in the EPANET 2.00.12 INP file).
+                
+                Required input, default = 0.
+    \item[{decon decay coefficient}]\hfill
+\\The disinfectant (decontaminant) decay coefficient. The options are 
+				(1) None, which runs the simulations without first-order decay, 
+				(2) INP, which runs the simulations with first-order decay using the
+                coefficient specified in the EPANET 2.00.12 INP file or (3) a number, which 
+				runs the simulation with first-order decay and the specified first-order
+				decay coefficient in units of (1/min) (overrides the decay coefficient 
+				in the EPANET 2.00.12 INP file).
+                
+                Required input, default = 0.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the booster station placement problem.
+                The options are: (1) ALL, which specifies all nodes as feasible booster station locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible booster station locations;
+                (3) NONE, which specifies no nodes as feasible booster station locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as feasible booster station locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible booster station locations. 
+                
+                Required input, default = ALL.
+    \item[{infeasible nodes}]\hfill
+\\A list that defines nodes that cannot be considered for the booster station placement problem.
+                The options are: (1) ALL, which specifies all nodes as infeasible booster station locations;
+                (2) NZD, which specifies non-zero demand nodes as infeasible booster station locations;
+                (3) NONE, which specifies no nodes as infeasible booster station locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as infeasible booster station locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible booster station locations. 
+                
+                Optional input, default = NONE.
+    \item[{max boosters}]\hfill
+\\The maximum number of booster stations that can be placed in the
+                network. The value must be a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list.
+                
+                Required input.
+    \item[{type}]\hfill
+\\The injection type for the disinfectant at the booster stations. 
+                The options are MASS or FLOWPACED. 
+                See the EPANET 2.00.12 user manual for additional information about source types \cite{EPANETusermanual}.
+                
+                Required input.
+    \item[{strength}]\hfill
+\\The amount of disinfectant injected into the network from the booster stations.  
+                If the source type option is MASS, then the units for the strength are in mg/min.  
+                If the source type option is FLOWPACED, then units are in mg/L.
+                
+                Required input.
+    \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                the start of injecting disinfectants from the booster stations. The value 
+                is a nonnegative integer. For example, a value of 120 represents 
+                a 120 minutes or a 2 hour delay between the time of detection and 
+                the start of booster injections.
+				
+                Required input.
+    \item[{duration}]\hfill
+\\The length of time in minutes that disinfectant will be injected at the booster 
+                stations during the simulation.	The value is a nonnegative integer. For example, 
+                a value of 240 means that a booster would simulate injection of disinfectant 
+                at a particular node for 4 hours. This duration is applied to all booster 
+                station locations identified in the optimization process.
+				
+                Required input.
+    \item[{evaluate}]\hfill
+      \\The option to evaluate the booster station placement created from
+      the optimization process.
+      Optional input, default = false.
+  \end{description}
+  \item[{boostersim}]\hfill
+  \item[{eventDetection}]\hfill
+  \item[{boosterimpact}]\hfill
+  \item[{booster quality}]\hfill
+  \item[{inversion}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{algorithm}]\hfill
+\\The algorithm used to perform source inversion. The options are 
+				optimization, bayesian, or csa. The optimization algorithm requires 
+				AMPL or PYOMO along with a MIP solver. The bayesian algorithm 
+				uses Bayes' Rule to update probability of a particular node 
+				being the contaminant source node. The CSA is the Contaminant
+                                Status Algorithm by \citet{csa}.
+                
+                Required input, default = optimization.
+    \item[{formulation}]\hfill
+\\The formulation used by the optimization algorithm. The options are 
+                LP\_discrete (discrete LP), MIP\_discrete (discrete MIP), 
+                MIP\_discrete\_nd (discrete MIP with no decrease) or 
+                MIP\_discrete\_step (discrete MIP for step injection).
+                
+                Required input for optimization algorithm, default = MIP\_discrete.
+    \item[{model format}]\hfill
+\\The modeling language used to build the formulation specified
+                by the formulation option. The options are AMPL and PYOMO. 
+				AMPL is a third party package that must be installed by 
+				the user if this option is specified. PYOMO is an open source 
+				software package that is distributed with WST.
+                
+                Required input for optimization algorithm, default = PYOMO.
+    \item[{merlion water quality model}]\hfill
+\\This option is set to true to use the Merlion 
+                water quality model for simulating the candidate injections
+                in the Bayesian probability-based method. It can be set to false
+                to use EPANET 2.00.12 for these simulations. Note that the Merlion water quality
+                model is required in either case to generate the initial list of candidate injections.
+ 
+                Optional input, default = true.
+    \item[{horizon}]\hfill
+\\The minutes over which the past measurement
+                data is used for source inversion. It is calculated backwards from
+                the latest measurement time in the measurements file. 
+                All measurements in the measurements file that are within the horizon 
+                are used (both negative and positive). In the case of the CSA algorithm, 
+                the implementation assumes fixed sensors only, and all measurements at 
+                these sensors are assumed to be negative prior to the horizon.
+                If the horizon is longer
+                than the time between the latest measurement and simulation start time,
+                then all the measurements are used for source inversion.
+                
+                Required input, default = None (Start of simulation).
+    \item[{num injections}]\hfill
+\\The number of possible injections to consider when
+                performing inversion. Multiple injections are only supported by
+                the MIP formulation. This value must be set to 1 for the LP model
+                or the probability algorithm.
+                
+                Required input for optimization algorithm, default = 1.
+    \item[{measurement failure}]\hfill
+\\The probability that a sensors gives an incorrect reading. Must be between 0 and 1. 
+                
+                Required input for the Bayesian algorithm, default = 0.05.
+    \item[{positive threshold}]\hfill
+\\The concentration threshold used by the sensors to flag a positive 
+                detection measurement. This is a parameter in the optimization algorithm (Equation \ref{eqn.milp_positive_set}).
+                
+                Required input for optimization algorithm, default = 100 mg/L. 
+    \item[{negative threshold}]\hfill
+\\The concentration threshold used by the sensors to flag
+                a negative detection measurement. This is a parameter in the
+                optimization algorithm (Equation \ref{eqn.milp_negative_set}).
+                
+                Required input for optimization algorithm, default = 0.0 mg/L.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the source inversion problem.
+                The options are: (1) ALL, which specifies all nodes as feasible source locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible source locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible source locations; or
+                (4) a filename, which is a space or comma separated file containing a list of 
+                specific nodes as feasible source locations. 
+
+                Optional input.
+    \item[{candidate threshold}]\hfill
+\\The objective cut-off value for candidate contamination incidents 
+                using the optimization algorithm. The objective value represents the
+                likelihood of a particular node being the injection node (See Equation \ref{eq_transform_obj}).  
+                The objective values are normalized to 1 and only the nodes having 
+                their objective values greater or equal to the threshold are reported
+                in the inversion results. 
+                
+                Required input for optimization algorithm, default = 0.20.
+    \item[{confidence}]\hfill
+\\The probability cut-off value for candidate contamination incidents
+                using the Bayesian algorithm. The value is between 0 and 1. 
+                
+                Required for the Bayesian algorithm, default = 0.95.
+    \item[{output impact nodes}]\hfill
+\\A option to output a Likely\_Nodes.dat file that contains only
+                the node IDs of the possible contaminant injection nodes obtained from the 
+                \code{inversion} subcommand. This file can be used as the feasible nodes for the next 
+                iteration of the \code{inversion} subcommand to only consider this set of possible contaminant 
+                injection nodes.
+                
+                Optional input, default = false.
+  \end{description}
+  \item[{measurements}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{grab samples}]\hfill
+\\The name of the file that contains all the measurements from 
+                the manual grab samples and the fixed sensors. The measurement file 
+                format is documented in File Formats Section \ref{formats_measFile}.
+
+                Required input.
+  \end{description}
+  \item[{grabsample}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{model format}]\hfill
+\\The modeling language used to build the formulation specified
+                by the model format option. The options are AMPL and PYOMO. 
+                AMPL is a third party package that must be installed by 
+                the user if this option is specified. PYOMO is an open source 
+                software package that is distributed with WST.
+       
+                Required input, default = PYOMO.
+    \item[{sample criteria}]\hfill
+\\ Determines which optimization model to solve. This option is 
+                only checked when running the problem with signal files. By default
+                the optimization is based on distinguishability of pair-wise scenarios.
+       
+                Optional input.
+    \item[{sample time}]\hfill
+\\The time at which the manual grab sample should be taken. 
+                The algorithm determines the best possible manual grab sample location(s)
+                based upon this time. Units: Minutes from the simulation start time in the
+                EPANET 2.00.12 INP file. 
+
+                Required input.
+    \item[{threshold}]\hfill
+\\This threshold determines whether or not an incident impacts a candidate
+                sample location.
+
+                Required input, default = 0.001.
+    \item[{fixed sensors}]\hfill
+\\A list that defines nodes that are already fixed continuous sensor locations.
+                The options are: (1) ALL, which specifies all nodes as fixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as fixed sensor locations;
+                (3) NONE, which specifies no nodes as fixed sensor locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as fixed sensor locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as fixed sensor locations. 
+
+                Optional input.
+    \item[{nodes metric}]\hfill
+\\ File containing a map of node to metric. The map is used for determining weighting factors
+                in the objective of the distinguishability optimization formulation.
+                Each line in the file has the node name separated by the corresponding metric.  
+
+                Optional input.
+    \item[{list scenario ids}]\hfill
+\\ File containing list of scenarios to considered from the signals folder.
+                Each line in the file has the signals ID and the contamination ID separated by a space.
+                Optional input.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered as potential sampling locations 
+                for the optimal sample location problem.
+                The options are: (1) ALL, which specifies all nodes as feasible sampling locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible sampling locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible sampling locations; or
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible sampling locations. 
+
+                Optional input.
+    \item[{num samples}]\hfill
+\\The maximum number of locations that can be sampled at one time. This is usually equal
+                to the number of sampling teams that are available.
+
+                Required input, default = 1.
+    \item[{greedy selection}]\hfill
+\\The option to select manual grab sample locations based upon a greedy search, which orders and selects the locations in order of the best solution.
+                This does not require any optimization.
+
+                Optional input, default = false.
+    \item[{with weights}]\hfill
+\\The option to add weights in the objective function of the distinguishability 
+                optimization formulation.
+
+                Optional input, default = false.
+    \item[{filter scenarios}]\hfill
+\\ This option enables filtering scenarios. Only those scenarios 
+                that match at least one of the measurements are considered
+                in the optimal sampling analysis.
+				
+				Optional input, default = false.
+  \end{description}
+  \item[{uq}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{analysis time}]\hfill
+\\The time at which the manual grab sample is should be taken. 
+                The algorithm determines the best possible manual grab sample location(s)
+                based upon this time. Units: Minutes from the simulation start time in the
+                EPANET 2.00.12 INP file.
+    \item[{threshold}]\hfill
+      \\This threshold determines whether or not an incident impacts a
+      location.
+    \item[{filter scenarios}]\hfill
+\\ This options enables filtering scenarios. Only those scenarios 
+                that match at least one of the measurements are considered
+                in the optimal sampling analysis, default = False.
+    \item[{measurement failure}]\hfill
+\\The probability that a sensors gives an incorrect reading. Must be between 0 and 1. 
+                
+                Required input for the Bayesian algorithm, default = 0.05.
+    \item[{confidence}]\hfill
+\\The probability cut-off value for classifying nodes as certain to be contaminated, 
+                uncertain to be contaminated, and certain to not be contaminated. The value is 
+                between 0 and 1. Nodes with probability greater than (((1-confidence)/2)+confidence) are 
+                classified likely to be contaminated or likely yes LY, 
+                nodes with probability less than ((1-confidence)/2) are classified likely not contaminated
+                LN and nodes with probability in between are uncertain nodes UN.
+                
+                Required for the Bayesian algorithm, default = 0.95.
+  \end{description}
+  \item[{visualization}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{screen}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The screen background color defined using a HEX color code or predefined color name.
+                
+                Optional input, default = white
+      \item[{size}]\hfill
+\\The screen size [width, height] in pixels.
+                
+                Optional input, default = [1000,600]
+    \end{description}
+    \item[{legend}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The legend background color defined using a HEX color code or predefined color name.
+                
+                Optional input, default = white
+      \item[{scale}]\hfill
+\\The legend text size multiplier, real number.
+                
+                Optional input, default = 1.0
+      \item[{location}]\hfill
+\\The legend location [left, top] in pixels.
+                
+                Optional input, default = [10,10] (upper left)
+    \end{description}
+    \item[{nodes}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The node color defined using HEX color code or predefined color name.
+                The color will apply to junctions, reservoirs and tanks. If the 
+                color is left blank, then junctions are black, reservoirs are 
+                blue and tanks are green.
+                
+                Optional input, default = None
+      \item[{size}]\hfill
+\\The node size, real number.
+                
+                Optional input.
+      \item[{opacity}]\hfill
+\\The node opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+    \end{description}
+    \item[{links}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The link color defined using HEX color code or predefined color name.
+                The color will apply to pipes, pumps and valves. If the 
+                color is left blank, then pipes are black, pumps are 
+                yellow and valves are turquoise.
+                
+                Optional input, default = None
+      \item[{size}]\hfill
+\\The link size, real number.
+                
+                Optional input.
+      \item[{opacity}]\hfill
+\\The link opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+    \end{description}
+    \item[{layers}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{label}]\hfill
+\\The layer label used in the legend. 
+                
+                Optional input, default = None
+      \item[{locations}]\hfill
+\\
+                The data locations to plot over the network. Locations are specified
+                using a list of EPANET IDs.
+                
+                Required input unless an external file is specified.
+      \item[{file}]\hfill
+\\The name of an external file that contains data to be used in the visualization.
+                The file is in YAML format. 
+                
+                Required input unless 'locations' are specified.  
+                Data from a file overrides data specified in 'locations'
+      \item[{location type}]\hfill
+\\The location type is used to indicate if the EPANET ID is of type 'node' 
+                (junction, reservoir, tank) or 'link' (pipe, pump, valve).
+                
+                Optional input. If left blank, node is tested before link
+      \item[{shape}]\hfill
+\\The marker shape, used only for node type layers. The shape can
+                be a single string, or a list of strings which is the same 
+                length as the location data.
+                
+				Optional input, only used for node type layers, default = circle
+      \item[{fill}]\hfill
+      \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+        \item[{color}]\hfill
+\\The fill color defined using HEX color code or predefined color name.
+                
+                Optional input, default = None
+        \item[{size}]\hfill
+\\The fill size, real number.
+                
+                Optional input.
+        \item[{opacity}]\hfill
+\\The fill opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+        \item[{color range}]\hfill
+\\The fill color range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{size range}]\hfill
+\\The fill size range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{opacity range}]\hfill
+\\The fill opacity range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+      \end{description}
+      \item[{line}]\hfill
+      \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+        \item[{color}]\hfill
+\\The line color defined using HEX color code or predefined color name.
+                
+                Optional input, default = None
+        \item[{size}]\hfill
+\\The line size, real number.
+                
+                Optional input.
+        \item[{opacity}]\hfill
+\\The fill opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+        \item[{color range}]\hfill
+\\The line color range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{size range}]\hfill
+\\The line size range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{opacity range}]\hfill
+\\The line opacity range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+      \end{description}
+    \end{description}
+  \end{description}
+  \item[{solver}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The solver type. Each component of WST
+				(e.g., sensor placement, flushing response, booster 
+				placement, source identification and grab sample) has different 
+				solvers available and more specific details are provided in 
+				the subcommand's chapter.
+                
+                Required input.
+    \item[{options}]\hfill
+\\A list of options associated with a specific solver type. More
+            information on the options available for a specific solver
+            is provided in the solver's documentation. The Getting
+            Started Section \ref{dependencies} provides links to the
+            different solvers.
+            
+            Optional input.
+    \item[{threads}]\hfill
+\\The maximum number of threads or function evaluations the solver is
+                allowed to use.  This option is not available to all solvers or all analyses.
+                
+                Optional input.
+    \item[{logfile}]\hfill
+\\The name of a file to output the results of the solver.
+                
+                Optional input.
+    \item[{verbose}]\hfill
+\\The solver verbosity level.
+                
+                Optional input, default = 0 (lowest level).
+    \item[{initial points}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{nodes}]\hfill
+\\A list of node locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing and booster\_msx
+        subcommands. This input causes an error for other subcommands.
+        
+        Optional input.
+      \item[{pipes}]\hfill
+\\A list of pipe locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing subcommand. This input causes an error for other subcommands.
+        
+        Optional input.
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file, and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

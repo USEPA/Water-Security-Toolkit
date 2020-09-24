@@ -1,0 +1,28 @@
+# No weights file: Net3_mc.impact.prob
+------------------------------------------------------------------------------
+Sensor placement id:        9304
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            17 19 24 65 88 
+Sensor junctions:           115 119 127 209 267 
+
+Impact File:                Net3_mc.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                70907.8333
+Lower quartile impact:      503.9170
+Median impact:              83150.7000
+Upper quartile impact:      143999.0000
+Value at Risk (VaR) (  5%): 144329.0000
+TCE                 (  5%): 144555.3333
+Max impact:                 144732.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_mc.impact
+------------------------------------------------------------------------------
+-1	137028.5263
+65	71611.9658
+88	71269.0775
+24	71055.0076
+17	70965.2738
+19	70907.8333

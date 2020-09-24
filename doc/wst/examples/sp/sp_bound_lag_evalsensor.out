@@ -1,0 +1,18 @@
+------------------------------------------------------------------------------
+Sensor placement id:        46394
+Number of sensors:          4
+Total cost:                 0
+Sensor node IDs:            27 37 53 64 
+Sensor junctions:           139 161 191 208 
+
+Impact File:                c:/wst-1.5/doc/wst/examples/sp/Net3/Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                12276.5280
+Lower quartile impact:      1650.0000
+Median impact:              9694.0000
+Upper quartile impact:      17470.0000
+Value at Risk (VaR) (  5%): 39810.0000
+TCE                 (  5%): 43067.5833
+Max impact:                 52101.0000
+------------------------------------------------------------------------------

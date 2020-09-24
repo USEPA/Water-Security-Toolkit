@@ -1,0 +1,36 @@
+# flushing configuration template
+network:
+  epanet file: Net6.inp        # EPANET network file name
+scenario:
+  tsg file: Net6_bio_JUNC1617.tsg               # TSG file name, overrides injection parameters above
+  merlion: false               # Use Merlion as WQ simulator, true or false
+impact:
+  erd file: null               # ERD database file name
+  metric: [PE]                 # Impact metric
+  tai file: bio.tai            # Health impact file name, required for public health metrics
+  response time: 0             # Time [min] needed to respond
+  detection limit: [0.0]       # Thresholds needed to perform detection
+  detection confidence: 1      # Number of sensors for detection
+  msx species: null            # MSX species used to compute impact
+flushing:
+  detection: [JUNCTION-1617, JUNCTION-199, JUNCTION-2297, JUNCTION-2716, JUNCTION-2930, JUNCTION-3023, JUNCTION-435, JUNCTION-552, JUNCTION-675, JUNCTION-831]   # Sensor locations to detect contamination scenarios
+  flush nodes:
+    feasible nodes: [JUNCTION-1881,JUNCTION-2233]        # Feasible flushing nodes
+    infeasible nodes: NONE     # Infeasible flushing nodes
+    max nodes: 2               # Maximum number of nodes to flush
+    rate: 1100.0               # Flushing rate [gallons/min]
+    response time: 60.0        # Time [min] between detection and flushing
+    duration: 480.0            # Flushing duration [min]
+  close valves:
+    feasible pipes: NONE       # Feasible pipes to close
+    infeasible pipes: NONE     # Infeasible pipes to close
+    max pipes: 0               # Maximum number of pipes to close
+    response time: 0.0         # Time [min] between detection and closing pipes
+solver:
+  type: EVALUATE  # Solver type
+  options:                     # A dictionary of solver options
+  logfile: null                # Redirect solver output to a logfile
+  verbose: 0                   # Solver verbosity level
+configure:
+  output prefix: Net6_flush_2nodes_JUNC1617_eval_true          # Output file prefix
+  debug: 0                     # Debugging level, default = 0

@@ -1,0 +1,70 @@
+\subsection{Overview}\label{spExecutable_spOverview}
+
+The {\bfseries sp} executable provides a common interface for sensor placement solvers in TEVA-\/SPOT.
+
+\subsection{Command-\/Line Help}\label{spExecutable_spUsage}
+
+\lstinputlisting{examples/command3.txt}
+
+\subsection{Description}\label{spExecutable_Description}
+
+The {\bfseries sp} executable is a Python script that coordinates the execution of the SPOT sensor placement solvers. The {\bfseries sp} options can flexibly specify the objective to be optimized, as well as constraints on performance/cost goals.
+
+The {\bfseries sp} script currently interfaces with integer programming (IP) solvers, GRASP heuristics, and a Lagrangian heuristic. The IP formulation can be used to find globally optimal solutions, the GRASP heuristic has proven effective at finding optimal solutions to a variety of large-\/scale applications, and the Lagrangian heuristic finds a near-\/optimal selection while computing a confidence bound.
+
+The following files are generated during the execution of {\bfseries sp}: 
+\begin{itemize}
+\item $<$tmpfile$>$.config -\/ the \doxyref{Sensor Placement Configuration File}{p.}{formats_spConfigFile}
+
+
+\item $<$tmpfile$>$.dat -\/ an AMPL data file (if using an IP solver)
+
+
+\item $<$tmpfile$>$.mod -\/ an AMPL script (if using an IP solver)
+
+
+\item $<$tmpfile$>$.log -\/ a log file that captures the solver output
+
+
+\item $<$tmpfile$>$.sensors -\/ a \doxyref{Sensor Placement File}{p.}{formats_sensorPlacementFile} that contains the final solution
+
+
+\end{itemize}
+
+\subsection{Notes}\label{spExecutable_spNotes}
+
+\begin{itemize}
+\item The solvers provided by SPOT do not attempt to minimize the number of sensors that are used. This can sometimes lead to confusing behavior, especially for worst-\/case objectives where there may be different solutions with different numbers of sensors. For small problems, the PICO solver can be used to solve an auxiliary problem, where the number of sensors is minimized subject to the performance value that is found when minimizing impact.
+
+
+\item The heuristic solvers do not currently support the \char`\"{}median\char`\"{} performance measure.
+
+
+\item The IP solvers do not currently support median, var, or tce performance measures.
+
+
+\item The aggregation threshold does not currently impact the problem formulation used by the GRASP heuristic.
+
+
+\item This solver interface assumes that event likelihoods are uniform. The format for specifying non-\/uniform likelihoods remains unresolved.
+
+
+\item Numerical issues have been observed when solving with the PICO solver in some cases. These usually result in a message that indicates that the solver failed.
+
+
+\item The gamma parameter cannot be varied with snl\_\-grasp or att\_\-grasp.
+
+
+\item The snl\_\-grasp and att\_\-grasp solvers cannot effectively minimize the worst-\/case objective when the problem is constrained.
+
+
+\item The \char`\"{}ub\char`\"{} option to sp is a misnomer when the Lagrangian solver is selected. The side constraints are really goal constraints, and therefore the values specified are not true upper bounds. However, we have decided to keep a consistent usage for both side and goal constraints rather than introducing a new option.
+
+
+\item The Lagrangian heuristic can now be used with \char`\"{}witness aggregated\char`\"{} problems as the PICO solver can. This cuts down the required memory in a dramatic way. For example, a problem that caused the Lagrangian to use 1.8 GB of RAM and run in 20 minutes when unaggregated, was solved with only 27MB of RAM in 20 seconds when aggregated. There is a disadvantage, though. The actual quality of the witness-\/aggregated solution of the Lagrangian solver can be 25 percent (or more) worse than the unaggregated solution. This could be improved in the future.
+
+
+\item The sp executable currently defaults to invoke witness aggregation when the Lagrangian solver is selected. If you want to turn this feature off, you must use the disable-\/aggregation option. To disable aggregation of all objectives, use the option disable-\/aggregation=all, as in the example above.
+
+
+\end{itemize}

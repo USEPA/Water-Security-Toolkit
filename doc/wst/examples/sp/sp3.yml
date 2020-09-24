@@ -1,0 +1,26 @@
+impact data:
+- name: ec
+  impact file: Net3_ec.impact
+  nodemap file: Net3.nodemap
+- name: mc
+  impact file: Net3_mc.impact
+  nodemap file: Net3.nodemap
+- name: nfd
+  impact file: Net3_nfd.impact
+  nodemap file: Net3.nodemap
+objective:
+- goal: ec
+  statistic: MEAN
+constraint:
+- goal: NS
+  statistic: TOTAL
+  bound: 5.0
+problem:
+  type: default
+  presolve: True
+  compute greedy ranking: True
+solver:
+  type: glpk
+configure:
+  output prefix: Net3
+  debug: 0

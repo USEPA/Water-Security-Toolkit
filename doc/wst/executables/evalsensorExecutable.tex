@@ -1,0 +1,104 @@
+%\subsection{Overview}\label{evalsensorExecutable_evalsensorOverview}
+The \code{evalsensor} executable is used to compute information about the impact 
+of contamination incidents for one or more sensor network designs. The \code{evalsensor} 
+executable takes a sensor network design in a sensor placement file (see File Formats Section 
+\ref{formats_sensorPlacementFile} for more detail) and evaluates them using data from 
+an impact file or a list of impact files (see File Formats Section \ref{formats_impactFile}). 
+This executable measures the performance of each sensor network designs with respect 
+to the set of possible contamination scenarios.
+
+Section \ref{solvers_solvers6} provides more information and an example application of 
+this executable.
+
+\subsection{Usage}\label{evalsensorExecutable_evalsensorUsage}
+Usage with a specific sensor network design:
+\begin{unknownListing}
+   evalsensor [options...] <sensor-file> <impact-file1> [<impact-file2>...]
+\end{unknownListing}
+Usage without a sensor network design:
+\begin{unknownListing}
+   evalsensor [options...] none <impact-file1> [<impact-file2>...]
+If none, is specified, then evalsensor will evaluate impacts without any sensors.
+\end{unknownListing}
+
+\subsection{Options}\label{evalsensorExecutable_evalsensorOptions}
+%\lstinputlisting{examples/simple/command7.txt}
+\begin{unknownListing}
+     --all-locs-feasible
+     A boolean flag to indicate that all locations are treated as feasible.
+     
+     --costs=<filename>
+     The name of a file that contains the cost information for each node in the network.
+	 For more details about the cost file, see File Formats Section `\ref{formats_costFile}`.
+     
+     --debug    
+     A boolean flag to add output information about each incident.
+
+     --format=<type>
+     The type of output that the evaluation will generate:
+		cout - 	Generates output that is easily read. (default)
+		xls - 	Generates output that is easily imported into a MS Excel spreadsheet.
+		xml - 	Generates an XML-formatted output to communicate 
+				with the TEVA-SPOT GUI. (not currently supported)
+		      
+     --gamma=<num>
+     The fraction of the tail distribution used to compute the VaR and TCE 
+	 performance measures. (default is 0.05)
+	 
+	 -h, --help
+	 A boolean flag to display usage information.
+	 
+	 --incident-weights=<filename>
+	 The name of a file that contains the weights of the different contamination incidents. 
+	 For more details about the weights file, see File Formats Section `\ref{formats_weightFile}`.
+	 
+	 --nodemap=<filename>
+	 The name of a file that contains the node map information for translating sensor placement 
+	 indices to EPANET node IDs. For more details about the nodemap file, see File Formats 
+	 Section `\ref{formats_nodeFile}`.
+	 
+	 -r, --responseTime=<num>
+	 The number of minutes that are needed to respond to the detection of 
+	 contamination. As the response time increases, the impact increases 
+	 because the contaminant affects the network for a greater length of 
+	 time.
+	 
+	 --sc-probabilities=<filename>
+	 The name of a file that contains the probability of detection for each sensor category. 
+	 For more details about the imperfect sensor class file, see File Formats Section 
+	 `\ref{formats_sensorClass}`.
+	 
+	 --scs=<filename>
+	 The name of a file that contains the sensor category information for each possible 
+	 sensor location in the network. For more details about the imperfect junction class file, 
+	 see File Formats Section `\ref{formats_junctionClass}`.
+	 
+	 --version
+	 A boolean flag to display version information.
+	 
+	 Note: Options like reponseTime can be specified with the syntax
+	 --responseTime 10.0 or --responseTime=10.0.
+\end{unknownListing}
+
+\subsection{Arguments}\label{evalsensorExecutable_evalsensorArguments}
+\begin{unknownListing}
+     <sensor-file>
+     A sensor placement file that contains one or more sensor network designs 
+	 that will be evaluated. If none, is specified, then evalsensor will evaluate 
+	 impacts without any sensors.
+     
+     <impact-file>
+     A impact file that contains the impact data concerning the simulated contamination 
+	 incidents. If one or more impact files are specified, then evaluations are 
+	 performed for each impact separately.
+\end{unknownListing}
+
+%\subsection{Description}\label{evalsensorExecutable_evalsensorDescription}
+%The \code{evalsensor} executable takes sensor placements in a Sensor Placement File 
+%\ref{formats_sensorPlacementFile} and evaluates them using data from an Impact File 
+%\ref{formats_impactFile} (or a list of impact files). This executable measures the 
+%performance of each sensor placement with respect to the set of possible 
+%contamination locations.
+%
+%See Section \ref{solvers_solvers6} for further description of this command.
+

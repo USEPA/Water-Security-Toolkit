@@ -1,0 +1,14 @@
+# sp output
+general:
+  version: 1.5                                                       # WST version
+  date: '2019-03-05'                                                 # Run date
+  cpu time: 0.501                                                    # CPU time (sec)
+  directory: C:/wst-/examples/sp_bound_lag
+  log file: Net3sp_output.log                                        # Log file
+sensor placement:
+  nodes: [['139', '161', '191', '208']]                              # List of sensor nodes
+  objective: ['9889.90378']                                          # Objective value
+  lower bound: 9819.335391                                           # Lower bound
+  upper bound: 9889.90378                                            # Upper bound
+  greedy ranking: Net3_evalsensor.out                                # Upper bound
+  stage 2: []                                                        # Upper bound

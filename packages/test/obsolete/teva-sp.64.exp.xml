@@ -1,0 +1,91 @@
+<experimental-study name="teva-sp">
+  <tags>
+    <tag>smoke</tag>
+    <tag>nightly</tag>
+  </tags>
+
+
+  <experiment name="GenerateTso">
+    <factors>
+      <factor name="tsg_file">
+        <level>-tsg test1.tsg -tsi test1.tsi</level>
+      </factor>
+      <factor name="tso_file">
+        <level>-tso test1.tso</level>
+      </factor>
+      <factor name="epanet_file">
+        <level>Net3.inp Net3.out</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -tso</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>test1 test1.tso</level>
+      </factor>
+      <factor name="objectives">
+        <level>-mc -vc -td -nfd -ec -epanetin Net3.inp</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp.script.pl -impact</executable>
+    </controls>
+  </experiment>
+
+
+  <experiment name="sp-simple-64">
+    <factors>
+      <factor name="goals">
+        <level>mc</level>
+        <level>vc</level>
+      </factor>
+      <factor name="measure">
+        <level>default</level>
+        <level>mean</level>
+        <level>worst</level>
+      </factor>
+      <factor name="impact_prefix">
+        <level>\-\-network=test1</level>
+      </factor>
+      <factor name="sensors">
+        <level>-\-ub=ns,5</level>
+      </factor>
+      <factor name="solver">
+        <level>-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp-simple</executable>
+    </controls>
+  </experiment>
+
+  <experiment name="sp">
+    <factors>
+      <factor name="impact_prefix">
+        <level>\-\-network=test1</level>
+      </factor>
+      <factor name="goals">
+        <level>"\-\-objective=mc \-\-ub=ns,5"</level>
+      </factor>
+      <factor name="solver">
+        <level>\-\-solver=heuristic</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>exp.teva-sp.pl -sp</executable>
+    </controls>
+  </experiment>
+
+  <analyze>
+    <data experiment="sp-simple-64"/>
+    <baseline>teva-sp.sp-simple-64.baseline.xml</baseline>
+    <test name="HeuristicBaseline" type="baseline">
+      <options>_measurement="Mean Impact" _tolerance=0</options>
+    </test>
+  </analyze>
+
+</experimental-study>

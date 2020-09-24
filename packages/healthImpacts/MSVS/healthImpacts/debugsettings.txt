@@ -1,0 +1,13 @@
+Module 64-bit:
+-Xmx1024M -classpath .;..\..\ANLUtilities;..\..\TEVA;..\..\DIAS;..\..\ANLSpatial;..\..\TEVA_Filter;..\..\ANLGUIUtilities;..\..\EPANETBase;..\..\EPANet-DIAS;..\..\DPFCore\bin -Dteva.log.dir=..\logs "-Danl.property.files=..\props\server.properties,..\props\simsvr.properties,..\props\win32\simsvr.properties,..\props\server1.properties,..\props\win32\rmi.properties" -Djava.security.policy=..\props\server.policy -Djava.library.path=..\..\TEVA_Libraries\win64 -Danl.jni_path=..\.. -Dteva.server.number=1 -Dteva.server.db.conn.id=Group1 -Danl.teva.modules.definitions=..\AnalysisModules\HIA.xml,..\AnalysisModules\tso2Impact.xml,..\AnalysisModules\IIA.xml -Depanet.mc.inp.file=network.inp -Dpython.dir=..\vpy64 -Danl.jni.debug_load=true anl.teva.server.TEVAServerImpl
+
+Module 32-bit:
+-Xmx1024M -classpath .;../../ANLUtilities;../../TEVA;../../DIAS;../../ANLSpatial;../../TEVA_Filter;../../ANLGUIUtilities;../../EPANETBase;../../EPANet-DIAS;../../DPFCore/bin -Dteva.log.dir=../logs "-Danl.property.files=../props/server.properties,../props/simsvr.properties,../props/win32/simsvr.properties,../props/server1.properties,../props/win32/rmi.properties" -Djava.security.policy=../props/server.policy -Djava.library.path=../../TEVA_Libraries/win32 -Danl.jni_path=..\.. -Dteva.server.number=1 -Dteva.server.db.conn.id=Group1 -Danl.teva.modules.definitions=../AnalysisModules/HIA.xml,../AnalysisModules/tso2Impact.xml,..\AnalysisModules\IIA.xml -Depanet.mc.inp.file=network.inp -Dpython.dir=../vpy32 -Danl.jni.debug_load=true anl.teva.server.TEVAServerImpl
+
+Working Dir:
+C:\TEVA\EclipseWS\TEVA-trunk\TEVAData/server-1
+
+Analysis Server 32-bit
+-Xmx1024M -classpath .;../ANLUtilities;../TEVA;../DIAS;../ANLSpatial;../TEVA_Filter;../ANLGUIUtilities;../EPANETBase;../EPANet-DIAS;../DPFCore/bin -Dteva.log.dir=../TEVAData/logs "-Danl.property.files=../TEVAData/props/analysis.properties,../TEVAData/props/win32/rmi.properties" -Djava.security.policy=../TEVAData/props/analysis.policy -Danl.jni_path=.. -Djava.library.path=../TEVA_Libraries/win32 -Danl.teva.modules.definitions=../TEVAData/AnalysisModules/tso2Impact.xml,../TEVAData/AnalysisModules/HIA.xml,../TEVAData/AnalysisModules/IIA.xml anl.teva.analysis.AnalysisServerImpl
+
+C:\TEVA\EclipseWS\TEVA-trunk\TEVA

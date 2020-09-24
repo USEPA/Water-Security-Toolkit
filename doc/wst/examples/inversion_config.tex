@@ -1,0 +1,182 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{network}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{epanet file}]\hfill
+\\ The name of the EPANET 2.00.12 input (INP) file that defines the water distribution
+                network model.
+                
+                Required input.
+  \end{description}
+  \item[{measurements}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{grab samples}]\hfill
+\\The name of the file that contains all the measurements from 
+                the manual grab samples and the fixed sensors. The measurement file 
+                format is documented in File Formats Section \ref{formats_measFile}.
+
+                Required input.
+  \end{description}
+  \item[{inversion}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{algorithm}]\hfill
+\\The algorithm used to perform source inversion. The options are 
+				optimization, bayesian, or csa. The optimization algorithm requires 
+				AMPL or PYOMO along with a MIP solver. The bayesian algorithm 
+				uses Bayes' Rule to update probability of a particular node 
+				being the contaminant source node. The CSA is the Contaminant
+                                Status Algorithm by \citet{csa}.
+                
+                Required input, default = optimization.
+    \item[{formulation}]\hfill
+\\The formulation used by the optimization algorithm. The options are 
+                LP\_discrete (discrete LP), MIP\_discrete (discrete MIP), 
+                MIP\_discrete\_nd (discrete MIP with no decrease) or 
+                MIP\_discrete\_step (discrete MIP for step injection).
+                
+                Required input for optimization algorithm, default = MIP\_discrete.
+    \item[{model format}]\hfill
+\\The modeling language used to build the formulation specified
+                by the formulation option. The options are AMPL and PYOMO. 
+				AMPL is a third party package that must be installed by 
+				the user if this option is specified. PYOMO is an open source 
+				software package that is distributed with WST.
+                
+                Required input for optimization algorithm, default = PYOMO.
+    \item[{merlion water quality model}]\hfill
+\\This option is set to true to use the Merlion 
+                water quality model for simulating the candidate injections
+                in the Bayesian probability-based method. It can be set to false
+                to use EPANET 2.00.12 for these simulations. Note that the Merlion water quality
+                model is required in either case to generate the initial list of candidate injections.
+ 
+                Optional input, default = true.
+    \item[{horizon}]\hfill
+\\The minutes over which the past measurement
+                data is used for source inversion. It is calculated backwards from
+                the latest measurement time in the measurements file. 
+                All measurements in the measurements file that are within the horizon 
+                are used (both negative and positive). In the case of the CSA algorithm, 
+                the implementation assumes fixed sensors only, and all measurements at 
+                these sensors are assumed to be negative prior to the horizon.
+                If the horizon is longer
+                than the time between the latest measurement and simulation start time,
+                then all the measurements are used for source inversion.
+                
+                Required input, default = None (Start of simulation).
+    \item[{num injections}]\hfill
+\\The number of possible injections to consider when
+                performing inversion. Multiple injections are only supported by
+                the MIP formulation. This value must be set to 1 for the LP model
+                or the probability algorithm.
+                
+                Required input for optimization algorithm, default = 1.
+    \item[{measurement failure}]\hfill
+\\The probability that a sensors gives an incorrect reading. Must be between 0 and 1. 
+                
+                Required input for the Bayesian algorithm, default = 0.05.
+    \item[{positive threshold}]\hfill
+\\The concentration threshold used by the sensors to flag a positive 
+                detection measurement. This is a parameter in the optimization algorithm (Equation \ref{eqn.milp_positive_set}).
+                
+                Required input for optimization algorithm, default = 100 mg/L. 
+    \item[{negative threshold}]\hfill
+\\The concentration threshold used by the sensors to flag
+                a negative detection measurement. This is a parameter in the
+                optimization algorithm (Equation \ref{eqn.milp_negative_set}).
+                
+                Required input for optimization algorithm, default = 0.0 mg/L.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the source inversion problem.
+                The options are: (1) ALL, which specifies all nodes as feasible source locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible source locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible source locations; or
+                (4) a filename, which is a space or comma separated file containing a list of 
+                specific nodes as feasible source locations. 
+
+                Optional input.
+    \item[{candidate threshold}]\hfill
+\\The objective cut-off value for candidate contamination incidents 
+                using the optimization algorithm. The objective value represents the
+                likelihood of a particular node being the injection node (See Equation \ref{eq_transform_obj}).  
+                The objective values are normalized to 1 and only the nodes having 
+                their objective values greater or equal to the threshold are reported
+                in the inversion results. 
+                
+                Required input for optimization algorithm, default = 0.20.
+    \item[{confidence}]\hfill
+\\The probability cut-off value for candidate contamination incidents
+                using the Bayesian algorithm. The value is between 0 and 1. 
+                
+                Required for the Bayesian algorithm, default = 0.95.
+    \item[{output impact nodes}]\hfill
+\\A option to output a Likely\_Nodes.dat file that contains only
+                the node IDs of the possible contaminant injection nodes obtained from the 
+                \code{inversion} subcommand. This file can be used as the feasible nodes for the next 
+                iteration of the \code{inversion} subcommand to only consider this set of possible contaminant 
+                injection nodes.
+                
+                Optional input, default = false.
+  \end{description}
+  \item[{solver}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The solver type. Each component of WST
+				(e.g., sensor placement, flushing response, booster 
+				placement) has different 
+				solvers available. More specific details are provided in 
+				the subcommand's chapter.
+                
+                Required input.
+    \item[{options}]\hfill
+\\A list of options associated with a specific solver type. More
+            information on the options available for a specific solver
+            is provided in the solver's documentation. The Getting
+            Started Section \ref{dependencies} provides links to the
+            different solvers.
+            
+            Optional input.
+    \item[{threads}]\hfill
+\\The maximum number of threads or function evaluations the solver is
+                allowed to use.  This option is not available to all solvers or all analyses.
+                
+                Optional input.
+    \item[{logfile}]\hfill
+\\The name of a file to output the results of the solver.
+                
+                Optional input.
+    \item[{verbose}]\hfill
+\\The solver verbosity level.
+                
+                Optional input, default = 0 (lowest level).
+    \item[{initial points}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{nodes}]\hfill
+\\A list of node locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing and booster\_msx
+        subcommands. This input causes an error for other subcommands.
+        
+        Optional input.
+      \item[{pipes}]\hfill
+\\A list of pipe locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing subcommand. This input causes an error for other subcommands.
+        
+        Optional input.
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

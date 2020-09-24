@@ -1,0 +1,6 @@
+['../../../bin']
+Run spotSkeleton
+Transform impact file
+Run sp (tier 1)
+Refine impact file
+Run sp (tier 2)

@@ -1,0 +1,105 @@
+$Id: releaseProcedure.txt 1286 2006-04-07 20:56:12Z lafisk $
+
+TEVA Software Release Procedure
+===============================
+
+A software release of TEVA occurs in four stages, called "Plan", 
+"Do", "Check" and "Act".  The progress of the four stages is
+documented with a checklist and some supporting information.  
+The checklist and supporting documents are all text files maintained 
+in the "qa" directory of the acro source tree, in a sub directory 
+named with the release number.
+
+When you add release documents to a release subdirectory of the
+"qa" directory, you should also add links to the documents from
+the file "qa/qa.html".
+
+"Plan":
+
+To begin the release process, obtain the "TEVA Software Release
+Process Checklist", which may be found in the repository at
+qa/docs/release.txt.
+
+Decide what the new release will be numbered, and create a new 
+directory in "qa" named {major}_{minor}.  Format the directory
+name so information about release 3.02 would be found in 
+directory "qa/03_02".
+
+Copy the release.txt file into the directory you just created.
+
+Fill out the "PLAN" section of the release checklist, and then
+check the file in to the repository.
+
+Under the section titled "Dates", you will lay out a time schedule
+for the release.  This will usually require some supporting information,
+which is explained in the following paragraphs.
+
+ o "release components identified" is the date by which you will have identified
+   everything that should be in the release.  This list may include the numbers
+   of bugs that are to be fixed, features that will be added, or documentation
+   that will be written.  When this list is completed, check it into
+   the release subdirectory as "releaseComponents.txt".  An example is in
+   the "qa/docs" directory.
+
+ o "release test plan identified" is the date by which you will create a
+   high level list of tests that will be run as part of the release process.
+   (It can be as simple as "all smoke tests and all performance tests").
+   Also identify which tests' output will will be saved in the 
+   "qa/{major}_{minor}" directory.  Check it in to the release directory
+   as "releaseTestPlan.txt".  An example is in the "qa/docs"
+   directory.
+   
+ o "create release branch" is the date that you will cease allowing new
+   development to the code base that will become the release.  You should
+   allow only bug fixes, documentation, and enhancements to the configure
+   and build process.  This freeze is accomplished by creating a branch 
+   to the CVS repository for the release.  New development will occur 
+   in the trunk.
+
+ o "third party requirements completed" - It is necessary to identify the
+   version of third party software packages that will be distributed with
+   TEVA.  For Sandia software, we may have additional requirements that we
+   have requested of the package developers for our release.  All
+   third party requirements should be identified by this date.  A checklist
+   of requirements should be checked in to the release subdirectory as
+   "thirdPartyRequirements.txt".  There is an example in "qa/docs".
+   
+ o "configure/install working" is the date by which we will verify our
+   release will be easy to download, build and install.
+   
+ o "documentation complete" is the date by which all documentation listed
+   in the "release components" will be completed.
+   
+ o "testing complete" is the date by which we will be done testing the
+   code.
+
+ o "customer satisfaction plan created" - The project manager should
+   create a checklist of steps that will be taken in the weeks following
+   the release (if the release was to a specific customer) to ensure
+   that the customer is happy and to get feedback to apply to future
+   releases.  Check out qa/docs/customerSatisfaction.txt as a starting
+   point.
+   
+ o "release" is the date on which the code will be made available to users.
+
+"Do":
+
+In the "do" stage, the planned activities are carried out.  
+
+The "Customer satisfaction plan" should state clearly how we will 
+determine that the customer or stakeholder is happy with the release.  
+A suggested plan may be found in "qa/docs/customerSatisfaction.txt".  
+(The customer or stakeholders were identified during the planning
+stage.)  
+
+"Check": In this stage, we verify that the planned activities
+occured successfully.  
+
+"Act": In the final stage, we release the code and begin the process
+of ensuring it meets customer's need.
+
+
+   
+   
+   
+   

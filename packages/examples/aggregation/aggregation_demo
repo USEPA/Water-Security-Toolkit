@@ -1,0 +1,105 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+
+setenv bindir `pwd`/../../bin
+setenv moddir `pwd`/../../etc/mod
+
+echo "NO AGGREGATION"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --disable-aggregation=mc --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "DEFAULT AGGREGATION"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "0 PERCENT"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-percent=mc,0 --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "25 PERCENT"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-percent=mc,0.25 --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "50 PERCENT"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-percent=mc,0.50 --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "75 PERCENT"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-percent=mc,0.75 --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "100 PERCENT"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-percent=mc,1.0 --memmon
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "1 RATIO"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-ratio=mc,1 --memmon --aggregation-percent=mc,1.0
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "0.75 RATIO"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-ratio=mc,0.75 --memmon --aggregation-percent=mc,1.0
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "0.5 RATIO"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-ratio=mc,0.5 --memmon --aggregation-percent=mc,1.0
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "0.25 RATIO"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-ratio=mc,0.25 --memmon --aggregation-percent=mc,1.0
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+echo "0 RATIO"
+$bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=mc --ub=ns,5 --solver=pico --aggregation-ratio=mc,0 --memmon --aggregation-percent=mc,1.0
+grep "Number of variables:" test1.log
+grep "Number of constraints:" test1.log
+grep "Number of nonzeros:" test1.log
+grep "Maximum memory" test1.log
+grep "Valid Lower" test1.log
+
+

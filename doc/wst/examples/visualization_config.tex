@@ -1,0 +1,173 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{network}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{epanet file}]\hfill
+\\ The name of the EPANET 2.00.12 input (INP) file that defines the water distribution
+                network model.
+                
+                Required input.
+  \end{description}
+  \item[{visualization}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{screen}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The screen background color defined using a HEX color code or predefined color name.
+                
+                Optional input, default = white
+      \item[{size}]\hfill
+\\The screen size [width, height] in pixels.
+                
+                Optional input, default = [1000,600]
+    \end{description}
+    \item[{legend}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The legend background color defined using a HEX color code or predefined color name.
+                
+                Optional input, default = white
+      \item[{scale}]\hfill
+\\The legend text size multiplier, real number.
+                
+                Optional input, default = 1.0
+      \item[{location}]\hfill
+\\The legend location [left, top] in pixels.
+                
+                Optional input, default = [10,10] (upper left)
+    \end{description}
+    \item[{nodes}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The node color defined using HEX color code or predefined color name.
+                The color will apply to junctions, reservoirs and tanks. If the 
+                color is left blank, then junctions are black, reservoirs are 
+                blue and tanks are green.
+                
+                Optional input, default = None
+      \item[{size}]\hfill
+\\The node size, real number.
+                
+                Optional input.
+      \item[{opacity}]\hfill
+\\The node opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+    \end{description}
+    \item[{links}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{color}]\hfill
+\\The link color defined using HEX color code or predefined color name.
+                The color will apply to pipes, pumps and valves. If the 
+                color is left blank, then pipes are black, pumps are 
+                yellow and valves are turquoise.
+                
+                Optional input, default = None
+      \item[{size}]\hfill
+\\The link size, real number.
+                
+                Optional input.
+      \item[{opacity}]\hfill
+\\The link opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+    \end{description}
+    \item[{layers}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{label}]\hfill
+\\The layer label used in the legend. 
+                
+                Optional input, default = None
+      \item[{locations}]\hfill
+\\
+                The data locations to plot over the network. Locations are specified
+                using a list of EPANET IDs.
+                
+                Required input unless an external file is specified.
+      \item[{file}]\hfill
+\\The name of an external file that contains data to be used in the visualization.
+                The file is in YAML format. 
+                
+                Required input unless 'locations' are specified.  
+                Data from a file overrides data specified in 'locations'
+      \item[{location type}]\hfill
+\\The location type is used to indicate if the EPANET ID is of type 'node' 
+                (junction, reservoir, tank) or 'link' (pipe, pump, valve).
+                
+                Optional input. If left blank, node is tested before link
+      \item[{shape}]\hfill
+\\The marker shape, used only for node type layers. The shape can
+                be a single string, or a list of strings which is the same 
+                length as the location data.
+                
+				Optional input, only used for node type layers, default = circle
+      \item[{fill}]\hfill
+      \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+        \item[{color}]\hfill
+\\The fill color defined using HEX color code or predefined color name.
+                
+                Optional input, default = None
+        \item[{size}]\hfill
+\\The fill size, real number.
+                
+                Optional input.
+        \item[{opacity}]\hfill
+\\The fill opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+        \item[{color range}]\hfill
+\\The fill color range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{size range}]\hfill
+\\The fill size range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{opacity range}]\hfill
+\\The fill opacity range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+      \end{description}
+      \item[{line}]\hfill
+      \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+        \item[{color}]\hfill
+\\The line color defined using HEX color code or predefined color name.
+                
+                Optional input, default = None
+        \item[{size}]\hfill
+\\The line size, real number.
+                
+                Optional input.
+        \item[{opacity}]\hfill
+\\The fill opacity, real number between 0.0 (transparent) and 1.0 (opaque).
+                
+                Optional input, default = 0.6
+        \item[{color range}]\hfill
+\\The line color range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{size range}]\hfill
+\\The line size range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+        \item[{opacity range}]\hfill
+\\The line opacity range used to scale line data.
+                
+                Optional input, default = [data min, data max]
+      \end{description}
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

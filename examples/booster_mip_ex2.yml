@@ -1,0 +1,35 @@
+network:
+  epanet file: Net3/Net3.inp
+scenario:
+  location: null
+  type: null
+  strength: null
+  start time: null
+  end time: null
+  tsg file: Net3/Net3_booster.tsg
+booster mip:
+  detection: ['15', '35', '219', '253']
+  model type: LIMIT 
+  model format: PYOMO 
+  stoichiometric ratio: 0.2   
+  objective: PD
+  toxin decay coefficient: 0
+  decon decay coefficient: 0
+  feasible nodes: NZD 
+  infeasible nodes: NONE
+  fixed nodes: []
+  max boosters: [2]                  
+  type: FLOWPACED
+  PD dose threshold: 1E-7
+  strength: 4
+  response time: 0
+  duration: 720.0
+  evaluate: false
+solver:
+  type: glpk
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: ${CWD}/booster_mip_ex2/Net3
+  debug: 0

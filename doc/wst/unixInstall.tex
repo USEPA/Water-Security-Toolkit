@@ -1,0 +1,32 @@
+The TEVA-SPOT Toolkit employs the integer programming solvers provided by the  Acro software. This example illustrates how to build both SPOT and Acro. After release 2.1.1, SPOT and Acro need to be built and configured separately.
+
+\section{Downloading}\
+There are several ways that SPOT and Acro can be downloaded. First, these two packages can be downloaded directly from the subversion repository using the svn command, which is commonly available on Linux computers. The SPOT and Acro subversion repositories support anonymous checkouts, so you should not need passwords. The following steps checkout the latest trunk version of these packages:
+\begin{verbatim}
+   svn checkout -q https://software.sandia.gov/svn/public/acro/acro-pico/trunk acro-pico
+   svn checkout -q https://software.sandia.gov/svn/teva/spot/spot/trunk spot
+\end{verbatim}
+Alternatively, recent tarballs of the acro-pico and spot software can be downloaded from the  Acro download site and SPOT download site. Once downloaded, these compressed tarballs can be expanded using the tar command:
+\begin{verbatim}
+   tar xvfz filename.tar.gz
+\end{verbatim}
+
+\section{Configuring and Building}\
+Acro can be configured using the standard build syntax:
+\begin{verbatim}
+   cd acro-pico
+   ./setup
+   autoreconf -i -f
+   ./configure
+   make
+\end{verbatim}
+This builds libraries in acro-pico/lib, along with executables in acro-pico/bin. The setup command bootstraps the configuration process with files from the bootstrap directory.
+
+SPOT can be configured and built in a similar manner:
+\begin{verbatim}
+   cd spot
+   ./setup
+   autoreconf -i -f
+   ./configure
+   make
+\end{verbatim}

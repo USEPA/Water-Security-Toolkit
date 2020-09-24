@@ -1,0 +1,21 @@
+Setting up IP data file...
+Creating AMPL script...
+Running AMPL script...
+------------------------------------------------------------------------------
+Sensor placement id:        24725
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            2 14 26 40 81 
+Sensor junctions:           15 109 131 166 253 
+
+Impact File:                /home/wehart/teva-sp/packages/sp/test/test1_mc.impact
+Number of events          : 236
+Min impact:                 0
+Mean impact:                29527.8
+Lower quartile impact:      289.354
+Median impact:              2577.99
+Upper quartile impact:      20299.8
+Value at Risk (VaR) (  5%): 144271
+TCE                 (  5%): 144271
+Max impact:                 144271
+------------------------------------------------------------------------------

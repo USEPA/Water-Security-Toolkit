@@ -1,0 +1,22 @@
+\subsection{Overview}\label{createIPDataExecutable_createIPDataOverview}
+
+The {\bfseries createIPData} executable is used by the {\bfseries sp} solver interface to setup an integer programming formulation for sensor placement.
+
+\subsection{Command-\/Line Help}\label{createIPDataExecutable_createIPDataUsage}
+
+\lstinputlisting{examples/simple/command4.txt}
+
+\subsection{Description}\label{createIPDataExecutable_createIPDataDescription}
+
+The input file used by {\bfseries createIPData} is a \doxyref{Sensor
+Placement Configuration File}{p.}{formats_spConfigFile}. The output of
+this executable is sent to standard out, and it is in a format that
+can be processed by \doxyref{PICO}{p.}{picoExecutable} and the AMPL
+solver interface.
+
+\subsection{Notes}\label{createIPDataExecutable_createIPDataNotes}
+
+\begin{itemize}
+\item This executable is not meant to be run interactively. 
+\item The scalability of this solver has not been well-\/characterized for large datasets, even when using aggressive aggregation. 
+\end{itemize}

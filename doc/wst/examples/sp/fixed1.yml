@@ -1,0 +1,37 @@
+impact data:
+- name: impact1
+  impact file: Net3_ec.impact
+  nodemap file: Net3.nodemap
+  directory: Net3
+objective:
+- name: obj1
+  goal: impact1
+  statistic: MEAN
+constraint:
+- name: const1
+  goal: NS
+  statistic: TOTAL
+  bound: 5.0
+sensor placement:
+  type: default
+  objective: obj1
+  constraint: const1
+  presolve: True
+  compute greedy ranking: True
+# @block:
+  location:
+    - infeasible nodes:
+      - 113
+      - 121
+      - 141
+      - 163
+      - 209
+# @:block
+solver:
+  type: glpk
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: fixed1/Net3
+  debug: 0

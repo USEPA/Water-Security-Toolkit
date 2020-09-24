@@ -1,0 +1,304 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{network}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{epanet file}]\hfill
+\\ The name of the EPANET 2.00.12 input (INP) file that defines the water distribution
+                network model.
+                
+                Required input.
+  \end{description}
+  \item[{scenario}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{location}]\hfill
+\\A list that describes the injection locations for the contamination scenarios.
+                The options are: (1) ALL, which denotes all nodes (excluding tanks and reservoirs)
+                as contamination injection locations; (2) NZD, which denotes all nodes with
+                non-zero demands as contamination injection locations; or (3) an EPANET node ID, 
+                which identifies a node as the contamination injection location. This allows 
+                for an easy specification of single or multiple contamination scenarios.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{type}]\hfill
+\\The injection type for the contamination scenarios. The options are MASS, CONCEN, FLOWPACED or SETPOINT. 
+                See the EPANET 2.00.12 user manual for additional information about source types \citep{EPANETusermanual}.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{strength}]\hfill
+\\The amount of contaminant injected into the network for the contamination scenarios.  
+                If the type option is MASS, then the units for the strength are in mg/min. 
+                If the type option is CONCEN, FLOWPACED or SETPOINT, then units are in mg/L.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{species}]\hfill
+\\The name of the contaminant species injected into the network. This is the name of a single species. 
+                It is required when using EPANET-MSX, since multiple species might be simulated, but
+                only one is injected into the network. For cases where multiple contaminants are injected,
+                a TSI file must be used.
+                
+                Required input for EPANET-MSX unless a TSG or TSI file is specified.
+    \item[{start time}]\hfill
+\\The injection start time that defines when the contaminant injection begins. 
+                The time is given in minutes and is measured from the start of the simulation. 
+                For example, a value of 60 represents an injection that starts at hour 1 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{end time}]\hfill
+\\The injection end time that defines when the contaminant injection stops.				
+                The time is given in minutes and is measured from the start of the simulation.
+                For example, a value of 120 represents an injection that ends at hour 2 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{tsg file}]\hfill
+\\The name of the TSG scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSG file will
+                override the location, type, strength, species, start and end times options specified in
+                the WST configuration file. The TSG file format is documented in File Formats Section \ref{formats_tsgFile}.
+                
+                Optional input.
+    \item[{tsi file}]\hfill
+\\The name of the TSI scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSI file will
+                override the TSG file, as well as the location, type, strength, species, start and end time options specified in
+                the WST configuration file. The TSI file format is documented in File Formats Section \ref{formats_tsiFile}.
+                
+                Optional input.
+    \item[{signals}]\hfill
+\\Name of file or directory with information to generate 
+                or load signals. If a file is provided the list of inp tsg tuples
+                 will be simulated and the information stored in signals files. If
+                a directory with the signals files is specified, the signal files will
+                be read and loaded in memory. This input is only valid for the uq
+                subcommand and the grabsample subcommand with probability based formulations.
+
+                Optional input.
+    \item[{msx file}]\hfill
+\\The name of the EPANET-MSX multi-species file that defines the multi-species reactions to
+                be simulated using EPANET-MSX.
+                
+                Required input for EPANET-MSX.
+    \item[{msx species}]\hfill
+\\The name of the MSX species whose concentration profile will be saved by the EPANET-MSX simulation
+                and used for later calculations.
+                
+                Required input for EPANET-MSX.
+    \item[{merlion}]\hfill
+\\A flag to indicate if the Merlion water quality
+                simulator should be used. The options are true or false. 
+                If an MSX file is provided, EPANET-MSX will be used.
+                
+                Required input, default = false.
+  \end{description}
+  \item[{impact}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{erd file}]\hfill
+\\The name of the ERD database file that contains the 
+                contaminant transport simulation results. It is 
+                created by running the \code{tevasim} subcommand.
+                Multiple ERD files (entered as a list, i.e., [<file1>, <file2>]) can be combined to
+                generate a single impact file. This can be used to combine
+                simulation results from different types of contaminants, in
+                which the ERD files were generated from different
+                TSG files.
+                
+                Required input.
+    \item[{metric}]\hfill
+\\The impact metric used to compute the impact file. Options
+                include EC, MC, NFD, PD, PE, PK, TD or VC. One impact file 
+                is created for each metric selected. These metrics are 
+                defined in Section \ref{impact_measures}.
+                
+                Required input.
+    \item[{tai file}]\hfill
+\\The name of the TAI file that contains health impact information. 
+                The TAI file format is documented in File Formats Section \ref{formats_taiFile}.
+                
+                Required input if a public health metric is used (PD, PE or PK).
+    \item[{response time}]\hfill
+\\The number of minutes that are needed to respond to the
+                detection of a contaminant. This represents the time that it takes
+                a water utility to stop the spread of the contaminant in the network and 
+                eliminate the consumption of contaminated water. As the response time increases,
+                the impact increases because the contaminant affects the network
+                for a greater length of time.  
+                
+                Required input, default = 0 minutes.
+    \item[{detection limit}]\hfill
+\\The minimum concentration that must be exceeded before a sensor can detect a contaminant.
+                There must be one threshold for each ERD file. The units of
+                these detection limits depend on the units of the contaminant
+                simulated for each ERD file (e.g., number of cells of a
+                biological agent).  
+                
+                Required input, default = 0.
+    \item[{detection confidence}]\hfill
+\\The number of sensors that must detect an incident before
+                the impacts are calculated.  
+                
+                Required input, default = 1 sensor.
+  \end{description}
+  \item[{flushing}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{detection}]\hfill
+\\The sensor network design used to detect contamination scenarios. The
+                sensor locations are used to compute a detection time for each 
+                contamination scenario. The options are a list of 
+                EPANET node IDs or a file name which contains a list of EPANET node IDs.
+                
+                Required input.
+    \item[{flush nodes}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible nodes}]\hfill
+\\A list that defines the nodes in the network that can be flushed. 
+                The options are: (1) ALL, which specifies all nodes as feasible flushing locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible flushing locations;
+                (3) NONE, which specifies no nodes as feasible flushing locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as feasible flushing locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible flushing locations.
+                
+                Required input, default = ALL.
+      \item[{infeasible nodes}]\hfill
+\\A list that defines the nodes in the network that cannot be flushed. 
+                The options are: (1) ALL, which specifies all nodes as infeasible flushing locations;
+                (2) NZD, which specifies all non-zero demand nodes as infeasible flushing locations;
+                (3) NONE, which specifies no nodes as infeasible flushing locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as infeasible flushing locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible flushing locations. 
+                
+                Optional input, default = NONE.
+      \item[{max nodes}]\hfill
+\\The maximum number of node locations that can be flushed simultaneously in the
+                network. The value is a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list. For example, a value of 
+                3 means that a maximum of 3 node will be identified as flushing locations 
+                during the optimization process.
+                
+                Required input.
+      \item[{rate}]\hfill
+\\The flushing rate for each node location to be flushed. A new demand pattern 
+                will be created using this rate for the node. The value is a nonnegative integer. 
+                For example, a value of 800 means that an additional demand of 800 gpm is applied 
+                at a particular node. This rate is applied to all flushing locations identified 
+                in the optimization process.
+                
+                Required input.
+      \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                the start of flushing. The value is a nonnegative integer. For example, 
+                a value of 120 represents a 120 minutes or a 2 hour delay between 
+                the time of detection and the start of flushing.
+                
+                Required input.
+      \item[{duration}]\hfill
+\\The length of time in minutes that flushing will be simulated at a particular node. 
+                The value is a nonnegative integer. For example, a value of 240 means that  
+                flushing would be simulated at a particular node for 4 hours. This duration 
+                is applied to all flushing locations identified in the optimization process.
+                
+                Required input.
+    \end{description}
+    \item[{close valves}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible pipes}]\hfill
+\\A list that defines the pipes in the network that can be closed. 
+                The options are: (1) ALL, which specifies all pipes as feasible pipes to close;
+                (2) DIAM min max, which specifies all pipes with a specific diameter as feasible pipes to close;
+                (3) NONE, which specifies no pipes as feasible pipes to close;
+                (4) a list of EPANET pipe IDs, which identifies specific pipes as feasible pipes to close; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific pipes as feasible pipes to close. 
+                
+                Required input, default = ALL.
+      \item[{infeasible pipes}]\hfill
+\\A list that defines the pipes in the network that cannot be closed. 
+                The options are: (1) ALL, which specifies all pipes as infeasible pipes to close;
+                (2) DIAM min max, which specifies all pipes with a specific diameter as infeasible pipes to close;
+                (3) NONE, which specifies no pipes as infeasible pipes to close;
+                (4) a list of EPANET pipe IDs, which identifies specific pipes as infeasible pipes to close; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific pipes as infeasible pipes to close. 
+                
+                Optional input, default = NONE.
+      \item[{max pipes}]\hfill
+\\The maximum number of pipes that can be closed simultaneously in the
+                network. The value must be a nonnegative integer or a list of
+                nonnegative integers. When a list is specified, the optimization
+                will be performed for each number in this list. For example, a value of 
+                2 means that a maximum of 2 pipes to close will be identified 
+                during the optimization process.
+                
+                Required input.
+      \item[{response time}]\hfill
+\\The time in minutes between the detection of a contamination incident and 
+                closing pipes. The value is a nonnegative integer. For example, 
+                a value of 120 would represent a 120 minutes or a 2 hour delay between 
+                the time of detection and the start of pipe closures.
+                
+                Required input.
+    \end{description}
+  \end{description}
+  \item[{solver}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The solver type. Each component of WST
+				(e.g., sensor placement, flushing response, booster 
+				placement) has different 
+				solvers available. More specific details are provided in 
+				the subcommand's chapter.
+                
+                Required input.
+    \item[{options}]\hfill
+\\A list of options associated with a specific solver type. More
+            information on the options available for a specific solver
+            is provided in the solver's documentation. The Getting
+            Started Section \ref{dependencies} provides links to the
+            different solvers.
+            
+            Optional input.
+    \item[{threads}]\hfill
+\\The maximum number of threads or function evaluations the solver is
+                allowed to use.  This option is not available to all solvers or all analyses.
+                
+                Optional input.
+    \item[{logfile}]\hfill
+\\The name of a file to output the results of the solver.
+                
+                Optional input.
+    \item[{verbose}]\hfill
+\\The solver verbosity level.
+                
+                Optional input, default = 0 (lowest level).
+    \item[{initial points}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{nodes}]\hfill
+\\A list of node locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing and booster\_msx
+        subcommands. This input causes an error for other subcommands.
+        
+        Optional input.
+      \item[{pipes}]\hfill
+\\A list of pipe locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing subcommand. This input causes an error for other subcommands.
+        
+        Optional input.
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

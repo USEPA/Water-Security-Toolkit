@@ -1,0 +1,86 @@
+------------------------------------------------------------------------------
+acro-utilib VOTD
+
+Acro integrates a rich variety of optimization libraries and solvers
+that have been developed for large-scale engineering and scientific
+applications. Acro was developed to facilitate the design, development,
+integration and support of optimization software libraries. Thus, Acro
+includes both individual optimization solvers as well as optimization
+frameworks that provide abstract interfaces for flexible interoperability
+of solver components. Furthermore, many solvers included in Acro can
+exploit parallel computing resources to solve optimization problems
+more quickly.
+
+The acro-utilib project contains the subset of Acro components that 
+are used to build UTILIB with FAST and EXACT.
+
+See the Acro home page for further details about the capabilities that
+are integrated into Acro:  http://software.sandia.gov/Acro
+
+------------------------------------------------------------------------------
+Acro Lead Developer.
+
+William E. Hart
+Sandia National Laboratories
+wehart@sandia.gov 
+
+------------------------------------------------------------------------------
+License.
+
+Acro is distributed under the GNU Lesser General Public License.
+However, packages integrated into Acro may used different licesnse.
+See the Acro home page:  http://software.sandia.gov/Acro
+
+------------------------------------------------------------------------------
+Installation.
+
+Details for the Acro installation process is described in
+acro/doc/INSTALL.  The command
+
+  cd acro
+  ./setup configure build
+
+will work for a simple build that does not rely on external software packages.
+
+Brief explanations of each configure option are displayed when you:
+
+./configure --help
+
+------------------------------------------------------------------------------
+Dependencies.
+
+Acro integrates third-party libraries that are used to support
+optimization and other analyses (e.g. open-source linear programming
+solvers).  Acro is not strictly dependent on any other external software
+packages.  The parallel solvers are dependent on MPI (using the mpich
+library).
+
+------------------------------------------------------------------------------
+Platforms.
+
+This package is quite generic and thus it should compile on a wide range
+of platforms.  Acro is actively supported with nightly build verifications
+on a variety of platforms.  See
+
+  http://software.sandia.gov/Acro
+
+for links to the latest nightly build test report.
+
+------------------------------------------------------------------------------
+Further Information and Help.
+
+Send email to acro-help@software.sandia.gov to address specific issues
+in the use of Acro.  Online documentation is available at
+
+  http://software.sandia.gov/Acro
+
+The 'Documentation' link provides information on Acro as well as several
+Acro projects.
+
+------------------------------------------------------------------------------
+WARNING.
+
+Many packages in Acro are "research" codes, and thus Acro is
+the subject of continuing active development.  Bug reports, suggestions
+for improvement, and required changes for other machines/compilers
+are welcome.  Direct all messages to acro-help@software.sandia.gov.

@@ -1,0 +1,19 @@
+Launching samplelocation executable ...
+samplelocation --simulation-duration-minutes=None --quality-timestep-minutes=None --output-merlion-labels --output-prefix=test_ --ignore-merlion-warnings --fixed-sensors=fixed_sensors.dat --number-samples=3.0 --inp=Net3.inp --tsg=test_profile.tsg 525.0
+Samplelocation execution time(sec) :0.37121295929
+Launching AMPL ...
+
+**********************************************************************
+
+			GrabSample Location Results
+
+	Number of events:				24
+	Sample time (min):				525.0
+	AML:						AMPL
+	Objective Value:				218.0
+	Nodes:						120
+							161
+							208
+
+**********************************************************************
+

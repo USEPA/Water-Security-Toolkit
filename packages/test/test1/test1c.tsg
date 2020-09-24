@@ -1,0 +1,6 @@
+; 24-hour events, 12am,6am,12pm, and 6pm
+
+NZD    MASS 1e+5             0                86400
+NZD    MASS 1e+5             21600            108000
+NZD    MASS 1e+5             43200            129600
+NZD    MASS 1e+5             64800            151200

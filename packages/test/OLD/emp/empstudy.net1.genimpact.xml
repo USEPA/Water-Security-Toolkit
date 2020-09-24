@@ -1,0 +1,24 @@
+<experimental-study name="teva-sp">
+  <tags>
+    <tag>smoke</tag>
+    <tag>nightly</tag>
+  </tags>
+
+  <experiment name="tso2Impact">
+    <factors>
+      <factor name="impact_prefix">
+        <level>"net1sanTEVA ../../net1sanTEVA.tso"</level>
+      </factor>
+      <factor name="detection">
+        <level>"\-minQuality 1e-7"</level>
+      </factor>
+      <factor name="objectives">
+        <level>"-mc -vc -td -nfd -ec -epanetin /reservoir1/networkData/TEVAPhaseI/net1sanTEVA.inp"</level>
+      </factor>
+    </factors>
+    <controls>
+       <executable>sp_test -impact</executable>
+    </controls>
+  </experiment>
+
+</experimental-study>

@@ -1,0 +1,28 @@
+# booster_mip output
+general:
+  version: 1.5                                     # WST version
+  date: '2018-10-15'                               # Run date
+  cpu time: 44.305                                 # CPU time (sec)
+  directory: C:/wst-1.5/examples/booster_mip_ex1
+  log file: Net3booster_mip_output.log             # Log file
+booster:
+  nodes: ['15', '101', '123', '171', '215', '219', '225', '229', '239', '253']
+                                                   # List of booster nodes
+  objective: 65442105.74759041                     # Objective value
+scenarios:
+  injection node: null
+  start time: null
+  end time: null                                   # Injection node
+  discarded:
+    count: null                      # Number of discarded scenarios
+  non-detected:
+    count: null                      # Number of non-detected scenarios
+    mass injected: null              # Mass injected (grams)
+  detected:
+    count: null                      # Number of detected scenarios
+    detection time: null             # Detection time (min)
+    mass consumed: null              # Mass consumed (grams)
+    mass injected: null              # Mass injected (grams)
+    pre-booster mass injected: null  # Mass injected before booster activate(grams)
+    mass in tanks: null              # Mass remaining in tanks (grams)
+    mass balence: null               # Mass balence

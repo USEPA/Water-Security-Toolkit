@@ -1,0 +1,569 @@
+<AnalysisModule name="Health Impacts Analysis" library_name="HIAnalysis">
+
+	<ModuleInputs>
+		<InputValue name="ContaminantName"        type="String"  required="true" tooltip=""/>
+<!--
+		<InputValue name="SampleType"             type="String"  required="true" tooltip="Sampling type" default="filtered">
+			<InputValueElements>
+				<InputValueElement display="Real-time" key="realtime"/>
+				<InputValueElement display="Composite" key="composite"/>
+				<InputValueElement display="Filtered" key="filtered"/>
+			</InputValueElements>
+		</InputValue>
+		<InputValue name="DetectLimit"     displayString="Detection Limit" type="float"   required="true" tooltip="Detection limit (mg/L or number of organisms"/>
+		<InputValue name="FilterVolume"    displayString="Filter Volume" type="float"   required="true" tooltip="Volume filtered in one sampling period"/>
+		<InputValue name="SampleFrequency" displayString="Sampling Frequency" type="int"      required="true" tooltip="Sampling frequency (hours)"/>
+		<InputValue name="SampleStart"     displayString="Sample Start Time (hours)"      type="int"      required="true" tooltip="Time of first sampling event (hours since simulation start)"/>
+		<InputValue name="SampleDelay"     displayString="Sample delay (hours)" type="int"      required="true" tooltip="Sample transport/analysis time (hours)"/>
+		<InputValue name="SampleLocations" displayString="Sampling Locations (Node IDs)" type="String"   required="true" tooltip="Sample locations (Comma-separated list - for now)"/>
+-->
+		<InputValue name="DoseResponseA"   displayString="Dose-Response 'a' coefficient" type="float"   required="true" tooltip="Dose-response 'a' coefficient"/>
+		<InputValue name="DoseResponseM"   displayString="Dose-Response 'm' coefficient" type="float"   required="true" tooltip="Dose-response 'm' coefficient"/>
+		<InputValue name="DoseResponseN"   displayString="Dose-Response 'n' coefficient" type="float"   required="true" tooltip="Dose-response 'n' coefficient"/>
+		<InputValue name="DoseResponseTau" displayString="Dose-Response 'tau' coefficient" type="float"   required="true" tooltip="Dose-response 'tau' coefficient"/>
+		<InputValue name="BodyMass"        displayString="Body Mass" type="float"   required="true" tooltip="Exposed individual body amss (kg)"/>
+
+		<InputValue name="LD50"            displayString="LD-50" type="float"   required="true" tooltip="LD 50 for chemical"/>
+		<InputValue name="Beta"            displayString="Beta"  type="float"   required="true" tooltip="Beta for Probit dose model for chemical"/>
+
+		<InputValue name="DoseResponseType"  displayString="Dose Response Curve Type"  type="String"   required="true" tooltip="either probit or old"/>
+
+		<InputValue name="Normalize"       type="int"   required="true" tooltip="Response computed using mg/Kg (true) or mg (false)"/>
+		<InputValue name="LatencyTime"     displayString="Latency Time (hours)" type="int"   required="true" tooltip="Time from being exposed to exhibiting definitive symptoms (hours)"/>
+		<InputValue name="FatalityTime"    displayString="Fatality Time (hours)" type="int"   required="true" tooltip="Time from exhibiting symptoms till death or recovery (hours)"/>
+		<InputValue name="IngestionRate"   displayString="Ingestion rate (l/day)" type="float"   required="true" tooltip="Volumetric ingestion rate (liters/day)"/>
+		<InputValue name="FatalityRate"    displayString="Fatality Rate" type="float"   required="true" tooltip="Fraction of exposed population that dies [0.0-1.0]"/>
+<!--
+		<InputValue name="InjectionMult"   displayString="Injection Multiplier" type="float"   required="true" tooltip="Contaminant injection rate multiplier"/>
+-->
+		<InputValue name="UsageRate"       displayString="Usage Rate" type="float"   required="true" tooltip="Per capita usage rate (flow units/person)"/>
+		<InputValue name="DoseType"        displayString="Dose Type" type="String"   required="true" tooltip="'Total' for total ingested mass">
+			<InputValueElements>
+				<InputValueElement display="Total" key="total"/>
+			</InputValueElements>
+		</InputValue>
+		<InputValue name="IngestionType"   displayString="Ingestion Type" type="String"   required="true" tooltip="'Demand' for ingestion probability proportional to node demand">
+			<InputValueElements>
+				<InputValueElement display="Demand-based" key="demand"/>
+			</InputValueElements>
+		</InputValue>
+		<InputValue name="Population"   displayString="Population Type" type="String"   required="true" tooltip="">
+			<InputValueElements>
+				<InputValueElement display="Demand-based" key="demand"/>
+				<InputValueElement display="From Scenario" key="scenario"/>
+			</InputValueElements>
+		</InputValue>
+		<InputValue name="NumWorstCaseToKeep"       displayString="Keep N worst" type="int"   required="true" tooltip="Number of worst-case scenarios to keep" default="0"/>
+	</ModuleInputs>
+
+	<ColorRamps>
+		<ColorRamp name="LogarithmicJET" logarithmic="true">
+			<ColorRampPoint value="0.000" red="0"   green="0"   blue="128" alpha="255"/>
+			<ColorRampPoint value="0.125" red="0"   green="0"   blue="255" alpha="255"/>
+			<ColorRampPoint value="0.375" red="0"   green="255" blue="255" alpha="255"/>
+			<ColorRampPoint value="0.625" red="255" green="255" blue="0"   alpha="255"/>
+			<ColorRampPoint value="0.875" red="255" green="0"   blue="0"   alpha="255"/>
+			<ColorRampPoint value="1.000" red="128" green="0"   blue="0"   alpha="255"/>
+		</ColorRamp>
+		<ColorRamp name="JET" logarithmic="false">
+			<ColorRampPoint value="0.000" red="0"   green="0"   blue="128" alpha="255"/>
+			<ColorRampPoint value="0.125" red="0"   green="0"   blue="255" alpha="255"/>
+			<ColorRampPoint value="0.375" red="0"   green="255" blue="255" alpha="255"/>
+			<ColorRampPoint value="0.625" red="255" green="255" blue="0"   alpha="255"/>
+			<ColorRampPoint value="0.875" red="255" green="0"   blue="0"   alpha="255"/>
+			<ColorRampPoint value="1.000" red="128" green="0"   blue="0"   alpha="255"/>
+		</ColorRamp>
+	</ColorRamps>
+	
+	<OutputDefinitions>
+		<MapOutput selectionString="Demand-based Population Estimate">
+			<Description></Description>
+			<Title>
+Demand-based Population Estimate
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Population" description="Population" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0" colorRamp="JET" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Injection Location">
+			<Description></Description>
+			<Title>
+Fatalities by Injection Location
+			</Title>
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<Values reference="RESULTS.Map_F" description="Fatalities" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="JET" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Injection Location - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Injection Location
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Map_F" description="Fatalities" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="LogarithmicJET" />
+		</MapOutput>
+		<MapOutput selectionString="Dosage by Injection Location">
+			<Description></Description>
+			<Title>
+Dosage by Injection Location
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Map_Dos" description="Dosage" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="JET" />
+		</MapOutput>
+		<MapOutput selectionString="Dosage by Injection Location - Logarithmic">
+			<Description></Description>
+			<Title>
+Dosage by Injection Location
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Map_Dos" description="Dosage" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="LogarithmicJET" />
+		</MapOutput>
+		<MapOutput selectionString="Response by Injection Location">
+			<Description></Description>
+			<Title>
+Response by Injection Location
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Map_Resp" description="Response" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="JET" />
+		</MapOutput>
+		<MapOutput selectionString="Response by Injection Location - Logarithmic">
+			<Description></Description>
+			<Title>
+Response by Injection Location
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.Map_Resp" description="Response" />
+			<Display reference="RESULTS.InjNodeDisplay" />
+			<Legend valueFormat="0" colorRamp="LogarithmicJET" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 10th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+10th percentile case ({RESULTS.10th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.10th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-10th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-10th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 10th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+10th percentile case ({RESULTS.10th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.10th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-10th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-10th percentile" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 25th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+25th percentile case ({RESULTS.25th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.25th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-25th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-25th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 25th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+25th percentile case ({RESULTS.25th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.25th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-25th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-25th percentile" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 50th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+50th percentile case ({RESULTS.50th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.50th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-50th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-50th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 50th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+50th percentile case ({RESULTS.50th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.50th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-50th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-50th percentile" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 75th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+75th percentile case ({RESULTS.75th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.75th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-75th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-75th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 75th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+75th percentile case ({RESULTS.75th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.75th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-75th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-75th percentile" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 90th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+90th percentile case ({RESULTS.90th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.90th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-90th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-90th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 90th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+90th percentile case ({RESULTS.90th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.90th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-90th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-90th percentile" />
+		</MapOutput>
+
+		<MapOutput selectionString="Fatalities by Receptor Location - 100th percentile">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+100th percentile case ({RESULTS.100th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.100th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-100th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="JET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-100th percentile" />
+		</MapOutput>
+		<MapOutput selectionString="Fatalities by Receptor Location - 100th percentile - Logarithmic">
+			<Description></Description>
+			<Title>
+Fatalities by Receptor Location
+100th percentile case ({RESULTS.100th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.100th percentile Injection}
+			</Title>
+			<NodeIDs reference="RESULTS.Map_NodeIDs" />
+			<SensorTypes reference="RESULTS.Map_SensorTypes" />
+			<Values reference="RESULTS.TotalFatalitiesByReceptor-100th percentile" description="Fatalities" />
+			<Display reference="RESULTS.Population" />
+			<Legend valueFormat="0.00" colorRamp="LogarithmicJET" />
+			<SourceNodes reference="RESULTS.SourceNodeIDs-100th percentile" />
+		</MapOutput>
+
+	<!--
+		<MapOutput selectionString="Infected Population">
+			<Description></Description>
+			<Title>
+Infected Population
+Total Population: {RESULTS.TotalPopulation:0.00}
+			</Title>
+			<NodeIDs reference="RESULTS.NodeIDs" />
+			<Values reference="RESULTS.InfectedPopulation" description="Infected Population" />
+			<Display reference="RESULTS.NodeDisplay" />
+			<Legend valueFormat="0" colorRamp="LogarithmicJET" />
+		</MapOutput>
+-->
+<!--
+		<MapOutput selectionString="Diseased Population">
+			<Description></Description>
+			<Title>
+Infected Population
+Total Population: {RESULTS.TotalPopulation:0.00}
+			</Title>
+			<NodeIDs reference="RESULTS.NodeIDs" />
+			<Values reference="RESULTS.DiseasedPopulation" description="Diseased Population" />
+			<Display reference="RESULTS.NodeDisplay" />
+			<Legend valueFormat="0" colorRamp="LogarithmicJET" />
+		</MapOutput>
+-->
+		<ChartOutput selectionString="Fatalities" showLegend="false" >
+			<Description></Description>
+			<Title>Fatalities</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="true" />
+			<YAxis label="Fatalities" logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.F_t" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Total Fatalities by Scenario" showLegend="false" >
+			<Description></Description>
+			<Title>Fatalities</Title>
+			<XAxis data="RESULTS.DummyXVals" label="Scenario" logarithmic="false" />
+			<YAxis label="Fatalities" logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.TotalFatalities" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Maximum Concentration by Scenario" showLegend="false" >
+			<Description></Description>
+			<Title>Maximum Concentration</Title>
+			<XAxis data="RESULTS.DummyXVals" label="Scenario" logarithmic="false" />
+			<YAxis label="Max. Concentration" logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.MaxConcentration" name="Concentration" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Maximum Individual Dose by Scenario" showLegend="false" >
+			<Description></Description>
+			<Title>Maximum Individual Dose</Title>
+			<XAxis data="RESULTS.DummyXVals" label="Scenario" logarithmic="false" />
+			<YAxis label="Max. Individual Dose" logarithmic="true" />
+			<DataSeries>
+				<Values data="RESULTS.MaxDosage" name="Dosage" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Total Infected Population by Scenario" showLegend="false" >
+			<Description></Description>
+			<Title>Total Infected Population</Title>
+			<XAxis data="RESULTS.DummyXVals" label="Scenario" logarithmic="false" />
+			<YAxis label="Total Infected Population" logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.TotalInfected" name="Infections" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Highest Fatality Nodes by Scenario" showLegend="false" >
+			<Description>
+Number of nodes to provide 90%
+of the total fatalities
+			</Description>
+			<Title>
+Nodes Required To Provide 90% Of Total Fatalities
+			</Title>
+			<XAxis data="RESULTS.DummyXVals" label="Scenario" logarithmic="false" />
+			<YAxis label="Number of Nodes" logarithmic="false" />
+			<DataSeries>
+				<Values data="RESULTS.HighFatalityNodes" name="Number of Nodes" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Worst Scenario Infections, Disease, and Fatalities by Time" showLegend="true" >
+			<Description></Description>
+			<Title>Worst Scenario Infections by Time</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.WorstScenario_I" name="Infections" />
+				<Values data="RESULTS.WorstScenario_D" name="Diseased"   />
+				<Values data="RESULTS.WorstScenario_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 10th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+10th percentile case ({RESULTS.10th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.10th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.10th percentile_I" name="Infections" />
+				<Values data="RESULTS.10th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.10th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 25th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+25th percentile case ({RESULTS.25th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.25th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.25th percentile_I" name="Infections" />
+				<Values data="RESULTS.25th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.25th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 50th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+50th percentile case ({RESULTS.50th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.50th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.50th percentile_I" name="Infections" />
+				<Values data="RESULTS.50th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.50th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 75th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+75th percentile case ({RESULTS.75th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.75th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.75th percentile_I" name="Infections" />
+				<Values data="RESULTS.75th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.75th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 90th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+90th percentile case ({RESULTS.90th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.90th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.90th percentile_I" name="Infections" />
+				<Values data="RESULTS.90th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.90th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		<ChartOutput selectionString="Infections, Disease, and Fatalities by Time - 100th Percentile Case" showLegend="true" >
+			<Description></Description>
+			<Title>
+Infections, Diseased, and Fatalities by Time
+100th percentile case ({RESULTS.100th percentile Fatalities:0} Fatalities)
+Injection Node: {RESULTS.100th percentile Injection}
+</Title>
+			<XAxis data="RESULTS.time" label="Time" logarithmic="false" />
+			<YAxis label="Population" logarithmic="false"/>
+			<DataSeries>
+				<Values data="RESULTS.100th percentile_I" name="Infections" />
+				<Values data="RESULTS.100th percentile_D" name="Diseased"   />
+				<Values data="RESULTS.100th percentile_F" name="Fatalities" />
+			</DataSeries>
+		</ChartOutput>
+		
+		
+		
+		<!--
+		<ChartOutput selectionString="Scenario Impact">
+			<Description></Description>
+			<Title>Cumulative Population Exposed</Title>
+			<XAxis data="RESULTS.ScenarioImpacts" label="Population Exposed" logarithmic="false" />
+			<DataSeries>
+				<YAxis data="RESULTS.ScenarioImpactsX" label="Cumulative Probability" logarithmic="false" />
+			</DataSeries>
+		</ChartOutput>
+-->
+		<TableOutput selectionString="Ensemble Summary Table">
+			<Description></Description>
+			<Title>Summary Table</Title>
+			<Columns>
+				<ColumnDef displayName="Injection Node" reference="RESULTS.Hist_SimID"/>
+				<ColumnDef displayName="Max Concentration" reference="RESULTS.MaxConcentrationBySource"/>
+				<ColumnDef displayName="Max Individual Dose" reference="RESULTS.MaxDosageBySource"/>
+				<ColumnDef displayName="Number of Infected" reference="RESULTS.TotalInfectedBySource"/>
+				<ColumnDef displayName="Number of Fatalities" reference="RESULTS.TotalFatalitiesBySource"/>
+				<ColumnDef displayName="Nodes for 90% Fatalities" reference="RESULTS.HighFatalityNodesBySource"/>
+				<ColumnDef displayName="Nodes with Fatalities" reference="RESULTS.NumNodesWithFatalitiesBySource"/>
+			</Columns>
+		</TableOutput>
+		<TableOutput selectionString="Ensemble Percentiles Table">
+			<Description></Description>
+			<Title>Summary Table</Title>
+			<Columns>
+				<ColumnDef displayName="Statistic" reference="RESULTS.RowNames"/>
+				<ColumnDef displayName="Max Concentration" reference="RESULTS.MaxConcentrationSummary"/>
+				<ColumnDef displayName="Max Individual Dose" reference="RESULTS.MaxDosageSummary"/>
+				<ColumnDef displayName="Number of Infected" reference="RESULTS.TotalInfectedSummary"/>
+				<ColumnDef displayName="Number of Fatalities" reference="RESULTS.TotalFatalitiesSummary"/>
+			</Columns>
+		</TableOutput>
+		<TableOutput selectionString="Fatalities Receptor Nodes Table">
+			<Description></Description>
+			<Title>Fatatlities Table</Title>
+			<Columns>
+				<ColumnDef displayName="Receptor Node" reference="RESULTS.NodeIDs"/>
+				<ColumnDef displayName="10th ({RESULTS.SourceNodeIDs-10th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-10th percentile"/>
+				<ColumnDef displayName="25th ({RESULTS.SourceNodeIDs-25th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-25th percentile"/>
+				<ColumnDef displayName="50th ({RESULTS.SourceNodeIDs-50th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-50th percentile"/>
+				<ColumnDef displayName="75th ({RESULTS.SourceNodeIDs-75th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-75th percentile"/>
+				<ColumnDef displayName="90th ({RESULTS.SourceNodeIDs-90th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-90th percentile"/>
+				<ColumnDef displayName="100th ({RESULTS.SourceNodeIDs-100th percentile})" reference="RESULTS.TotalFatalitiesByReceptor-100th percentile"/>
+			</Columns>
+		</TableOutput>
+	</OutputDefinitions>
+</AnalysisModule>

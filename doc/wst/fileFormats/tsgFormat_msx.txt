@@ -1,0 +1,44 @@
+<Src1><SrcN> <SrcType> <SrcSpecie> <SrcStrngth> <Start> <Stop>
+
+<Srci>:	      A label that describes the ith source location of an N-source ensemble. 
+	      This can be either: 1) An EPANET node ID identifying one node 
+	      where the contaminant is introduced, 2) ALL, denoting all nodes 
+              (excluding tanks and reservoirs), 3) NZD, denoting all nodes with 
+	      non-zero demands. This simple language allows easy specification of 
+	      single- or multi-source ensembles. [Character strings]
+<SrcType>:    The source type, one of: MASS, CONCEN, FLOWPACED, SETPOINT (see EPANET 2.00.12 
+	      user manual for information about these types of water quality sources). 
+	      [Character string] 
+<SrcSpecie>:  The character ID of the water quality species added by the source. This 
+	      parameter must be omitted when using executables built from the standard 
+	      EPANET 2.00.12 distribution. [Character string] 
+<SrcStrngth>: The strength of the contaminant source (see EPANET 2.00.12 documentation for 
+              the various source types). 
+<Start>:      The time, in seconds, measured from the start of simulation, when the 
+	      contaminant injection is started. [Integer] 
+<Stop>:       The time, in seconds, measured from the start of simulation, when the 
+	      contaminant injection is stopped. [Integer] 
+
+Examples: 
+	   
+One scenario with a single injection at node ID 10, mass rate of 5 mg/min of species 
+SPECIE1, start time of 0, and stop time of 1000:
+10     MASS    SPECIE1    5     0     1000
+
+Multiple scenarios with single injections at all non-zero demand nodes:
+NZD   MASS    SPECIE1   5     0     1000
+
+Multiple scenarios with two injections, one at node ID 10, and the other at all 
+non-zero demand nodes (NZD):
+10     NZD     MASS     SPECIE1   5     0     1000
+
+Multiple scenarios with three injections, at all combinations of all nodes 
+(if there are N nodes, this would generate N^3 scenarios for the ensemble):
+ALL     ALL     ALL   MASS   SPECIE1   5     0     1000
+
+Note: this language will generate scenarios with repeat instances of injection node 
+locations (e.g., ALL   ALL would generate one scenario for node i and j, and another 
+identical one for node j and i). Also, it will generate multi-source scenarios with 
+the same node repeated. In this latter case, the source mass rate at the repeated 
+node is the mass rate specified in <SrcStrngth>.
+

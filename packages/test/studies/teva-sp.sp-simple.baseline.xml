@@ -1,0 +1,266 @@
+<Results expfile="teva-sp.exp.xml">
+<Experiment LogFile="teva-sp.sp-simple-1">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>1</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:03"
+  />
+  <StartTime>2005-12-19 16:11:03</StartTime>
+  <RunTime unit="seconds">2</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="1">default</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="985893">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21787</Value>
+     <Value name="Median Impact" type="numeric/double">1355.14</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.sp-simple-2">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>2</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:04"
+  />
+  <StartTime>2005-12-19 16:11:04</StartTime>
+  <RunTime unit="seconds">1</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="920574">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 59 70 81</Value>
+     <Value name="Junctions">15 35 203 219 253</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">289.354</Value>
+     <Value name="Mean Impact" type="numeric/double">21787</Value>
+     <Value name="Median Impact" type="numeric/double">1355.14</Value>
+     <Value name="UQuartile Impact" type="numeric/double">9272.39</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144275</Value>
+     <Value name="Max Impact" type="numeric/double">144321</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.sp-simple-3">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>3</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:06"
+  />
+  <StartTime>2005-12-19 16:11:06</StartTime>
+  <RunTime unit="seconds">1</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=mc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="1">mc</Factor>
+    <Factor id="3">worst</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="763742">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">8 14 29 55 60</Value>
+     <Value name="Junctions">601 109 143 195 204</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_mc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">627.286</Value>
+     <Value name="Mean Impact" type="numeric/double">69835.1</Value>
+     <Value name="Median Impact" type="numeric/double">49669.5</Value>
+     <Value name="UQuartile Impact" type="numeric/double">140413</Value>
+     <Value name="VaR Impact" type="numeric/double">144271</Value>
+     <Value name="TCE Impact" type="numeric/double">144271</Value>
+     <Value name="Max Impact" type="numeric/double">144271</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.sp-simple-4">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>4</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:07"
+  />
+  <StartTime>2005-12-19 16:11:07</StartTime>
+  <RunTime unit="seconds">1</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">vc</Factor>
+    <Factor id="1">default</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="975970">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32452</Value>
+     <Value name="Median Impact" type="numeric/double">18340</Value>
+     <Value name="UQuartile Impact" type="numeric/double">31085.9</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.sp-simple-5">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>5</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:08"
+  />
+  <StartTime>2005-12-19 16:11:08</StartTime>
+  <RunTime unit="seconds">1</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_mean --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">vc</Factor>
+    <Factor id="2">mean</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="86449">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 14 59 81</Value>
+     <Value name="Junctions">15 35 109 203 253</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">6684.47</Value>
+     <Value name="Mean Impact" type="numeric/double">32452</Value>
+     <Value name="Median Impact" type="numeric/double">18340</Value>
+     <Value name="UQuartile Impact" type="numeric/double">31085.9</Value>
+     <Value name="VaR Impact" type="numeric/double">115546</Value>
+     <Value name="TCE Impact" type="numeric/double">220135</Value>
+     <Value name="Max Impact" type="numeric/double">458475</Value>
+  </Trial>
+</Experiment>
+<Experiment LogFile="teva-sp.sp-simple-6">
+  <Category>teva-sp.sp-simple</Category>
+  <Name>6</Name>
+  <Key
+      KernelName="Linux"
+      HostName="software.sandia.gov"
+      KernelRelease="2.6.10-1.14_FC2"
+      KernelVersion="#1 Thu Feb 10 17:13:14 EST 2005"
+      Machine="i686"
+      Processor="i686"
+      Platform="i386"
+      OS="GNU/Linux"
+      Scenario="test"
+      Date="2005-12-19 16:11:16"
+  />
+  <StartTime>2005-12-19 16:11:16</StartTime>
+  <RunTime unit="seconds">8</RunTime>
+  <CommandLine>../bin/sp --path=../bin --path=../../etc/mod --print-log --objective=vc_worst --network=test1 --ub=ns,5 --solver=heuristic   --seed=$seed</CommandLine>
+  <ExecutionStatus>Pass</ExecutionStatus>
+  <Description>
+    <Factor id="2">vc</Factor>
+    <Factor id="3">worst</Factor>
+    <Factor id="1">\-\-network=test1</Factor>
+    <Factor id="1">-\-ub=ns,5</Factor>
+    <Factor id="1">-\-solver=heuristic</Factor>
+  </Description>
+  <Trial id="0" seed="913465">
+     <Value name="Sensor Placement ID" type="numeric/integer">1804289383</Value>
+     <Value name="Number Of Sensors" type="numeric/integer">5</Value>
+     <Value name="Total Cost" type="numeric/double">0</Value>
+     <Value name="Node Ids">2 4 6 10 59</Value>
+     <Value name="Junctions">15 35 50 101 203</Value>
+     <Value name="Impact File">/space/homes/wehart/tmp/teva-sp/packages/sp/test/test1_vc.impact</Value>
+     <Value name="Number Of Scenarios" type="number/integer">236</Value>
+     <Value name="Min Impact" type="numeric/double">0</Value>
+     <Value name="LQuartile Impact" type="numeric/double">9489.95</Value>
+     <Value name="Mean Impact" type="numeric/double">41127.6</Value>
+     <Value name="Median Impact" type="numeric/double">22091.9</Value>
+     <Value name="UQuartile Impact" type="numeric/double">43498.3</Value>
+     <Value name="VaR Impact" type="numeric/double">186440</Value>
+     <Value name="TCE Impact" type="numeric/double">260363</Value>
+     <Value name="Max Impact" type="numeric/double">356402</Value>
+  </Trial>
+</Experiment>
+</Results>

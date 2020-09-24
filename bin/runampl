@@ -1,0 +1,34 @@
+#!/usr/bin/python
+#
+# runampl
+#
+# Jon Berry, 7/13/2005
+# adapted from script of Jean-Paul Watson's
+#
+# precondition: .dat file generated
+# postcondition: dynamic sensor placement model has been run, and cplex output
+#		 files have been generated
+# 
+# usage: runampl <modfile> <teva_directory> <delay>
+#	<modfile> is the dynamic model ampl .mod file
+#	<teva_directory> is the directory under /..../TEVADatabase
+#	<delay> is the number of hours after detection that the impacts stop
+
+import os
+import sys
+import tempfile
+
+
+if len(sys.argv) < 3:
+   print "usage: runampl <ampl_model_file> <teva_directory> <delay>"
+   sys.exit(1)
+           
+modfile = sys.argv[1]
+dataset = sys.argv[2]
+delay = sys.argv[3]
+
+inptext = "\"model " + modfile + "; data "+ dataset + "." +  delay + ".dat; option cplex_options 'timing=1 mipdisplay=3 prestats=1 integrality=0 '; solve; for {i in TrueLocations: i != dummyLocation} { if s[i] == 1 then print i-1, LocPlacementCost[i]; } print \"\"; for {sl in SuperLocations} { for {l in SuperLocationMembers[sl]} { if (s[l] == 1) then print sl, l-1;}} for {(a,l) in AttackTouchedLocPair: AttackTime[a]==0} { if (FirstSensorForAttack[a,l]==1) then print a, AttackLoc[a]-1, AttackTime[a], l, ConsumptionBeforeAlarmAt[a,l]; } print\"\"; \"";
+
+cmd = "echo " + inptext + "| ampl >> cplex." + dataset + "." + delay
+print cmd
+os.system(cmd)

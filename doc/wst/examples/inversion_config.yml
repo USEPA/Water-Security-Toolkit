@@ -1,0 +1,35 @@
+# inversion configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+measurements:
+  grab samples: measures.dat             # Measurements file name
+inversion:
+  algorithm: optimization                # Source inversion algorithm: optimization, bayesian
+                                         #   or csa
+  formulation: MIP_discrete_nd           # Optimization formulation type, optimization only
+  model format: PYOMO                    # Source inversion optimization formulation: AMPL or
+                                         #   PYOMO
+  merlion water quality model: true      # Use Merlion water quality model for Bayesian
+                                         #   algorithm
+  horizon: 1440.0                        # Amount of past measurement data to use (min)
+  num injections: 1.0                    # No. of possible injections
+  measurement failure: 0.05              # Probability that a sensor fails
+  positive threshold: 100.0              # Sensor threshold for positive contamination
+                                         #   measurement
+  negative threshold: 0.1                # Sensor threshold for negative contamination
+                                         #   measurement
+  feasible nodes: null                   # Feasible source nodes
+  candidate threshold: null              # Objective cut-off for candidate nodes
+  confidence: null                       # Probability confidence for candidate nodes
+  output impact nodes: false             # Print likely injection nodes file
+solver:
+  type: glpk                             # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

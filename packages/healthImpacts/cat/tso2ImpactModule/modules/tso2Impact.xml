@@ -1,0 +1,53 @@
+<AnalysisModule name="tso2Impact Analysis" library_name="tso2ImpactModule">
+	<ModuleInputs>
+		<InputValue name="outputFileRoot" type="String" 
+			    required="true" 
+			    tooltip="impact file root">
+		</InputValue>
+		<InputValue name="detectionDelay" type="int" 
+			    required="true" 
+			    tooltip="response delay in minutes">
+		</InputValue>
+		<InputValue name="minQuality" type="double" 
+			    required="true" 
+			    tooltip="concentration threshold">
+		</InputValue>
+		<InputValue name="mcSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for mass consumed impact file">
+		</InputValue>
+		<InputValue name="vcSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for volume consumed impact file">
+		</InputValue>
+		<InputValue name="nfdSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for number of failed detections impact file">
+		</InputValue>
+		<InputValue name="ecSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for extent of contamination impact file">
+		</InputValue>
+		<InputValue name="pkSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for population killed impact file">
+		</InputValue>
+		<InputValue name="pkSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for population dosed impact file">
+		</InputValue>
+		<InputValue name="peSelected" type="int" 
+			    required="true" 
+			    tooltip="1 for population exposed impact file">
+		</InputValue>
+		<InputValue name="HIAParameters" type="NamedData" 
+			    required="false" 
+			    tooltip="1 for population exposed impact file">
+		</InputValue>
+	</ModuleInputs>
+	<ColorRamps>
+	</ColorRamps>
+	<OutputDefinitions>
+	</OutputDefinitions>
+</AnalysisModule>
+

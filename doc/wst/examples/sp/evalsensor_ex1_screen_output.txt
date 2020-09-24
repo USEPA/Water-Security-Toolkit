@@ -1,0 +1,29 @@
+------------------------------------------------------------------------------
+Sensor placement id:        23112
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            17 19 24 65 88 
+Sensor junctions:           115 119 127 209 267 
+
+Impact File:                Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                9951.5669
+Lower quartile impact:      1650.0000
+Median impact:              9694.0000
+Upper quartile impact:      15044.8000
+Value at Risk (VaR) (  5%): 25485.0000
+TCE                 (  5%): 27992.4667
+Max impact:                 33110.0000
+
+Impact File:                Net3_mc.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                70806.1310
+Lower quartile impact:      503.9170
+Median impact:              83999.3000
+Upper quartile impact:      143984.0000
+Value at Risk (VaR) (  5%): 143999.0000
+TCE                 (  5%): 144049.5000
+Max impact:                 144143.0000
+------------------------------------------------------------------------------

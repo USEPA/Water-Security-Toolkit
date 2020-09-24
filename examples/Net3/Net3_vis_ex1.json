@@ -1,0 +1,62 @@
+{
+  "locations": [
+    [
+      {"objective": 0.9, "name": "153"}, 
+      {"objective": 0.7, "name": "127"}, 
+      {"objective": 0.5, "name": "129"}, 
+      {"objective": 0.3, "name": "139"}, 
+      {"objective": 0.1, "name": "131"}
+    ]
+  ],
+  "locations2": [
+    [
+      {"objective": 0.9, "name": "10"}
+    ]
+  ], 
+  "locations3": [
+    [
+      {"objective": 2, "name": "215"}, 
+      {"objective": 4, "name": "217"}, 
+      {"objective": 6, "name": "219"}, 
+      {"objective": 8, "name": "225"}
+    ]
+  ],
+  "locations4": [
+    [
+      {"objective": 2, "name": "215"}, 
+      {"objective": 4, "name": "217"}, 
+      {"objective": 6, "name": "219"}, 
+      {"objective": 8, "name": "225"},
+      {"objective": 10, "name": "225"}
+    ]
+  ],
+  "sp locations": [
+    [
+      "113",
+      "119",
+      "141",
+      "181",
+      "211"
+    ],
+    [
+      "113", 
+      "119", 
+      "163", 
+      "207", 
+      "237"
+    ], 
+    [
+      "113", 
+      "121", 
+      "141", 
+      "163", 
+      "209"
+    ]
+  ],
+  "pipes to close": [
+      "101", 
+      "171", 
+      "229", 
+      "247" 
+  ]
+}

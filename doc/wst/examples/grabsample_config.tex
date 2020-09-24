@@ -1,0 +1,234 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{network}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{epanet file}]\hfill
+\\ The name of the EPANET 2.00.12 input (INP) file that defines the water distribution
+                network model.
+                
+                Required input.
+  \end{description}
+  \item[{scenario}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{location}]\hfill
+\\A list that describes the injection locations for the contamination scenarios.
+                The options are: (1) ALL, which denotes all nodes (excluding tanks and reservoirs)
+                as contamination injection locations; (2) NZD, which denotes all nodes with
+                non-zero demands as contamination injection locations; or (3) an EPANET node ID, 
+                which identifies a node as the contamination injection location. This allows 
+                for an easy specification of single or multiple contamination scenarios.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{type}]\hfill
+\\The injection type for the contamination scenarios. The options are MASS, CONCEN, FLOWPACED or SETPOINT. 
+                See the EPANET 2.00.12 user manual for additional information about source types \citep{EPANETusermanual}.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{strength}]\hfill
+\\The amount of contaminant injected into the network for the contamination scenarios.  
+                If the type option is MASS, then the units for the strength are in mg/min. 
+                If the type option is CONCEN, FLOWPACED or SETPOINT, then units are in mg/L.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{species}]\hfill
+\\The name of the contaminant species injected into the network. This is the name of a single species. 
+                It is required when using EPANET-MSX, since multiple species might be simulated, but
+                only one is injected into the network. For cases where multiple contaminants are injected,
+                a TSI file must be used.
+                
+                Required input for EPANET-MSX unless a TSG or TSI file is specified.
+    \item[{start time}]\hfill
+\\The injection start time that defines when the contaminant injection begins. 
+                The time is given in minutes and is measured from the start of the simulation. 
+                For example, a value of 60 represents an injection that starts at hour 1 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{end time}]\hfill
+\\The injection end time that defines when the contaminant injection stops.				
+                The time is given in minutes and is measured from the start of the simulation.
+                For example, a value of 120 represents an injection that ends at hour 2 of the simulation.
+                
+                Required input unless a TSG or TSI file is specified.
+    \item[{tsg file}]\hfill
+\\The name of the TSG scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSG file will
+                override the location, type, strength, species, start and end times options specified in
+                the WST configuration file. The TSG file format is documented in File Formats Section \ref{formats_tsgFile}.
+                
+                Optional input.
+    \item[{tsi file}]\hfill
+\\The name of the TSI scenario file that defines the ensemble of contamination
+                scenarios to be simulated. Specifying a TSI file will
+                override the TSG file, as well as the location, type, strength, species, start and end time options specified in
+                the WST configuration file. The TSI file format is documented in File Formats Section \ref{formats_tsiFile}.
+                
+                Optional input.
+    \item[{signals}]\hfill
+\\Name of file or directory with information to generate 
+                or load signals. If a file is provided, the list of INP-TSG tuples
+                 will be simulated and the information stored in signals files. If
+                a directory with the signals files is specified, the signal files will
+                be read and loaded in memory. This input is only valid for the uq
+                subcommand and the grabsample subcommand with probability based formulations.
+
+                Optional input.
+    \item[{msx file}]\hfill
+\\The name of the EPANET-MSX multi-species file that defines the multi-species reactions to
+                be simulated using EPANET-MSX.
+                
+                Required input for EPANET-MSX.
+    \item[{msx species}]\hfill
+\\The name of the MSX species whose concentration profile will be saved by the EPANET-MSX simulation
+                and used for later calculations.
+                
+                Required input for EPANET-MSX.
+    \item[{merlion}]\hfill
+\\A flag to indicate if the Merlion water quality
+                simulator should be used. The options are true or false. 
+                If an MSX file is provided, EPANET-MSX will be used.
+                
+                Required input, default = false.
+  \end{description}
+  \item[{grabsample}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{model format}]\hfill
+\\The modeling language used to build the formulation specified
+                by the model format option. The options are AMPL and PYOMO. 
+                AMPL is a third party package that must be installed by 
+                the user if this option is specified. PYOMO is an open source 
+                software package that is distributed with WST.
+       
+                Required input, default = PYOMO.
+    \item[{sample criteria}]\hfill
+\\ Determines which optimization model to solve. This option is 
+                only checked when running the problem with signal files. By default
+                the optimization is based on distinguishability of pair-wise scenarios.
+       
+                Optional input.
+    \item[{sample time}]\hfill
+\\The time at which the manual grab sample should be taken. 
+                The algorithm determines the best possible manual grab sample location(s)
+                based upon this time. Units: Minutes from the simulation start time in the
+                EPANET 2.00.12 INP file. 
+
+                Required input.
+    \item[{threshold}]\hfill
+\\This threshold determines whether or not an incident impacts a candidate
+                sample location.
+
+                Required input, default = 0.001.
+    \item[{fixed sensors}]\hfill
+\\A list that defines nodes that are already fixed continuous sensor locations.
+                The options are: (1) ALL, which specifies all nodes as fixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as fixed sensor locations;
+                (3) NONE, which specifies no nodes as fixed sensor locations;
+                (4) a list of EPANET node IDs, which identifies specific nodes as fixed sensor locations; or
+                (5) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as fixed sensor locations. 
+
+                Optional input.
+    \item[{nodes metric}]\hfill
+\\ File containing a map of node to metric. The map is used for determining weighting factors
+                in the objective of the distinguishability optimization formulation.
+                Each line in the file has the node name separated by the corresponding metric.  
+
+                Optional input.
+    \item[{list scenario ids}]\hfill
+\\ File containing list of scenarios to considered from the signals folder.
+                Each line in the file has the signals ID and the contamination ID separated by a space.
+				
+                Optional input.
+    \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered as potential sampling locations 
+                for the optimal sample location problem.
+                The options are: (1) ALL, which specifies all nodes as feasible sampling locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible sampling locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible sampling locations; or
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible sampling locations. 
+
+                Optional input.
+    \item[{num samples}]\hfill
+\\The maximum number of locations that can be sampled at one time. This is usually equal
+                to the number of sampling teams that are available.
+
+                Required input, default = 1.
+    \item[{greedy selection}]\hfill
+\\The option to select manual grab sample locations based upon a greedy search, which orders and selects the locations in order of the best solution.
+                This does not require any optimization.
+
+                Optional input, default = false.
+    \item[{with weights}]\hfill
+\\The option to add weights in the objective function of the distinguishability 
+                optimization formulation.
+
+                Optional input, default = false.
+    \item[{filter scenarios}]\hfill
+\\ This option enables filtering scenarios. Only those scenarios 
+                that match at least one of the measurements are considered
+                in the optimal sampling analysis.
+				
+				Optional input, default = false.
+  \end{description}
+  \item[{solver}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The solver type. Each component of WST
+				(e.g., sensor placement, flushing response, booster 
+				placement) has different 
+				solvers available. More specific details are provided in 
+				the subcommand's chapter.
+                
+                Required input.
+    \item[{options}]\hfill
+\\A list of options associated with a specific solver type. More
+            information on the options available for a specific solver
+            is provided in the solver's documentation. The Getting
+            Started Section \ref{dependencies} provides links to the
+            different solvers.
+            
+            Optional input.
+    \item[{threads}]\hfill
+\\The maximum number of threads or function evaluations the solver is
+                allowed to use.  This option is not available to all solvers or all analyses.
+                
+                Optional input.
+    \item[{logfile}]\hfill
+\\The name of a file to output the results of the solver.
+                
+                Optional input.
+    \item[{verbose}]\hfill
+\\The solver verbosity level.
+                
+                Optional input, default = 0 (lowest level).
+    \item[{initial points}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{nodes}]\hfill
+\\A list of node locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing and booster\_msx
+        subcommands. This input causes an error for other subcommands.
+        
+        Optional input.
+      \item[{pipes}]\hfill
+\\A list of pipe locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing subcommand. This input causes an error for other subcommands.
+        
+        Optional input.
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

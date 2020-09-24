@@ -1,0 +1,38 @@
+Generating mass consumed impact file
+Generating volume of contaminated water consumed impact file
+Generating number of failed detections impact file
+Generating time to detection impact file
+Generating extent of contamination impact file
+Detection delay (in minutes)=0
+main: after process_arguments: 
+Current file=./Net3_bio
+Storage method=LZMA
+
+Number of nodes=97
+Number of links=119
+Number of tanks=5
+Number of junctions=92
+Number of steps=577
+Number of species=2
+  Species=BIO (stored)
+  Species=CLF (not stored)
+Step size (hours)=0.0833333
+Floatmax=3.40282e+38
+
+Extracting pipe lengths from TSO/ERD prologoue
+
+Processing simulation results for scenario=1
+Processed input in   0.010 seconds
+
+Number of scenarios=1
+
+
+Total number of scenarios=1
+
+Node map file written to file=Net3_bio.nodemap
+
+Impact outputs written to file=Net3_bio_mc.impact
+Impact outputs written to file=Net3_bio_vc.impact
+Impact outputs written to file=Net3_bio_nfd.impact
+Impact outputs written to file=Net3_bio_td.impact
+Impact outputs written to file=Net3_bio_ec.impact

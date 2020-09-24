@@ -1,0 +1,46 @@
+# grabsample configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+scenario:
+  location: null                         # Injection location: ALL, NZD or EPANET ID
+  type: null                             # Injection type: MASS, CONCEN, FLOWPACED or SETPOINT
+  strength: null                         # Injection strength [mg/min or mg/L depending on
+                                         #   type]
+  species: null                          # Injection species, required for EPANET-MSX
+  start time: null                       # Injection start time [min]
+  end time: null                         # Injection end time [min]
+  tsg file: null                         # TSG file name, overrides injection parameters above
+  tsi file: null                         # TSI file name, overrides TSG file
+  signals: null                          # Signal files, overrides TSG or TSI files
+  msx file: null                         # Multi-species extension file name
+  msx species: null                      # MSX species to save
+  merlion: false                         # Use Merlion as WQ simulator, true or false
+grabsample:
+  model format: PYOMO                    # Grab sample model format: AMPL or PYOMO
+  sample criteria: distinguish           # Criteria to sample: distinguish, probability1,
+                                         #   probability2
+  sample time: 720.0                     # Sampling time (min)
+  threshold: null                        # Contamination threshold. Default 0.001
+  fixed sensors: null                    # Fixed sensor nodes
+  nodes metric: null                     # Map of node to metric (e.g., EC, PI)
+  list scenario ids: null                # List of scenario ids considered from the signals
+                                         #   folder
+  feasible nodes: null                   # Feasible sampling nodes
+  num samples: null                      # Maximum number of grab samples, default = 1
+  greedy selection: false                # Perform greedy selection. No optimization
+  with weights: false                    # Perform optimization with weights in the objective
+                                         #   function
+  filter scenarios: false                # Filters scenarios that match measurements
+measurements:
+  grab samples: null                     # Measurements file name
+solver:
+  type: glpk                             # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

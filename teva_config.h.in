@@ -1,0 +1,30 @@
+/* _________________________________________________________________________
+ *
+ * Water Security Toolkit (WST)
+ * Copyright (c) 2012 Sandia Corporation.
+ * This software is distributed under the Revised BSD License.
+ * Under the terms of Contract DE-AC04-94AL85000, there is a non-exclusive 
+ * license for use of this work by or on behalf of the U.S. government.
+ * For more information, see the License Notice in the WST User Manual.
+ * _________________________________________________________________________
+ */
+
+#ifndef _SRC_TEVA_CONFIG_H
+#define _SRC_TEVA_CONFIG_H 1
+
+/* define if the BLAS library is available */
+#cmakedefine TEVA_SPOT_HAVE_BLAS @TEVA_SPOT_HAVE_BLAS@
+
+/* define if the unistd.h header is available */
+#cmakedefine TEVA_SPOT_HAVE_UNISTD_H @TEVA_SPOT_HAVE_UNISTD_H@
+
+/* define if the log2 function exists */
+#cmakedefine TEVA_SPOT_HAVE_LOG2 @TEVA_SPOT_HAVE_LOG2@
+
+/* define if the rint function exists */
+#cmakedefine TEVA_SPOT_HAVE_RINT @TEVA_SPOT_HAVE_RINT@
+
+/* define if the srandom function exists */
+#cmakedefine TEVA_SPOT_HAVE_SRANDOM @TEVA_SPOT_HAVE_SRANDOM@
+
+#endif

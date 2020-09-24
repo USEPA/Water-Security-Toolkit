@@ -1,0 +1,4 @@
+; 24-hour injection starting at 12 am 
+; InjectionNodes 	TypeofInjection	Species MassInjectionRate(mg/min)	StartTime(sec)	EndTime(sec)
+
+105    MASS	BIO 	2.42E7	0                86400 

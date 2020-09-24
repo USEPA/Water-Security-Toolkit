@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# runs.impact2Dynamic
+#
+# Jon Berry, 7/13/2005
+#
+# precondition: impact files generated for delays of 0, 4, and 12 hours
+# postcondition: ampl .dat files generated for Dynamic sensor placement model
+# 
+# usage: runs.impact2Dynamic <numnodes> <numevents> <teva_directory><objective>
+#	<numnodes> is the number of nodes in the network
+#       <numevents> is the number of events (e.g. #non-zero dmd nodes * times)
+#       <teva_directory> is the directory under /..../TEVADatabase of the .tso
+#			files from which the impact files were generated
+#       <objective> two-letter code for objective:  "mc", etc.
+
+if [ $# -ne 4 ]
+then
+    echo -n "usage: runs.impact2Dynamic <numnodes> <numevents> "
+    echo "<teva_directory> <objective>"
+    exit 1
+fi
+
+
+impact2Dynamic -imf $3.0.$4.impact -n $1 -awf event.$2 -amf $3.0.dat -b 20 -slt 0.0
+impact2Dynamic -imf $3.4.$4.impact -n $1 -awf event.$2 -amf $3.4.dat -b 20 -slt 0.0
+impact2Dynamic -imf $3.12.$4.impact -n $1 -awf event.$2 -amf $3.12.dat -b 20 -slt 0.0

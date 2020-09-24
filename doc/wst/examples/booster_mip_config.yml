@@ -1,0 +1,49 @@
+# booster_mip configuration template
+network:
+  epanet file: Net3.inp                  # EPANET 2.00.12 network file name
+scenario:
+  location: null                         # Injection location: ALL, NZD or EPANET ID
+  type: null                             # Injection type: MASS, CONCEN, FLOWPACED or SETPOINT
+  strength: null                         # Injection strength [mg/min or mg/L depending on
+                                         #   type]
+  species: null                          # Injection species, required for EPANET-MSX
+  start time: null                       # Injection start time [min]
+  end time: null                         # Injection end time [min]
+  tsg file: Net3.tsg                     # TSG file name, overrides injection parameters above
+  tsi file: null                         # TSI file name, overrides TSG file
+  signals: null                          # Signal files, overrides TSG or TSI files
+  msx file: null                         # Multi-species extension file name
+  msx species: null                      # MSX species to save
+  merlion: false                         # Use Merlion as WQ simulator, true or false
+booster mip:
+  detection: [111, 127, 179]             # Sensor locations to detect contamination scenarios
+  model type: NEUTRAL                    # Booster model type: NEUTRAL or LIMIT
+  model format: PYOMO                    # Booster optimization model: AMPL or PYOMO
+  stoichiometric ratio: [0.0]            # Stoichiometric ratio [decon/toxin], LIMIT model only
+  objective: MC                          # Objective to minimize
+  toxin decay coefficient: 0             # Toxin decay coefficient: None, INP or number
+  decon decay coefficient: 0             # Decontaminant decay coefficient: None, INP or number
+  feasible nodes: ALL                    # Feasible booster nodes
+  infeasible nodes: NONE                 # Infeasible booster nodes
+  max boosters: [2]                      # Maximum number of booster stations
+  type: FLOWPACED                        # Booster source type: MASS or FLOWPACED
+  strength: 4.0                          # Booster source strength [mg/min or mg/L depending on
+                                         #   type]
+  response time: 0.0                     # Time [min] between detection and booster injection
+  duration: 600.0                        # Time [min] for booster injection
+  evaluate: false                        # Evaluate booster placement: true or false,  default
+                                         #   = false
+solver:
+  type: glpk                             # Solver type
+  options:                               # A dictionary of solver options
+  threads: 1                             # Number of concurrent threads or function evaluations
+  logfile: null                          # Redirect solver output to a logfile
+  verbose: 0                             # Solver verbosity level
+  initial points: []
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0
+boostersim:
+eventDetection:
+boosterimpact:

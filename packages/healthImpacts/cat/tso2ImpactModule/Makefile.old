@@ -1,0 +1,650 @@
+# This file was generated automatically by configure.  Do not edit.
+VPATH = .
+links = 
+host_alias = i686-pc-linux-gnu
+host_cpu = i686-pc
+host_vendor = linux
+host_os = gnu
+host_canonical = i686-pc-linux-gnu
+target_alias = i686-pc-linux-gnu
+target_cpu = i686-pc
+target_vendor = linux
+target_os = gnu
+target_canonical = i686-pc-linux-gnu
+build_alias = i686-pc-linux-gnu
+build_cpu = i686-pc
+build_vendor = linux
+build_os = gnu
+build_canonical = i686-pc-linux-gnu
+host_makefile_frag = ../../config/mf-sp-linux-linux-default
+
+#### package, host, target, and site dependent Makefile fragments come in here.
+
+INSTALL_LIBRARIES=install_libraries
+#-----------------------------------------------------------------------#
+#       These PACKAGE Macros for target=LINUX  at site=DEFAULT          #
+#-----------------------------------------------------------------------#
+
+CPLEX_DIR=/usr/local/cplex/CPLEX.6.0/LINUX
+CPLEX_INCLUDES=-I$(CPLEX_DIR)
+CPLEX_LIBS=-lcplex
+CPLEX_LDFLAGS=-L$(CPLEX_DIR)
+
+MPI_DIR=/usr/local/mpich
+MPI_INCLUDES=-I$(MPI_DIR)/include
+MPI_LIBS=-lmpich
+MPI_LDFLAGS=-L$(MPI_DIR)/lib
+
+MPE_DIR=/usr/local/MPEX
+MPE_INCLUDES= -DUSING_MPE -I$(MPE_DIR)
+MPE_LIBS= -lmpe
+MPE_LDFLAGS= -L$(MPE_DIR)
+
+XPRESS_DIR=/usr/local/express
+XPRESS_INCLUDES=-I$(XPRESS_DIR)/include
+XPRESS_LIBS=-lxmsl -lxosl -lmp-opt
+XPRESS_LDFLAGS=-L$(XPRESS_DIR)/lib
+
+SOPLEX_DIR=$(ROOT_DIR)/../soplex
+SOPLEX_INCLUDES=-I$(SOPLEX_DIR)/src
+SOPLEX_LIBS=-lsoplex
+SOPLEX_LDFLAGS=-L$(SOPLEX_DIR)/lib
+
+RW_DIR=
+RW_INCLUDES=
+RW_LIBS=
+RW_LDFLAGS=
+
+BLAS_LDFLAGS=-L/usr/lib
+BLAS_LIBS=-lblas
+
+LAPACK_LDFLAGS=-L/usr/lib
+LAPACK_LIBS=-llapack
+#-----------------------------------------------------#
+# Target ARCHitecture dependent definitions - LINUX   #
+#-----------------------------------------------------#
+
+AR		= ar
+ARFLAGS		= ruv
+RANLIB		= ls
+ARCLEAN		= $(RM)
+
+CC              = gcc
+CWARNINGS       = $(C++WARNINGS) -Wstrict-prototypes -Wmissing-prototypes
+CC_SHARED	= -shared
+ 
+CCC             = g++
+C++             = $(CCC)
+C++WARNINGS     = -Wall -fexceptions
+C++_SHARED	= -shared
+ 
+F77		= f77
+FFLAGS		= -O4 #-libmil #-u
+F_SHARED	=
+
+INCLUDES	= $(ARCH_INCLUDES)
+LIB_PATH	= $(ARCH_LIB_PATH)
+LIBS		= $(ARCH_LIBS)
+LDSTATIC	= -static
+LDFLAGS		=
+OPTIMIZATION	= -O3
+
+ARCH_LIB_PATH	=
+ARCH_LIBS	= -lg2c #-ll
+ARCH_INCLUDES	= -I. -I/usr/include/X11R5
+ARCH_FLAGS	= -DUNIX -DLINUX -DMULTITASK -DANSI_HDRS -DANSI_NAMESPACES
+XTRAFLAGS	= 
+PROFILE_FLAG	= -pg
+
+DEFINES		= $(ARCH_DEFINES)
+TARGET_ARCH	=
+LIBRARY_TARGET  = library_standard
+TARGET_NAME=linux
+#-------------------------------------------------#
+# Host ARCHitecture dependent definitions - LINUX #
+#-------------------------------------------------#
+
+ECHO		= /bin/echo
+LN		= ln -s
+LND		= ln -s
+MYMAKE		= gmake
+MAKE		= $(MYMAKE) -f Makefile-$(TARGET_NAME)
+PWD		= pwd
+RM		= rm -rf
+SHELL = /bin/sh
+SYMBTEST	= -L
+YACC		= yacc
+LEX		= flex -l
+#-----------------------------------------------------------------------------
+#
+# Make macros that are used everywhere.  These macros are
+# 	extentions of the standard make macros to specify the 
+#	C++ compiler, and to generate more verbage during the compilation.
+#
+#-----------------------------------------------------------------------------
+
+
+
+
+##
+##
+## COMPILE definitions
+##
+##
+
+TOUCH= touch -c
+
+CPPFLAGS = $(INCLUDES)
+CFLAGS =  $(ARCH_FLAGS) $(PROFILE_FLAG) $(CWARNINGS) $(OPTIMIZATION) $(XTRAFLAGS)
+C++FLAGS = $(ARCH_FLAGS) $(PROFILE_FLAG) $(C++WARNINGS) $(OPTIMIZATION) $(XTRAFLAGS) $(C++LOCAL)
+
+
+COMPILE.c = $(INSURE) $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+LINK.c = $(INSURE) $(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+
+COMPILE.cc = $(INSURE) $(C++) $(C++FLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+LINK.cc = $(INSURE) $(C++) $(C++FLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)
+
+COMPILE.C = $(COMPILE.cc)
+LINK.C = $(LINK.cc)
+
+COMPILE.F = $(F77) $(FFLAGS) $(PROFILE_FLAG) $(INCLUDES) $(TARGET_ARCH) -c
+LINK.F = $(F77) $(FFLAGS) $(INCLUDES) $(LDFLAGS) $(TARGET_ARCH)
+
+OUTPUT_OPTION = -o $*.o
+
+.SUFFIXES: .o .c .cpp .cc .C .H .a .pi .so .i .F .f .dxx .Ht .Ct .ht .cppt .for .FOR .py .swig
+
+##
+## Compiling *.c files
+##
+
+.c: 
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.c) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.c.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.c.pi:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.pi
+	$(COMPILE.c) $(CC_SHARED) $(OUTPUT_OPTION) $<
+	mv $*.o $*.pi
+	@$(ECHO)
+
+##
+## Compiling *.cc files
+##
+.cpp:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.cc) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.cpp.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.cpp.pi:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o $*.pi
+	$(COMPILE.cc) $(C++_SHARED) $(OUTPUT_OPTION) $<
+	mv $*.o $*.pi
+	@$(ECHO)
+
+
+##
+## Compiling *.cc files
+##
+.cc:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.cc) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.cc.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.cc.pi:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o $*.pi
+	$(COMPILE.cc) $(C++_SHARED) $(OUTPUT_OPTION) $<
+	mv $*.o $*.pi
+	@$(ECHO)
+
+
+##
+## Compiling *.C files
+##
+.C:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File-- " $<
+	@$(ECHO) " ---------------------"
+	$(LINK.C) -o $* $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.C.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.C) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.C.pi:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o $*.pi
+	$(COMPILE.C) $(C++_SHARED) $(OUTPUT_OPTION) $<
+	mv $*.o $*.pi
+	@$(ECHO)
+
+
+##
+## Compiling fortran files
+##
+.f:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.F) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.F:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.F) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.for:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.F) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.FOR:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(LINK.F) -o $@ $< $(LDLIBS)
+	if [ $(MPI_EXEC_DIR) ] ; then \
+	   cp $@ $(MPI_EXEC_DIR);\
+	fi
+	@$(ECHO)
+
+.f.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File -- " $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.F.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File --" $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.for.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File --" $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+.FOR.o:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File --" $<
+	@$(ECHO) " ---------------------"
+	$(RM) $*.o
+	$(COMPILE.F) $(OUTPUT_OPTION) $<
+	@$(ECHO)
+
+##
+##
+## Generating preprocessed files
+##
+##
+
+.c.i:
+	$(CC) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) $(CWARNINGS) -E $< > $*.i
+
+.cpp.i:
+	$(C++) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) $(C++WARNINGS) -E $< > $*.i
+
+.cc.i:
+	$(C++) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) $(C++WARNINGS) -E $< > $*.i
+
+.C.i:
+	$(C++) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) $(C++WARNINGS) -E $< > $*.i
+
+.f.i:
+	$(F77) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) -E $< > $*.i
+
+.F.i:
+	$(F77) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) -E $< > $*.i
+
+.for.i:
+	$(F77) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) -E $< > $*.i
+
+.FOR.i:
+	$(F77) $(ARCH_FLAGS) $(CPPFLAGS) $(DEBUGGING) $(XTRAFLAGS) -E $< > $*.i
+
+
+##
+##
+## Archiving files
+##
+##
+
+# MSE, 12/19/00: causes unwanted override of ARFLAGS in mt-*
+#ARFLAGS=rcv
+
+.c.a:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.c) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.cpp.a:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.cc) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.cc.a:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.cc) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.C.a:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.C) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.c.so:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.c) $(CC_SHARED) -o $*.o $<
+	mv $*.o $*.pi
+	$(AR) $(ARFLAGS) $@ $*.pi
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.cpp.so:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.cc) $(C++_SHARED) -o $*.o $<
+	mv $*.o $*.pi
+	$(AR) $(ARFLAGS) $@ $*.pi
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.cc.so:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.cc) $(C++_SHARED) -o $*.o $<
+	mv $*.o $*.pi
+	$(AR) $(ARFLAGS) $@ $*.pi
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.C.so:
+	@$(ECHO) ""
+	@$(ECHO) " Compiling and Archiving Source File -- " $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.C) $(C++_SHARED) -o $*.o $<
+	mv $*.o $*.pi
+	$(AR) $(ARFLAGS) $@ $*.pi
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+
+.f.a:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File and Archiving --" $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.F) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+ 
+.F.a:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File and Archiving --" $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.F) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+ 
+.for.a:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File and Archiving --" $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.F) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+ 
+.FOR.a:
+	@$(ECHO)
+	@$(ECHO) " Compiling Source File and Archiving --" $<
+	@$(ECHO) " -----------------------------------"
+	$(COMPILE.F) -o $% $<
+	$(AR) $(ARFLAGS) $@ $%
+	$(ARCLEAN) $%
+	@$(ECHO)
+	@$(RM) -f $(LIBRARY_STATUS)
+ 
+
+##
+##
+## Misc stuff
+##
+##
+.y.c:
+	$(YACC) $<
+	grep -v "^#line" y.tab.c > $@
+	$(RM) y.tab.c
+
+.y.cc:
+	$(YACC) $<
+	grep -v "^#line" y.tab.c > $@
+	$(RM) y.tab.c
+
+.y.cpp:
+	$(YACC) $<
+	grep -v "^#line" y.tab.c > $@
+	$(RM) y.tab.c
+
+.l.c:
+	$(LEX) -l -t $< | grep -v "^#line" > $@
+
+
+##
+## DOC++ Conversions
+##
+.H.dxx:
+	docify $< $*.dxx
+
+.h.dxx:
+	docify $< $*.dxx
+
+
+##
+## Template Conversions
+##
+.H.Ht:
+	@$(BINDIR)/gentemps -temp $* $(TEMPLATE_DEFNS)
+
+.C.Ct:
+	@$(BINDIR)/gentemps -temp $* $(TEMPLATE_DEFNS)
+
+.h.ht:
+	@$(BINDIR)/gentemps -temp $* $(TEMPLATE_DEFNS)
+
+.cpp.cppt:
+	@$(BINDIR)/gentemps -temp $* $(TEMPLATE_DEFNS)
+ROOT_DIR=/home/teva/teva-sp/packages/sp
+MPI_DIR=
+MPI_INCLUDES=
+MPI_LIBS=
+MPI_LDFLAGS=
+MPE_DIR=
+MPE_INCLUDES=
+MPE_LIBS=
+MPE_LDFLAGS=
+PROFILE_FLAG=
+ACRODIR=/home/teva/teva-sp/../acro
+#-----------------------------------------------------------------------#
+#       These SITE Macros for a STANDARD configuration are used 	#
+#	everywhere.				                        #
+#									#
+#	This is the configuration that I use for development, so I make	#
+#	assumptions that the make environment is less brain-dead.	#
+#	In particular, I use VPATH and the += option			#
+#-----------------------------------------------------------------------#
+
+BINDIR= $(ROOT_DIR)/bin
+LIBDIR= $(ROOT_DIR)/lib
+SRCDIR= $(ROOT_DIR)/src
+INCDIR= $(ROOT_DIR)
+DOCDIR= $(ROOT_DIR)/doc
+TEMPLATE_DIR=$(ROOT_DIR)
+
+PACKAGE_INCLUDES= $(MPI_INCLUDES) -I$(ACRODIR)/include -I$(ACRODIR)
+PACKAGE_LIBS= $(MPI_LIBS) -lutilib
+PACKAGE_LDFLAGS= $(MPI_LDFLAGS) -L$(ACRODIR)/lib
+PACKAGE_DEFINES= $(MPI_DEFINE) $(MPE_DEFINE)
+
+##
+## Define global compiling flags
+##
+XTRAFLAGS = $(WARNINGS) $(DEBUGGING) $(ANSI_FLAG) $(ANSIHDR_FLAG) $(MAPPEDIO_FLAG) -DDLL_API=
+INCLUDES  = $(PACKAGE_DEFINES) -I. -I$(INCDIR) $(PACKAGE_INCLUDES) $(ARCH_INCLUDES) -I$(ROOT_DIR)/../tevalibs/include
+
+LDLIBS = $(PACKAGE_LIBS) $(ARCH_LIBS) -lm
+ 
+LDFLAGS = -L$(LIBDIR) -L$(ROOT_DIR)/../tevalibs $(PACKAGE_LDFLAGS) -lAnalysisModule
+
+
+LIBRARY=libHelloModule.so
+
+library: $(LIBRARY)
+
+install_library:
+	$(MAKE) clean
+	$(MAKE) library
+
+SRCS= HelloAnalysisIA.cpp HelloAnalysisAggr.cpp  HelloAnalysisJNI.cpp 
+OBJS= $(SRCS:.cpp.o)
+
+include ../MakeMacros
+
+
+LDLIBS = -lsp $(PACKAGE_LIBS) -lthreatassess -ltevautil -lm
+EXECUTABLES= 
+
+$(LIBRARY): $(OBJS)
+	$(LINK.cc) $(C++_SHARED) $< -o $@ $(LDFLAGS) 
+
+all:	executables
+
+clean:
+	@$(RM) -Rf *.o *.ii *.ti SunWS_cache *.i
+	@$(RM) -Rf $(EXECUTABLES)
+	@$(RM) -Rf $(EXECUTABLES:.exe=)
+
+executables:
+	$(MAKE) $(EXECUTABLES:.exe=)
+	cp $(EXECUTABLES:.exe=) $(ROOT_DIR)/bin
+

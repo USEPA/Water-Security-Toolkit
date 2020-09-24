@@ -1,0 +1,121 @@
+TODO Update Release History
+
+\section{Release Notes}\label{history_introNotes}
+The section describing each section includes some notes and caveats for the use of the different solvers. These solvers have been tested on simple examples, as well as on some moderate-\/scale water networks (e.g. network1). Current efforts have focused on ensuring the correctness of these solvers, and their scalability to problems of this scale. The notes in this document identify additional limitations that we know about and which will be addressed in subsequent releases.
+
+\subsection{Release 1.0}\label{history_spot1_0}
+
+Rename of TEVA-\/SP to SPOT
+
+Added reduced-\/memory mode for heuristic solves.
+
+Improved aggregation mechanism for integer programming solves. Added a new aggregation threshold that supports the computation of bounds on the final solution in a natural manner.
+
+Integrated PICO 1.1, which works on PC platforms.
+
+Added timing control for SPOT solvers, and instrumented all SPOT solvers to write out the best solution seen so far as soon as it is found.
+
+Integrated bound computation for aggregated integer programming solves. Instrumented the PICO solver to report when a valid lower bound has been computed.
+
+Added the 'awd' performance goal for 'sp', which can be used for tracer-\/study sensor placement optimization. Created the sp-\/tracer script to apply this functionality in a simple manner.
+
+\subsection{Release 2.0}\label{history_tevasp2_0}
+
+\begin{verbatim}
+
+   Added heuristic support to optimize sensor placement with imperfect sensors
+
+   Improved heuristic support for VaR, TCE, and Worst-Case performance
+
+   Improved IP solver support for witness aggregation
+
+   See examples 2-5 in the "sp executable" documentation 
+\end{verbatim}
+
+\subsection{Release 1.1}\label{history_tevasp1_1_0}
+
+\begin{verbatim}
+TODO:
+  JP's notes:
+    Added heuristic support for the VaR, TCE, and Worst-Case performance 
+    statistics. 
+
+    Added heuristic support for invalid/fixed facility locations.
+
+  Bill's notes:
+    Added --seed option to 'sp' to enable control of pseudo-random events
+	in the sensor placement heuristic.
+
+    Removed the --fixed* and --invalid* options to 'sp'.  These have been
+	replaced with the --sensor-locations option, which specifies
+	a file that can specify whether locations are feasible/infeasible
+        and fixed/unfixed.
+
+    Added the --gamma option to 'sp', which specifies the percent of the
+	tail distribution used for robustness computations: var, cvar, tce.
+
+    Added the --numsamples option to 'sp', which controls the number of
+	iterations used in the heuristic sensor placement solver.
+    
+\end{verbatim}
+
+\subsection{Release 1.0.2}\label{history_tevasp1_0_2}
+
+\begin{verbatim}
+November 30, 2005
+
+Changes in this release:
+
+Bug fixes:
+
+  - Fixed the appearance on some test platforms of nan values in
+    the impact file for the population exposed objective on a test 
+    network and threat.
+
+Performance improvements:
+
+  - Large improvement for generation of impact files
+    (with tso2Impact) for the population exposed objective.  
+    Somewhat smaller improvement for population killed objective.
+
+Enhancements:
+
+  - Changes to enable use of CVaR measure within the integer 
+    programming solver.
+
+  - Rework of GRASP in preparation for incorporation of new objectives.
+
+  - Added new tests (test1i, test1j and test1k) to sp/test.
+
+Portability issues:
+
+  - Some 64 bit portability changes to utilib
+
+  - Minor fix to sp script so AMPL/PICO solver executes properly on 
+    Windows
+
+Known issues in this release:
+
+  The PICO executable under Windows has a known issue when solving 
+  for the mass consumed objective with the CVaR statistics.
+  The executable released with 1.0.2 does not exhibit the problem, 
+  at the cost of speed.  When the problem is solved, a faster PICO 
+  executable will be available.
+\end{verbatim}
+
+\subsection{Release 1.0.1}\label{history_tevasp1_0_1}
+
+\begin{verbatim}
+October 31, 2005
+
+Performance of evalsensor is improved.
+\end{verbatim}
+
+\subsection{Release 1.0.0}\label{history_tevasp1_0_0}
+
+\begin{verbatim}
+October 28, 2005
+
+Initial release.
+\end{verbatim}
+ 

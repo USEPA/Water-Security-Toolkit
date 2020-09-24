@@ -1,0 +1,18 @@
+read_impact_files:  Net3_ec.impact
+
+Number of Nodes                :  97
+Number of Contamination Impacts: 9480
+
+Number of sensors=5
+Objective=ec
+Statistic=mean
+Impact file=Net3_ec.impact
+Delay=0
+
+Running glpsol...
+... glpsol done
+Running PICO...
+... PICO done
+Computing a lower bound
+Objective lower bound: 8499.94194912
+Done with sp

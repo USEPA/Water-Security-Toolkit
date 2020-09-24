@@ -1,0 +1,28 @@
+impact data:
+- name: impact1
+  impact file: Net3/Net3_ec.impact
+  nodemap file: Net3/Net3.nodemap
+objective:
+- name: obj1
+  goal: impact1
+  statistic: CVAR
+  gamma: 0.05
+constraint:
+- name: const1
+  goal: NS
+  statistic: TOTAL
+  bound: 5
+sensor placement:
+  type: robust-cvar perfect-sensor
+  objective: obj1
+  constraint: const1
+  presolve: True
+  compute greedy ranking: True
+solver:
+  type: cbc
+  options: {}
+  logfile: null
+  verbose: 0
+configure:
+  output prefix: ${CWD}/sp_ex5/Net3
+  debug: 0

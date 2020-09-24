@@ -1,0 +1,26 @@
+; 24-hour events, hourly events
+
+NZD    MASS 100                                 0                86400
+NZD    MASS 100                              3600                90000
+NZD    MASS 100                              7200                93600
+NZD    MASS 100                             10800                97200
+NZD    MASS 100                             14400               100800
+NZD    MASS 100                             18000               104400
+NZD    MASS 100                             21600               108000
+NZD    MASS 100                             25200               111600
+NZD    MASS 100                             28800               115200
+NZD    MASS 100                             32400               118800
+NZD    MASS 100                             36000               122400
+NZD    MASS 100                             39600               126000
+NZD    MASS 100                             43200               129600
+NZD    MASS 100                             46800               133200
+NZD    MASS 100                             50400               136800
+NZD    MASS 100                             54000               140400
+NZD    MASS 100                             57600               144000
+NZD    MASS 100                             61200               147600
+NZD    MASS 100                             64800               151200
+NZD    MASS 100                             68400               154800
+NZD    MASS 100                             72000               158400
+NZD    MASS 100                             75600               162000
+NZD    MASS 100                             79200               165600
+NZD    MASS 100                             82800               169200

@@ -1,0 +1,38 @@
+network:
+    epanet file: Net3/Net3.inp
+visualization:
+  screen:
+    color: white                
+    size: [1600, 1000]    
+  legend:
+    color: white                
+    scale: 2.0                     
+    location: [20, 20]      
+  layers:
+  - label: 30 inch diameter pipes
+    locations: '["links"][i]'           
+    file: Net3/Net3_locations.yml
+    location type: link     
+    shape: circle             
+    fill:
+      color: blue 
+      size: '["length"][i]' 
+      opacity: '["length"][i]' 
+      color range: null         
+      size range: [5,20]  
+      opacity range: [0.5,1]             
+  - label: Nodes with base demand > 100
+    locations: '["nodes"][i]'          
+    file: Net3/Net3_locations.yml
+    location type: node     
+    shape: circle             
+    fill:
+      color: '["base demand"][i]' 
+      size: '["base demand"][i]' 
+      opacity: 1
+      color range: [orange, red]         
+      size range: [15,35]  
+      opacity range: null           
+configure:
+  output prefix: ${CWD}/visualization_ex2/Net3 
+  debug: 0

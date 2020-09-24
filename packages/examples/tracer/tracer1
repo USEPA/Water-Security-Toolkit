@@ -1,0 +1,6 @@
+#../../../bin/sp-tracer --path=../../.. --inp=../etc/tracer/Net3_mod.inp ../etc/tracer/River_source.txt
+#../../../bin/sp-tracer --path=../../.. --ages=../etc/tracer/River_age.txt ../etc/tracer/River_source.txt --objective=awd --ub=ns,10 --solver=pico --ub=nfd,1.0 --runtime=60
+#../../../bin/sp-tracer --path=../../.. --ages=../etc/tracer/River_age.txt ../etc/tracer/River_source.txt --objective=awd --ub=ns,10 --solver=cplexamp --ub=nfd,0.9 --runtime=300.0
+../../../bin/sp-tracer --path=../../.. --ages=../etc/tracer/River_age.txt ../etc/tracer/River_source.txt --objective=awd --ub=ns,10 --solver=pico --ub=nfd,0.9 --runtime=300.0
+
+#../../../bin/sp-tracer --path=../../.. --ages=../etc/tracer/River_age.txt ../etc/tracer/River_source.txt --objective=nfd --ub=ns,10 --solver=pico --ub=awd,0.5 --runtime=300 #--solver-options="--numRRTrialsPerCall=8"

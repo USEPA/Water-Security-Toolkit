@@ -1,0 +1,59 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible
+##
+## build epanet codes
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+DEBUGGING_SYMBOLS=/Z7
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+
+CFLAGS=$(CFLAGS) /Z7
+
+EPANETLIB_INC = $(TPL)\epanet\EPANET_\include
+
+all: static\spotSkeleton.exe
+
+##
+## SPOTSKELETON EXECUTABLE
+##
+##
+SPOTSKELETON_LOC = $(PACKAGES)\network
+SPOTSKELETON_CPP_SRC = $(SPOTSKELETON_LOC)\spotSkeleton.cpp
+SPOTSKELETON_CPP_OBJ = $(SPOTSKELETON_CPP_SRC:.cpp=.obj)
+SPOTSKELETON_INCLUDE = /I . /I $(EPANETLIB_INC)
+SPOTSKELETON_FLAGS =
+
+$(SPOTSKELETON_CPP_OBJ): $(SPOTSKELETON_CPP_SRC)
+    $(CC) $(CFLAGS) $(CPPFLAGS) $(SPOTSKELETON_FLAGS) $(SPOTSKELETON_INCLUDE) /Fo$@ /c $*.cpp
+
+static\spotSkeleton.exe:  $(SPOTSKELETON_CPP_OBJ) static\libepanet.lib
+   $(CC) $(DEBUGGING_SYMBOLS) $(LINKDBG) /Fe$@ $** 
+
+
+############################
+
+OBJ_FILES = $(SPOTSKELETON_CPP_OBJ)
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+clean:
+        @-del $(OBJ_FILES)
+        @-del /Q static\spotSkeleton.*

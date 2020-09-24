@@ -1,0 +1,1429 @@
+Generating mass consumed impact file
+Detection delay (in minutes)=0
+main: after process_arguments: 
+Current file=./Net3
+Storage method=LZMA
+
+Number of nodes=97
+Number of links=119
+Number of tanks=5
+Number of junctions=92
+Number of steps=577
+Number of species=1
+  Species=species (stored)
+Step size (hours)=0.0833333
+Floatmax=3.40282e+38
+
+Processing simulation results for scenario=1
+Processing simulation results for scenario=2
+Processing simulation results for scenario=3
+Processing simulation results for scenario=4
+Processing simulation results for scenario=5
+Processing simulation results for scenario=6
+Processing simulation results for scenario=7
+Processing simulation results for scenario=8
+Processing simulation results for scenario=9
+Processing simulation results for scenario=10
+Processing simulation results for scenario=11
+Processing simulation results for scenario=12
+Processing simulation results for scenario=13
+Processing simulation results for scenario=14
+Processing simulation results for scenario=15
+Processing simulation results for scenario=16
+Processing simulation results for scenario=17
+Processing simulation results for scenario=18
+Processing simulation results for scenario=19
+Processing simulation results for scenario=20
+Processing simulation results for scenario=21
+Processing simulation results for scenario=22
+Processing simulation results for scenario=23
+Processing simulation results for scenario=24
+Processing simulation results for scenario=25
+Processing simulation results for scenario=26
+Processing simulation results for scenario=27
+Processing simulation results for scenario=28
+Processing simulation results for scenario=29
+Processing simulation results for scenario=30
+Processing simulation results for scenario=31
+Processing simulation results for scenario=32
+Processing simulation results for scenario=33
+Processing simulation results for scenario=34
+Processing simulation results for scenario=35
+Processing simulation results for scenario=36
+Processing simulation results for scenario=37
+Processing simulation results for scenario=38
+Processing simulation results for scenario=39
+Processing simulation results for scenario=40
+Processing simulation results for scenario=41
+Processing simulation results for scenario=42
+Processing simulation results for scenario=43
+Processing simulation results for scenario=44
+Processing simulation results for scenario=45
+Processing simulation results for scenario=46
+Processing simulation results for scenario=47
+Processing simulation results for scenario=48
+Processing simulation results for scenario=49
+Processing simulation results for scenario=50
+Processing simulation results for scenario=51
+Processing simulation results for scenario=52
+Processing simulation results for scenario=53
+Processing simulation results for scenario=54
+Processing simulation results for scenario=55
+Processing simulation results for scenario=56
+Processing simulation results for scenario=57
+Processing simulation results for scenario=58
+Processing simulation results for scenario=59
+Processing simulation results for scenario=60
+Processing simulation results for scenario=61
+Processing simulation results for scenario=62
+Processing simulation results for scenario=63
+Processing simulation results for scenario=64
+Processing simulation results for scenario=65
+Processing simulation results for scenario=66
+Processing simulation results for scenario=67
+Processing simulation results for scenario=68
+Processing simulation results for scenario=69
+Processing simulation results for scenario=70
+Processing simulation results for scenario=71
+Processing simulation results for scenario=72
+Processing simulation results for scenario=73
+Processing simulation results for scenario=74
+Processing simulation results for scenario=75
+Processing simulation results for scenario=76
+Processing simulation results for scenario=77
+Processing simulation results for scenario=78
+Processing simulation results for scenario=79
+Processing simulation results for scenario=80
+Processing simulation results for scenario=81
+Processing simulation results for scenario=82
+Processing simulation results for scenario=83
+Processing simulation results for scenario=84
+Processing simulation results for scenario=85
+Processing simulation results for scenario=86
+Processing simulation results for scenario=87
+Processing simulation results for scenario=88
+Processing simulation results for scenario=89
+Processing simulation results for scenario=90
+Processing simulation results for scenario=91
+Processing simulation results for scenario=92
+Processing simulation results for scenario=93
+Processing simulation results for scenario=94
+Processing simulation results for scenario=95
+Processing simulation results for scenario=96
+Processing simulation results for scenario=97
+Processing simulation results for scenario=98
+Processing simulation results for scenario=99
+Processing simulation results for scenario=100
+Processing simulation results for scenario=101
+Processing simulation results for scenario=102
+Processing simulation results for scenario=103
+Processing simulation results for scenario=104
+Processing simulation results for scenario=105
+Processing simulation results for scenario=106
+Processing simulation results for scenario=107
+Processing simulation results for scenario=108
+Processing simulation results for scenario=109
+Processing simulation results for scenario=110
+Processing simulation results for scenario=111
+Processing simulation results for scenario=112
+Processing simulation results for scenario=113
+Processing simulation results for scenario=114
+Processing simulation results for scenario=115
+Processing simulation results for scenario=116
+Processing simulation results for scenario=117
+Processing simulation results for scenario=118
+Processing simulation results for scenario=119
+Processing simulation results for scenario=120
+Processing simulation results for scenario=121
+Processing simulation results for scenario=122
+Processing simulation results for scenario=123
+Processing simulation results for scenario=124
+Processing simulation results for scenario=125
+Processing simulation results for scenario=126
+Processing simulation results for scenario=127
+Processing simulation results for scenario=128
+Processing simulation results for scenario=129
+Processing simulation results for scenario=130
+Processing simulation results for scenario=131
+Processing simulation results for scenario=132
+Processing simulation results for scenario=133
+Processing simulation results for scenario=134
+Processing simulation results for scenario=135
+Processing simulation results for scenario=136
+Processing simulation results for scenario=137
+Processing simulation results for scenario=138
+Processing simulation results for scenario=139
+Processing simulation results for scenario=140
+Processing simulation results for scenario=141
+Processing simulation results for scenario=142
+Processing simulation results for scenario=143
+Processing simulation results for scenario=144
+Processing simulation results for scenario=145
+Processing simulation results for scenario=146
+Processing simulation results for scenario=147
+Processing simulation results for scenario=148
+Processing simulation results for scenario=149
+Processing simulation results for scenario=150
+Processing simulation results for scenario=151
+Processing simulation results for scenario=152
+Processing simulation results for scenario=153
+Processing simulation results for scenario=154
+Processing simulation results for scenario=155
+Processing simulation results for scenario=156
+Processing simulation results for scenario=157
+Processing simulation results for scenario=158
+Processing simulation results for scenario=159
+Processing simulation results for scenario=160
+Processing simulation results for scenario=161
+Processing simulation results for scenario=162
+Processing simulation results for scenario=163
+Processing simulation results for scenario=164
+Processing simulation results for scenario=165
+Processing simulation results for scenario=166
+Processing simulation results for scenario=167
+Processing simulation results for scenario=168
+Processing simulation results for scenario=169
+Processing simulation results for scenario=170
+Processing simulation results for scenario=171
+Processing simulation results for scenario=172
+Processing simulation results for scenario=173
+Processing simulation results for scenario=174
+Processing simulation results for scenario=175
+Processing simulation results for scenario=176
+Processing simulation results for scenario=177
+Processing simulation results for scenario=178
+Processing simulation results for scenario=179
+Processing simulation results for scenario=180
+Processing simulation results for scenario=181
+Processing simulation results for scenario=182
+Processing simulation results for scenario=183
+Processing simulation results for scenario=184
+Processing simulation results for scenario=185
+Processing simulation results for scenario=186
+Processing simulation results for scenario=187
+Processing simulation results for scenario=188
+Processing simulation results for scenario=189
+Processing simulation results for scenario=190
+Processing simulation results for scenario=191
+Processing simulation results for scenario=192
+Processing simulation results for scenario=193
+Processing simulation results for scenario=194
+Processing simulation results for scenario=195
+Processing simulation results for scenario=196
+Processing simulation results for scenario=197
+Processing simulation results for scenario=198
+Processing simulation results for scenario=199
+Processing simulation results for scenario=200
+Processing simulation results for scenario=201
+Processing simulation results for scenario=202
+Processing simulation results for scenario=203
+Processing simulation results for scenario=204
+Processing simulation results for scenario=205
+Processing simulation results for scenario=206
+Processing simulation results for scenario=207
+Processing simulation results for scenario=208
+Processing simulation results for scenario=209
+Processing simulation results for scenario=210
+Processing simulation results for scenario=211
+Processing simulation results for scenario=212
+Processing simulation results for scenario=213
+Processing simulation results for scenario=214
+Processing simulation results for scenario=215
+Processing simulation results for scenario=216
+Processing simulation results for scenario=217
+Processing simulation results for scenario=218
+Processing simulation results for scenario=219
+Processing simulation results for scenario=220
+Processing simulation results for scenario=221
+Processing simulation results for scenario=222
+Processing simulation results for scenario=223
+Processing simulation results for scenario=224
+Processing simulation results for scenario=225
+Processing simulation results for scenario=226
+Processing simulation results for scenario=227
+Processing simulation results for scenario=228
+Processing simulation results for scenario=229
+Processing simulation results for scenario=230
+Processing simulation results for scenario=231
+Processing simulation results for scenario=232
+Processing simulation results for scenario=233
+Processing simulation results for scenario=234
+Processing simulation results for scenario=235
+Processing simulation results for scenario=236
+Processed input in   0.830 seconds
+
+Number of scenarios=236
+
+
+Total number of scenarios=236
+
+Node map file written to file=Net3.nodemap
+
+Impact outputs written to file=Net3_mc.impact
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+VecTrieKey(vec)
+outputGroup: setting ml[0] to 2
+TrieNode: 2 
+Aggregated Scenario Indices: 
+1 60 119 178 
+outputGroup: setting ml[1] to 2
+TrieNode: 4 
+Aggregated Scenario Indices: 
+2 61 120 179 
+outputGroup: setting ml[2] to 83
+TrieNode: 10 11 12 13 14 86 15 17 84 85 16 18 56 83 20 53 54 19 51 55 88 33 35 37 52 60 87 32 36 38 42 48 50 89 31 39 41 43 46 49 90 5 30 40 44 47 61 4 28 45 57 63 91 95 29 58 62 92 59 64 2 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+62 
+outputGroup: setting ml[3] to 82
+TrieNode: 10 11 12 13 14 86 15 17 84 85 16 18 56 83 20 53 54 19 51 55 88 33 35 37 52 60 87 32 36 38 42 48 50 89 31 39 41 43 46 49 90 30 40 44 45 47 61 4 28 57 63 91 29 58 62 92 2 5 59 64 65 95 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+121 
+outputGroup: setting ml[4] to 83
+TrieNode: 10 11 12 13 86 17 84 85 15 16 18 83 14 20 54 56 19 53 88 33 35 51 52 87 32 36 42 48 60 31 37 41 43 46 50 89 5 30 38 44 49 55 90 28 39 47 57 61 95 4 29 40 45 58 63 91 2 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+3 
+outputGroup: setting ml[5] to 4
+TrieNode: 10 11 14 
+Aggregated Scenario Indices: 
+180 
+outputGroup: setting ml[6] to 62
+TrieNode: 11 14 15 16 56 53 54 51 55 88 37 52 60 87 38 42 48 50 89 39 41 43 46 49 90 5 40 44 45 47 61 4 57 63 91 95 58 62 92 59 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+181 63 122 
+outputGroup: setting ml[7] to 62
+TrieNode: 11 14 15 16 56 53 54 51 88 52 60 87 42 48 50 41 43 46 49 55 89 5 37 44 61 90 38 47 57 63 95 4 39 45 58 62 91 40 59 64 92 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+4 
+outputGroup: setting ml[8] to 83
+TrieNode: 12 10 11 13 86 14 17 84 85 15 16 18 83 20 54 56 19 53 88 33 35 51 52 87 32 36 42 48 60 31 37 41 43 46 50 89 5 30 38 44 49 55 90 28 39 47 57 61 95 4 29 40 45 58 63 91 2 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+5 
+outputGroup: setting ml[9] to 53
+TrieNode: 12 10 13 11 14 17 15 16 53 54 56 88 51 52 48 60 46 50 5 49 61 45 63 91 47 62 92 4 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 58 59 95 
+Aggregated Scenario Indices: 
+182 
+outputGroup: setting ml[10] to 82
+TrieNode: 12 13 86 85 17 18 15 16 54 56 53 55 84 88 37 51 52 83 87 20 38 42 48 60 89 19 39 41 43 46 50 90 5 33 35 40 44 45 47 49 4 32 36 57 61 95 31 58 63 91 30 59 62 92 28 64 29 65 2 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 10 14 11 
+Aggregated Scenario Indices: 
+123 
+outputGroup: setting ml[11] to 82
+TrieNode: 12 86 13 84 85 18 83 17 20 15 16 19 33 35 54 56 32 36 53 55 88 31 37 51 52 87 30 38 42 48 60 89 39 41 43 46 50 90 5 40 44 45 47 49 4 57 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 28 29 2 10 14 11 
+Aggregated Scenario Indices: 
+64 
+outputGroup: setting ml[12] to 51
+TrieNode: 13 17 14 15 16 56 53 54 51 88 52 60 46 48 49 50 45 61 47 63 91 4 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 58 59 5 95 11 
+Aggregated Scenario Indices: 
+183 
+outputGroup: setting ml[13] to 64
+TrieNode: 13 17 15 16 54 56 53 55 88 37 51 52 87 38 42 48 60 89 39 41 43 46 50 90 40 44 45 47 49 4 57 61 58 63 91 59 62 92 5 64 65 95 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 11 
+Aggregated Scenario Indices: 
+124 
+outputGroup: setting ml[14] to 64
+TrieNode: 13 17 15 16 56 53 54 51 88 52 60 87 42 48 50 41 43 46 49 89 5 44 61 90 47 55 57 63 95 4 37 45 58 62 91 38 59 64 92 39 65 40 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 11 
+Aggregated Scenario Indices: 
+6 
+outputGroup: setting ml[15] to 64
+TrieNode: 13 17 16 54 55 88 15 37 52 87 38 42 48 56 89 39 41 43 46 50 53 90 5 40 44 47 49 51 4 45 57 60 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 11 
+Aggregated Scenario Indices: 
+65 
+outputGroup: setting ml[16] to 62
+TrieNode: 14 15 16 54 56 53 88 51 52 87 42 48 60 41 43 46 50 89 5 44 49 90 47 57 61 95 4 45 55 58 63 91 37 59 62 92 38 64 39 65 40 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 11 
+Aggregated Scenario Indices: 
+184 7 
+outputGroup: setting ml[17] to 62
+TrieNode: 14 15 16 56 53 54 51 55 88 37 52 60 87 38 42 48 50 89 39 41 43 46 49 90 5 40 44 47 61 4 45 57 63 91 95 58 62 92 59 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 11 
+Aggregated Scenario Indices: 
+66 
+outputGroup: setting ml[18] to 62
+TrieNode: 14 15 16 56 53 54 51 55 88 37 52 60 87 38 42 48 50 89 39 41 43 46 49 90 40 44 45 47 61 4 57 63 91 58 62 92 59 64 65 5 66 67 74 95 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 11 
+Aggregated Scenario Indices: 
+125 
+outputGroup: setting ml[19] to 62
+TrieNode: 15 14 16 56 53 51 54 52 60 48 50 88 46 49 5 61 63 95 62 64 65 66 67 74 68 72 75 87 42 69 73 76 79 41 43 55 70 71 77 78 80 89 37 44 82 90 6 38 47 57 81 4 39 45 58 91 96 40 59 92 11 
+Aggregated Scenario Indices: 
+8 
+outputGroup: setting ml[20] to 62
+TrieNode: 15 16 54 55 56 88 37 52 53 87 38 42 48 51 89 39 41 43 46 50 60 90 5 40 44 47 49 4 45 57 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 11 
+Aggregated Scenario Indices: 
+67 
+outputGroup: setting ml[21] to 62
+TrieNode: 15 16 54 55 56 88 37 52 53 87 38 42 48 51 89 39 41 43 46 50 60 90 40 44 45 47 49 4 57 61 58 63 91 59 62 92 64 5 65 66 95 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 11 
+Aggregated Scenario Indices: 
+126 
+outputGroup: setting ml[22] to 49
+TrieNode: 15 16 56 53 51 60 50 49 61 63 91 62 92 58 64 14 54 59 65 66 88 52 67 74 48 68 72 75 46 69 73 45 70 71 47 4 5 76 79 77 78 80 95 82 81 6 96 11 
+Aggregated Scenario Indices: 
+185 
+outputGroup: setting ml[23] to 62
+TrieNode: 16 54 53 88 51 52 87 42 48 60 41 43 46 50 89 5 44 49 90 47 57 61 95 4 45 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 55 81 96 37 38 39 40 15 14 11 56 
+Aggregated Scenario Indices: 
+9 
+outputGroup: setting ml[24] to 49
+TrieNode: 16 54 53 88 52 48 51 46 50 60 45 49 47 61 4 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 70 71 76 79 5 77 78 80 95 82 81 15 14 11 56 6 96 
+Aggregated Scenario Indices: 
+186 
+outputGroup: setting ml[25] to 62
+TrieNode: 16 54 88 52 55 87 37 42 48 89 38 41 43 46 50 90 5 39 44 47 49 4 40 45 57 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 51 60 53 15 14 11 56 
+Aggregated Scenario Indices: 
+68 
+outputGroup: setting ml[26] to 62
+TrieNode: 16 54 88 55 37 52 38 48 89 39 46 50 87 90 40 42 45 47 49 4 41 43 61 44 63 91 57 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 51 60 53 15 14 11 56 
+Aggregated Scenario Indices: 
+127 
+outputGroup: setting ml[27] to 64
+TrieNode: 17 15 14 56 11 53 51 60 50 16 49 61 63 62 64 52 65 48 54 66 46 67 74 5 68 72 75 88 69 73 76 79 95 70 71 77 78 80 82 87 6 42 81 41 43 89 96 44 90 47 57 4 45 55 58 91 37 59 92 38 39 40 13 
+Aggregated Scenario Indices: 
+10 
+outputGroup: setting ml[28] to 51
+TrieNode: 17 15 16 54 53 88 51 52 48 60 46 50 56 45 49 47 61 4 63 91 62 92 58 64 59 65 66 14 67 74 68 72 75 69 73 70 71 5 76 79 77 78 80 95 82 81 13 6 96 11 
+Aggregated Scenario Indices: 
+187 
+outputGroup: setting ml[29] to 64
+TrieNode: 17 16 54 15 55 88 37 52 56 87 38 42 48 53 89 39 41 43 46 50 51 90 5 40 44 47 49 60 4 45 57 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 13 11 
+Aggregated Scenario Indices: 
+69 
+outputGroup: setting ml[30] to 64
+TrieNode: 17 16 54 15 55 88 37 52 56 87 38 42 48 53 89 39 41 43 46 50 51 90 40 44 45 47 49 60 4 57 61 58 63 91 5 59 62 92 64 95 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 14 13 11 
+Aggregated Scenario Indices: 
+128 
+outputGroup: setting ml[31] to 57
+TrieNode: 18 17 15 16 14 54 56 53 85 88 51 52 86 12 48 60 10 13 46 50 11 45 49 47 61 4 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 6 96 1 
+Aggregated Scenario Indices: 
+188 
+outputGroup: setting ml[32] to 83
+TrieNode: 18 17 15 85 14 56 86 11 12 53 10 13 51 60 50 16 49 54 61 52 63 84 88 48 62 83 87 20 42 46 64 5 19 41 43 65 89 33 35 44 66 90 95 32 36 47 57 67 74 4 31 37 45 58 68 72 75 91 30 38 55 59 69 73 76 79 92 28 39 70 71 77 78 80 29 40 2 82 6 81 96 1 
+Aggregated Scenario Indices: 
+11 
+outputGroup: setting ml[33] to 83
+TrieNode: 18 20 19 33 35 32 36 31 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 17 47 57 4 15 16 58 91 54 56 59 92 53 55 63 88 51 52 62 48 60 64 46 50 65 45 49 66 5 61 67 74 68 72 75 95 69 73 76 79 70 71 77 78 80 82 6 81 96 14 83 84 85 86 12 10 13 11 1 
+Aggregated Scenario Indices: 
+129 
+outputGroup: setting ml[34] to 83
+TrieNode: 18 20 19 33 35 32 36 31 37 30 38 28 39 87 29 40 42 41 43 89 2 44 90 47 57 4 58 91 59 92 63 17 62 64 65 66 16 67 74 15 54 68 72 75 45 55 56 69 73 76 79 88 52 53 70 71 77 78 80 48 51 82 6 46 50 60 81 5 49 96 61 95 14 83 84 85 86 12 10 13 11 1 
+Aggregated Scenario Indices: 
+70 
+outputGroup: setting ml[35] to 83
+TrieNode: 19 20 33 35 18 32 36 83 17 31 37 84 85 13 15 16 30 38 55 86 12 14 28 39 54 56 87 10 11 29 40 42 53 88 2 41 43 51 52 89 44 48 60 90 46 47 50 57 4 5 45 49 58 91 59 61 92 95 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+12 
+outputGroup: setting ml[36] to 83
+TrieNode: 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 33 32 95 31 30 28 29 2 6 96 1 
+Aggregated Scenario Indices: 
+189 
+outputGroup: setting ml[37] to 83
+TrieNode: 19 33 35 32 36 31 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 20 52 55 88 18 48 51 54 83 17 50 53 60 84 85 15 16 49 86 12 14 56 61 10 13 11 1 
+Aggregated Scenario Indices: 
+71 
+outputGroup: setting ml[38] to 83
+TrieNode: 19 33 35 32 36 31 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 20 52 55 88 18 48 51 54 83 17 46 50 53 60 84 85 15 16 45 49 86 12 14 56 61 10 13 11 5 95 1 
+Aggregated Scenario Indices: 
+130 
+outputGroup: setting ml[39] to 92
+TrieNode: 21 19 20 18 35 83 17 36 84 85 15 16 37 86 12 14 38 54 55 56 10 13 39 53 87 88 11 40 42 51 52 41 43 48 60 89 44 46 50 90 45 47 49 57 4 58 61 91 59 63 92 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 23 33 24 32 34 95 3 25 26 27 97 28 29 30 2 31 6 96 1 
+Aggregated Scenario Indices: 
+190 
+outputGroup: setting ml[40] to 92
+TrieNode: 21 19 20 23 18 24 33 34 35 83 3 17 25 32 36 84 85 13 15 16 26 27 31 37 86 97 12 14 28 30 38 54 55 56 10 11 29 39 53 87 2 40 42 51 88 41 43 52 60 89 44 48 50 90 46 47 49 57 4 5 45 58 61 91 59 63 92 95 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+13 
+outputGroup: setting ml[41] to 92
+TrieNode: 21 19 20 23 24 33 34 35 3 25 32 36 26 27 31 37 97 28 30 38 29 39 87 2 40 42 41 43 89 44 90 47 57 4 45 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 49 56 10 13 61 11 5 95 1 
+Aggregated Scenario Indices: 
+72 
+outputGroup: setting ml[42] to 92
+TrieNode: 21 19 20 33 35 32 36 31 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 23 34 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 24 3 25 95 26 27 97 1 
+Aggregated Scenario Indices: 
+131 
+outputGroup: setting ml[43] to 93
+TrieNode: 22 21 19 20 18 35 83 17 36 84 85 15 16 37 86 12 14 38 54 55 56 10 13 39 53 87 88 11 40 42 51 52 41 43 48 60 89 44 46 50 90 45 47 49 57 4 58 61 91 59 63 92 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 23 33 24 32 34 95 3 25 26 27 97 28 29 30 2 31 6 96 1 
+Aggregated Scenario Indices: 
+191 
+outputGroup: setting ml[44] to 93
+TrieNode: 22 21 19 20 23 18 24 33 34 35 83 3 17 25 32 36 84 85 13 15 16 26 27 31 37 86 97 12 14 28 30 38 54 55 56 10 11 29 39 53 87 2 40 42 51 88 41 43 52 60 89 44 48 50 90 46 47 49 57 4 5 45 58 61 91 59 63 92 95 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 1 
+Aggregated Scenario Indices: 
+14 
+outputGroup: setting ml[45] to 93
+TrieNode: 22 21 19 20 23 24 33 34 35 3 25 32 36 26 27 31 37 97 28 30 38 29 39 87 2 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 45 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 49 56 10 13 61 11 5 95 1 
+Aggregated Scenario Indices: 
+73 
+outputGroup: setting ml[46] to 93
+TrieNode: 22 21 19 20 33 35 32 36 31 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 23 96 34 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 24 3 25 95 26 27 97 1 
+Aggregated Scenario Indices: 
+132 
+outputGroup: setting ml[47] to 92
+TrieNode: 23 21 19 20 18 35 83 17 36 84 85 15 16 37 86 12 14 38 54 55 56 10 13 39 53 87 88 11 40 42 51 52 41 43 48 60 89 44 46 50 90 45 47 49 57 4 58 61 91 59 63 92 62 64 34 65 33 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 5 95 82 81 24 3 32 31 30 28 97 29 2 25 26 27 6 96 1 
+Aggregated Scenario Indices: 
+192 
+outputGroup: setting ml[48] to 92
+TrieNode: 23 21 19 20 33 35 32 36 31 34 37 30 38 28 39 87 29 40 42 2 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 96 5 95 24 3 97 25 26 27 1 
+Aggregated Scenario Indices: 
+133 
+outputGroup: setting ml[49] to 92
+TrieNode: 23 24 3 34 97 33 25 26 27 28 21 29 30 19 20 31 2 32 35 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 95 1 
+Aggregated Scenario Indices: 
+74 
+outputGroup: setting ml[50] to 92
+TrieNode: 23 24 34 3 25 33 26 27 32 97 28 31 29 30 2 21 19 20 35 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 95 1 
+Aggregated Scenario Indices: 
+15 
+outputGroup: setting ml[51] to 92
+TrieNode: 24 3 97 25 26 27 28 29 2 23 21 19 20 33 35 32 36 31 37 30 34 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 95 1 
+Aggregated Scenario Indices: 
+16 
+outputGroup: setting ml[52] to 92
+TrieNode: 24 3 97 25 27 28 29 30 2 31 32 33 23 21 19 20 35 36 37 34 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 18 52 55 83 88 17 48 51 54 84 85 15 16 46 50 53 60 86 12 14 45 49 56 10 13 61 11 5 95 1 26 
+Aggregated Scenario Indices: 
+75 
+outputGroup: setting ml[53] to 92
+TrieNode: 24 23 21 19 20 18 35 83 17 36 84 85 15 16 37 86 12 14 38 54 55 56 10 13 39 53 87 88 11 40 42 51 52 41 43 48 60 89 44 46 50 90 45 47 49 57 4 25 58 61 91 59 63 92 62 34 64 65 66 67 74 68 72 75 69 73 70 71 27 3 5 33 76 79 32 77 78 80 95 97 82 81 28 29 31 2 30 6 96 1 26 
+Aggregated Scenario Indices: 
+193 
+outputGroup: setting ml[54] to 92
+TrieNode: 24 25 27 28 29 2 23 21 19 20 18 33 35 83 17 32 36 84 85 15 16 31 37 86 12 14 30 38 54 55 56 10 13 39 53 87 88 11 40 42 51 52 41 43 48 60 89 44 46 50 90 45 47 49 57 4 58 61 91 59 63 92 62 34 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 3 5 95 97 1 26 
+Aggregated Scenario Indices: 
+134 
+outputGroup: setting ml[55] to 2
+TrieNode: 26 
+Aggregated Scenario Indices: 
+17 76 135 194 
+outputGroup: setting ml[56] to 83
+TrieNode: 27 28 29 2 30 31 32 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+18 77 136 
+outputGroup: setting ml[57] to 83
+TrieNode: 27 28 30 29 2 31 32 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+195 
+outputGroup: setting ml[58] to 82
+TrieNode: 28 29 2 30 31 32 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+19 78 137 
+outputGroup: setting ml[59] to 82
+TrieNode: 28 30 29 2 31 32 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+196 
+outputGroup: setting ml[60] to 3
+TrieNode: 29 2 
+Aggregated Scenario Indices: 
+20 79 138 197 
+outputGroup: setting ml[61] to 82
+TrieNode: 30 28 29 2 31 32 33 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 6 96 
+Aggregated Scenario Indices: 
+21 80 139 
+outputGroup: setting ml[62] to 82
+TrieNode: 30 31 32 28 29 2 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+198 
+outputGroup: setting ml[63] to 82
+TrieNode: 31 30 28 29 2 32 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+22 140 
+outputGroup: setting ml[64] to 82
+TrieNode: 31 32 30 28 29 2 33 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 47 50 57 4 49 58 91 59 61 92 63 62 64 45 46 65 5 66 67 74 95 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+81 
+outputGroup: setting ml[65] to 82
+TrieNode: 31 32 33 30 28 29 2 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 6 96 
+Aggregated Scenario Indices: 
+199 
+outputGroup: setting ml[66] to 82
+TrieNode: 32 31 30 28 29 2 33 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 6 96 
+Aggregated Scenario Indices: 
+23 
+outputGroup: setting ml[67] to 82
+TrieNode: 32 31 30 28 29 2 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+141 
+outputGroup: setting ml[68] to 82
+TrieNode: 32 31 33 30 28 29 2 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 47 50 57 4 49 58 91 59 61 92 63 62 64 65 45 46 66 5 67 74 68 72 75 95 69 73 76 79 70 71 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+82 
+outputGroup: setting ml[69] to 80
+TrieNode: 32 33 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 70 71 77 5 78 79 80 82 95 81 
+Aggregated Scenario Indices: 
+200 
+outputGroup: setting ml[70] to 82
+TrieNode: 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 5 81 95 6 96 
+Aggregated Scenario Indices: 
+24 83 
+outputGroup: setting ml[71] to 80
+TrieNode: 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 70 71 77 5 78 79 80 82 95 81 
+Aggregated Scenario Indices: 
+201 
+outputGroup: setting ml[72] to 82
+TrieNode: 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+142 
+outputGroup: setting ml[73] to 84
+TrieNode: 34 33 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 70 71 5 76 79 77 78 80 95 82 81 32 31 30 28 29 2 6 96 1 
+Aggregated Scenario Indices: 
+202 
+outputGroup: setting ml[74] to 83
+TrieNode: 34 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 5 82 81 95 6 96 
+Aggregated Scenario Indices: 
+84 
+outputGroup: setting ml[75] to 83
+TrieNode: 34 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 13 15 16 38 55 86 12 14 39 54 56 87 10 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 6 96 
+Aggregated Scenario Indices: 
+25 
+outputGroup: setting ml[76] to 83
+TrieNode: 34 33 32 31 30 28 29 2 19 20 35 18 36 83 17 37 84 85 15 16 38 55 86 12 14 39 54 56 87 10 13 40 42 53 88 11 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 
+Aggregated Scenario Indices: 
+143 
+outputGroup: setting ml[77] to 64
+TrieNode: 35 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 50 53 60 49 61 16 15 14 56 11 
+Aggregated Scenario Indices: 
+85 
+outputGroup: setting ml[78] to 64
+TrieNode: 35 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 46 50 53 60 45 49 61 5 95 16 15 14 56 11 
+Aggregated Scenario Indices: 
+144 
+outputGroup: setting ml[79] to 64
+TrieNode: 35 36 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 5 45 49 58 91 59 61 92 95 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 16 15 14 56 11 
+Aggregated Scenario Indices: 
+26 
+outputGroup: setting ml[80] to 64
+TrieNode: 35 36 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 16 15 14 56 11 6 96 
+Aggregated Scenario Indices: 
+203 
+outputGroup: setting ml[81] to 63
+TrieNode: 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 50 53 60 49 61 16 15 14 56 11 
+Aggregated Scenario Indices: 
+86 
+outputGroup: setting ml[82] to 63
+TrieNode: 36 37 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 46 50 53 60 45 49 61 5 95 16 15 14 56 11 
+Aggregated Scenario Indices: 
+145 
+outputGroup: setting ml[83] to 63
+TrieNode: 36 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 5 45 49 58 91 59 61 92 95 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 16 15 14 56 11 
+Aggregated Scenario Indices: 
+27 
+outputGroup: setting ml[84] to 63
+TrieNode: 36 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 16 15 14 56 11 6 96 
+Aggregated Scenario Indices: 
+204 
+outputGroup: setting ml[85] to 62
+TrieNode: 37 38 39 87 40 42 41 43 89 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 50 53 60 49 61 16 15 14 56 11 
+Aggregated Scenario Indices: 
+87 
+outputGroup: setting ml[86] to 62
+TrieNode: 37 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 55 88 48 51 54 46 50 53 60 45 49 61 5 95 16 15 14 56 11 
+Aggregated Scenario Indices: 
+146 
+outputGroup: setting ml[87] to 62
+TrieNode: 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 5 45 49 58 91 59 61 92 95 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 16 15 14 56 11 
+Aggregated Scenario Indices: 
+28 
+outputGroup: setting ml[88] to 62
+TrieNode: 37 38 55 39 54 87 40 42 53 88 41 43 51 52 89 44 48 60 90 46 47 50 57 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 16 15 14 56 11 6 96 
+Aggregated Scenario Indices: 
+205 
+outputGroup: setting ml[89] to 60
+TrieNode: 38 39 87 40 42 41 43 89 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 88 48 51 50 60 49 61 54 53 16 15 14 56 11 
+Aggregated Scenario Indices: 
+88 
+outputGroup: setting ml[90] to 60
+TrieNode: 38 39 87 40 42 41 43 89 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 52 88 48 51 46 50 60 45 49 61 54 53 5 95 16 15 14 56 11 
+Aggregated Scenario Indices: 
+147 
+outputGroup: setting ml[91] to 62
+TrieNode: 38 39 87 40 42 88 41 43 52 54 89 44 48 51 53 90 46 47 50 57 60 4 5 45 49 58 91 59 61 92 95 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 55 37 16 15 14 56 11 
+Aggregated Scenario Indices: 
+29 
+outputGroup: setting ml[92] to 60
+TrieNode: 38 39 87 40 42 88 41 43 52 89 44 48 51 90 46 47 50 57 60 4 45 49 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 54 53 5 95 16 15 14 56 11 6 96 
+Aggregated Scenario Indices: 
+206 
+outputGroup: setting ml[93] to 2
+TrieNode: 40 
+Aggregated Scenario Indices: 
+30 89 148 207 
+outputGroup: setting ml[94] to 2
+TrieNode: 41 
+Aggregated Scenario Indices: 
+31 90 149 208 
+outputGroup: setting ml[95] to 53
+TrieNode: 43 44 90 47 57 4 45 58 91 46 59 61 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 48 50 49 52 51 88 54 60 16 53 15 56 14 11 
+Aggregated Scenario Indices: 
+32 
+outputGroup: setting ml[96] to 53
+TrieNode: 43 44 90 47 57 4 45 58 91 46 59 92 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 48 50 49 61 52 51 88 54 60 16 53 15 56 14 11 
+Aggregated Scenario Indices: 
+91 
+outputGroup: setting ml[97] to 53
+TrieNode: 43 44 90 47 57 4 58 91 59 92 45 63 46 62 5 64 65 95 66 67 74 68 72 75 69 73 48 70 71 50 49 61 76 77 78 79 52 51 88 54 60 16 53 15 56 14 11 80 82 81 6 96 
+Aggregated Scenario Indices: 
+209 
+outputGroup: setting ml[98] to 53
+TrieNode: 43 44 90 47 57 4 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 45 46 5 95 48 50 49 61 52 51 88 54 60 16 53 15 56 14 11 
+Aggregated Scenario Indices: 
+150 
+outputGroup: setting ml[99] to 49
+TrieNode: 45 46 5 47 4 95 48 50 49 61 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 52 51 88 54 60 16 53 15 56 14 11 80 82 81 6 96 
+Aggregated Scenario Indices: 
+92 
+outputGroup: setting ml[100] to 49
+TrieNode: 45 46 5 95 47 4 48 50 49 61 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 52 51 88 54 60 16 53 15 56 14 11 80 82 81 6 96 
+Aggregated Scenario Indices: 
+33 
+outputGroup: setting ml[101] to 49
+TrieNode: 45 47 4 46 5 48 50 49 61 63 91 62 92 58 64 59 65 52 66 51 67 74 88 54 60 68 72 16 53 69 73 15 56 70 71 14 11 75 76 79 95 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+151 210 
+outputGroup: setting ml[102] to 31
+TrieNode: 50 49 61 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 91 92 58 59 
+Aggregated Scenario Indices: 
+34 93 152 
+outputGroup: setting ml[103] to 31
+TrieNode: 50 49 61 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+211 
+outputGroup: setting ml[104] to 51
+TrieNode: 52 48 46 50 5 49 61 95 63 91 62 92 64 89 65 66 67 74 90 47 68 72 75 4 45 69 73 76 79 70 71 77 78 80 82 6 81 96 51 58 59 60 88 54 16 53 15 14 56 11 
+Aggregated Scenario Indices: 
+94 
+outputGroup: setting ml[105] to 51
+TrieNode: 52 48 46 50 45 49 47 61 4 63 91 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 89 96 90 5 51 58 59 60 95 88 54 16 53 15 14 56 11 
+Aggregated Scenario Indices: 
+153 
+outputGroup: setting ml[106] to 49
+TrieNode: 52 51 60 48 50 46 49 45 61 47 63 91 4 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 95 88 54 16 53 15 14 56 11 6 96 
+Aggregated Scenario Indices: 
+212 
+outputGroup: setting ml[107] to 51
+TrieNode: 52 51 60 50 49 48 61 63 62 64 46 65 5 66 67 74 95 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 91 92 89 90 47 4 45 58 59 53 88 54 56 15 16 14 11 
+Aggregated Scenario Indices: 
+35 
+outputGroup: setting ml[108] to 35
+TrieNode: 53 51 60 50 49 61 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 56 6 96 
+Aggregated Scenario Indices: 
+213 
+outputGroup: setting ml[109] to 62
+TrieNode: 53 51 60 50 52 48 49 46 61 5 63 62 95 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 89 90 4 45 47 54 55 88 37 87 38 42 39 41 43 40 44 57 58 91 59 92 16 15 14 56 11 
+Aggregated Scenario Indices: 
+36 
+outputGroup: setting ml[110] to 62
+TrieNode: 53 51 60 52 48 50 89 46 49 90 5 47 61 4 45 63 91 95 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 54 55 88 37 87 38 42 39 41 43 40 44 57 58 59 16 15 14 56 11 
+Aggregated Scenario Indices: 
+95 
+outputGroup: setting ml[111] to 62
+TrieNode: 53 51 60 52 48 89 46 50 90 45 47 49 4 5 95 61 63 91 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 54 55 88 37 87 38 42 39 41 43 40 44 57 58 59 16 15 14 56 11 
+Aggregated Scenario Indices: 
+154 
+outputGroup: setting ml[112] to 62
+TrieNode: 54 53 51 52 60 88 48 50 46 49 5 61 63 95 62 64 65 66 67 74 68 72 75 87 42 69 73 76 79 41 43 70 71 77 78 80 89 44 82 90 6 47 57 81 4 45 58 91 96 55 59 92 37 38 39 40 56 16 15 14 11 
+Aggregated Scenario Indices: 
+37 
+outputGroup: setting ml[113] to 49
+TrieNode: 54 53 88 52 48 51 46 50 60 45 49 47 61 4 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 5 56 95 16 15 14 11 6 96 
+Aggregated Scenario Indices: 
+214 
+outputGroup: setting ml[114] to 62
+TrieNode: 54 88 52 55 87 37 42 48 89 38 41 43 46 50 90 5 39 44 47 49 4 40 45 57 61 95 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 51 60 53 56 16 15 14 11 
+Aggregated Scenario Indices: 
+96 
+outputGroup: setting ml[115] to 62
+TrieNode: 54 88 55 37 52 38 39 87 40 42 48 41 43 46 50 89 44 45 49 90 47 57 61 4 58 63 91 59 62 92 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 5 95 51 60 53 56 16 15 14 11 
+Aggregated Scenario Indices: 
+155 
+outputGroup: setting ml[116] to 62
+TrieNode: 56 53 51 54 52 55 60 88 37 48 50 87 89 38 42 46 49 90 5 39 41 43 47 61 4 40 44 45 63 91 95 57 62 92 58 64 59 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 16 15 14 11 
+Aggregated Scenario Indices: 
+97 
+outputGroup: setting ml[117] to 62
+TrieNode: 56 53 51 54 52 55 60 88 37 48 50 87 89 38 42 46 49 90 39 41 43 45 47 61 4 40 44 63 91 57 62 92 58 64 59 65 66 67 74 5 68 72 75 69 73 76 79 95 70 71 77 78 80 82 6 81 96 16 15 14 11 
+Aggregated Scenario Indices: 
+156 
+outputGroup: setting ml[118] to 62
+TrieNode: 56 53 51 60 50 49 52 48 61 46 63 5 62 64 95 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 89 90 4 45 47 54 55 88 37 87 38 42 39 41 43 40 44 57 58 91 59 92 16 15 14 11 
+Aggregated Scenario Indices: 
+38 
+outputGroup: setting ml[119] to 35
+TrieNode: 56 53 51 60 50 49 61 63 91 62 92 58 64 59 65 66 67 74 68 72 75 69 73 70 71 76 79 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+215 
+outputGroup: setting ml[120] to 30
+TrieNode: 57 58 91 59 61 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+39 
+outputGroup: setting ml[121] to 30
+TrieNode: 57 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 70 71 76 77 78 79 61 80 82 81 6 96 
+Aggregated Scenario Indices: 
+216 
+outputGroup: setting ml[122] to 30
+TrieNode: 57 58 91 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 61 
+Aggregated Scenario Indices: 
+98 157 
+outputGroup: setting ml[123] to 27
+TrieNode: 58 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+40 99 
+outputGroup: setting ml[124] to 27
+TrieNode: 58 59 92 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+158 217 
+outputGroup: setting ml[125] to 2
+TrieNode: 59 
+Aggregated Scenario Indices: 
+41 100 159 218 
+outputGroup: setting ml[126] to 29
+TrieNode: 61 63 62 64 65 66 67 68 72 69 73 70 71 74 75 76 79 77 78 80 82 6 81 96 91 92 58 59 
+Aggregated Scenario Indices: 
+42 
+outputGroup: setting ml[127] to 29
+TrieNode: 61 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 91 92 58 59 
+Aggregated Scenario Indices: 
+101 
+outputGroup: setting ml[128] to 29
+TrieNode: 61 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 6 96 91 92 58 59 
+Aggregated Scenario Indices: 
+160 
+outputGroup: setting ml[129] to 29
+TrieNode: 61 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 91 92 58 59 6 96 
+Aggregated Scenario Indices: 
+219 
+outputGroup: setting ml[130] to 27
+TrieNode: 63 62 64 65 66 67 68 72 69 73 74 70 71 75 76 79 77 78 80 82 6 81 96 92 58 59 
+Aggregated Scenario Indices: 
+161 
+outputGroup: setting ml[131] to 27
+TrieNode: 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 6 81 96 92 58 59 
+Aggregated Scenario Indices: 
+43 102 
+outputGroup: setting ml[132] to 27
+TrieNode: 63 62 64 65 66 67 74 68 72 75 69 73 76 79 70 71 77 78 80 82 81 92 58 59 6 96 
+Aggregated Scenario Indices: 
+220 
+outputGroup: setting ml[133] to 20
+TrieNode: 65 66 67 74 72 73 75 76 68 69 70 71 79 78 82 81 80 6 96 
+Aggregated Scenario Indices: 
+221 
+outputGroup: setting ml[134] to 20
+TrieNode: 65 66 67 74 75 76 72 73 79 78 80 82 6 81 96 68 69 70 71 
+Aggregated Scenario Indices: 
+44 
+outputGroup: setting ml[135] to 20
+TrieNode: 65 66 67 74 75 76 79 78 82 6 81 96 72 80 68 69 70 71 73 
+Aggregated Scenario Indices: 
+162 
+outputGroup: setting ml[136] to 21
+TrieNode: 65 66 74 67 75 76 79 77 78 80 82 6 81 96 72 68 69 70 71 73 
+Aggregated Scenario Indices: 
+103 
+outputGroup: setting ml[137] to 20
+TrieNode: 66 67 68 72 69 73 70 71 74 75 76 79 77 78 80 82 81 6 96 
+Aggregated Scenario Indices: 
+222 
+outputGroup: setting ml[138] to 19
+TrieNode: 66 67 74 75 76 72 78 79 82 6 81 96 68 69 80 70 71 73 
+Aggregated Scenario Indices: 
+45 
+outputGroup: setting ml[139] to 19
+TrieNode: 66 67 74 75 76 79 78 82 6 81 96 72 80 68 69 70 71 73 
+Aggregated Scenario Indices: 
+163 
+outputGroup: setting ml[140] to 20
+TrieNode: 66 74 75 67 76 79 77 78 80 82 6 81 96 72 68 69 73 70 71 
+Aggregated Scenario Indices: 
+104 
+outputGroup: setting ml[141] to 19
+TrieNode: 67 72 68 69 73 70 71 74 75 76 79 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+164 
+outputGroup: setting ml[142] to 19
+TrieNode: 67 72 68 69 74 75 76 79 77 78 80 82 6 81 96 73 70 71 
+Aggregated Scenario Indices: 
+223 
+outputGroup: setting ml[143] to 19
+TrieNode: 67 72 73 68 74 75 76 79 77 78 80 82 6 81 96 69 70 71 
+Aggregated Scenario Indices: 
+46 
+outputGroup: setting ml[144] to 19
+TrieNode: 67 72 74 75 76 79 77 78 80 82 6 81 96 68 69 73 70 71 
+Aggregated Scenario Indices: 
+105 
+outputGroup: setting ml[145] to 5
+TrieNode: 68 69 70 71 
+Aggregated Scenario Indices: 
+47 106 165 224 
+outputGroup: setting ml[146] to 4
+TrieNode: 69 70 71 
+Aggregated Scenario Indices: 
+48 107 166 225 
+outputGroup: setting ml[147] to 2
+TrieNode: 70 
+Aggregated Scenario Indices: 
+49 108 167 226 
+outputGroup: setting ml[148] to 2
+TrieNode: 71 
+Aggregated Scenario Indices: 
+50 109 168 227 
+outputGroup: setting ml[149] to 14
+TrieNode: 72 73 74 75 76 79 77 78 80 82 6 81 96 
+Aggregated Scenario Indices: 
+169 228 
+outputGroup: setting ml[150] to 14
+TrieNode: 72 74 75 76 79 77 78 80 82 6 81 96 73 
+Aggregated Scenario Indices: 
+51 
+outputGroup: setting ml[151] to 13
+TrieNode: 72 74 75 76 79 78 82 6 81 96 80 73 
+Aggregated Scenario Indices: 
+110 
+outputGroup: setting ml[152] to 2
+TrieNode: 73 
+Aggregated Scenario Indices: 
+52 111 170 229 
+outputGroup: setting ml[153] to 14
+TrieNode: 74 72 75 76 79 78 82 6 80 81 96 73 77 
+Aggregated Scenario Indices: 
+53 
+outputGroup: setting ml[154] to 13
+TrieNode: 74 75 76 79 78 72 82 80 81 6 73 96 
+Aggregated Scenario Indices: 
+230 
+outputGroup: setting ml[155] to 13
+TrieNode: 74 75 76 79 78 80 82 6 81 96 72 73 
+Aggregated Scenario Indices: 
+112 
+outputGroup: setting ml[156] to 13
+TrieNode: 74 75 76 79 78 82 6 81 96 80 72 73 
+Aggregated Scenario Indices: 
+171 
+outputGroup: setting ml[157] to 13
+TrieNode: 75 76 79 78 80 82 6 81 96 74 72 73 
+Aggregated Scenario Indices: 
+113 
+outputGroup: setting ml[158] to 14
+TrieNode: 75 76 79 78 82 6 80 81 96 74 72 73 77 
+Aggregated Scenario Indices: 
+54 
+outputGroup: setting ml[159] to 13
+TrieNode: 75 76 79 78 82 80 6 96 81 74 72 73 
+Aggregated Scenario Indices: 
+172 
+outputGroup: setting ml[160] to 13
+TrieNode: 75 76 79 78 82 81 6 80 96 74 72 73 
+Aggregated Scenario Indices: 
+231 
+outputGroup: setting ml[161] to 2
+TrieNode: 77 
+Aggregated Scenario Indices: 
+55 114 173 232 
+outputGroup: setting ml[162] to 14
+TrieNode: 78 79 75 76 77 74 72 73 80 82 81 6 96 
+Aggregated Scenario Indices: 
+233 
+outputGroup: setting ml[163] to 14
+TrieNode: 78 82 6 81 79 80 75 76 77 74 72 73 96 
+Aggregated Scenario Indices: 
+115 174 
+outputGroup: setting ml[164] to 14
+TrieNode: 78 82 6 81 96 79 80 75 76 77 74 72 73 
+Aggregated Scenario Indices: 
+56 
+outputGroup: setting ml[165] to 14
+TrieNode: 80 82 6 81 78 79 75 76 77 74 72 73 96 
+Aggregated Scenario Indices: 
+116 
+outputGroup: setting ml[166] to 14
+TrieNode: 80 82 6 81 96 78 76 79 75 77 74 72 73 
+Aggregated Scenario Indices: 
+175 234 
+outputGroup: setting ml[167] to 14
+TrieNode: 80 82 6 81 96 78 79 75 76 77 74 72 73 
+Aggregated Scenario Indices: 
+57 
+outputGroup: setting ml[168] to 2
+TrieNode: 81 
+Aggregated Scenario Indices: 
+58 117 176 235 
+outputGroup: setting ml[169] to 14
+TrieNode: 82 6 96 81 80 78 79 75 76 77 74 72 73 
+Aggregated Scenario Indices: 
+118 
+outputGroup: setting ml[170] to 14
+TrieNode: 82 80 78 81 6 96 79 75 76 77 74 72 73 
+Aggregated Scenario Indices: 
+59 
+outputGroup: setting ml[171] to 14
+TrieNode: 82 81 6 80 78 79 75 76 77 74 72 73 96 
+Aggregated Scenario Indices: 
+177 
+outputGroup: setting ml[172] to 14
+TrieNode: 82 81 80 78 79 75 76 77 74 72 73 6 96 
+Aggregated Scenario Indices: 
+236 
+groups[0].ml : 2
+groups[1].ml : 2
+groups[4].ml : 83
+groups[7].ml : 62
+groups[8].ml : 83
+groups[14].ml : 64
+groups[16].ml : 62
+groups[19].ml : 62
+groups[23].ml : 62
+groups[27].ml : 64
+groups[32].ml : 83
+groups[35].ml : 83
+groups[40].ml : 92
+groups[44].ml : 93
+groups[50].ml : 92
+groups[51].ml : 92
+groups[55].ml : 2
+groups[56].ml : 83
+groups[58].ml : 82
+groups[60].ml : 3
+groups[61].ml : 82
+groups[63].ml : 82
+groups[66].ml : 82
+groups[70].ml : 82
+groups[75].ml : 83
+groups[79].ml : 64
+groups[83].ml : 63
+groups[87].ml : 62
+groups[91].ml : 62
+groups[93].ml : 2
+groups[94].ml : 2
+groups[95].ml : 53
+groups[100].ml : 49
+groups[102].ml : 31
+groups[107].ml : 51
+groups[109].ml : 62
+groups[112].ml : 62
+groups[118].ml : 62
+groups[120].ml : 30
+groups[123].ml : 27
+groups[125].ml : 2
+groups[126].ml : 29
+groups[131].ml : 27
+groups[134].ml : 20
+groups[138].ml : 19
+groups[143].ml : 19
+groups[145].ml : 5
+groups[146].ml : 4
+groups[147].ml : 2
+groups[148].ml : 2
+groups[150].ml : 14
+groups[152].ml : 2
+groups[153].ml : 14
+groups[158].ml : 14
+groups[161].ml : 2
+groups[164].ml : 14
+groups[167].ml : 14
+groups[168].ml : 2
+groups[170].ml : 14
+groups[0].ml : 2
+groups[1].ml : 2
+groups[2].ml : 83
+candidate longest event 61
+length: 83
+group 2 max length: 83
+groups[6].ml : 62
+groups[11].ml : 82
+groups[15].ml : 64
+groups[17].ml : 62
+groups[20].ml : 62
+groups[25].ml : 62
+groups[29].ml : 64
+groups[34].ml : 83
+groups[37].ml : 83
+groups[41].ml : 92
+groups[45].ml : 93
+groups[49].ml : 92
+groups[52].ml : 92
+groups[55].ml : 2
+groups[56].ml : 83
+groups[58].ml : 82
+groups[60].ml : 3
+groups[61].ml : 82
+groups[64].ml : 82
+groups[68].ml : 82
+groups[70].ml : 82
+groups[74].ml : 83
+groups[77].ml : 64
+groups[81].ml : 63
+groups[85].ml : 62
+groups[89].ml : 60
+groups[93].ml : 2
+groups[94].ml : 2
+groups[96].ml : 53
+groups[99].ml : 49
+groups[102].ml : 31
+groups[104].ml : 51
+groups[110].ml : 62
+groups[114].ml : 62
+groups[116].ml : 62
+groups[122].ml : 30
+groups[123].ml : 27
+groups[125].ml : 2
+groups[127].ml : 29
+groups[131].ml : 27
+groups[136].ml : 21
+groups[140].ml : 20
+groups[144].ml : 19
+groups[145].ml : 5
+groups[146].ml : 4
+groups[147].ml : 2
+groups[148].ml : 2
+groups[151].ml : 13
+groups[152].ml : 2
+groups[155].ml : 13
+groups[157].ml : 13
+groups[161].ml : 2
+groups[163].ml : 14
+groups[165].ml : 14
+groups[168].ml : 2
+groups[169].ml : 14
+groups[0].ml : 2
+groups[1].ml : 2
+groups[3].ml : 82
+groups[6].ml : 62
+groups[10].ml : 82
+groups[13].ml : 64
+groups[18].ml : 62
+groups[21].ml : 62
+groups[26].ml : 62
+groups[30].ml : 64
+groups[33].ml : 83
+groups[38].ml : 83
+groups[42].ml : 92
+groups[46].ml : 93
+groups[48].ml : 92
+groups[54].ml : 92
+groups[55].ml : 2
+groups[56].ml : 83
+groups[58].ml : 82
+groups[60].ml : 3
+groups[61].ml : 82
+groups[63].ml : 82
+groups[67].ml : 82
+groups[72].ml : 82
+groups[76].ml : 83
+groups[78].ml : 64
+groups[82].ml : 63
+groups[86].ml : 62
+groups[90].ml : 60
+groups[93].ml : 2
+groups[94].ml : 2
+groups[98].ml : 53
+groups[101].ml : 49
+groups[102].ml : 31
+groups[105].ml : 51
+groups[111].ml : 62
+groups[115].ml : 62
+groups[117].ml : 62
+groups[122].ml : 30
+groups[124].ml : 27
+groups[125].ml : 2
+groups[128].ml : 29
+groups[130].ml : 27
+groups[135].ml : 20
+groups[139].ml : 19
+groups[141].ml : 19
+groups[145].ml : 5
+groups[146].ml : 4
+groups[147].ml : 2
+groups[148].ml : 2
+groups[149].ml : 14
+groups[152].ml : 2
+groups[156].ml : 13
+groups[159].ml : 13
+groups[161].ml : 2
+groups[163].ml : 14
+groups[166].ml : 14
+groups[168].ml : 2
+groups[171].ml : 14
+groups[0].ml : 2
+groups[1].ml : 2
+groups[5].ml : 4
+groups[6].ml : 62
+groups[9].ml : 53
+groups[12].ml : 51
+groups[16].ml : 62
+groups[22].ml : 49
+groups[24].ml : 49
+groups[28].ml : 51
+groups[31].ml : 57
+groups[36].ml : 83
+groups[39].ml : 92
+groups[43].ml : 93
+groups[47].ml : 92
+groups[53].ml : 92
+groups[55].ml : 2
+groups[57].ml : 83
+groups[59].ml : 82
+groups[60].ml : 3
+groups[62].ml : 82
+groups[65].ml : 82
+groups[69].ml : 80
+groups[71].ml : 80
+groups[73].ml : 84
+groups[80].ml : 64
+groups[84].ml : 63
+groups[88].ml : 62
+groups[92].ml : 60
+groups[93].ml : 2
+groups[94].ml : 2
+groups[97].ml : 53
+groups[101].ml : 49
+groups[103].ml : 31
+groups[106].ml : 49
+groups[108].ml : 35
+groups[113].ml : 49
+groups[119].ml : 35
+groups[121].ml : 30
+groups[124].ml : 27
+groups[125].ml : 2
+groups[129].ml : 29
+groups[132].ml : 27
+groups[133].ml : 20
+groups[137].ml : 20
+groups[142].ml : 19
+groups[145].ml : 5
+groups[146].ml : 4
+groups[147].ml : 2
+groups[148].ml : 2
+groups[149].ml : 14
+groups[152].ml : 2
+groups[154].ml : 13
+groups[160].ml : 13
+groups[161].ml : 2
+groups[162].ml : 14
+groups[166].ml : 14
+groups[168].ml : 2
+groups[172].ml : 14

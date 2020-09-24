@@ -1,0 +1,362 @@
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[{impact data}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the impact block that is used in the objective or constraint block.
+                
+                Required input.
+                
+    \item[{impact file}]\hfill
+\\The name of the impact file that is created by \code{sim2Impact} and 
+                contains the detection time and the total
+                impact given a sensor at that node is the first to detect
+                contamination from that scenario. 
+                The impact file format is documented in File Formats Section \ref{formats_impactFile}.
+                
+                Required input.
+                
+    \item[{nodemap file}]\hfill
+\\The name of the nodemap file that is created by \code{sim2Impact} and 
+                maps sensor placement ids to the network node labels. 
+                The nodemap file format is documented in File Formats Section \ref{formats_nodeFile}.
+                
+                Required input.
+                
+    \item[{weight file}]\hfill
+\\The name of the weight file that specifies the weights for contamination
+                incidents. This file supports the optimization of weighted
+                impact metrics. 
+                The weight file format is documented in File Formats Section \ref{formats_weightFile}.
+                
+                Optional input; by default, incidents are optimized with weight 1.
+  \end{description}
+
+  \item[{cost}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the cost block that is used in the objective or constraint block.
+                
+                Optional input.
+    \item[{cost file}]\hfill
+\\The name of the cost file that contains the costs for the installation of
+                sensors throughout the distribution network. This file contains
+                EPANET ID/cost pairs.
+                The cost file format is documented in File Formats Section \ref{formats_costFile}.
+                
+                Optional input.
+  \end{description}
+  \item[{objective}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the objective block that is used in sensor placement block.
+                
+                Required input.
+    \item[{goal}]\hfill
+\\The objective of the optimization process that defines what is going to minimized. 
+                The options are the name of the impact block, the name of the cost block, 
+                the number of sensors (NS) or the number of failed detections (NFD).
+				
+				Required input.
+    \item[{statistic}]\hfill
+      \\The objective statistic. The TOTAL
+      statistic is used when the goal is NS                             or
+      NFD. When the goal is to compute a                             statistic
+      of an impact block, the options                             are MEAN,
+      MEDIAN, VAR, TCE, CVAR, TOTAL                             or WORST. For
+      example, MEAN will minimize                             the mean impacts
+      over all of the                             contamination scenarios,
+      while WORST                             will only minimize the worst
+      impacts                             from the ensemble of contamination
+      scenarios.                                  Required input.
+    \item[{gamma}]\hfill
+      \\The value of gamma that specifies the                 fraction of the
+      distribution of impacts that will                 be used to compute the
+      VAR, CVAR and TCE statistics.                 Gamma is assumed to be in
+      the interval (0,1], which means                  that gamma can be
+      greater than zero but less than or equal to one. It                 can
+      be interpreted as specifying the 100*gamma                 percent of
+      the worst contamination incidents that                 are used for
+      these calculations.                  Required input for VAR or CVAR
+      objective statistics,                 default = 0.05.
+  \end{description}
+  \item[{constraint}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the constraint block that is used in sensor placement block.
+                
+                Required input.
+    \item[{goal}]\hfill
+\\The constraint goal. The options are the name of the impact block name, 
+                the name of the cost block, the number of sensors (NS) or the number of failed detections (NFD).
+                
+                Required input.
+    \item[{statistic}]\hfill
+\\The constraint statistic. The TOTAL
+                statistic is used when the goal is NS
+                or NFD. When the goal is to compute a
+                statistic of an impact block, the options
+                are MEAN, MEDIAN, VAR, TCE, CVAR, TOTAL
+                or WORST. For example, MEAN will constrain
+                the mean impacts over all of the
+                contamination scenarios, while WORST
+                will only constrain the worst impacts
+                from the ensemble of contamination
+                scenarios.
+
+                Required input.
+    \item[{gamma}]\hfill
+\\The value of gamma that specifies the fraction of the distribution of impacts that
+                will be used to compute the VAR, CVAR and TCE statistics. Gamma
+                is assumed to be in the interval (0,1], which means that gamma 
+				can be greater than zero but less than or equal to one. It can be interpreted
+                as specifying the 100*gamma percent of the worst contamination
+                incidents that are used for these calculations.  
+                
+                Required input for VAR or CVAR objective statistics, default = 0.05.
+    \item[{bound}]\hfill
+\\The upper bound on the constraint.
+                
+                Optional input.
+  \end{description}
+  \item[{aggregate}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the aggregation block that is used in sensor placement block.
+                
+                Optional input.
+    \item[{type}]\hfill
+\\The type of aggregation used to reduce the size of the sensor placement problem.  
+                The options are THRESHOLD, PERCENT or RATIO.
+
+                THRESHOLD is used to aggregate similar impacts by specifying a goal and a value.  
+                This is used to reduce the total size of the sensor placement formulation (for large problems).
+                Solutions generated with non-zero thresholds are not guaranteed
+                to be globally optimal.
+
+                PERCENT is an alternative method to compute the aggregation threshold 
+                in which the value (of the goal-value pair) is a real number between 0.0 and 1.0. 
+                Over all contamination incidents, compute the maximum difference, d, between the impact of the
+                contamination incident if it is not detected and the impact if it is detected
+                at the earliest possible feasible location and set the aggregation threshold to 
+                d times the aggregation percent. If both THRESHOLD and PERCENT are set to valid values, 
+                then PERCENT takes priority.
+
+                RATIO is also specified with a goal-value pair in which value is a real number between
+                0.0 and 1.0.
+                
+                Optional input.
+    \item[{goal}]\hfill
+\\The aggregation goal for the aggregation type.
+                
+                Optional input.
+    \item[{value}]\hfill
+\\The aggregation value for the aggregation type. If the aggregation type is PERCENT or RATIO,
+                then this value is a real number between 0.0 and 1.0.
+                
+                Optional input.
+    \item[{conserve memory}]\hfill
+\\The maximum number of impact files that should be read into memory 
+                at any one time. This option allows impact files to be processed in 
+                a memory conserving mode if location aggregation is chosen and the original impact
+                files are very large. For example, a conserve memory value of 10000 requests
+                that no more than 10000 impacts should be read into memory at any one 
+                time while the original impact files are being processed into smaller
+                aggregated files.  
+				
+				Optional input, default = zero to turn off this option.
+    \item[{distinguish detection}]\hfill
+\\A goal for which aggregation should not allow incidents to
+                become trivial. If the aggregation threshold is so large that all
+                locations, including the dummy, would form a single superlocation,
+                this forces the dummy to be in a superlocation by itself. Thus,
+                the sensor placement will distinguish between detecting and not
+                detecting. This option can be listed multiple times, to specify
+                multiple goals. 
+                
+                Optional input, default = 0.
+    \item[{disable aggregation}]\hfill
+\\Disable aggregation for this goal, even at value zero, which
+                would incur no error. Each witness incident will be in a separate
+                superlocation. This option can be listed multiple times to
+                specify multiple goals. ALL can be used to specify
+                all goals. 
+                
+                Optional input, default = 0.
+  \end{description}
+  \item[{imperfect}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{name}]\hfill
+\\The name of the imperfect block that is used in sensor placement block.
+                
+                Optional input.
+    \item[{sensor class file}]\hfill
+\\The name of the imperfect sensor class file that defines the detection probabilities
+                for all sensor categories. It is used with the imperfect-sensor model 
+                and must be specified in conjunction with a imperfect junction class file.
+                The imperfect sensor class file format is documented in File Formats Section \ref{formats_sensorClass}.
+                
+                Optional input.
+    \item[{junction class file}]\hfill
+\\The name of the imperfect junction class file that defines a sensor category for
+                each network node. It is used with the imperfect-sensor model and
+                must be specified in conjunction with a imperfect sensor class file.
+                The imperfect junction class file format is documented in File Formats Section \ref{formats_junctionClass}.
+                
+                Optional input.
+  \end{description}
+  \item[{sensor placement}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The sensor placement problem type. The command \code{wst sp ---help-problems} 
+                provides a list of problem types for sensor placement. For example, average-case perfect-sensor
+                is the standard problem type for sensor placement, since it uses the mean statistic, 
+                zero constraints, single objective and perfect sensors. 
+                
+                Required option, default = average-case perfect-sensor.
+    \item[{modeling language}]\hfill
+\\The modeling language to generate the sensor placement optimization 
+                problem. The options are NONE, PYOMO or AMPL. 
+
+                Required input, default = NONE.
+    \item[{objective}]\hfill
+\\The name of the objective block previously defined to be used in sensor placement.
+                
+                Required input.
+    \item[{constraint}]\hfill
+\\The name of the constraint block previously defined to be used in sensor placement.
+                
+                Required input.
+    \item[{imperfect}]\hfill
+\\The name of the imperfect block previously defined to be used in sensor placement.
+                
+                Optional input.
+    \item[{aggregate}]\hfill
+\\The name of the aggregate block previously defined to be used in sensor placement.
+                
+                Optional input.
+    \item[{compute bound}]\hfill
+\\A flag to indicate if bounds should be computed on the sensor placement
+                solution. The options are true or false. 
+                
+                Optional input, default = false.
+    \item[{presolve}]\hfill
+\\A flag to indicate if the sensor placement problem should be presolved. 
+                The options are true or false. 
+                
+                Optional input, default = true.
+    \item[{compute greedy ranking}]\hfill
+\\A flag to indicate if a greedy ranking of the sensor locations should be calculated. 
+                The options are true or false. 
+                
+                Optional input, default = false.
+    \item[{location}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{feasible nodes}]\hfill
+\\A list that defines nodes that can be considered for the sensor placement problem.
+                The options are:
+                (1) ALL, which specifies all nodes as feasible sensor locations;
+                (2) NZD, which specifies all non-zero demand nodes as feasible sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as feasible sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as feasible sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Required input, default = ALL.
+      \item[{infeasible nodes}]\hfill
+\\A list that defines nodes that cannot be considered for the sensor placement problem.
+                The options are:
+                (1) ALL, which specifies all nodes as infeasible sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as infeasible sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as infeasible sensor locations;
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as infeasible sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+      \item[{fixed nodes}]\hfill
+\\A list that defines nodes that are already sensor locations.
+                The options are:
+                (1) ALL, which specifies all nodes as fixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as fixed sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as fixed sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as fixed sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+      \item[{unfixed nodes}]\hfill
+\\A list that defines nodes that are unfixed sensor locations.
+                The options are:
+                (1) ALL, which specifies all nodes as unfixed sensor locations;
+                (2) NZD, which specifies non-zero demand nodes as unfixed sensor locations;
+                (3) a list of EPANET node IDs, which identifies specific nodes as unfixed sensor locations; 
+                (4) a filename, which references a space or comma separated file containing a list of 
+                specific nodes as unfixed sensor locations; or
+                (5) NONE, which indicates this option is ignored.
+                
+                Optional input, default = NONE.
+    \end{description}
+  \end{description}
+  \item[{solver}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{type}]\hfill
+\\The solver type. Each component of WST
+				(e.g., sensor placement, flushing response, booster 
+				placement) has different 
+				solvers available. More specific details are provided in 
+				the subcommand's chapter.
+                
+                Required input.
+    \item[{options}]\hfill
+\\A list of options associated with a specific solver type. More
+            information on the options available for a specific solver
+            is provided in the solver's documentation. The Getting
+            Started Section \ref{dependencies} provides links to the
+            different solvers.
+            
+            Optional input.
+    \item[{threads}]\hfill
+\\The maximum number of threads or function evaluations the solver is
+                allowed to use.  This option is not available to all solvers or all analyses.
+                
+                Optional input.
+    \item[{logfile}]\hfill
+\\The name of a file to output the results of the solver.
+                
+                Optional input.
+    \item[{verbose}]\hfill
+\\The solver verbosity level.
+                
+                Optional input, default = 0 (lowest level).
+    \item[{initial points}]\hfill
+    \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+      \item[{nodes}]\hfill
+\\A list of node locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing and booster\_msx
+        subcommands. This input causes an error for other subcommands.
+        
+        Optional input.
+      \item[{pipes}]\hfill
+\\A list of pipe locations (EPANET IDs) to begin the optimization
+        process. Currently, this option is only supported for the
+        network solver used in the flushing subcommand. This input causes an error for other subcommands.
+        
+        Optional input.
+    \end{description}
+  \end{description}
+  \item[{configure}]\hfill
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+    \item[{output prefix}]\hfill
+\\The prefix used for all output files.
+                
+                Required input.
+    \item[{output directory}]\hfill
+      \\The output directory to store the results.
+    \item[{debug}]\hfill
+\\The debugging level (0 or 1) that indicates the amount of debugging 
+                information printed to the screen, log file and output yml file. 
+                
+                Optional input, default = 0 (lowest level).
+  \end{description}
+\end{description}

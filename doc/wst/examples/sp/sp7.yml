@@ -1,0 +1,19 @@
+impact data:
+- name: impact1
+  impact file: Net3_ec.impact
+  nodemap file: Net3.nodemap
+objective:
+- goal: impact1
+  statistic: MEAN
+constraint:
+- goal: NS
+  statistic: TOTAL
+  bound: 5.0
+problem:
+  type: default
+  presolve: True
+solver:
+  type: lagrangian
+configure:
+  output prefix: Net3
+  debug: 0

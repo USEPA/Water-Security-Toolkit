@@ -1,0 +1,26 @@
+#! /usr/bin/env python
+
+import sys
+import os
+from os.path import normpath, join, dirname, abspath
+currdir = dirname(abspath(__file__))
+pythondir = normpath( join( currdir, '..', '..', '..', '..', 'python' ) )
+import site
+site.addsitedir(pythondir)
+sys.path.insert(0, normpath( join( currdir, '..' ) ))
+sys.path.append(".")
+
+from pyutilib.th.runtests import main
+
+package="pyspot"
+subpackages = ['evalsensor', 'sp', 'pico', 'tevasim', 'tso2Impact']
+filter = []
+
+if currdir.endswith('pyunit'):
+    testdir = normpath( join( currdir, '..', '..' ) )
+    main(sys.argv, package, subpackages, filter, testdir, dirname=join("test","pyunit"))
+else:
+    testdir = normpath( join( currdir, '..') )
+    bindir = join(testdir,'bin')
+    os.environ['PATH']=os.pathsep.join([bindir,os.environ['PATH']])
+    main(sys.argv, package, subpackages, filter, testdir, dirname="test")

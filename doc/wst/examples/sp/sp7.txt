@@ -1,0 +1,34 @@
+Running command ...
+/Users/wehart/home/mac/src/wst/bin/ufl /Users/wehart/home/mac/src/wst/doc/wst/examples/sp/sp7/wst_sp_w_Ebo_r9aPZo.lag 5 0 /Users/wehart/home/mac/src/wst/doc/wst/examples/sp/sp7/wst_sp_w_Ebo_.json
+ ncust: 236
+ Best integer solution value: 9972.843120
+ Lower bound: 9972.647685
+ Total Time: 0.100000 secs
+====================
+Optimization Results
+====================
+Objective:   9972.84312
+Lower Bound: 9972.647685
+Upper Bound: 9972.84312
+
+Solutions: [[18, 53, 62, 74]]
+Locations: [['117', '191', '206', '237']]
+------------------------------------------------------------------------------
+Sensor placement id:        4140
+Number of sensors:          4
+Total cost:                 0
+Sensor node IDs:            18 53 62 74 
+Sensor junctions:           117 191 206 237 
+
+Impact File:                Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                13753.9102
+Lower quartile impact:      1650.0000
+Median impact:              10484.0000
+Upper quartile impact:      20016.0000
+Value at Risk (VaR) (  5%): 38731.0000
+TCE                 (  5%): 55265.3333
+Max impact:                 67975.0000
+------------------------------------------------------------------------------
+

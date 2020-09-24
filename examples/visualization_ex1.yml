@@ -1,0 +1,46 @@
+network:
+    epanet file: Net3/Net3.inp
+visualization:
+  screen:
+    color: white                
+    size: [1600, 1000]          
+  legend:
+    color: white                
+    scale: 2.0                     
+    location: [20, 20]      
+  junctions:
+    color: black  
+    size: 5.0
+    opacity: 0.5
+  reservoirs:
+    color: '#a0b0f8'
+    size: 18.0
+    opacity: 1
+  tanks:
+    color: '#3ec427'
+    size: 18.0
+    opacity: 1
+  pipes:
+    color: black
+    size: 1.0
+    opacity: 0.5
+  pumps:
+    color: maroon
+    size: 10.0
+    opacity: 1                   
+  layers:
+    label: Five Pipes
+    locations: ['145', '287', '155', '231', '175']           
+    file: null
+    location type: link     
+    shape: circle             
+    fill:
+      color: red
+      size: [8, 10, 12, 24, 30]
+      opacity: 1
+      color range: null         
+      size range: null  
+      opacity range: null           
+configure:
+  output prefix: ${CWD}/visualization_ex1/Net3 
+  debug: 0

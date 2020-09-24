@@ -1,0 +1,13 @@
+# sim2Impact configuration template
+impact:
+  erd file: [Net3.erd]                   # ERD database file name
+  metric: [MC]                           # Impact metric
+  tai file: null                         # Health impact file name, required for public health
+                                         #   metrics
+  response time: 0                       # Time [min] needed to respond
+  detection limit: [0.0]                 # Thresholds needed to perform detection
+  detection confidence: 1                # Number of sensors for detection
+configure:
+  output prefix: Net3                    # Output file prefix
+  output directory: SIGNALS_DATA_FOLDER  # Output directory
+  debug: 0                               # Debugging level, default = 0

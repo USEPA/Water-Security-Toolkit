@@ -1,0 +1,54 @@
+Changelog WST 1.3 (2016/1/04)
+========================
+WST 1.3 includes the following changes:
+ - New capabilities to solve flushing optimization for large problems, 
+   including parallelization and stop time criteria
+ - Compatibility with Pyomo 4.0 
+ - CMake build harness 
+ - Additional tests 
+ - Bug fixes
+
+Changelog WST 1.2 (2014/12/22)
+========================
+WST 1.2 expands the capabilities of WST with the following features:
+ - Added the EPANET_BTX and CSA libraries for source inversion
+ - Expanded booster_mip to include the PD metric
+ - Added the network local search solver to booster_msx
+ - Efficiency improvements to the flushing component (bundling
+   simulation scenarios) 
+ - Expanded support for result visualization
+ - A prototype build harness based on CMake
+ - Numerous bug fixes
+
+Changelog WST 1.1.1 (2014/03/31)
+========================
+WST 1.1.1 is a patch release that bundles an updated version of PyEPANET
+that corrects issues some users were seeing with the PyEPANET interface
+to the EPANET DLL on Windows platforms.
+
+Changelog WST 1.1 (2014/02/06)
+========================
+WST 1.1 is the first external release for WST.  WST builds upon the simulation 
+and optimization framework of TEVA-SPOT and adds several new features. These 
+features were all developed to model possible response action plans once 
+contamination has been detected in the system.  WST 1.1 includes the following 
+components:
+ - Contaminant transport
+ - Impact assessment
+ - Sensor placement
+ - Hydrant flushing locations
+ - Booster placement
+ - Source inversion
+ - Grab sampling
+
+The WST User Manual documents the use of each component in WST.
+
+Changelog WST 1.0 (2012/4/19)
+========================
+Preliminary release of WST intended as a test bed for the development team.
+The contaminant transport simulation, impact assessment and sensor placement 
+optimization tools were all developed as part of the TEVA-SPOT Toolkit.  
+All functionality in TEVA-SPOT has been replicated in WST using new, user 
+friendly YAML format configuration files. Future development for functionality 
+in TEVA-SPOT will occur in the WST software repository. 
+https://software.sandia.gov/trac/wst.

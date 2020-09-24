@@ -1,0 +1,11 @@
+#!/bin/csh
+##
+## Location of bin directory depends on whether test is running
+## in a source/build/dist tree or in a binary installation.
+##
+
+if (-e ../../python) then
+  echo `pwd`/../../bin
+else
+  echo `pwd`/../../../bin
+endif

@@ -1,0 +1,192 @@
+IMPORTANT INFORMATION REGARDING ERD2SCADA
+
+========
+CONTENTS
+========
+- General Info
+- erd2scada library
+- Code Examples
+- canary xml modifications
+
+
+
+
+============
+GENERAL INFO
+============
+- erd2scada is a shared object library.  we can think of this
+ as a library that does canary file parsing and translation
+ of scada tags to epanet indices.  there are 2 functions available
+ right now...  they are listed in the next section with descriptions.
+
+- runERD2SCADA is a simulation tool that uses the erd2scada library
+ to get scada tag information, then it connects with a MySQL server
+ and starts sending selected "measurements" from a pre-existing ERD
+ database to that server.  It does this in real time.
+ 
+ 
+ 
+ 
+=================
+erd2scada library
+=================
+this library has two functions available as of this writing, and
+a couple of useful structures and an enumeration definition.
+here they are:
+
+
+
+pSCADAinfo initializeSCADAinfo(char* xmlConfigFile)
+-------------------------------------------------------------------------------
+this function opens the xml canary file specified in string format,
+and returns a pointer to a SCADAinfo structure (see below).  all the 
+xml parsing is done internally, so you don't have to mess with it.
+-------------------------------------------------------------------------------
+
+
+
+
+int getTagIndexByScada(char* myScadaID, pSCADAinfo mySCADAinfo)
+-------------------------------------------------------------------------------
+this function just cycles through all the SCADAtag structures contained in
+mySCADAinfo, and retreives the tag index for the tag of that scada-id.
+in other words, use this to find the index of a tag by its string name.
+-------------------------------------------------------------------------------
+
+
+
+
+
+struct {
+	pSCADAtag* tags;
+	char dbAddress[MAX_DB_ADDR];
+	int numTags;
+}
+SCADAinfo, *pSCADAinfo;
+-------------------------------------------------------------------------------
+this is the main structure for storing scada tag information.
+pSCADAinfo->tags is an array of SCADAtag pointers (see below).
+dbAdress is the string address of the mysql server.
+numTags is the number of tags.
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+struct 
+{	
+	char epanetID[MAX_TAG_LEN];
+	char shortID[MAX_TAG_LEN];
+	char scadaID[MAX_TAG_LEN];
+	signalTypes signalType;
+	char units[MAX_TAG_LEN];
+	char description[MAX_TAG_LEN];
+} SCADAtag, *pSCADAtag;
+-------------------------------------------------------------------------------
+so we have one of these structures for every scada tag in the canary file.
+information is just copied to this right from the xml attributes.
+-------------------------------------------------------------------------------
+
+
+
+
+
+typedef enum signalTypes
+{
+	OTHER,
+	FLOW,
+	PRESSURE,
+	ALARM,
+	WQ
+} signalTypes;
+-------------------------------------------------------------------------------
+this is meant to help relate information about the measuring device to epanet
+element type.  flow would be a link, pressure would be a node, etc.
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+=============
+CODE EXAMPLES
+=============
+
+
+
+Parsing the canary file
+-----------------------
+
+char *xmlConfigFile = "myCanaryFile.xml";
+pSCADAinfo mySCADAinfo = initializeSCADAinfo(xmlConfigFile);
+
+
+
+
+
+
+
+Finding the EPANET index and type of a scada tag
+------------------------------------------------
+
+char *myScadaID = "Px00002003";
+int enIndex;
+int tagIndex;
+signalTypes mySignalType;
+
+tagIndex = getTagIndexByScada(myScadaID, mySCADAinfo)
+
+enIndex = EN_getIndexbyID(mySCADAinfo->tag[tagIndex]->epanetID);
+
+if(mySCADAinfo->tags[tagIndex]->signalType == FLOW)
+	// the element is a link.
+else if(mySCADAinfo->tags[tagIndex]->signalType == PRESSURE)
+	// the elemnt is a node.
+
+
+
+
+
+
+
+
+
+
+========================
+CANARY XML MODIFICATIONS
+========================
+
+for each signal tag, we need to locate this device topographically in the 
+EPAnet input file.  so we add the following attribute to each tag:
+
+ epanet-ID="@@someID@@"
+
+where the quoted string is replaced by the epanet index number of the element matching 
+the location of the measurement device.  erd2scada does not care if this is a link or 
+junction, so be sure to check the mySCADAinfo->tags[tagIndex]->signalType 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+T H R E A T  E N S E M B L E  V U L N E R A B I L I T Y  A N A L Y S I S
+                               (T E V A)
+                    T H R E A T  S I M U L A T O R
+                              Version 1.2
+
+T E V A is using Epanet release 20012
+Initializing Epanet 
+Computing network hydraulics at time = 48:00  
+Computing network water quality:
+Scenario 00001, injection nodes              15,  time48:00  
+Scenario 00002, injection nodes              35,  time48:00  
+Scenario 00003, injection nodes             101,  time48:00  
+Scenario 00004, injection nodes             103,  time48:00  
+Scenario 00005, injection nodes             105,  time48:00  
+Scenario 00006, injection nodes             107,  time48:00  
+Scenario 00007, injection nodes             109,  time48:00  
+Scenario 00008, injection nodes             111,  time48:00  
+Scenario 00009, injection nodes             113,  time48:00  
+Scenario 00010, injection nodes             115,  time48:00  
+Scenario 00011, injection nodes             117,  time48:00  
+Scenario 00012, injection nodes             119,  time48:00  
+Scenario 00013, injection nodes             121,  time48:00  
+Scenario 00014, injection nodes             123,  time48:00  
+Scenario 00015, injection nodes             125,  time48:00  
+Scenario 00016, injection nodes             127,  time48:00  
+Scenario 00017, injection nodes             131,  time48:00  
+Scenario 00018, injection nodes             139,  time48:00  
+Scenario 00019, injection nodes             141,  time48:00  
+Scenario 00020, injection nodes             143,  time48:00  
+Scenario 00021, injection nodes             145,  time48:00  
+Scenario 00022, injection nodes             147,  time48:00  
+Scenario 00023, injection nodes             149,  time48:00  
+Scenario 00024, injection nodes             151,  time48:00  
+Scenario 00025, injection nodes             153,  time48:00  
+Scenario 00026, injection nodes             157,  time48:00  
+Scenario 00027, injection nodes             159,  time48:00  
+Scenario 00028, injection nodes             161,  time48:00  
+Scenario 00029, injection nodes             163,  time48:00  
+Scenario 00030, injection nodes             166,  time48:00  
+Scenario 00031, injection nodes             167,  time48:00  
+Scenario 00032, injection nodes             171,  time48:00  
+Scenario 00033, injection nodes             177,  time48:00  
+Scenario 00034, injection nodes             185,  time48:00  
+Scenario 00035, injection nodes             189,  time48:00  
+Scenario 00036, injection nodes             191,  time48:00  
+Scenario 00037, injection nodes             193,  time48:00  
+Scenario 00038, injection nodes             197,  time48:00  
+Scenario 00039, injection nodes             199,  time48:00  
+Scenario 00040, injection nodes             201,  time48:00  
+Scenario 00041, injection nodes             203,  time48:00  
+Scenario 00042, injection nodes             205,  time48:00  
+Scenario 00043, injection nodes             207,  time48:00  
+Scenario 00044, injection nodes             209,  time48:00  
+Scenario 00045, injection nodes             211,  time48:00  
+Scenario 00046, injection nodes             213,  time48:00  
+Scenario 00047, injection nodes             215,  time48:00  
+Scenario 00048, injection nodes             217,  time48:00  
+Scenario 00049, injection nodes             219,  time48:00  
+Scenario 00050, injection nodes             225,  time48:00  
+Scenario 00051, injection nodes             229,  time48:00  
+Scenario 00052, injection nodes             231,  time48:00  
+Scenario 00053, injection nodes             237,  time48:00  
+Scenario 00054, injection nodes             239,  time48:00  
+Scenario 00055, injection nodes             243,  time48:00  
+Scenario 00056, injection nodes             247,  time48:00  
+Scenario 00057, injection nodes             251,  time48:00  
+Scenario 00058, injection nodes             253,  time48:00  
+Scenario 00059, injection nodes             255,  time48:00  
+
+Species generated/saved:
+  Species idx stored?
+  species   0 stored
+Elapsed time for quality simulations (seconds): 1.000000e+00
+T E V A  Normal  Termination

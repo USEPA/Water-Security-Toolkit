@@ -1,0 +1,43 @@
+read_impact_files:  Net3_ec.impact
+Note: witness aggregation disabled for grasp
+
+Number of Nodes                :  97
+Number of Contamination Impacts: 9480
+
+Number of sensors=5
+Objective=ec
+Statistic=mean
+Impact file=Net3_ec.impact
+Delay=0
+
+Running iterated descent SNL grasp for *perfect* sensor model
+Iterated descent completed
+# No weights file: Net3_ec.impact.prob
+------------------------------------------------------------------------------
+Sensor placement id:        8909
+Number of sensors:          5
+Total cost:                 0
+Sensor node IDs:            21 33 54 63 75 
+Sensor junctions:           121 151 193 207 239 
+
+Impact File:                Net3_ec.impact
+Number of events:           236
+Min impact:                 0.0000
+Mean impact:                8656.5521
+Lower quartile impact:      0.0000
+Median impact:              6480.0000
+Upper quartile impact:      13890.0000
+Value at Risk (VaR) (  5%): 28010.0000
+TCE                 (  5%): 35838.3667
+Max impact:                 44525.0000
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+Greedy ordering of sensors: Net3_ec.impact
+------------------------------------------------------------------------------
+-1	59035.8890
+54	29087.3165
+33	18779.7581
+63	11622.1623
+75	10102.3572
+21	8656.5521
+Done with sp

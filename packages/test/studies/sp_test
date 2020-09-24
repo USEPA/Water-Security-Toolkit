@@ -1,0 +1,314 @@
+#! /usr/bin/env python
+##
+## BUG: this script cannot correctly handle AMPL option values that contain a white space.
+##
+
+import signal
+import sys
+import re
+import os
+import random
+import math
+import types
+import shutil
+pathname = os.path.dirname(sys.argv[0])
+fullpath = os.path.abspath(pathname)
+
+etcdir="../../../../../etc/"
+bindir=fullpath+"/../../../bin/"
+slash = os.sep
+
+os.sys.path = os.sys.path + [fullpath + "/../../../tpl/acro/packages/fast"]
+os.sys.path = os.sys.path + [fullpath + "/../../../tpl/acro/packages/pyutilib"]
+from fast import exact
+import pyutilib
+import commands
+
+#
+# Process the output log
+#
+def process_log(OUTPUT,logfile):
+        status = 1
+        tstatus = "Normal"
+        leak_flag=False
+        valgrind_leaks="-1"
+        valgrind_errors="-1"
+        if os.path.exists(logfile):
+           INPUT = open(logfile,"r")
+           i=0
+           for line in INPUT:
+             i = i + 1
+             words = re.split('[ \t]+',line.strip())
+             if len(words) < 2:
+                continue
+
+             # pico
+             if len(words)>=5 and words[2] == "Value" and words[3] == "=":
+                status = 0
+                print >>OUTPUT, "Value numeric/double " + words[4]
+
+             elif len(words)>=3 and words[0] == "LP" and words[1] == "value=":
+                status = 0
+                print >>OUTPUT, "Value numeric/double " + words[2]
+
+             # heuristic
+             elif len(words)>=3 and words[0] == "Minimum" and words[1] == "cost=":
+                status = 0
+                print >>OUTPUT, "Value numeric/double " + words[2]
+             # lagrangian
+             elif len(words)>=5 and words[0] == "Best" and words[1] == "integer":
+                status = 0
+                print >>OUTPUT, "Value numeric/double " + words[4]
+
+             elif len(words)>=3 and words[0] == "CPU" and words[1] == "RunTime=":
+                print >>OUTPUT, "\"CPU RunTime\" numeric/double " + words[2]
+
+             elif len(words)>=3 and words[0] == "CPU" and words[1] == "TotalTime=":
+                print >>OUTPUT, "\"CPU TotalTime\" numeric/double " + words[2]
+
+             elif len(words)>=3 and words[0] == "WallClock" and words[1] == "TotalTime=":
+                print >>OUTPUT, "\"WallClock TotalTime\" numeric/double " + words[2]
+
+             elif words[0] == "Created":
+                print >>OUTPUT, "\"Subproblems Created\" numeric/integer " + words[1]
+
+             elif words[0] == "Bounded":
+                print >>OUTPUT, "\"Subproblems Bounded\" numeric/integer " + words[1]
+
+             elif words[0] == "Split":
+                print >>OUTPUT, "\"Subproblems Split\" numeric/integer " + words[1]
+
+             elif words[0] == "Dead":
+                print >>OUTPUT, "\"Subproblems Dead\" numeric/integer " + words[1]
+
+             elif len(words)>=3 and words[0] == "Started" and words[1] == "Bounding":
+                print >>OUTPUT, "\"Subproblems Started Bounding\" numeric/integer " + words[2]
+
+             elif len(words)>=3 and words[0] == "Started" and words[1] == "Splitting":
+                print >>OUTPUT, "\"Subproblems Started Splitting\" numeric/integer " + words[2]
+
+             elif len(words)>=5 and words[0] == "Number" and words[3] == "Events:":
+                print >>OUTPUT, "\"Number Contamination Events\" numeric/integer " + words[4]
+
+             elif len(words)>=5 and words[0] == "Number" and words[3] == "Impacts:":
+                print >>OUTPUT, "\"Number Contamination Impacts\" numeric/integer " + words[4]
+
+             elif len(words)>=4 and words[0] == "Number" and words[2] == "variables:":
+                print >>OUTPUT, "\"Number All IP Variables\" numeric/integer " + words[3]
+
+             elif len(words)>=5 and words[0] == "Number" and words[2] == "integer":
+                print >>OUTPUT, "\"Number Integer IP Variables\" numeric/integer " + words[4]
+
+             elif len(words)>=4 and words[0] == "Number" and words[2] == "constraints:":
+                print >>OUTPUT, "\"Number IP Constraints\" numeric/integer " + words[3]
+
+             elif len(words)>=4 and words[0] == "Number" and words[2] == "nonzeros:":
+                print >>OUTPUT, "\"Number IP Nonzeros\" numeric/integer " + words[3]
+
+             elif len(words)>=7 and words[0] == "Valid" and words[2] == "Bound":
+                print >>OUTPUT, "\"Valid Bound\" numeric/double " + words[6]
+
+             elif words[0] == "RUN" and words[1] == "ABORTED:":
+                tstatus = "Aborted"
+                status = 1
+
+             elif len(words)>=5 and words[0] == "Maximum" and words[1] == "memory":
+                print >>OUTPUT, "\"Max-Memory\" numeric/integer " + words[3]
+
+             #
+             # Options for process tso2Impact output
+             #
+             elif len(words)>=3 and words[0] == "Number" and words[2][0:9] == "scenarios":
+                print >>OUTPUT, "\"Number of Scenarios\" numeric/integer " + words[2][10:]
+
+             elif len(words)>=6 and words[0] == "Node" and words[2][0:4] == "file":
+                print >>OUTPUT, "\"NodeMap File\" text/string " + words[5][5:]
+
+             elif len(words)>=5 and words[0] == "Impact" and words[2] == "written":
+                print >>OUTPUT, "\"Impact File\" text/string " + words[4][5:]
+                diffval = commands.getoutput("cd " + cwd + "; diff " + words[4][5:] + " " + etcdir + "Net3/" + ((words[4][5:]).split("/"))[1])
+                if diffval == "":
+                   print >>OUTPUT, "ImpactDiffs numeric/integer 0"
+                else:
+                   print >>OUTPUT, "ImpactDiffs numeric/integer 1"
+                   print >>OUTPUT, "ImpactDiffVal text/string \"\"\""
+                   print >>OUTPUT, diffval
+                   print >>OUTPUT, "\"\"\""
+                status = 0
+
+             elif len(words)>=4 and words[0] == "TSO" and words[2] == "Name:":
+                print >>OUTPUT, "\"TSO File\" text/string " + words[3]
+
+             #
+             # When running under AMPL, the first set of valgrind statistics is the 
+             # one's that we want
+             #
+             elif words[1] == "ERROR" and words[2] == "SUMMARY:" and valgrind_errors == "-1":
+                valgrind_errors = words[3]
+             elif leak_flag==True and words[1] == "definitely" and valgrind_leaks == "-1":
+                valgrind_leaks = words[3]
+                leak_flag=False
+        
+             elif words[1] == "LEAK" and words[2] == "SUMMARY:":
+                leak_flag=True
+        else:
+                print "logfile " + logfile + " doesnt exist"
+
+        #
+        # Remove commas from valgrind #'s
+        #
+        p = re.compile( ',' )
+        valgrind_errors = p.sub( "", valgrind_errors)
+        valgrind_leaks = p.sub( "", valgrind_leaks)
+        print >>OUTPUT, "\"Valgrind Errors\" numeric/integer " + valgrind_errors
+        print >>OUTPUT, "\"Valgrind Leaks\" numeric/integer " + valgrind_leaks
+        print >>OUTPUT, "TerminationStatus text/string " + tstatus
+        print >>OUTPUT, "exit_status numeric/integer " + `status`
+
+
+
+##
+## MAIN
+##
+#
+# Setup signal handler
+#
+if sys.version_info[0:2] >= (2,4):
+   signal.signal(signal.SIGTERM, pyutilib.signal_handler)
+   signal.signal(signal.SIGINT, pyutilib.signal_handler)
+#
+# Process factors
+#
+(factor,option) = exact.process_input_file(sys.argv[2])
+option.set("seed", int(option["seed"]))
+
+if "memmon" in option.keys():
+   option.set("memmon", None)        # from "ExactNone"
+if "memmon" in factor.keys():
+   factor.set("memmon", "memmon")
+
+#
+# Generate log file
+#
+#
+# Compute a simple randomized scalar, and evaluate it with (x-1)^2
+#
+if "EXACT_DRIVER" in os.environ.keys():
+   driver = os.environ["EXACT_DRIVER"]
+else:
+   driver = ""
+cwd = fullpath + slash + os.path.dirname(sys.argv[2])
+#
+# TSO
+#
+if sys.argv[1] == "-tso":
+   cmd = driver + " " + bindir+"tevasim " + factor["tsg_file"] + " " + factor["tso_file"] + " " + factor["epanet_file"]
+#
+# Generate TSO from several TSG files
+#
+if sys.argv[1] == "-gen-tso":
+#-tsg test1.tsg -tsi test1.tsi -tso test1.tso Net3.inp Net3.out
+   cmd = driver + " " + bindir + "tevasim " + factor["tsg_file"] +  " " + factor["tso_file"] + " " + factor["epanet_file"] 
+#
+# Impact
+#
+elif sys.argv[1] == "-impact":
+   if "objectives" in factor.keys():
+      cmd = driver + " " + bindir + "tso2Impact " + factor["impact_prefix"] + " " + factor["objectives"] #+ " " + factor["scenario_aggr"]
+   else:
+      if factor["objective"][0:2] in ["pe", "pk", "pd"]:
+         cmd = driver + " " + bindir+"tso2Impact " + "--" + factor["objective"][0:2] + " " + etcdir + "tai/" + factor["objective"][3:] + ".tai --epanetin " + etcdir + option["network"] + ".inp" + " ../" + option["network"] + "_" + option["frequency"] + "_" + factor["objective"][3:] + " " + etcdir + option["network"] + "/" + option["network"] + "_" + option["frequency"] + ".tso "
+      elif factor["objective"][0:3] in ["dpe", "dpk", "dpd"]:
+         cmd = driver + " " + bindir+"tso2Impact " + " --" + factor["objective"][0:3] + " " + etcdir + "tai/" + factor["objective"][4:] + ".tai --epanetin " + etcdir + option["network"] + ".inp" + " ../" + option["network"] + "_" + option["frequency"] + "_" + factor["objective"][4:] + " " + etcdir + option["network"] + "/" + option["network"] + "_" + option["frequency"] + ".tso"
+      else:
+         cmd = driver + " " + bindir+"tso2Impact "+ " --" + factor["objective"] + " --epanetin " + etcdir + option["network"] + ".inp" + " ../" + option["network"] + "_" + option["frequency"] + " " + etcdir + option["network"] + "/" + option["network"] + "_" + option["frequency"] + ".tso"
+
+elif sys.argv[1] == "-multi-impact":        # multi .tso files
+         cmd = driver + " " + bindir+"tso2Impact "
+         print "OPTION[OBJ]: " , option["objective"]
+         for obj in option["objective"]:
+                cmd = cmd + " --" + obj
+                if obj in ["pe", "pk", "pd", "dpe", "dpk", "dpd"]:
+                         print "OPTION[TAI]: " , option["taifile"]
+                         for tai in option["taifile"]:
+                                cmd = cmd + " " + tai
+         print "OPTION[MINQ]: " , option["detectionLimit"]
+         for minq in option["detectionLimit"]:
+                cmd = cmd + " --detectionLimit " + minq
+         cmd += " ../" + option["network"] 
+         print "OPTION[TSOFILE]: " , option["tsofile"]
+         for tsofile in option["tsofile"]:
+                cmd = cmd + " " + etcdir + tsofile 
+#
+# Scenario Aggr
+#
+elif sys.argv[1] == "-scenario_aggr":
+   cmd = driver + " " + bindir+"scenarioAggr " + " " + factor["num_events"] + " " + factor["scenario_aggr"]
+#
+# MVSCen
+#
+elif sys.argv[1] == "-mvscen":
+   cmd = driver + " " + fullpath + "/mvscen " + factor["impact_prefix"]
+#
+# SP
+#
+elif sys.argv[1] == "-sp":
+   cmd = driver + " " + bindir+"sp --path="+bindir+" --path=" + etcdir + "mod --print-log " + factor["impact_prefix"] + " " + factor["goals"] + " " + factor["solver"] + " " + factor["solver-options"] + " " + factor["memmon"]
+#
+# SP Study
+#
+elif sys.argv[1] == "-sp-study":
+   cmd = driver + " " + bindir+"sp --path="+bindir+" --path=" + etcdir + "mod --print-log " + factor["impact_prefix"] + " " + factor["goals"] + " " + factor["solver"] + " " + factor["solver-options"] + " " + factor["sensors"] + " " + factor["memmon"]
+#
+# SP Simple
+#
+elif sys.argv[1] == "-sp-simple":
+   cmd = driver + " " + bindir+"sp --path="+bindir+" --path=" + etcdir + "mod --print-log --objective=" + factor["goals"] + "_" + factor["measure"] + " " + factor["impact_prefix"] + " " + factor["sensors"] + " " + factor["costs"] + " " + factor["format"] + " " + factor["summary"] + " " + factor["solver"] + " --seed=" + option["seed"] + " " + factor["threshold"] + " " + factor["gamma"] + " " + factor["side_constraint"] + " " + factor["sensor-locations"] + " " + factor["memmon"]
+#
+# Generic
+#
+elif sys.argv[1] == "-generic":
+   list_t = type([])
+   cmd = driver + " " + bindir+"sp --path="+bindir+" --path=" + etcdir + "mod --print-log "
+   for key in option.keys():
+     if key[0] != '_':
+        if option[key] != None:
+           if type(option[key]) == list_t:
+                for item in option[key]:
+                   try:
+                           cmd = cmd + " --" + key + "=\"" + item + "\" "
+                   except:
+                           cmd = cmd + " --" + key + "=" + `item` + " "
+           else:
+                try:
+                           cmd = cmd + " --" + key + "=\"" + option[key] + "\""
+                except:
+                           cmd = cmd + " --" + key + "=" + `option[key]` + ""
+        else:
+                   cmd = cmd + " --" + key + ""
+   #if option["_data"][0] == "/":
+      #cmd = cmd + " " + option["_data"]
+   #else:
+      #cmd = cmd + " ../../" + option["_data"]
+
+else:
+   raise IOError, "Unknown option " + sys.argv[1]
+print "Command Line: " + cmd
+
+# the following is due to an unexplained phenomenon: "<file>.log" (exact's
+# convention) seems to conflict with something, perhaps in the process manager's
+# world.  Adding an extension so that the file doesn't end in ".log" gets
+# us to the end of an exact run.  This needs to be explored.
+logfile = os.path.basename(sys.argv[4]) + ".foo"
+
+pyutilib.run_command(cmd,logfile,cwd=cwd)
+#
+# Generate a measurements file (*.out)
+#
+OUTPUT = open(sys.argv[3],"w")
+if sys.argv[1] == "-sp" or sys.argv[1] == "-sp-study" or sys.argv[1] == "-sp-simple" or sys.argv[1] == "-generic" or sys.argv[1] == "-impact":
+   process_log(OUTPUT, cwd + slash + logfile)
+else:
+   print >>OUTPUT, "exit_status numeric/integer 0"
+OUTPUT.close()
+shutil.copyfile(cwd + "/" + logfile, sys.argv[4]);

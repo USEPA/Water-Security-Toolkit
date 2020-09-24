@@ -1,0 +1,17 @@
+network:
+  epanet file: Net3/Net3.inp
+scenario:
+  location: ['15']
+  type: MASS
+  strength: 5.77e8
+  species: EColi
+  start time: 0 
+  end time: 360 
+  tsg file: null     
+  tsi file: null    
+  msx file: Net3/Net3_EColi_TSB.msx
+  msx species: EColi  
+  merlion: false            
+configure:
+  output prefix: ${CWD}/tevasim_ex2/Net3_EColi_TSB 
+  debug: 0 

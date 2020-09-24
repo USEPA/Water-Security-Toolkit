@@ -1,0 +1,13 @@
+To execute the tests, execute
+
+  ../../../python/bin/python test_example.py
+
+or if you have put lpython on your path you can type
+
+  lpython test_example.py
+
+
+Baseline *.txt output files are updated using the runsh script:
+
+  ./runsh solver1.sh > solver1.txt
+

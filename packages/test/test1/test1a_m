@@ -1,0 +1,32 @@
+#!/bin/csh
+##
+## Test1 test script
+##
+
+setenv bindir `bindirLocation`
+setenv moddir `moddirLocation`
+setenv python `pythonLocation`
+
+if (! -e test1b.tso) then
+   $bindir/tevasim --tsg test1b.tsg --tsi test1b.tsi --tso test1b.tso Net3.inp Net3.out
+endif
+
+if (! -e test1c.tso) then
+   $bindir/tevasim --tsg test1c.tsg --tsi test1c.tsi --tso test1c.tso Net3.inp Net3.out
+endif
+
+#  Generate a single impact file that includes ensembles from both .tso files
+
+$bindir/tso2Impact --pe test1 test1b.tso test1c.tso  ../data/Net3/bio.tai ../data/Net3/chem.tai
+
+$python $bindir/sp --path=$bindir --path=$moddir --network=test1 --objective=pe --ub=ns,5 --solver=lagrangian 
+
+if (! -e aggrtest1_pe.impact) then
+   $bindir/scenarioAggr --numEvents=472 test1_pe.impact
+endif
+
+cp test1.nodemap aggrtest1.nodemap
+
+$python $bindir/sp --path=$bindir --path=$moddir --network=aggrtest1 --objective=pe --ub=ns,5 --solver=lagrangian 
+
+rm test1_pe.impact

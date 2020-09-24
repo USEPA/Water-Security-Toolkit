@@ -1,0 +1,16 @@
+DEBUG
+DETECTION_TIME   RESPONSE_DELAY   VALVE_DELAY   FLUSH_RATE   FLUSH_LENGTH   SIM_LENGTH
+NUM_NODES_NN   FLUSH_N1   FLUSH_N2  FLUSH_NN
+NUM_PIPES_NP   PIPE_N1   PIPE_N2  PIPE_NP
+
+DEBUG			Boolean
+DETECTION_TIME		integer (hours)
+RESPONSE_DELAY		integer (hours)
+VALVE_DELAY		integer (hours)
+FLUSH_RATE		double (native rate)
+FLUSH_LENGTH	        integer (hours)
+SIM_DURATION	        integer (hours)
+NUM_NODES_NN	        integer
+FLUSH_Nx		integer (node index)
+NUM_PIPES_NP		integer
+PIPE_Nx			integer (pipe index)

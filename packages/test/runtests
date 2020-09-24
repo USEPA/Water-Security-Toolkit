@@ -1,0 +1,31 @@
+#! /bin/sh
+
+echo "***********************************************"
+echo "THIS SCRIPT IS DEPRECATED.  PLEASE USE test.wst"
+echo "***********************************************"
+exit 1
+
+echo "--------------"
+echo " pyunit tests"
+echo "--------------"
+pushd pyunit
+../../../python/bin/python runtests
+popd
+
+#pushd studies
+#./runstudy -f tso.study.xml
+#./runstudy -f impact.study.xml
+#./runstudy -f opt.study.xml
+#popd
+
+if [ -e unit/runner ]; then
+   echo "------------"
+   echo " unit tests"
+   echo "------------"
+   pushd unit
+   ./runner
+   popd
+fi
+
+# We ignore the pyspot tests, since they are executed separately
+#lbin test.pyspot

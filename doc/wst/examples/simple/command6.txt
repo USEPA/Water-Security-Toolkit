@@ -1,0 +1,11 @@
+Usage: scenarioAggr [options...] <impact-file>
+A command to aggregate incidents in an impact file.
+
+options:
+
+  -h, --help                  Display usage information
+      --numEvents             The number of events before scenario
+                              aggregation.
+      --out                   The output impact filename.
+      --version               Display version information
+

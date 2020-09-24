@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+#
+# sptk - sensor placement solver
+#
+#  This script is known to work with Python 2.5.  It is known
+#  to fail with Python 2.3.4.
+#
+
+import sys
+if sys.version_info[0:2] < (2,4):
+   print ""
+   print "ERROR: sp requires Python 2.4 or newer"
+#from os.path import abspath, dirname
+#sys.path.insert(0, dirname(abspath(__file__)))
+#sys.path.insert(0, dirname(dirname(abspath(__file__))))
+
+import pywst
+import pyutilib.workflow
+
+#
+# Create driver
+#
+driver = pyutilib.workflow.TaskDriver(prog='sptk', 
+description='This is a sensor placement command-line that uses subcommands to specify different types of sensor placement optimization strategies.')
+#
+# Add subcommand for every pyspot.sptk.* plugin task
+#
+prefix = 'pywst.sptk.'
+for name in pyutilib.workflow.TaskFactory().services():
+    if name.startswith(prefix):
+        driver.register_task(name, name[len(prefix):], help=pyutilib.workflow.TaskFactory.doc(name))
+#
+# Parse the command-line arguments to execute a subcommand
+#
+driver.parse_args()
+

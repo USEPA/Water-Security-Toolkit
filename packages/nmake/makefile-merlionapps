@@ -1,0 +1,410 @@
+##
+## nmake file - to build in compiler console window for
+##    microsoft compiler (cl) or compilers (like intel's icl)
+##    which try to be mostly compatible (but better)
+##
+## build merlion applications
+##
+## it expects to find a writeable spot source directory at TOP
+##
+## "nmake all" builds static libraries and executables
+## 
+##
+## TODO create a make check that runs some executables
+
+TOP=..\..
+
+PACKAGES=$(TOP)\packages
+TPL=$(TOP)\tpl
+UTILIB_DIR=$(TPL)\acro\packages\utilib
+UTILIB_LIB_DIR=$(UTILIB_DIR)\mvs\nmake
+UTILIB_LIB=$(UTILIB_LIB_DIR)\static\libutilib.lib
+UTILIB_INCLUDE= \
+  /I $(UTILIB_LIB_DIR) \
+  /I $(UTILIB_DIR)\src
+TEVASIM_LOC = $(PACKAGES)\sim\tevasim
+TEVAUTIL_INCLUDE = /I $(PACKAGES)\tevaUtils\tso\src
+ERD_INCLUDE = /I $(PACKAGES)\tevaUtils\erd\erd\include
+ENL_INCLUDE = /I $(PACKAGES)\tevaUtils\erd\enl\include
+MERLION_APPS=$(TOP)\packages\sim\merlion\applications
+EPANETLIB_LOC = $(TPL)\epanet\EPANET_\src
+EPANETLIB_INCLUDE = /I . /I $(EPANETLIB_LOC) /I $(EPANETLIB_LOC)\..\include
+EPANETMSXLIB_LOC = $(TPL)\epanet\EPANET_MSX_\src
+EPANETMSXLIB_INCLUDE = /I . /I $(EPANETMSXLIB_LOC) /I $(EPANETMSXLIB_LOC)\..\include
+MERLIONLIB_LOC = $(PACKAGES)\sim\merlion\src
+MERLIONLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC)
+MERLIONUTILSLIB_LOC = $(PACKAGES)\sim\merlion\merlionUtils\src
+MERLIONUTILSLIB_INCLUDE = /I . /I $(MERLIONLIB_LOC) /I $(EPANETLIB_LOC)  /I $(EPANETLIB_LOC)\..\include /I $(MERLIONUTILSLIB_LOC) /I $(TPL)\acro\tpl\boost
+
+!if $(BITS)==64
+LIBSUBDIR=win64
+!else
+LIBSUBDIR=win32
+!endif
+
+CFLAGS=$(CFLAGS) /Z7
+
+## TODO how many of these winflags do we actually need
+WINFLAGS=-D_WIN32 -DWIN32 -D_WINDOWS -DWINDOWS
+## _USRDLL and LIBEPANET_JNI_EXPORTS are not found in our sources
+SHAREDFLAGS=-D_USRDLL -DLIBEPANET_JNI_EXPORTS -DDLL
+DONTWARN=/wd4996 /wd4518 /wd4502 /wd4430 /wd4530
+CFLAGS = $(CFLAGS) $(WINFLAGS) $(DONTWARN) -DANSI -DANSI_NAMESPACES $(DEBUGFLAG)
+
+!IFDEF USE_SHARED_FLAGS
+CFLAGS = $(CFLAGS) $(SHAREDFLAGS)
+!ENDIF
+
+
+all: static\boostersim.exe \
+     static\boosterquality.exe \
+     static\boosterimpact.exe \
+     static\erdval.exe \
+     static\inversionsim.exe \
+     static\measuregen.exe \
+     static\samplelocation.exe \
+     static\eventDetection.exe \
+     static\jsonwriter.exe \
+     static\jsonwriter2.exe
+
+dll: dlls
+
+dlls: 
+
+##
+## Create a teva_config.h - the configuration file from autotools
+##
+##
+headers:
+    copy teva_config.txt teva_config.h
+
+##
+## Create directories to keep static and shared files separate
+##
+##
+static:
+    @if not exist static mkdir static
+
+shared:
+    @if not exist shared mkdir shared
+
+
+##
+##
+## BOOSTERSIM EXECUTABLE
+##
+##
+BOOSTERSIM_LOC = $(MERLION_APPS)\booster\src
+BOOSTERSIM_CPP_SRC = \
+		$(BOOSTERSIM_LOC)\booster\BoosterNetworkSimulator.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterDataWriter.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterDataWriterAMPL.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterDataWriterPYOMO.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterDataWriterPYSP.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterSimOptions.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterOptions.cpp \
+		$(BOOSTERSIM_LOC)\booster\BoosterSim.cpp
+BOOSTERSIM_CPP_OBJ = $(BOOSTERSIM_CPP_SRC:.cpp=.obj)
+BOOSTERSIM_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		          $(MERLIONLIB_INCLUDE) \
+			  $(EPANETLIB_INCLUDE) \
+			  $(UTILIB_INCLUDE) \
+			  /I $(BOOSTERSIM_LOC)
+BOOSTERSIM_FLAGS = /EHs # required to use boost library
+
+{$(BOOSTERSIM_LOC)\booster}.cpp.{$(BOOSTERSIM_LOC)\booster}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(BOOSTERSIM_FLAGS) $(BOOSTERSIM_INCLUDE) /Fo$@ /c $*.cpp
+
+static\boostersim.exe:  $(BOOSTERSIM_CPP_OBJ) static\libmerlionutils.lib static\libmerlion.lib static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## BOOSTERQUALITY EXECUTABLE
+##
+##
+BOOSTERQUALITY_LOC = $(MERLION_APPS)\booster\src
+BOOSTERQUALITY_CPP_SRC = \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterNetworkSimulator.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterDataWriter.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterDataWriterAMPL.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterDataWriterPYOMO.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterQualityOptions.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterOptions.cpp \
+		$(BOOSTERQUALITY_LOC)\booster\BoosterQuality.cpp
+BOOSTERQUALITY_CPP_OBJ = $(BOOSTERQUALITY_CPP_SRC:.cpp=.obj)
+BOOSTERQUALITY_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		          $(MERLIONLIB_INCLUDE) \
+			  $(EPANETLIB_INCLUDE) \
+			  $(UTILIB_INCLUDE) \
+			  /I $(BOOSTERQUALITY_LOC)
+BOOSTERQUALITY_FLAGS = /EHs # required to use boost library
+
+{$(BOOSTERQUALITY_LOC)\booster}.cpp.{$(BOOSTERQUALITY_LOC)\booster}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(BOOSTERQUALITY_FLAGS) $(BOOSTERQUALITY_INCLUDE) /Fo$@ /c $*.cpp
+
+static\boosterquality.exe:  $(BOOSTERQUALITY_CPP_OBJ) static\libmerlionutils.lib static\libmerlion.lib static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## BOOSTERIMPACT EXECUTABLE
+##
+##
+BOOSTERIMPACT_LOC = $(MERLION_APPS)\booster\src
+BOOSTERIMPACT_CPP_SRC = \
+		$(BOOSTERIMPACT_LOC)\booster\BoosterNetworkSimulator.cpp \
+		$(BOOSTERIMPACT_LOC)\booster\BoosterImpactOptions.cpp \
+		$(BOOSTERIMPACT_LOC)\booster\BoosterOptions.cpp \
+		$(BOOSTERIMPACT_LOC)\booster\BoosterImpact.cpp
+BOOSTERIMPACT_CPP_OBJ = $(BOOSTERIMPACT_CPP_SRC:.cpp=.obj)
+BOOSTERIMPACT_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		          $(MERLIONLIB_INCLUDE) \
+			  $(EPANETLIB_INCLUDE) \
+			  $(UTILIB_INCLUDE) \
+			  /I $(BOOSTERIMPACT_LOC)
+BOOSTERIMPACT_FLAGS = /EHs # required to use boost library
+
+{$(BOOSTERIMPACT_LOC)\booster}.cpp.{$(BOOSTERIMPACT_LOC)\booster}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(BOOSTERIMPACT_FLAGS) $(BOOSTERIMPACT_INCLUDE) /Fo$@ /c $*.cpp
+
+static\boosterimpact.exe:  $(BOOSTERIMPACT_CPP_OBJ) static\libmerlionutils.lib static\libmerlion.lib static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+
+##
+##
+## ERDVAL EXECUTABLE
+##
+##
+ERDVAL_LOC = $(MERLION_APPS)\erdvalidate\src
+ERDVAL_CPP_SRC = $(ERDVAL_LOC)\erdvalidate\erdvalidate.cpp
+ERDVAL_CPP_OBJ = $(ERDVAL_CPP_SRC:.cpp=.obj)
+ERDVAL_INCLUDE = /I . $(TEVAUTIL_INCLUDE) \
+	       	      $(ERD_INCLUDE) \
+		      /I $(ERDVAL_LOC) 
+
+ERDVAL_FLAGS =
+
+{$(ERDVAL_LOC)\erdvalidate}.cpp.{$(ERDVAL_LOC)\erdvalidate}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(ERDVAL_FLAGS) $(ERDVAL_INCLUDE) /Fo$@ /c $*.cpp
+
+static\erdval.exe:  $(ERDVAL_CPP_OBJ) static\libtsoutil.lib
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## INVERSIONSIM and SAMPLELOCATION need to know how to build tevasim's mem_mon.obj
+##
+##
+
+{$(TEVASIM_LOC)}.c.{$(TEVASIM_LOC)}.obj:
+    $(CC) $(CFLAGS) $(SAMPLELOCATION_FLAGS) $(SAMPLELOCATION_INCLUDE) /Fo$@ /c $*.c
+
+##
+##
+## INVERSIONSIM EXECUTABLE
+##
+##
+INVERSIONSIM_LOC = $(MERLION_APPS)\source_inversion\src
+INVERSIONSIM_CPP_SRC = \
+		$(INVERSIONSIM_LOC)\source_inversion\InversionDataWriter.cpp \
+		$(INVERSIONSIM_LOC)\source_inversion\InversionSimOptions.cpp \
+		$(INVERSIONSIM_LOC)\source_inversion\InversionNetworkSimulator.cpp \
+		$(INVERSIONSIM_LOC)\source_inversion\InversionSim.cpp 
+INVERSIONSIM_C_SRC = \
+                $(TEVASIM_LOC)\mem_mon.c
+INVERSIONSIM_CPP_OBJ = $(INVERSIONSIM_CPP_SRC:.cpp=.obj) $(INVERSIONSIM_C_SRC:.c=.obj)
+INVERSIONSIM_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		            $(MERLIONLIB_INCLUDE) \
+			    $(EPANETLIB_INCLUDE) \
+                            $(EPANETMSXLIB_INCLUDE) \
+                            $(ERD_INCLUDE) \
+                            $(TEVAUTIL_INCLUDE) \
+                            /I $(TEVASIM_LOC) \
+                            $(ENL_INCLUDE) \
+			    $(UTILIB_INCLUDE) \
+			    /I $(INVERSIONSIM_LOC)
+INVERSIONSIM_FLAGS = /EHs # required to use boost library
+
+{$(INVERSIONSIM_LOC)\source_inversion}.cpp.{$(INVERSIONSIM_LOC)\source_inversion}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(INVERSIONSIM_FLAGS) $(INVERSIONSIM_INCLUDE) /Fo$@ /c $*.cpp
+
+static\inversionsim.exe:  $(INVERSIONSIM_CPP_OBJ) \
+       static\libmerlionutils.lib static\libmerlion.lib \
+       static\libepanet.lib static\libepanetmsx.lib static\libenl.lib \
+       static\liberd.lib static\libtsoutil.lib  static\liblzma.lib $(UTILIB_LIB)
+     $(CPP) /L psapi.lib $(LINKDBG) /Fe$@ $**
+
+
+
+##
+##
+## MEASUREGEN EXECUTABLE
+##
+##
+MEASUREGEN_LOC = $(MERLION_APPS)\measure_gen\src
+MEASUREGEN_CPP_SRC = \
+		$(MEASUREGEN_LOC)\measure_gen\MeasureDataWriter.cpp \
+		$(MEASUREGEN_LOC)\measure_gen\MeasureSimOptions.cpp \
+		$(MEASUREGEN_LOC)\measure_gen\MeasureNetworkSimulator.cpp \
+		$(MEASUREGEN_LOC)\measure_gen\MeasureSim.cpp
+MEASUREGEN_CPP_OBJ = $(MEASUREGEN_CPP_SRC:.cpp=.obj)
+MEASUREGEN_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		              $(MERLIONLIB_INCLUDE) \
+			      $(EPANETLIB_INCLUDE) \
+			      $(UTILIB_INCLUDE) \
+			      /I $(MEASUREGEN_LOC)
+MEASUREGEN_FLAGS = /EHs # required to use boost library
+
+{$(MEASUREGEN_LOC)\measure_gen}.cpp.{$(MEASUREGEN_LOC)\measure_gen}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(MEASUREGEN_FLAGS) $(MEASUREGEN_INCLUDE) /Fo$@ /c $*.cpp
+
+static\measuregen.exe:  $(MEASUREGEN_CPP_OBJ) static\libmerlionutils.lib static\libmerlion.lib static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+##
+##
+## SAMPLELOCATION EXECUTABLE
+##
+##
+SAMPLELOCATION_LOC = $(MERLION_APPS)\grab_sample_location\src
+SAMPLELOCATION_CPP_SRC = \
+		$(SAMPLELOCATION_LOC)\grab_sample_location\samplelocation.cpp \
+		$(SAMPLELOCATION_LOC)\grab_sample_location\SampleLocationOptions.cpp \
+		$(SAMPLELOCATION_LOC)\grab_sample_location\SampleNetworkSimulator.cpp \
+		$(SAMPLELOCATION_LOC)\grab_sample_location\SampleLocationDataWriter.cpp
+SAMPLELOCATION_C_SRC = \
+                $(TEVASIM_LOC)\mem_mon.c
+SAMPLELOCATION_CPP_OBJ = $(SAMPLELOCATION_CPP_SRC:.cpp=.obj) $(SAMPLELOCATION_C_SRC:.c=.obj)
+SAMPLELOCATION_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		              $(MERLIONLIB_INCLUDE) \
+			      /I $(TEVASIM_LOC) \
+			      $(EPANETLIB_INCLUDE) \
+                              $(EPANETMSXLIB_INCLUDE) \
+                              $(ENL_INCLUDE) \
+                              $(ERD_INCLUDE) \
+                              $(TEVAUTIL_INCLUDE) \
+			      $(UTILIB_INCLUDE) \
+			      /I $(SAMPLELOCATION_LOC)
+SAMPLELOCATION_FLAGS = /EHs # required to use boost library
+
+{$(SAMPLELOCATION_LOC)\grab_sample_location}.cpp.{$(SAMPLELOCATION_LOC)\grab_sample_location}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(SAMPLELOCATION_FLAGS) $(SAMPLELOCATION_INCLUDE) /Fo$@ /c $*.cpp
+
+static\samplelocation.exe:  $(SAMPLELOCATION_CPP_OBJ) static\libmerlionutils.lib \
+                            static\libmerlion.lib static\libenl.lib \
+                            static\libepanet.lib static\libepanetmsx.lib static\libenl.lib \
+                            static\liberd.lib static\libtsoutil.lib static\liblzma.lib $(UTILIB_LIB)
+    $(CPP) /L psapi.lib $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## EVENTDETECTION EXECUTABLE
+##
+##
+EVENTDETECTION_LOC = $(MERLION_APPS)\event_detection\src
+EVENTDETECTION_CPP_SRC = \
+		$(EVENTDETECTION_LOC)\event_detection\EventDetectionOptions.cpp \
+		$(EVENTDETECTION_LOC)\event_detection\EventDetection.cpp
+EVENTDETECTION_CPP_OBJ = $(EVENTDETECTION_CPP_SRC:.cpp=.obj)
+EVENTDETECTION_INCLUDE = /I . $(MERLIONUTILSLIB_INCLUDE) \
+		              $(MERLIONLIB_INCLUDE) \
+			      $(EPANETLIB_INCLUDE) \
+                              $(EPANETMSXLIB_INCLUDE) \
+			      $(UTILIB_INCLUDE) \
+			      /I $(EVENTDETECTION_LOC)
+EVENTDETECTION_FLAGS = /EHs # required to use boost library
+
+{$(EVENTDETECTION_LOC)\event_detection}.cpp.{$(EVENTDETECTION_LOC)\event_detection}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(EVENTDETECTION_FLAGS) $(EVENTDETECTION_INCLUDE) /Fo$@ /c $*.cpp
+
+static\eventDetection.exe:  $(EVENTDETECTION_CPP_OBJ) static\libmerlionutils.lib static\libmerlion.lib static\libepanet.lib static\libepanetmsx.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## JSONWRITER EXECUTABLE
+##
+##
+JSONWRITER_LOC = $(MERLION_APPS)\json_writer\src
+JSONWRITER_CPP_SRC = $(JSONWRITER_LOC)\json_writer\json_main.cpp
+JSONWRITER_CPP_OBJ = $(JSONWRITER_CPP_SRC:.cpp=.obj)
+JSONWRITER_INCLUDE = /I . $(EPANETLIB_INCLUDE) \
+                     /I $(JSONWRITER_LOC)
+JSONWRITER_FLAGS = /EHs # required to use boost library
+
+{$(JSONWRITER_LOC)\json_writer}.cpp.{$(JSONWRITER_LOC)\json_writer}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(JSONWRITER_FLAGS) $(JSONWRITER_INCLUDE) /Fo$@ /c $*.cpp
+
+static\jsonwriter.exe:  $(JSONWRITER_CPP_OBJ) static\libepanet.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+##
+##
+## JSONWRITER2 EXECUTABLE
+##
+##
+JSONWRITER2_LOC = $(MERLION_APPS)\json_writer2\src
+JSONWRITER2_CPP_SRC = $(JSONWRITER2_LOC)\json_writer2\json2_main.cpp
+JSONWRITER2_CPP_OBJ = $(JSONWRITER2_CPP_SRC:.cpp=.obj)
+JSONWRITER2_INCLUDE = /I . \
+                    $(EPANETLIB_INCLUDE) \
+                    $(TEVAUTIL_INCLUDE) \
+                    $(ERD_INCLUDE) \
+                    /I $(JSONWRITER2_LOC)
+JSONWRITER2_FLAGS = /EHs # required to use boost library
+
+{$(JSONWRITER2_LOC)\json_writer2}.cpp.{$(JSONWRITER2_LOC)\json_writer2}.obj:
+    $(CPP) $(CFLAGS) $(CPPFLAGS) $(JSONWRITER2_FLAGS) $(JSONWRITER2_INCLUDE) /Fo$@ /c $*.cpp
+
+static\jsonwriter2.exe:  $(JSONWRITER2_CPP_OBJ) static\libepanet.lib static\libtsoutil.lib $(UTILIB_LIB)
+     $(CPP) $(LINKDBG) /Fe$@ $**
+
+
+
+OBJ_FILES = $(BOOSTERSIM_CPP_OBJ) \
+            $(BOOSTERQUALITY_CPP_OBJ) \
+	    $(BOOSTERIMPACT_CPP_OBJ) \
+	    $(ERDVAL_CPP_OBJ) \
+	    $(INVERSIONSIM_CPP_OBJ) \
+	    $(MEASUREGEN_CPP_OBJ) \
+	    $(SAMPLELOCATION_CPP_OBJ) \
+	    $(EVENTDETECTION_CPP_OBJ) \
+	    $(JSONWRITER_CPP_OBJ) \
+	    $(JSONWRITER2_CPP_OBJ) 
+
+help:
+   @echo "nmake all" will build the static libraries and executables
+   @echo "nmake dlls " will build the shared versions
+   @echo "nmake clean-objs" will delete the object files only
+   @echo "nmake clean" will delete all generated files
+   @echo "nmake check" will run and check the executables (not implemented yet)
+   @echo "nmake /?" lists all nmake options
+
+clean-objs:
+        @-del /Q $(OBJ_FILES)
+
+
+clean:
+	cd $(MAKEDIR)
+		@-del /Q teva_config.h
+        @-del $(OBJ_FILES)
+        @-del /Q static\boostersim.*
+        @-del /Q static\boosterquality.*
+        @-del /Q static\boosterimpact.*
+        @-del /Q static\erdval.*
+        @-del /Q static\inversionsim.*
+	@-del /Q static\measuregen.*
+	@-del /Q static\samplelocation.*
+        @-del /Q static\eventDetection.*
+        @-del /Q static\jsonwriter.*
+        @-del /Q static\jsonwriter2.*
+        

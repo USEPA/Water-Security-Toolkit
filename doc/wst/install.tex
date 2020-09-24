@@ -1,0 +1,274 @@
+This document provides information on downloading and installing the
+Water Security Toolkit (WST). WST is an open source toolkit for
+modeling and analyzing water distribution systems to minimize the
+potential impact of contamination incidents. For detailed information
+on how to use WST, including descriptions of the input specifications,
+algorithms, and analysis tools, please see the companion ``Water
+Security Toolkit User Manual'' document.
+
+\section{Obtaining the Water Security Toolkit}\label{S:getting_wst}
+
+WST is distributed by Sandia National Laboratories in both source and
+binary forms through the World Wide Web at
+\url{https://software.sandia.gov/trac/wst}. From the main WST web page,
+follow the ``Download'' link at the very top of the page. Here you will
+have the option to download the WST source as well as pre-built binary
+packages for 32- and 64-bit Windows, and 64-bit Linux. Along with
+formal releases, there is the option to download a
+``VOTD''\footnote{VOTD: Version of the day} build. This package is an
+automated build of the current development branch of the code meant to
+facilitate rapid dissemination of research developments to interested
+partners. VOTD builds should be considered ``bleeding edge'' and might
+frequently be unstable; as such, general users are discouraged from
+relying on them for any production analyses.
+
+Alternatively, the WST source code can be checked out directly from the
+master Subversion version control system through
+\url{https://software.sandia.gov/svn/teva/wst/}. In particular, the
+mainline trunk development branch can be checked out with
+\begin{unknownListing}
+svn checkout https://software.sandia.gov/svn/teva/wst/wst/trunk wst
+\end{unknownListing}
+Individual releases are archived in the
+\url{https://software.sandia.gov/svn/teva/wst/wst/tags} directory. The
+repository contains references to external repositories (notably, the
+EPANET repository on SourceForge). Please note that your local network
+configuration might require site-specific Subversion proxy settings, as
+well as network access to \url{https://software.sandia.gov} and
+\url{https://epanet.svn.sourceforge.net}.
+
+\section{Dependencies}\label{S:dependencies}
+
+WST is a collection of Python and compiled C++ software. It has
+dependencies on several third-party software packages. First and
+foremost, you must have a Python interpreter installed. WST is
+currently compatible with Python 2.6 or 2.7. Python 3.x is not yet
+supported. Python is available from \url{http://python.org/}.
+
+The WST source code and binary distributions bundle several additional
+Python packages, including:
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em,labelindent=2em,leftmargin=4em]
+\item[Coopr]\hfill\\ A collection of open-source optimization-related
+  Python packages that supports a diverse set of optimization
+  capabilities for formulating and analyzing optimization models. Coopr
+  in turn bundles several third-party dependency libraries:
+  \begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em]
+  \item[argparse]\hfill\\ A Python command line argument parsing utility
+  \item[coverage]\hfill\\ A Python utility for capturing and reporting
+    code coverage
+  \item[distribute]\hfill\\ A Python utility for building and installing
+    Python packages
+  \item[gcovr]\hfill\\ A utility for parsing and reporting GCOV code
+    coverage reports
+  \item[nose]\hfill\\ A Python test-harness driver
+  \item[ordereddict]\hfill\\ A utility that back-ports ordered
+    dictionaries to Python 2.6
+  \item[pip]\hfill\\ A Python utility for installing Python packages
+  \item[ply]\hfill\\ A general parser-lexer
+  \item[pyro]\hfill\\ A utility for managing distributed Python execution
+  \item[runpy2]\hfill\\ A utility that back-ports runpy functionality to Python 2.4
+  \item[setuptools]\hfill\\ A Python utility for building and installing Python packages
+  \item[six]\hfill\\ A utility that provides a portable interface to Python 2.x
+    and 3.x
+  \item[unittest2]\hfill\\ A utility that back-ports unittest functionality from
+    Python 2.7 to 2.3-2.6
+  \item[virtualenv]\hfill\\ A utility for creating virtual Python environments
+  \end{description}
+\item[PyUtilib]\hfill\\ A collection of Python utilities, including the testing
+  harness used in WST
+\item[PyEPANET]\hfill\\ Python wrappers for the EPANET 2.0 Programmers Toolkit
+\item[PyYAML]\hfill\\ A YAML parser and emitter for Python
+\end{description}
+
+WST subcommands can leverage numerous third-party programs that
+\emph{are not} part of the WST source code:
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em,labelindent=2em,leftmargin=4em]
+\item[AMPL]\hfill\\ A commercial algebraic modeling environment, available from
+  \url{http://www.ampl.com/}.
+\item[CBC]\hfill\\ An open-source mixed-integer linear programming
+  solver, available from \url{https://projects.coin-or.org/Cbc}. The
+  \emph{COIN Binary} Project provides pre-compiled binaries through the
+  CoinAll distribution,
+  available from \url{https://projects.coin-or.org/CoinBinary}.
+\item[CPLEX]\hfill\\ A commercial mixed-integer linear programming solver,
+  available from
+  \url{http://www.ibm.com/software/integration/optimization/cplex-optimizer/}.
+\item[Coliny]\hfill\\ An open-source package that provides algorithms for model
+  transformation and black-box optimization, available as the
+  Acro-coliny project from
+  \url{https://software.sandia.gov/trac/acro/}.
+\item[Dakota]\hfill\\ An open-source package that provides algorithms for
+  black-box optimization, sensitivity analysis, surrogate modeling, and
+  uncertainty quantification. Dakota is available from
+  \url{http://dakota.sandia.gov/}. For Windows users, we recommend the
+  5.1 MinGW build.
+\item[GLPK]\hfill\\ An open-source mixed-integer linear programming
+  solver, available from \url{http://www.gnu.org/software/glpk/}.
+  Pre-compiled binary distributions are available as part of most
+  UNIX-like operating systems. The GLPK for Windows Project
+  provides pre-compiled Windows binaries, available from
+  \url{http://winglpk.sourceforge.net/}.
+\item[Gurobi]\hfill\\ A commercial mixed-integer linear programming solver,
+  available from
+  \url{http://www.gurobi.com/}.
+\item[PICO]\hfill\\ An open-source mixed-integer linear programming solver,
+  available as the Acro-pico project from
+  \url{https://software.sandia.gov/trac/acro/}.
+\end{description}
+Please refer to the individual projects' documentation for licensing,
+pricing and installation information.
+
+
+\section{Installing Binary Distributions}
+
+Precompiled binary distributions (for Windows and Linux platforms) are
+distributed as a single ZIP archive. Installing WST requires only
+unzipping the archive to any location on your hard drive. The archive
+will create several folders within the main WST folder:
+\begin{description}[topsep=0pt,parsep=0.5em,itemsep=-0.4em,labelwidth=5em,labelindent=7em,]
+\item[bin] The compiled WST programs and driver utilities
+\item[dist] Third-party dependencies
+\item[doc] WST documentation (including this guide)
+\item[etc] Common data, including model files and example EPANET
+  networks
+\item[examples] Examples for using several WST subcommands with EPANET Net3
+\end{description}
+
+The main WST executable is located in the \code{wst/bin} directory. WST
+can be executed by typing the full path to the executable (e.g.,\
+\verb~C:\WST-1.0\bin\wst.exe~ on Windows or \verb|~/wst-1.0/bin/wst| on
+Linux) or by adding the \code{wst/bin} directory to your system
+\code{PATH} and just running \code{wst}. The first time you
+run WST you will see a message about configuring Python packages for
+first use; this process is normal and could take several minutes
+depending on your system.
+
+
+
+\section{Compiling WST from Source Code}
+
+Disclaimer: compiling WST from the source code is an advanced topic and targeted
+only at potential developers. It assumes familiarity with compilers and
+build terminology. We strongly recommend that general users make use of
+the pre-built binary packages whenever possible.  
+
+Compiling WST from the source code makes use of the Python VirtualEnv package to
+set up a \emph{virtual} Python environment within the WST the source code
+distribution. The Python components of WST are installed into this
+virtual environment to better insulate WST from the rest of your
+particular environment (and vice-versa). The compiled (C++) binary
+executables are installed into a \code{bin} directory within the
+source code distribution. Currently, WST does not support out-of-source builds.
+
+\subsection{Windows}
+
+Compiling WST from the source code for Windows is a arduous process and is
+currently outside the scope of this document. We strongly recommend
+that Windows users leverage the pre-built binary distributions.
+
+\subsection{Linux}
+
+Compiling WST for Linux (and Linux-like environments) is nominally a
+3-step process:
+\begin{enumerate}
+\item Obtain the WST source code
+\item Configure the Python environment
+\item Build the C++ executables
+\end{enumerate}
+
+\subsubsection{Obtaining the WST Source Code}
+The WST source code can either be extracted from a downloaded source zip/tar
+archive or checked out directly from the repository using Subversion.
+For more information, see ``Obtaining WST'' above. The following
+directions assume that you have placed the source code in the
+\code{\textasciitilde/wst-1.0}
+directory.
+
+\subsubsection{Configuring the Python Virtual Environment}
+The Python virtual environment is automatically configured by the
+\code{setup} script distributed in the top-level directory of the
+source code distribution:
+\begin{unknownListing}
+cd ~/wst-1.0
+./setup
+\end{unknownListing}
+This configures WST using your system's default Python interpreter and
+the bundled versions of the Python dependencies. If you wish to use a
+different version of Python with WST, specify it explicitly when running
+the \code{setup} script:
+\begin{unknownListing}
+cd ~/wst-1.0
+python2.7 ./setup
+\end{unknownListing}
+If you also wish to configure WST with the bleeding edge (trunk)
+versions of the key Python dependencies, specify the \code{--trunk}
+option:
+\begin{unknownListing}
+cd ~/wst-1.0
+./setup --trunk
+\end{unknownListing}
+
+Setup configures the Python virtual environment within the
+\code{wst/python} directory (e.g.,\
+\code{\textasciitilde/wst-1.0/python}). The virtual interpreter and the
+main \code{wst} script both reside in \code{wst/python/bin} directory
+(e.g.,\ \code{\textasciitilde/wst-1.0/python/bin/wst}). If you are only
+going to have a single virtual environment, we recommend adding the
+\code{wst/python/bin} directory to your system PATH. Alternatively, you
+can make use of the \code{lbin} and \code{lpython} scripts (installed
+into \code{wst/python/bin}) to correctly locate ``local'' binaries and
+the local virtual python interpreter.  To run \code{wst} from anywhere
+\emph{under the main WST directory}, you would run ``\code{lbin wst}''.
+Similarly, to run the local python (virtual environment) interpreter,
+you would run ``\code{lpython}''. It is safe to copy both \code{lbin}
+and \code{lpython} to other directories (e.g.,\
+\code{\textasciitilde/bin}).
+
+After the installation of the core functionality of the python environments
+a couple of installations are required. 
+
+\begin{unknownListing}
+pip install numpy
+pip install texttable
+pip install matplotlib
+\end{unknownListing}
+
+\subsubsection{Building the C++ Executables}
+
+WST relies on the GNU Autotools to manage the build process for compiled
+executables. In particular, you must have Autoconf version 2.60 or
+newer installed on your system along with a relatively new C++ compiler
+and linker (e.g., gcc >= 3.4). The build process follows the normal
+``autoreconf -- configure -- make'' sequence:
+\begin{unknownListing}
+cd ~/wst-1.0
+./setup
+autoreconf -v -i -f
+./configure
+make
+\end{unknownListing}
+Note that we do not recommend running ``\code{make install}''. The
+resulting compiled binaries reside in \code{wst/bin}, and are easily
+accessed from anywhere under the main WST directory using the
+\code{lbin} script (see above).
+
+This process could be simplified by using the main \code{setup} script:
+\begin{unknownListing}
+cd ~/wst-1.0
+./setup build
+\end{unknownListing}
+
+
+\subsection{Uninstalling WST}
+
+As WST does not rely on a formal installer, uninstalling WST only requires
+deleting the main WST directory (regardless of if you installed
+pre-built binaries or build WST from source). If you added the
+\code{wst/bin} and/or \code{wst/python/bin} directories to your system
+PATH, you should also remove those entries.
+
+% LocalWords:  WST Sandia VOTD analyses svn EPANET SourceForge Coopr argparse
+% LocalWords:  gcovr GCOV ordereddict pyro runpy setuptools unittest virtualenv
+% LocalWords:  PyUtilib PyEPANET PyYAML YAML AMPL CPLEX Coliny Acro coliny PICO
+% LocalWords:  MinGW pico exe wst VirtualEnv executables cd lbin lpython gcc
+% LocalWords:  Autotools Autoconf autoreconf

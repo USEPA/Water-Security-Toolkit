@@ -1,0 +1,14 @@
+TARGETS = userman
+LATEX=pdflatex
+LOCAL_CLEAN=local_clean
+
+examples/%.tex:
+	cd examples; ../../../python/bin/python generate_config.py $@; cd ..
+
+examples/%.yml:
+	cd examples; ../../../python/bin/python generate_config.py $@; cd ..
+
+local_clean:
+	rm -rfv examples/*_config.tex
+	rm -rfv examples/*.yml
+

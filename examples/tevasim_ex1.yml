@@ -1,0 +1,8 @@
+network:
+  epanet file: Net3/Net3.inp 
+scenario:         
+  tsg file: Net3/Net3.tsg           
+  merlion: true                    
+configure:
+  output prefix: ${CWD}/tevasim_ex1/Net3 
+  debug: 0

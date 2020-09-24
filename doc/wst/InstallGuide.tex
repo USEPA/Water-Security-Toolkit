@@ -1,0 +1,149 @@
+
+%% ==================================================================
+%% DOCUMENT CLASS ---------------------------------------------------
+%% ==================================================================
+
+%%    Uncomment the following for <article> mode
+
+\documentclass[pdf,oneside]{book}
+
+%% ==================================================================
+%% PREAMBLE ---------------------------------------------------------
+%% ==================================================================
+
+\usepackage{type1cm}
+\usepackage{fullpage}
+%
+\usepackage{myoxygen}
+\usepackage[sort]{natbib}
+%\usepackage{apaish}
+\usepackage{color,atbeginend}
+\usepackage{fancyhdr,verbatim,extramarks}
+\usepackage{listings,arydshln,hhline,graphicx}
+\usepackage{helvet}
+\usepackage{courier}
+%\usepackage{lastpage}
+\usepackage[small,compact]{titlesec}
+\usepackage[english]{babel}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage[titletoc]{appendix}
+%\usepackage[T1]{fontenc}
+%\usepackage[latin9]{inputenc}
+\usepackage{lmodern} % Use the modern font family; this renders T1
+                     % fonts, which do not show up as being "blurry" in
+                     % Adobe Acrobat
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{babel}
+\usepackage{enumitem}
+\usepackage{tabularx}
+
+\include{macros}
+\newcommand\docTitle{Installation Guide}
+
+% ---------------------------------------------------------------- %
+%
+% Set the title, author, and date
+  \title{\sc Water Security Toolkit \docTitle:\\Version 1.0}
+
+  \author{\\Editors:\\
+\\
+Terranna Haxton\\
+Center for Environmental Solutions and Emergency Response\\
+Office of Research and Development\\
+U.S. Environmental Protection Agency\\\
+Cincinnati, OH 45256\\
+\\
+Katherine A. Klise\\
+Geoscience Research and Applications Group\\
+Sandia National Laboratories \\
+PO Box 5800 MS 0751 \\
+Albuquerque, NM 87185 \\
+\\
+  }
+  
+  \date{}
+
+%\SANDprintDate{Jan 2013}
+%\author{J. Berry, E. Boman, L.A. Riesen, W.E. Hart, C.A. Phillips, J.-P. Watson}
+
+\hypersetup{colorlinks=false}
+\parindent 0mm
+\parskip = 2mm
+%\AfterBegin{itemize}{\setlength{\itemsep}{1.75mm}}
+%\AfterBegin{enumerate}{\setlength{\itemsep}{1.75mm}}
+%\AfterBegin{description}{\setlength{\itemsep}{1.75mm}}
+%\titleformat{\chapter}[hang]{\bf\large}{\thechapter\quad}{2mm}{\large}[]
+%\titlespacing{\chapter}{0pt}{0mm}{5mm}
+
+%% Set up the XML language
+%\lstdefinestyle{XML}{language=XML, basicstyle={\ttfamily},
+  %usekeywordsintag=true, alsoletter={-}, escapechar={\#},
+  %markfirstintag=true, morestring=[b]{''}, mathescape=true,
+  %keywordstyle=\sffamily\bfseries, stringstyle=\rmfamily\textsl }
+%%% End of preamble --------------------------------------------------
+
+\lstset{aboveskip=1em,belowskip=1em,showspaces=false,showstringspaces=false}
+\lstset{frame=single,
+  basicstyle=\footnotesize ,
+  backgroundcolor=\color{white}}
+
+\newlength{\topheight}
+\setlength{\topheight}{1.0in}
+
+%% ==================================================================
+%% MAIN DOCUMENT ----------------------------------------------------
+%% ==================================================================
+
+\begin{document}
+  \includepdf[pages={1}]{coversheet_blank.pdf}
+  \maketitle
+
+  \pagenumbering{roman}
+  \clearpage
+  \input{Disclaimer}
+  
+  %\clearpage
+  %\chapter*{Forward}
+  %\input{Forward}
+
+  \clearpage
+  \chapter*{License Notice}
+  \input{LicenseNotice}
+
+  \clearpage
+  \chapter*{Acknowledgements}
+  \input{EPAAcknowledgements}
+
+  \cleardoublepage
+  \tableofcontents
+  %\listoffigures
+  %\listoftables
+
+%  \SANDmain
+  \clearpage
+  \pagenumbering{arabic}
+
+  \chapter{Installing WST}
+  \input{install}
+
+  \newpage
+
+  \bibliographystyle{abbrv}
+  %\bibliography{sensors}
+
+  \newpage
+
+  % \chapter{BSD License}\label{BSDPage}
+  % \input{BSDPage}
+  \includepdf[pages={1}]{last_page_blank.pdf}
+
+  %% ==================================================================
+  % END MAIN DOCUMENT
+  %% ==================================================================
+  
+\end{document}
+

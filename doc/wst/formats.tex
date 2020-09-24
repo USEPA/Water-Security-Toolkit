@@ -1,0 +1,357 @@
+This chapter describes the different file formats used by WST, including a 
+brief description, format, the associated subcommand(s) and any additional details.
+
+\section{Configuration File}\label{formats_yamlFile}
+\begin{itemize}
+\item {\bfseries Description:} Input configuration file for all WST subcommands.
+\item {\bfseries Format:} YAML 
+\item {\bfseries Created by:} Template input configuration files can be created using the \code{---template} option from each subcommand in WST.
+\item {\bfseries Used by:} WST
+\item {\bfseries Details:} 
+The input configuration files for WST are stored in the YAML file format.
+YAML is a human-readable file format that is well suited for storing hierarchical 
+information. This information can be easily parsed and stored as common data types 
+such as strings, scalars, lists and dictionaries by a range of programming languages. 
+WST uses PyYAML to parse YAML files into Python data types. Basic YAML format specifications are listed below:
+\begin{itemize}
+\item Each element of a YAML file is a key, value pair separated by a colon (key:value).  
+\item The key is the name given to the element, and the value is the data for that element.  
+\item The hierarchy of YAML files is maintained by outline indentation. 
+\item The number of spaces used to indent an element in the YAML file must be consistent across all elements at the same hierarchical level.  
+\item Nested data elements must be indented further than their preceding level.
+\item Using tab for indentation is not recommended.
+\item Optional blank lines can be added for readability. 
+\item Comments begin with the number sign (\#) and must be separated from a key:value 
+pair by space. Comments can start anywhere but are limited to a single line.
+\item PyYAML automatically casts data types. For example, [123] is read as a list 
+with a single integer value, '123' is read as a string, 123 is read as an integer, and 123.0 is read as a real number.
+\item Strings do not require quotation (unless they could be cast as a number) and can contain spaces.
+\item Lists are indicated with square brackets or hyphens. When using square brackets, the list is comma separated. When using hyphens, each entry of the list is on a new line.
+\item Dictionaries are indicated with indentation or curly brackets and are used to define key: value pairs.  Nested dictionaries define the hierarchical levels in the YAML file.
+\end{itemize}
+Additional information on YAML files can be found on the official YAML website \url{http://www.yaml.org}.
+
+Select aspects of the \code{flushing} subcommand template configuration file are used as an example of the format of a YAML file. 
+The full \code{flushing} subcommand template configuration file is shown in Figure \ref{fig:flushing_template}. 
+In the template, the top level key, denoted 'flushing', contains the following data:
+\unknownInputListing{examples/flushing_config.yml}{}{1}{50}
+This subset of the the \code{flushing} subcommand template is refereed to as the flushing block. Instead of a single 
+value assigned to 'flushing', the value is a dictionary containing a nested structure 
+of additional key:value pairs. 
+
+The keys 'detection', 'flush nodes' and 'close valves' are all second level keys inside the flushing block. 
+The location of these keys is often specified using the notation [flushing][detection], [flushing][flush nodes] and [flushing][close valves]. 
+The second level keys must be indented using the same number of spaces and they must have unique names. 
+The key [flushing][detection] is assigned to a list. Lists can be specified 
+in one of two ways, using square brackets or using hyphen. The following two formats (separated by -\--\--) are equivalent. 
+\begin{unknownListing}
+flushing:
+  detection: [111, 127, 179] # square bracket notation, comma separated
+---
+flushing:
+  detection: # hyphen notation, new line for each entry
+  - 111
+  - 127
+  - 179
+\end{unknownListing}
+All template configuration files use square brackets to indicate where a list of input values can be used.
+If these input values include keywords, like NZD for non-zero demand nodes, this 
+information is listed in the comment or in the user manual documentation for 
+that specific YAML input parameter.
+
+The options [flushing][flush nodes] and [flushing][close valves] are both assigned dictionaries. 
+The data inside these second level keys contain additional key:value pairs. 
+All keys within these dictionaries must be indented using the same number of spaces and have unique names. 
+Two key:value pairs in the flushing flush nodes option are listed below:
+\begin{unknownListing}
+flushing:
+  flush nodes:
+    feasible nodes: NZD
+    max nodes: 2
+\end{unknownListing}    
+Here, the [flushing][flush nodes][feasible nodes] option is set to the string NZD 
+and the [flushing][flush nodes][max nodes] option is set to the integer 2. 
+Note that there are two third-order keys named 'response time', however they do not share the same exact hierarchy, as shown below:
+\begin{unknownListing}
+flushing:
+  flush nodes:
+    response time: 0.0
+  close valves:
+    response time: 0.0    
+\end{unknownListing}    
+
+YAML files can be written in a compact format that uses curly brackets to represent the hierarchical indentation of the nested dictonary. 
+While this avoids issues with space indentation, this format is more difficult for the user to read. 
+For example, the following two examples (separated by -\--\--) are equivalent: 
+\begin{unknownListing} 
+flushing:
+  detection: [111, 127, 179] 
+---
+{'flushing': {'detection': [111, 127, 179]}}
+\end{unknownListing}  
+\end{itemize}
+
+\section{Cost File}\label{formats_costFile}
+\begin{itemize}
+\item {\bfseries Description:} Specifies the costs for installing sensors at 
+different nodes throughout a network. This is the cost of installing one sensor 
+at one particular node. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{sp} 
+\item {\bfseries Details:} Each line of this file has the format:
+\begin{unknownListing}
+   <EPANET node ID> <cost>
+\end{unknownListing}
+Nodes not explicitly enumerated in this file are assumed to have a cost of zero 
+unless the ID \code{\_\_}default is specified. For example to specify that 
+all un-\/enumerated nodes have a cost of 1.0:
+\begin{unknownListing}
+   __default 1.0
+\end{unknownListing}
+
+For example, the following cost file indicates that a sensor at node 1 has a cost of \$100, a sensor at node 2 has a cost of \$200 and sensors at all other nodes have a cost of \$50.
+\begin{unknownListing}
+     1       100
+     2       200
+   __default 50
+\end{unknownListing}
+\end{itemize}
+
+\if 0
+\section{DVF File}\label{formats_dvfFile} 
+\begin{itemize} 
+\item {\bfseries Description:} Provides representation of flushing variables (opened hydrants and closed pipes).
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user or \code{flushing}
+\item {\bfseries Used by:} \code{tevasim} and \code{sim2Impact}
+\item {\bfseries Details:}
+\unknownInputListing{fileFormats/dvfFormat.txt}{}{1}{16}{}
+\end{itemize} 
+\fi
+
+\section{ERD File}\label{formats_tsoFile} 
+\begin{itemize} 
+\item {\bfseries Description:} Provides a compact representation of all contamination scenario simulation results. 
+\item {\bfseries Format:} binary 
+\item {\bfseries Created by:} \code{tevasim} 
+\item {\bfseries Used by:} \code{sim2Impact} 
+\item {\bfseries Details:} The simulation data generator produces four output files 
+containing the results of all contamination simulation scenarios.  The database files include 
+an index file (index.erd), a hydraulics file (hyd.erd) and a water quality file (qual.erd).  
+The files are unformatted binary file in order to save disk space and computation time. 
+They are not readable using an ordinary text editor.  
+%All data written are either of type float, int, long, or 16-byte character strings. The format of this file is as follows. 
+%\unknownInputListing{fileFormats/tsoFormat.txt}{}{}
+\item {\bfseries Note:} The ERD file format replaced the TSO and SDX file formats, created by previous versions of 
+\code{tevasim}, to extend the capability of \code{tevasim} for multi-species simulation using EPANET-MSX.  
+While the \code{tevasim} subcommand produces only ERD files 
+(even for single species simulation), the \code{sim2Impact} subcommand accepts both ERD and TSO file formats. 
+\end{itemize} 
+
+
+\section{Impact File}\label{formats_impactFile}
+\begin{itemize}
+\item {\bfseries Description:} For each contamination scenario, the impact file 
+contains a list of all the locations (nodes) in the network where a sensor might 
+detect contamination from a specific scenario.
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} \code{sim2Impact} 
+\item {\bfseries Used by:} \code{sp} and \code{evalsensor} 
+\item {\bfseries Details:} The first line of an impact file 
+contains the number of incidents. The second line specifies the number of delays (always 1) and the delay time in minutes.
+Subsequent lines have the format
+\begin{unknownListing}
+   <scenario-index> <node-index> <time-of-detection> <impact-value>
+\end{unknownListing}
+The scenario index is the index of contamination scenarios that were simulated. 
+A scenario index maps to a line in the network scenariomap file, which is defined in Section \ref{formats_scenarioFile}. 
+The node index is the index of a witness location for the incident. A node index maps to a line 
+in the network nodemap file, which is defined in Section \ref{formats_nodeFile}. The time of detection is in minutes. 
+The value of the impacts are in the corresponding units for each impact metric. The different 
+impact metrics in each line correspond to the different delays that have been computed. 
+\end{itemize}
+
+
+\section{Imperfect Junction Class File}\label{formats_junctionClass}
+\begin{itemize}
+\item {\bfseries Description:} Provides the mapping from EPANET node IDs to failure classes of different false-negative probabilities. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{sp} 
+\item {\bfseries Details:} The imperfect junction class file provides the mapping from EPANET node IDs
+ to failure classes of different false-negative probabilities as defined in a imperfect sensor class file 
+ (See Section \ref{formats_sensorClass} for information on imperfect sensor class files). The format of this file is:
+\begin{unknownListing}
+   <node id> <failure class>
+   <node id> <failure class>
+   ....
+\end{unknownListing}
+
+For example, node 1 is of class 2, node 2 is of class 1 and node 3 is of class 1:
+\begin{unknownListing}
+   1 2
+   2 1
+   3 1
+   ....
+\end{unknownListing}
+\end{itemize}
+
+\section{Imperfect Sensor Class File}\label{formats_sensorClass}
+\begin{itemize}
+\item {\bfseries Description:} Contains false-negative probabilities for different types of sensors. 
+The false-negative probability defines the accuracy rate of the sensor (e.g., 50 percent of the 
+time the sensor is providing a correct reading). 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{sp} 
+\item {\bfseries Details:} The file has format:
+\begin{unknownListing}
+   <class id> <false-negative probability>
+   <class id> <false-negative probability>
+   ....
+\end{unknownListing}
+
+For example, the following file defines a failure class 1 with a false-negative probability of 25 percent, 
+and a failure class 2 with a false-negative probability of 50 percent:
+\begin{unknownListing}
+   1 0.25
+   2 0.5
+   ....
+\end{unknownListing}
+\end{itemize}
+
+\section{Measurements File}\label{formats_measFile}
+\begin{itemize}
+\item {\bfseries Description:} Contains a list of measurements along with their corresponding time and EPANET node ID.
+  This file can contain multiple node IDs and the measurement time is not required to be in order. 
+\item {\bfseries Format:} ASCII
+\item {\bfseries Created by:} WST user or a water quality event detection system or a data acquisition system  
+\item {\bfseries Used by:} \code{inversion} 
+\item {\bfseries Details:} Each line of this file has the format:
+\begin{unknownListing}
+   <EPANET node ID> <Time from beginning of simulation (sec) > <Binary yes/no measurement>
+\end{unknownListing}
+An example measurements file is provided:
+\unknownInputListingFixed{../../examples/Net3/Net3_MEASURES.dat}{}{1}{10}
+\end{itemize}
+
+\section{Nodemap File}\label{formats_nodeFile}
+\begin{itemize}
+\item {\bfseries Description:} Provides a mapping from the indices used for sensor placement to the node IDs used within EPANET.
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} \code{sim2Impact} 
+\item {\bfseries Used by:} \code{evalsensor} and \code{sp} 
+\item {\bfseries Details:} Each line of this file has the format:
+\begin{unknownListing}
+   <node-index> <EPANET node ID>
+\end{unknownListing}
+This mapping is generated by the \code{sim2Impact} subcommand, and all sensor placement solvers subsequently use the node indices internally. 
+\end{itemize}
+
+
+\section{Scenariomap File}\label{formats_scenarioFile}
+\begin{itemize}
+\item {\bfseries Description:} The scenariomap file provides auxiliary information about each contamination incident. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} \code{sim2Impact} 
+\item {\bfseries Used by:} \code{evalsensor} 
+\item {\bfseries Details:} Each line of this file has the format:
+\begin{unknownListing}
+   <node-index> <EPANET node ID> <source-type> <source-start-time> ...
+			<source-stop-time> <source-strength>
+\end{unknownListing}
+The node index maps to the network nodemap file as described in Section \ref{formats_nodeFile}, and the EPANET node ID provides 
+this information. The source type is the injection mode for an scenario, e.g., 
+flow-\/paced or fixed-\/concentration. The scenario source start and stop times are in minutes, and these values are relative to the 
+start of the EPANET simulation. The source strength is the concentration of contaminant at the injection source. 
+\end{itemize}
+
+
+\section{Sensor Placement File}\label{formats_sensorPlacementFile}
+\begin{itemize}
+\item {\bfseries Description:} Describes one or more sensor placements. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created By:} \code{sp} 
+\item {\bfseries Used By:} \code{evalsensor} 
+\item {\bfseries Details:} Lines in a sensor placement file that begin with 
+the \# character are assumed to be comments. Otherwise, lines of this file have the format
+\begin{unknownListing}
+   <sp-id> <number-of-sensors> <node-index-1> ...
+\end{unknownListing}
+The sensor placement ID is used to identify sensor placements in the file. Sensor 
+placements could have differing numbers of sensors, so each line contains this 
+information. The node indices map to values in the nodemap file described in Section \ref{formats_nodeFile}. 
+\end{itemize}
+
+\section{TAI File}\label{formats_taiFile}
+\begin{itemize}
+\item {\bfseries Description:} Describes the information needed for assessing health impacts.
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{sim2Impact} 
+\item {\bfseries Details:} This file is required for health impact metrics, such as population exposed, population 
+dosed and population killed. 
+The following example can be copied directly into a text editor. 
+\unknownInputListing{fileFormats/tiaFormat.txt}{1}{1}{102}
+\end{itemize}
+
+
+\section{TSG File}\label{formats_tsgFile}
+\begin{itemize}
+\item {\bfseries Description:} Specifies how an ensemble of EPANET 2.00.12 contamination scenario simulations will be performed. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{tevasim} 
+\item {\bfseries Details:} Each line of a TSG file specifies injection location(s), species (optional), 
+injection mass and the injection time-\/frame:
+\begin{unknownListing}
+   <injection-location> <injection-type> <specie> <injection-mass> <start-time> <end-time>
+\end{unknownListing}	
+If <specie> is included, the \code{tevasim} subcommand uses EPANET-MSX. The simulation data generator 
+uses the specifications in the TSG file to construct a separate threat simulation input (TSI) 
+file that describes each individual contamination scenario in the ensemble. Each line in the TSG file 
+uses a simple language that is expanded to define the ensemble. The entire ensemble is 
+comprised of the cumulative effect of all lines in the TSG file. The TSG file is an optional file, 
+since the ensemble of contamination scenarios can be specified in the configuration file.
+\unknownInputListing{fileFormats/tsgFormat_msx.txt}{}{1}{44}{}
+\end{itemize}
+
+
+\section{TSI File}\label{formats_tsiFile} 
+\begin{itemize} 
+\item {\bfseries Description:} Specifies how an ensemble of EPANET 2.00.12 contamination scenario simulations will be performed. 
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} \code{tevasim} or WST user 
+\item {\bfseries Used by:} \code{tevasim} 
+\item {\bfseries Details:} The TSI file is generated as output from the \code{tevasim} subcommand 
+and would not normally be used, but it is available after the run for reviewing each scenario 
+that was generated for the ensemble. The TSG file is essentially a short hand for generation of 
+the more cumbersome TSI file. Each record in the TSI file specifies the unique attributes 
+of one contamination scenario. The number of scenarios does not have a restriction.                         
+\unknownInputListing{fileFormats/tsiFormat_msx.txt}{1}{1}{23}
+\end{itemize} 
+
+
+\section{Weight File}\label{formats_weightFile}
+\begin{itemize}
+\item {\bfseries Description:} Specifies the weights for contamination incidents.
+\item {\bfseries Format:} ASCII 
+\item {\bfseries Created by:} WST user 
+\item {\bfseries Used by:} \code{sp} 
+\item {\bfseries Details:} Each line of this file has the format:
+\begin{unknownListing}
+   <scenario-ID> <weight>
+\end{unknownListing}
+Scenarios not explicitly enumerated in this file are assumed to have a weight of zero unless 
+the ID \code{\_\_}default is specified. For example, to specify that all un-\/enumerated 
+scenarios have a weight of 1.0:
+\begin{unknownListing}
+   __default 1.0
+\end{unknownListing}
+\end{itemize}
+
+
+
+
+% LocalWords:  WST sp un

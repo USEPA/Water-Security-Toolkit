@@ -1,0 +1,13 @@
+confidence nodes: 0.90
+confidence scenarios: 0.99
+delta t: 60
+measurements: MEAS.dat
+num cycles: 6
+mip solver: glpk
+number of samples: 3
+set scenarios: list_scenarios
+start time: 120
+threshold: 0.01
+true scenario: list_true_scenario
+sample criteria: probability1
+prune scenarios: True

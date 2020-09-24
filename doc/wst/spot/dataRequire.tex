@@ -1,0 +1,181 @@
+\section{Data Requirments for TEVA-SPOT}\label{data_TEVASPOT}
+
+The Threat Ensemble Vulnerability Assessment Sensor Placement Optimization Tool, TEVA-SPOT, is a software product and decision-making process developed by EPA's TEVA Research program to assist in determining the best location for sensors in a distribution system. In the past, the TEVA-SPOT software has been applied by EPA staff using models and data provided by utilities. In some cases, significant improvements in the models have been made in order to bring them up to the standards required by the TEVA-SPOT software.  In order to streamline the application of TEVA-SPOT, this document was developed to describe the requirements and steps that utilities must follow to participate in the TEVA program and/or use TEVA-SPOT.  
+
+Table 1 summarizes the data and information required for a water utility to use TEVA-SPOT; each component is described in more detail in the text.  In addition to having an appropriate utility network model, utilities will need to make decisions about the nature of the Contamination Warning System they are designing and the types of security incidents that they would like to detect.
+
+{\bf Table 1.  Information and data required for utilities to design sensor networks using TEVA-SPOT.}
+\begin{center}
+  \begin{tabular}{ | p{5cm} | p{10cm} | }
+    \hline
+    INFORMATION AND DATA NEEDED FOR SENSOR PLACEMENT & DESCRIPTION  \\ \hline
+    Utility Network Model  & The model (e.g. EPANET input file) should be up-to-date, capable of simulating operations for a 7-10 day period, and calibrated with field data.  \\ \hline
+    Sensor Characteristics & Type of sensors or sampling program, detection limits, and (if applicable) event detection system \\ \hline
+    Design Basis Threat & Data describing type of event that the utility would like to be able to detect: specific contaminants, behavior of adversary, and customer behavior \\ \hline
+    Performance Measures & Utility specific critical performance criteria, such as time to detection, number of illnesses, etc. \\ \hline
+    Utility Response & Plan for response to a positive sensor reading, including total time required for the utility to limit further public exposure. \\ \hline
+    Potential Sensor Locations & List of all feasible locations for placing sensors, including associated model node/junction. \\
+    \hline
+  \end{tabular}
+\end{center}
+
+{\bf UTILITY NETWORK MODEL}
+
+The TEVA-SPOT software relies upon an EPANET hydraulic model of the network as the mechanism for calculating the impacts resulting from contamination incidents. Therefore, an acceptable model of the distribution system is needed in order to effectively design the sensor system. The following sub-sections describe the various issues/characteristics of an acceptable hydraulic model for use within TEVA-SPOT.   
+
+{\bf EPANET Software Requirement}
+TEVA-SPOT uses EPANET, a public domain water distribution system modeling software package. In order to utilize TEVA-SPOT, existing network models that were not developed in EPANET must be converted to and be demonstrated to properly operate within EPANET (Version 2.00.11). Most commercial software packages utilize the basic EPANET calculation engine and contain a conversion tool for creating an EPANET input file from the files native to the commercial package.  The user may encounter two potential types of problems when they attempt to make the conversion: (1) some commercial packages support component representations that are not directly compatible with EPANET such as representation of variable speed pumps. The representation of these components may need to be modified in order to operate properly under EPANET; (2) additionally, the conversion programs developed by the commercial software vendors may also introduce some unintended representations within EPANET that may require manual correction.  Following conversion, the output from the original model should be compared with the EPANET model output to ensure that the model results are the same or acceptably close (see section on Model Testing). 
+
+{\bf Extended Period Simulation}
+TEVA-SPOT uses both the hydraulic and water quality modeling portions of EPANET. In order to support the water quality modeling, the model must be an extended period simulation (EPS) that represents the system operation over a period of several days. Typically a model that uses rules to control operations (e.g., turn pump A on when the water level in tank B drops to a specified level) are more resilient and amenable to long duration runs than are those that use controls based solely on time clocks. Model output should be examined to ensure that tank water levels are not systematically increasing or decreasing over the course of the run since that will lead to unsustainable situations. 
+
+The required length of simulation depends on the size and operation of the specific water system. However, in general, the length of the simulation should reflect the longest travel times from a source to customer nodes. This can be calculated by running the EPANET model for water age and determining the higher water age areas. In determining the required simulation length, small dead-ends (especially those with zero demand nodes) can be ignored. Typically a run length of 7 to 10 days is required for TEVA-SPOT though shorter periods may suffice for smaller systems and longer run times required for larger or more complex systems. 
+
+{\bf Seasonal Models} 
+In most cases, water security incidents can take place at any time of the day or any season of the year. As a result, sensor systems should be designed to operate during one or more representative periods in the water system. It should be noted that this differs significantly from the normal design criteria for a water system where pipes are sized to accommodate water usage during peak seasons or during unusual events such as fires. In many cases, the only available models are representative of these extreme cases and generally, modifications to such models should be made to reflect a broader time period prior to use with TEVA-SPOT. Specific guidance on selecting models is provided below:
+\begin{itemize} 
+\item {\bfseries Optimal situation:} the utility has multiple models representing average conditions throughout the year, typical higher demand case (e.g., average summer day) and typical lower demand case (e.g., average winter day).
+\item {\bfseries Minimal situation:} the utility has a single model representing relatively average conditions throughout the year.
+\item {\bfseries Situations to avoid:} the utility has a single model representing an extreme case (e.g., maximum day model). 
+\item {\bfseries Exceptions:} (1) If a sensor system is being designed to primarily monitor a water system during a specific event such as a major annual festival, then one of the models should reflect conditions during that event; and (2) If the water system experiences little variation in water demand and water system operation over the course of the year, then a single representative model would suffice.
+\end{itemize} 
+
+{\bf Model Detail}
+A sufficient amount of detail should be represented in the model for use within TEVA-SPOT. This does not mean that an all-pipes model is required nor does it mean that a model that only represents transmission lines would suffice. At a minimum, all parts of the water system that are considered critical from a security standpoint should be included in the model, even if they are on the periphery of the system. The following guidance drawn from the Initial Distribution System Evaluation (IDSE) Guidance Manual of the Final Stage 2 Disinfectants and Disinfection Byproducts Rule provides a reasonable lower limit for the level of detail required for a TEVA-SPOT analysis (USEPA, 2006). 
+
+Most distribution system models do not include every pipe in a distribution system. Typically, small pipes near the periphery of the system and other pipes that affect relatively few customers are excluded to a greater or lesser extent depending on the intended use of the model. This process is called skeletonization. Models including only transmission networks (e.g. pipes larger than 12 inches in diameter only) are highly skeletonized while models including many smaller diameter distribution mains (e.g. 4 to 6 inches in diameter) are less skeletonized. In general, water moves quickly through larger transmission piping and slower through the smaller distribution mains. Therefore, the simulation of water age or water quality requires that the smaller mains be included in the model to fully capture the residence time and potential water quality degradation between the treatment plant and the customer. Minimum requirements for physical system modeling data for the IDSE process are listed below.
+\begin{itemize} 
+\item At least 50 percent of total pipe length in the distribution system.
+\item At least 75 percent of the pipe volume in the distribution system.
+\item All 12-inch diameter and larger pipes.
+\item All 8-inch diameter and larger pipes that connect pressure zones, mixing zones from different sources, storage facilities, major demand areas, pumps, and control valves, or are known or expected to be significant conveyors of water.
+\item All 6-inch diameter and larger pipes that connect remote areas of a distribution system to the main portion of the system or are known or expected to be significant conveyors of water.
+\item All storage facilities, with controls or settings applied to govern the open/closed status of the facility that reflect standard operations.
+\item All active pump stations, with realistic controls or settings applied to govern their on/off status that reflect standard operations.
+\item All active control valves or other system features that could significantly affect the flow of water through the distribution system (e.g., interconnections with other systems, pressure reducing valves between pressure zones).
+\end{itemize}
+
+{\bf Model Demands}
+The movement of water through a distribution system is largely driven by water demands (consumption) throughout the system. During higher demand periods, flows and velocities generally increase and vice versa. Demands are usually represented within a model as average or typical demands at most nodes and then (a) global or regional demand multipliers are applied to all nodes to represent periods of higher or lower demand, and (b) temporal demand patterns are applied to define how the demands vary over the course of a day.  In some models, demands within a large area have been aggregated and assigned to a central node.  In building a model for use with TEVA-SPOT, rather than aggregating the demands and assigning them to only a few nodes, each demand should be assigned to the node that is nearest to the actual point of use. Both EPANET and most commercial software products allow the user to assign multiple demands to a node with different demands assigned to different diurnal patterns. For example, part of the demand at a node could represent residential demand and utilize a pattern representative of residential demand. Another portion of the demand at the same node may represent commercial usage and be assigned to a representative commercial diurnal water use pattern. TEVA-SPOT supports either a single demand or multiple demands assigned to nodes. 
+
+{\bf Model Calibration/Validation}
+Calibration is the process of adjusting model parameters so that predicted model outputs generally reflect the actual behavior of the system. Validation is the next step after calibration, in which the calibrated model is compared to independent data sets (i.e., data that was not used in the calibration phase) in order to ensure that the model is valid over wider range of conditions. There are no formal standards in the water industry concerning how closely the model results need to match field results nor is there formal guidance on the amount of field data that must be collected. Calibration methods that are frequently used include roughness (c-factor) tests, hydrant flow tests, tracer tests and matching model results over extended periods for pressure, flow and tank water levels to field data collected from SCADA systems or special purpose data collection efforts. 
+
+The IDSE Guidance Manual stipulates the following minimum criteria in order to demonstrate calibration. ``The model must be calibrated in extended period simulation for at least a 24-hour period. Because storage facilities have such a significant impact upon water age and reliability of water age predictions throughout the distribution system, you must compare and evaluate the model predictions versus the actual water levels of all storage facilities in the system to meet calibration requirements.'' For TEVA-SPOT application, the water utility should calibrate the model to a level that they are confident that the model adequately reflects the actual behavior of the water system being represented by the model.  Some general guidelines for calibration/validation are shown below:
+\begin{itemize} 
+\item If the model has been in operation actively and for several years and has been applied successfully in a variety of extended period simulation situations, then further substantial calibration may not be necessary. However, even in this case,  it is prudent to demonstrate the validity of the model by comparing the model results to field measurements such as time-varying tank water levels and/or field pressure measurements.
+\item If the model has been used primarily for steady state applications, then further calibration/validation emphasizing extended period simulation is needed.
+\item If the model has been recently developed and not undergone significant application, then a formal calibration/validation process is needed.
+\end{itemize}
+
+{\bf Model Tanks}
+Tank mixing models:  Most water distribution system models use a ``complete mix'' tank representation that assumes that tanks are completely and instantaneously mixed. EPANET (and most commercial modeling software models) allow for alternative mixing models such as last in-first out (LIFO), first in-first out (FIFO), and compartment models.  If a utility has not previously performed water quality modeling, they may not have determined the most appropriate tank mixing model for each tank. Since the tank mixing model can affect contaminant modeling and thus the sensor placement decisions, tank mixing models should be specified in the EPANET model input files.
+
+{\bf Model Testing}
+The final step in preparing the model for use in TEVA-SPOT is to put the model through a series of candidate tests. Following is a list of potential tests that should be considered.
+\begin{itemize} 
+\item If the model was developed and applied using a software package other than EPANET, then following its conversion to EPANET, the original model and the new EPANET model should be run in parallel under EPS and the results compared. The models should give virtually the same results or very similar results. Comparisons should include tank water levels and flows in major pipes, pumps and valves over the entire time period of the simulation. If there are significant differences between the two models, then the EPANET model should be modified to better reflect the original model or differences should be explained and justified.
+\item The EPANET model should be run over an extended period (typically 1 to 2 weeks) to test for sustainability. In a sustainable model, tank water levels cycle over a reasonable range and do not display any systematic drops or increases. Thus, the range of calculated minimum and maximum water levels in all tanks should be approximately the same in the last few days of the simulation as they were in the first few days. Typically, a sustainable model will display results that are in dynamic equilibrium in which temporal tank water level and flow patterns will repeat themselves on a daily (or other periodic) basis.
+\item If the water system has multiple sources, then the source tracing feature in EPANET should be used to test the movement of water from each source. In most multiple source systems, operators generally have a good idea as to how far the water from each source travels. The model results should be shown to the knowledgeable operators to ensure that the model is operating in a manner that is compatible with their understanding of the system.
+\item The model should be run for a lengthy period (1 to 2 weeks) using the water age option in EPANET in order to determine travel times. Since the water age in tanks is not usually known before modeling, a best guess (not zero hours) should be used to set an initial water age for each tank.  Then after the long run of the model, a graph of calculated water age should be examined for each tank to ensure that it has reached a dynamic equilibrium and is still not increasing or decreasing. If the water age is still systematically increasing or decreasing, then the plot of age for each tank should be visually extrapolated to estimate an approximate final age and that value should be reinserted in the model as an initial age, and the model rerun for the extended period. The model output of water age should then be investigated for reasonableness, e.g., are there areas where water age seems unreasonably high? This exercise will also help to define a reasonable upper limit for the duration of the model run to be used in the TEVA-SPOT application.
+\end{itemize}
+
+Following these test runs, any identified modifications should be made in the model to ensure that the model will operate properly under TEVA-SPOT.   Many utilities will not be able to make all of the above modifications to their network model.  In that case, TEVA-SPOT can still be applied; however the overall accuracy of the results will be questionable and should only be considered applicable to the system as described by the model.
+
+{\bf SENSOR CHARACTERISTICS}
+ 
+The TEVA-SPOT analysis requires some assumptions about the detection characteristics of the sensors. In particular, the sensor type, detection limit, and accuracy need to be specified.  For example, the analysis can specify a contaminant-specific detection limit that reflects the ability of the water quality sensors to detect the contaminant. Alternatively, the analysis can assume perfect sensors that are capable of detecting all non-zero concentrations of contaminants with 100% reliability. The latter assumption, though not realistic, provides an upper bound on realistic sensor performance.  If the utility has some idea as to the type of sensor that they are planning on using and its likely detection performance, then that information should be provided. If that information is not available, then some typical default values will be used in the TEVA-SPOT analysis. 
+
+In order to quantify detection limits for water quality sensors, the utility must indicate the type of water quality sensor being used, as well as the disinfection method used in the system. Generally, water quality sensors are more sensitive to contaminant introduction with chlorine disinfection than with chloramine.  As a result, contaminant detection limits may need to be increased in the design of a sensor network for a chloraminated system.
+
+Ongoing pilot studies for EPA's Water Security Initiative use a platform of water quality sensors, including free chlorine residual, total organic carbon (TOC), pH, conductivity, oxidation reduction potential (ORP), and turbidity (USEPA, 2005b). The correlation between contaminant concentration and the change in these water quality parameters can be estimated from experimental data, such as pipe loop studies (Hall et al., 2007; USEPA, 2005c). Of these parameters, chlorine residual and TOC seem to be most likely to detect a wide range of contaminants. 
+
+Detection limits for water quality sensors can be defined in terms of the concentration that would change one or more water quality parameters enough that the change would be detected by an event detection system (for example, Cook et al., 2005; McKenna, Wilson and Klise, 2006) or a water utility operator. A utility operator may be able to recognize a possible contamination incident if a change in water quality is significant and rapid. For example, if the chlorine residual decreased by 1 mg/L, the conductivity increased by 150 5Sm/cm, or TOC increased by 1 mg/L.
+
+{\bf DESIGN BASIS THREAT}
+
+A design basis threat identifies the type of threat that a water utility seeks to protect against when designing a CWS. In general, a CWS is designed to protect against contamination threats; however, there are a large number of potentially harmful contaminants and a myriad of ways in which a contaminant can be introduced into a distribution system. Some utilities may wish to design a system that can detect not only high impact incidents, but also low impact incidents that may be caused by accidental backflow or cross-connections. It is critical for a water utility to agree upon the most appropriate design basis threat before completing the sensor network design. 
+
+Contamination incidents are specified by the type of contaminant(s), the quantity of contaminant, the location(s) at which the contaminant is introduced into the water distribution system, the time of day of the introduction, and the duration of the contaminant introduction. Given that it is difficult to predict the behavior of adversaries, it is unlikely that a water utility will know, with any reasonable level of certainty, the specific contamination threats that they may face.  The TEVA-SPOT approach assumes that most of these parameter values cannot be known precisely prior to an incident; therefore, the modeling process must take this uncertainty into account.  
+
+As an example, probabilities are assigned to each location in a distribution system indicating the likelihood that the contaminant would be introduced at that location.  The default assumption is that each location is equally likely to be selected by an adversary (each has the same probability assigned to it). A large number of contamination incidents (an ensemble of incidents) are then simulated and sensor network designs are selected based on how well they perform for the entire set of incidents.  Based on their completed vulnerability assessment and other security related studies, a utility may have some knowledge or preconceived ideas that will assist in refining these assumptions.  Some specific questions to consider are listed below:
+\begin{itemize} 
+\item Are there certain locations that should be assigned higher probabilities? Should all nodes be considered as possible introduction sites or only nodes with consumer demand?  
+\item Should utility infrastructure sites, such as storage tanks, be considered as potential contamination entry locations?
+\item Are there specific contaminants of concern to this utility? 
+\end{itemize}
+
+{\bf PERFORMANCE MEASURES}
+
+The TEVA-SPOT software utilizes an optimization model that selects the best sensor design in order to meet a specific set of performance measures. These measures are also sometimes referred to as objectives or metrics. There are several performance measures that are currently supported by TEVA-SPOT including:  
+\begin{itemize} 
+\item the number of persons who become ill from exposure to a contaminant
+\item the percentage of incidents detected
+\item the time of detection
+\item the length of pipe contaminated 
+\end{itemize} 
+Although it requires more time and input from the user, TEVA-SPOT can also consider multiple objectives in its analysis. If the water utility has any preferences in the area of performance measures, they should specify which of the above measures should be used and the relative importance (weight) to be assigned to each measure. If there are other quantitative measures that they wish to be considered, these should be specified.
+
+{\bf UTILITY RESPONSE}
+
+The TEVA-SPOT analysis uses the concept of ``response times'' in the analysis of the effectiveness of a sensor system. Response time is an aggregate measure of the total time between the indication of a contamination incident (e.g., detection of an unusual event by a sensor system) and full implementation of an effective response action such that there are no more consequences. The following response activities are likely following sensor detection (USEPA, 2004; Bristow and Brumbelow, 2006):
+\begin{itemize} 
+\item Credibility determination: integrating data to improve confidence in detection; for example, by looking for additional sensor detections or detection by a different monitoring strategy, and checking sensor maintenance records.
+\item Verification of contaminant presence: collection of water samples in the field, field tests and/or laboratory analysis to screen for potential contaminants.
+\item Public warning: communication of public health notices to prevent further exposure to contaminated water.
+\item Utility mitigation: implementing appropriate utility actions to reduce likelihood of further exposure, such as isolation of contaminated water in the distribution system or other hydraulic control options.
+\item Medical mitigation: public health actions to reduce the impacts of exposure, such as providing medical treatment and/or vaccination.
+\end{itemize} 
+Past analyses have shown that the benefits of a contaminant warning system (CWS) are very dependent on a rapid response time.   Typically, the TEVA-SPOT analysis assesses a range of response times between 0 and 24 hours. A zero hour response time is obviously infeasible but is usually analyzed in TEVA-SPOT as the best-case scenario and thus the maximum benefits that can be associated with a CWS.  Water utilities should assess their own emergency response procedures and their acceptable risk tolerance in terms of false negative and false positive responses in order to define a range of response times to be used in the TEVA-SPOT analysis.
+
+{\bf POTENTIAL SENSOR LOCATIONS} 
+
+TEVA-SPOT searches potential sensor locations to determine those set of locations (nodes) that will result in the optimal performance measure for a particular number of sensors. Utilities can choose to consider all nodes as potential sensor locations or to limit the search to a subset of specified nodes. 
+
+The primary physical requirements for locating sensors at a particular location are accessibility, electricity, physical security, data transmission capability, sewage drains, and temperatures within the manufacturer specified range for the instrumentation (ASCE, 2004). Accessibility is required for installation and maintenance of the sensor stations. Electricity is necessary to power sensors, automated sampling devices, and computerized equipment. Physical security protects the sensors from natural elements and vandalism or theft. Data transmission is needed to transmit sensor signals back to a centralized SCADA database, and can be accomplished through a variety of solutions including digital cellular, private radio, land-line, or fiber-optic cable. Sewage drains are required to dispose of water and reagents from some sensors. Temperature controls may be needed to avoid freezing or heat damage. 
+
+Most drinking water utilities can identify many locations satisfying the above requirements, such as pumping stations, tanks, valve stations, or other utility-owned infrastructure. Many additional locations may meet the above requirements for sensor locations or could be easily and inexpensively adapted. Other utility services, such as sewage systems, own sites that likely meet most of the requirements for sensor locations (e.g., collection stations, wastewater treatment facilities, etc.). In addition, many publicly-owned sites could be easily adapted, such as fire and police stations, schools, city and/or county buildings, etc. Finally, many consumer service connections would also meet many of the requirements for sensor placement, although there may be difficulties in securing access to private homes or businesses. Nevertheless, the benefit of using these locations may be worth the added cost. Compliance monitoring locations may also be feasible sites.
+
+The longer the list of potential sensor sites, the more likely one is to design a high-performing CWS.  Typically, the TEVA-SPOT analysis will consider two or three subsets of nodes.  For example, the set of all nodes in the model, the set of all publicly-owned facilities, and the set of all water utility owned facilities. The utility should develop a list of the (EPANET) node numbers associated with the facilities that they would like to have considered as potential sensor locations.  Multiple lists indicating different subsets (such as water utility owned, publicly owned, etc.)  may also be specified. 
+
+{\bf POPULATION} 
+
+In TEVA-SPOT analyses, the most commonly used performance measure for sensor placement is the number of persons made ill following exposure to contaminated drinking water. In order to estimate health impacts, information is needed on the population at each node. There are a variety of methods that can be used to estimate nodal population. 
+\begin{itemize} 
+\item The simplest method is to assume a constant relationship between demand assigned to a node and the population for that node. This method is most appropriate for a homogeneous, largely residential area. If a water demand-based population method is to be used, the total population calculated by the model using a per capita water usage rate needs to be verified with the population served considering billing records.
+\item Alternatively, if the number of service connections and types of service connections (i.e. residential, commercial, industrial, etc.) are known for each node, then this information can be used to estimate population. 
+\item A third alternative involves independent determination of population based on census data. If the use of a census-based population is desired, the population associated with each non-zero demand node of the model needs to be determined using the census data and GIS software.   The resulting total population needs to be verified with the population served by the water system. 
+\end{itemize} 
+If the second or third method is used to estimate nodal population, a file (text file or spreadsheet) should be developed listing model node numbers and the population assigned to that node.  
+
+For more information about applying the TEVA-SPOT methodology, see Murray et al. (2007) or visit the EPA website \begin{verb} http://www.epa.gov/nhsrc/water/teva.html \end{verb}.
+
+{\bf ADDITIONAL READING}
+
+American Society of Civil Engineers (ASCE), 2004. Interim Voluntary Guidelines for Designing an Online Contaminant Monitoring System.
+
+Berry, J. et al, 2005. Sensor Placement in Municipal Water Networks. Jour. Wat. Res. Plan. Manag. 131 (3): 237-243.
+
+Berry, J. et al, 2006. Sensor Placement in Municipal Networks with Temporal Integer Programming Models. Jour. Wat. Res. Plan. Manag. 132(4): 218-224. 
+
+Bristow, E. and Brumbelow, K., 2006. Delay between sensing and response in water contamination events. Jour. Infrastructure Systems, p. 87-95. 
+
+Cook, J. et al, 2005. Decision Support System for Water Distribution System Monitoring for Homeland Security. Proceedings of the AWWA Water Security Congress, Oklahoma City. 
+
+Hall, J. et al, 2007.  On-line Water Quality Parameters as Indicators of Distribution System Contamination.  Jour. AWWA, 99:1:66-77.
+
+McKenna, S. et al, 2006. Detecting Changes in Water Quality. Jour. AWWA, to appear.
+
+Murray, R., Janke, R. Hart, W., Berry, J., Taxon, T. and Uber, J, 2007.  A sensor network design decision framework for Contamination Warning Systems.  Submitted to Jour. AWWA.
+
+U. S. Environmental Protection Agency, 2004. Response Protocol Toolbox: Planning for and Responding to Drinking Water Contamination Threats and Incidents. \begin{verb} http://www.epa.gov/safewater/watersecurity/pubs/rptb_response_guidelines.pdf \end{verb}
+
+U. S. Environmental Protection Agency, 2005a. Review of State-of-the-Art Early Warning Systems for Drinking Water.
+
+U. S. Environmental Protection Agency, 2005b. WaterSentinel System Architecture. \begin{verb} http://epa.gov/watersecurity/pubs/watersentinel_system_architecture.pdf \end{verb}
+
+U. S. Environmental Protection Agency, 2005c. WaterSentinel Online Water Quality Monitoring as an Indicator of Contamination. \begin{verb} http://epa.gov/watersecurity/pubs/watersentinel_wq_monitoring.pdf \end{verb}
+
+U. S. Environmental Protection Agency, 2006.  Initial Distribution System Evaluation Guidance Manual for the Final Stage 2 Disinfectants and Disinfection Byproducts Rule.   EPA 815-B-06-002.  \begin{verb} http://www.epa.gov/safewater/disinfection/stage2/pdfs/guide_idse_full.pdf \end{verb} 
+
+

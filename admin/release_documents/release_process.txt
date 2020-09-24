@@ -1,0 +1,313 @@
+TODO: Rewrite these release instructions
+
+After reorganization of code and creation of ANL repository:
+
+Most code is at UC.  The ANL repository has external links to
+the UC code, plus health impacts code.
+
+Example of creating release 1.3.0
+
+Start with UC repository.  Create release branch, freeze acro-pico
+link in it.
+
+  revision 2557: created branches/teva-spot-1.3
+  freeze links to acro-pico/stable/1.3 and exact/fast/stable/1.2
+
+Create ANL release branch with externals pointing to UC, and freeze
+with same revision of acro-pico
+
+  revision created branches/teva-spot-limited-1.3
+  links to UC point into branches/teva-spot-1.3
+  freeze links to acro-pico/stable/1.3 and exact/fast/stable/1.2
+
+Create release docs at UC.  Release docs at ANL say - do UC release
+then do health impacts tests
+
+In reality we can be testing both at the same time.
+
+Also important is to write a README.x.y.z which goes along with the
+release.  It should be checked into the top of the release directories:
+
+  UC/releases/teva-spot-x.y.z
+  ANL/releases/teva-spot-limited-x.y.z
+
+And included in the top of each tar and zip files:
+
+  UC/dist/teva-spot-x.y.z/code/{arch}/teva-spot-x.y.z-{arch}-{compiler}-{libtype}.tar.gz
+  ANL/dist/teva-spot-limited-x.y.z/code/{arch}/teva-spot-x.y.z-{arch}-{compiler}-{libtype}.tar.gz
+
+And archived with the distribution documents:
+  UC/dist/teva-spot-x.y.z/docs/README.x.y.z
+  ANL/dist/teva-spot-limited-x.y.z/docs/README.x.y.z
+
+The following was written before the reorganization and is somewhat
+out of date - but it's the general idea.
+
+TEVA-SPOT: Software Release Procedure
+=====================================
+
+URL = http://engcvs.uc.edu/repos/TEVA/spot
+
+  URL/trunk/     The latest source code.
+                 Blank release docs are in admin/release_documents.
+                 
+
+  URL/stable/    Branches of trunk (created with "svn copy").
+    x.y/         Created in preparation for release x.y.0.
+                 Tested, bug fixes merged back into trunk.
+                 Copied to "releases" when ready to release.
+                 Work can continue here for patch releases (x.y.1).
+
+  URL/releases/  The source code representing the release.  All Externals
+    teva-spot-x.y.0/  must link to code that will not change.
+    teva-spot-x.y.1/
+    
+
+  URL/dist/        The archived release, including all files distributed 
+    teav-spot-x.y.0/ as part of the release.  (Tar and zip files, release
+      docs/          checklists, test output, change log, etc.)
+      tests/
+      CHANGE_LOG
+      teva-spot-x-y-0-linux64-bin.tar.gz
+      teva-spot-x-y-0-linux64-bin.zip
+      teva-spot-x-y-0-mingw32-bin.tar.gz
+
+    teav-spot-x.y.1/ An archived patch (bug fix) release.  Just the
+      CHANGE_LOG     tar and/or zip files, and a change log.
+      teva-spot-x-y-1-linux64-bin.tar.gz
+
+
+How to create release x.y.0:
+===========================
+
+CREATE DIRECTORIES, CREATE RELEASE DOCUMENTS:
+
+  Create a release branch:
+
+    svn copy URL/trunk URL/stable/x.y
+
+  Make a note of the revision number of the repository when you
+  make the copy.  Include it in the commit message.  Let's suppose
+  it is REVISION_NUMBER.
+
+  Create directories for archiving of release documents, release
+  tests, tar/zip files, etc.:
+  
+    svn co -N URL/dist
+    cd dist
+    mkdir teva-spot-x.y.0
+    mkdir teva-spot-x.y.0/docs
+    mkdir teva-spot-x.y.0/tests
+    svn add teva-spot-x.y.0
+    svn ci
+
+  Copy blank release documents into the dist directory:
+
+    cd teva-spot-x.y.0/docs
+    cp {path to spot trunk}/admin/release_documents/*.txt
+
+  Fill out release.txt with the dates and details of the release, and
+  fill out manifest.txt to capture what needs to be in the release.
+  Describe the test plan in releaseTestPlan.txt.  At some point also
+  create a customer satisfaction plan.
+
+TEST THE BRANCH, ARCHIVE TEST RESULTS:
+
+  Test the code in URL/stable/x.y.  Archive test results (enough to document
+  that they were done and they succeeded) in URL/dist/teva-spot-x.y.0/tests. 
+
+MERGE WORK IN STABLE BRANCH BACK INTO THE TRUNK:
+
+  To merge bug fixes from stable back into the trunk, first look at
+  all the changes that have been made in the branch since you created it:
+
+  svn diff URL/stable/x.y@REVISION_NUMBER URL/stable/x.y &> diff.out
+
+  Review diff.out to ensure that you want all these changes in the trunk.
+  Then, to merge them into the trunk:
+
+  svn co URL/trunk spot
+  cd spot
+  svn merge URL/stable/x.y@REVISION_NUMBER URL/stable/x.y .
+  svn ci
+
+  Make a note of the current revision number in the commit message.  If
+  you need to merge from the branch back to the trunk again, you will
+  start with this revision number.
+
+MERGE CONTINUING WORK FROM THE TRUNK INTO THE BRANCH:
+
+  If work is done in the trunk that you want to include in the branch,
+  first look at the all the changes made to the trunk since you created
+  the branch:
+
+  svn diff URL/trunk@REVISION_NUMBER URL/trunk &> diff.out
+
+  If you want to merge all of these into the branch, then:
+
+  cd {path to stable}/stable/x.y
+  svn merge URL/trunk@REVISION_NUMBER URL/trunk .
+  svn ci
+
+  Note the current revision number in the commit message.  If you need
+  to merge again, you will need to start from the new revision number.
+
+"TAG" THE RELEASE (FREEZE THE CODE USING SVN COPY AND SVN PROPEDIT):
+
+  When ready to create the release:
+
+  svn copy URL/stable/x.y URL/releases/teva-spot-x.y.0
+
+  Go in to URL/releases/teva-spot-x.y.0 and change all the external 
+  links to point to something that won't change.  This is accomplished
+  by setting the svn:externals property on a directory, and editing
+  the "Externals" text file in that directory.  (We follow
+  the popular convention of having an "Externals" text file in every
+  directory where we set the svn:externals property on one or more
+  subdirectories.)
+
+  At the time of this writing, teva-spot has these Externals files:
+
+    ./packages/Externals
+    ./packages/fast/Externals
+    ./packages/tevalibs/Externals
+    ./Externals
+
+  For example, to edit the svn:externals property in these directories:
+
+    svn co URL/releases/teva-spot-x.y.0
+    cd teva-spot-x.y.0
+    svn propedit svn:externals .
+    svn propedit svn:externals packages
+    svn propedit svn:externals packages/fast
+    svn propedit svn:externals packages/tevalibs
+
+  In all of the directories that have external links, either
+  add a revision number, ensuring that the code checked out is
+  frozen, or make sure that the link is to a release directory of
+  the external package.  
+
+  Suppose the revision number of TEVA-SPOT is
+  3520 when the release is tagged.  We could change:
+
+    test http://engcvs.uc.edu/repos/TEVA/teva-sp-qa/test
+
+  to
+
+    test -r3520 http://engcvs.uc.edu/repos/TEVA/teva-sp-qa/test
+
+  and we could change:
+
+    fast  https://software.sandia.gov/svn/public/exact/fast/trunk
+
+  to
+
+    fast  https://software.sandia.gov/svn/public/exact/fast/releases/2.0
+
+  As an quick alternative to using "svn propedit", you can edit the
+  Externals file and then
+
+  svn propset -F Externals svn:externals .
+
+  For acro-pico, you must choose a release of acro-pico, or tar up
+  acro-pico from the date that testing was done.  This is because
+  acro-pico itself contains external links to the head version
+  acro projects.  If you check out an old revision of acro-pico,
+  these subdirectories will be populated with the head version of
+  pico, pebbl, etc.  You can make the tar file much smaller by
+  removing all the .svn directories, and any extra COIN versions
+  that were checked in but are not used in the build.
+
+  This command in an acro-pico directory:
+
+  bin/svn.a rupdate -r {2007-07-20}
+
+  updates your checkout with all the acro code as of July 20, 2007.
+
+  In the top level configure.ac file of the release directory, change
+  the version number in the AC_INIT macro to the new version number.
+
+CREATE A SOURCE DISTRIBUTION:
+
+  To create a source distribution, use the "make dist" target:
+    
+    svn co URL/releases/1.1.0
+    cd 1.1.0
+    ./setup configure
+    make dist
+    
+  The tar file in the current directory is the source distribution.
+
+CREATE A BINARY DISTRIBUTION:
+
+  To create the special binary distribution we give the EPA (containing 
+  the sp script, tests, executables, and documentation) use the 
+  "make install" target.  Normally "make install" builds the code,
+  and then installs executables, libraries, include files, etc.
+  in standard directories like "/usr/local/lib", "/usr/local/bin".
+  (The default "/usr/local" path can be changed by defining another
+  path with "configure --prefix=/newpath".)
+
+  But we have added several install hooks in the Makefiles so that
+  "make install DESTDIR=/my/staging/directory" will create the 
+  directories we want to distribute and copy the files into them.
+
+  DESTDIR allows you to install into a staging area.  The files can
+  be packaged into a tar or zip file, and later unpacked on another
+  machine.  (If shared libraries are included, they need to be
+  moved to the lib directory under the path originally specified by 
+  the "prefix" variable.)
+
+  svn co URL/releases/1.1.0
+  cd 1.1.0
+  ./setup configure --enable-shared
+  make
+  make install DESTDIR=~/mybuilds/shared_build
+  cd ~/mybuilds/shared_build/usr/local
+  tar cvf spot_1.1.0_linux32_gcc4.1.1_shared.tar bin lib mod doc test
+  
+  The tar or zip file name should indicate the version of spot,
+  the system type it was built for, the compiler used, and
+  whether shared or static libraries are provided.
+
+ARCHIVE THE DISTRIBUTION:
+
+  Save a copy of the compressed tar or the zip file in the
+  "dist" area.  Suppose the release name is "TEVA-SPOT 1.1.0":
+
+  svn co -N URL/dist/teva-spot-1.1.0
+  cd teva-spot-1.1.0
+  copy {path to tar file}/spot...tar.gz .
+  svn add spot...tar.gz
+  svn ci
+
+  The "-N" gives you a non-recursive checkout, so you don't
+  have to wait for other tar and zip files that have been
+  checked in to be checked out.  If you are not sure of the
+  name of the "dist" directory, you can list them:
+
+  svn list URL/dist
+
+  Archive the change log here too, and any other documents
+  that went along with the release.  
+
+  Ensure that the release checklists in 
+  URL/dist/teva-spot-1.1.0/docs have been completed.
+
+How to create a quick patch (bugfix) release x.y.1:
+===================================================
+
+  Create URL/dist/teva-spot-x.y.1
+
+  Test the code in stable/x.y and when you are satisfied that your
+  bugfix (the reason for the patch) works:
+
+  svn copy URL/stable/x.y URL/releases/teva-spot-x.y.1
+
+  Freeze the external links in the release directory you just created.
+
+  Write a change log explaining the fix, put it in 
+  URL/dist/teva-spot-x.y.1.
+
+  Create the source or binary release and archive the tar and zip
+  files in URL/dist/teva-spot-x.y.1.

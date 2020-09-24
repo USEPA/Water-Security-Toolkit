@@ -1,0 +1,28 @@
+{
+  "solver type": "glpk", 
+  "run date": "2014-06-14 10:18:32", 
+  "problem type": "default", 
+  "lower bound": 8932.3555084745694, 
+  "CPU time": 6.3696341514587402, 
+  "EPANET node ID": [
+    [
+      "111", 
+      "119", 
+      "169", 
+      "207", 
+      "237"
+    ]
+  ], 
+  "modeling language": "pyomo", 
+  "upper bound": 8932.3555084745694, 
+  "objective": 8932.3555084745694, 
+  "node ID": [
+    [
+      15, 
+      19, 
+      42, 
+      63, 
+      74
+    ]
+  ]
+}

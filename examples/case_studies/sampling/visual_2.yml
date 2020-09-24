@@ -1,0 +1,144 @@
+configure:
+  output prefix: '2'
+network:
+  epanet file: /home/dbhart/wst-test/examples/case_studies/sampling/SCENARIO_SIGNALS/INPUTS/true.inp
+visualization:
+  layers:
+  - fill:
+      color: red
+    label: Contaminated Nodes
+    location type: node
+    locations:
+    - '40'
+    - '111'
+    - '113'
+    - '169'
+    - '179'
+    - '183'
+    - '184'
+    - '185'
+    - '187'
+    - '189'
+    - '191'
+    - '193'
+    - '195'
+    - '197'
+    - '204'
+    - '205'
+    - '206'
+    - '207'
+    - '208'
+    - '209'
+    - '265'
+    - '267'
+    shape: circle
+  - fill:
+      color: yellow
+    label: Uncertain Nodes
+    location type: node
+    locations:
+    - '35'
+    - '103'
+    - '107'
+    - '109'
+    - '115'
+    - '167'
+    - '171'
+    - '173'
+    - '177'
+    - '181'
+    - '199'
+    - '201'
+    - '203'
+    - '211'
+    - '213'
+    - '237'
+    - '239'
+    - '241'
+    - '269'
+    - '271'
+    - '273'
+    - '275'
+    - '1'
+    shape: circle
+  - fill:
+      color: '#a0b0f8'
+    label: Clean Nodes
+    location type: node
+    locations:
+    - '10'
+    - '15'
+    - '20'
+    - '50'
+    - '60'
+    - '601'
+    - '61'
+    - '101'
+    - '105'
+    - '117'
+    - '119'
+    - '120'
+    - '121'
+    - '123'
+    - '125'
+    - '127'
+    - '129'
+    - '131'
+    - '139'
+    - '141'
+    - '143'
+    - '145'
+    - '147'
+    - '149'
+    - '151'
+    - '153'
+    - '157'
+    - '159'
+    - '161'
+    - '163'
+    - '164'
+    - '166'
+    - '215'
+    - '217'
+    - '219'
+    - '225'
+    - '229'
+    - '231'
+    - '243'
+    - '247'
+    - '249'
+    - '251'
+    - '253'
+    - '255'
+    - '257'
+    - '259'
+    - '261'
+    - '263'
+    - River
+    - Lake
+    - '2'
+    - '3'
+    shape: circle
+  - fill:
+      color: black
+    label: Grab Sample Locations
+    location type: node
+    locations:
+    - '113'
+    - '117'
+    - '273'
+    - '113'
+    - '197'
+    - '259'
+    - '115'
+    - '197'
+    - '211'
+    shape: diamond
+  legend:
+    location:
+    - 800
+    - 20
+  screen:
+    size:
+    - 1200
+    - 800
