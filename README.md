@@ -1,3 +1,5 @@
+DEPRECATED - This repository is no longer being maintained and is available for reuse.
+
 Water Security Toolkit (WST)
 =======================================
 
